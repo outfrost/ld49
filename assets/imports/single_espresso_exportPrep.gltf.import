@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/single_espresso_exportPrep.gltf-aa9e87a0d4cb87e7f85ea6dca56a9de0.scn"
+path="res://.import/single_espresso_exportPrep.gltf-448a0abdf607583d44412e5062ab18b5.scn"
 
 [deps]
 
-source_file="res://Assets/Imports/single_espresso_exportPrep.gltf"
-dest_files=[ "res://.import/single_espresso_exportPrep.gltf-aa9e87a0d4cb87e7f85ea6dca56a9de0.scn" ]
+source_file="res://assets/imports/single_espresso_exportPrep.gltf"
+dest_files=[ "res://.import/single_espresso_exportPrep.gltf-448a0abdf607583d44412e5062ab18b5.scn" ]
 
 [params]
 
