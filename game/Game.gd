@@ -19,6 +19,10 @@ export(float, 35.0, 45.0, 0.5) var temperature_max: float = 40.0
 var temper: float
 export(float, 0.0, 200.0, 2.0) var temper_initial: float = 100.0
 export(float, 0.0, 200.0, 2.0) var temper_min: float = 0.0
+export(float, 0.0, 200.0, 2.0) var temper_max: float = 100.0
+
+var time_elapsed: float = 0.0
+export var game_duration: int = 20.0
 
 # NOTE: should all be of type Activity
 # TODO: attach them to scene objects with clickable models
@@ -26,15 +30,9 @@ export(Array, Resource) var activities
 
 export(Array, Resource) var passive_effects
 
-var activities_active = []
-var current_activity_timeout: int = 0
-
-var time_elapsed: float = 0.0
-export var game_duration: int = 20.0
-
+var activities_available = []
 var current_activity: Activity
-var last_activity_update: int = 0
-var effects: Array = []
+var current_activity_timeout: float = 0.0
 
 # NOTE: should all be of type Customer
 # NOTE: should likely be a bunch of nodes in the scene graph somewhere
@@ -58,39 +56,36 @@ func _process(delta: float) -> void:
 	if !is_running:
 		return
 
-	var tick_temperature_delta = 0
-	var tick_temper_delta = 0
-	var tick_money_delta = 0
+	time_elapsed += delta
 
 	if passive_effects.size():
 		for effect in passive_effects:
 			if !effect:
 				continue
-			var should_tick = OS.get_ticks_msec() >= effect.next_update_time
-			if should_tick:
+			while effect.has_next_tick(time_elapsed):
 				var tick_strings = [effect.displayed_name, effect.displayed_description]
 				print("Passive effect tick \"%s\": %s" % tick_strings)
-				tick_temperature_delta += effect.update_temperature_delta
-				tick_temper_delta += effect.update_temper_delta
-				tick_money_delta += effect.update_temperature_delta
-				effect.bump_interval()
+				temperature += effect.update_temperature_delta
+				temper += effect.update_temper_delta
+#				tick_money_delta += effect.update_temperature_delta
 
-	temperature += tick_temperature_delta
-	temper += tick_temper_delta
+	if current_activity:
+		DebugOverlay.display("current activity %s" % current_activity.displayed_name)
+		if time_elapsed >= current_activity_timeout:
+			temperature += current_activity.outcome_temperature_delta
+			temper += current_activity.outcome_temper_delta
+			current_activity_timeout = 0.0
+			current_activity = null
+	else:
+		DebugOverlay.display("current activity none")
 
-	time_elapsed += delta
+	# limit temper value
+	if temper > temper_max:
+		temper = temper_max
 
 	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
 	DebugOverlay.display("temper %.1f" % temper)
 	DebugOverlay.display("temperature %.2f" % temperature)
-
-	if current_activity:
-		DebugOverlay.display("current activity %s" % current_activity.displayed_name)
-		if OS.get_ticks_msec() >= current_activity_timeout:
-			current_activity_timeout = 0
-			current_activity = null
-	else:
-		DebugOverlay.display("current activity none")
 
 	var is_out_of_temper = temper < temper_min
 	var is_out_of_cool = temperature > temperature_max
@@ -115,6 +110,7 @@ func on_start_game() -> void:
 	yield(transition_screen, "animation_finished")
 
 	main_menu.hide()
+
 	reset()
 
 	# Instantiate level
@@ -155,12 +151,10 @@ func reset() -> void:
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
 		return
-	for i in range(0, passive_effects.size()):
-		var pe = passive_effects[i]
+	for pe in passive_effects:
 		if !pe:
 			continue
-		pe.start_time = OS.get_ticks_msec()
-		pe.bump_interval()
+		pe.next_update_time = time_elapsed + pe.update_interval
 
 func populate_activity_buttons() -> void:
 	if !activities.size():
@@ -179,16 +173,15 @@ func populate_activity_buttons() -> void:
 			"button": activity_button,
 			"activity": activity
 		}
-		activities_active.push_back(activity_object)
+		activities_available.push_back(activity_object)
 
 func clear_activity_buttons() -> void:
-	if !activities_active.size():
+	if !activities_available.size():
 		return
-	for activity_object in activities_active:
+	for activity_object in activities_available:
 		$UI.remove_child(activity_object.button)
-	activities_active.clear()
+	activities_available.clear()
 
 func set_activity(activity) -> void:
 	current_activity = activity
-	current_activity_timeout = OS.get_ticks_msec() + activity.duration * 1000
-
+	current_activity_timeout = time_elapsed + activity.duration
