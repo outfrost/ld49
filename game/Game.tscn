@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://game/Activity.gd" type="Script" id=2]
@@ -6,35 +6,33 @@
 [ext_resource path="res://game/loading/TransitionScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/Game.gd" type="Script" id=5]
 [ext_resource path="res://game/PassiveEffect.gd" type="Script" id=6]
+[ext_resource path="res://level/Cafe.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-duration = 5
-outcome_temper_delta = 5
-outcome_money_delta = 0
-outcome_temperature_delta = 5
+duration = 3.0
+outcome_temper_delta = 0.0
+outcome_temperature_delta = 0.5
 displayed_name = "Cook"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
-duration = 5
-outcome_temper_delta = -5
-outcome_money_delta = 0
-outcome_temperature_delta = 5
+duration = 3.0
+outcome_temper_delta = 10.0
+outcome_temperature_delta = 0.0
 displayed_name = "Take a break"
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 6 )
-duratin_seconds = -1
-update_interval_ms = 1000
-update_temper_delta = 0
-update_money_delta = 0
-update_temperature_delta = 1
+update_interval = 1.0
+update_temper_delta = 0.0
+update_temperature_delta = 0.2
 displayed_name = "Broken AC"
 displayed_description = "Temperature rises!"
 
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
+level_scene = ExtResource( 7 )
 activities = [ SubResource( 1 ), SubResource( 2 ), null, null, null, null, null, null, null ]
 passive_effects = [ SubResource( 3 ) ]
 
