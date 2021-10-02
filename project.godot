@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Activity",
+"language": "GDScript",
+"path": "res://game/Activity.gd"
+}, {
+"base": "Button",
+"class": "ActivityButton",
+"language": "GDScript",
+"path": "res://game/ActivityButton.gd"
+}, {
 "base": "Node",
 "class": "Game",
 "language": "GDScript",
@@ -19,14 +29,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/GroupMessenger.gd"
 }, {
+"base": "Resource",
+"class": "PassiveEffect",
+"language": "GDScript",
+"path": "res://game/PassiveEffect.gd"
+}, {
 "base": "Control",
 "class": "TransitionScreen",
 "language": "GDScript",
 "path": "res://game/loading/TransitionScreen.gd"
 } ]
 _global_script_class_icons={
+"Activity": "",
+"ActivityButton": "",
 "Game": "",
 "GroupMessenger": "",
+"PassiveEffect": "",
 "TransitionScreen": ""
 }
 
