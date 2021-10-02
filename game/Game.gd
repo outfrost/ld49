@@ -12,17 +12,18 @@ var is_running = false
 
 # Barista's temperature - the lower the better
 var temperature: float
-export var temperature_initial: float = 37.0
-export var temperature_max: float = 40.0
+export(float, 35.0, 45.0, 0.1) var temperature_initial: float = 37.0
+export(float, 35.0, 45.0, 0.5) var temperature_max: float = 40.0
 
 # Barista's "cool" - the higher the better
 var temper: float
-export var temper_initial: float = 100.0
-export var temper_min: float = 0.0
+export(float, 0.0, 200.0, 2.0) var temper_initial: float = 100.0
+export(float, 0.0, 200.0, 2.0) var temper_min: float = 0.0
 
 # NOTE: should all be of type Activity
 # TODO: attach them to scene objects with clickable models
 export(Array, Resource) var activities
+
 export(Array, Resource) var passive_effects
 
 var activities_active = []
@@ -91,22 +92,17 @@ func _process(delta: float) -> void:
 	else:
 		DebugOverlay.display("current activity none")
 
-
 	var is_out_of_temper = temper < temper_min
 	var is_out_of_cool = temperature > temperature_max
 
-	var is_lose_condition_met = is_out_of_temper or is_out_of_cool
-	DebugOverlay.display("is_lose %s" % is_lose_condition_met)
-
-	var is_win_condition_met = time_elapsed >= game_duration
-	DebugOverlay.display("is_win %s" % is_win_condition_met)
-
-	if is_lose_condition_met:
+	if is_out_of_temper or is_out_of_cool:
+		# Game over
 		# TODO: implement gameover lose
 		print("LOST")
 		back_to_menu()
 
-	if is_win_condition_met:
+	if time_elapsed >= game_duration:
+		# Player wins
 		# TODO: implement gameover win
 		print("WON")
 		back_to_menu()
