@@ -4,6 +4,10 @@ extends Spatial
 
 var busy:bool = false
 
+func leave() -> void:
+	busy = false
+
+
 func _ready():
 	if OS.has_feature("debug"):
 		hide()
