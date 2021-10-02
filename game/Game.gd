@@ -13,11 +13,11 @@ onready var transition_screen: TransitionScreen = $UI/TransitionScreen
 var debug: Reference
 
 func _ready() -> void:
-	if OS.has_feature("debug"):
-		var debug_script = load("res://debug.gd")
-		if debug_script:
-			debug = debug_script.new(self)
-			debug.startup()
+	var debug_script_name = "res://debug.gd"
+	if OS.has_feature("debug") and ResourceLoader.exists(debug_script_name):
+		var debug_script = load(debug_script_name)
+		debug = debug_script.new(self)
+		debug.startup()
 
 	main_menu.connect("start_game", self, "on_start_game")
 
