@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://game/customer/generic_customer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/customer/drinking_spot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="NavigationMesh" id=1]
+vertices = PoolVector3Array( 0.19547, -0.842898, -1.13221, 0.19547, -0.842898, -3.23221, -1.60453, -0.842898, -3.53221, -6.70453, -0.842898, -1.13221, -1.60453, -0.842898, -6.53221, 0.19547, -0.842898, -6.83221, 0.19547, -0.842898, -9.53221, -6.70453, -0.842898, -9.53221, -1.60453, -0.842898, -6.53221, -6.70453, -0.842898, -9.53221, -6.70453, -0.842898, -1.13221, -1.60453, -0.842898, -3.53221, 1.69547, -0.842898, -3.53221, 0.19547, -0.842898, -3.23221, 0.19547, -0.842898, -1.13221, 6.79547, -0.842898, -1.13221, 0.19547, -0.842898, -9.53221, 0.19547, -0.842898, -6.83221, 1.69547, -0.842898, -6.53221, 6.79547, -0.842898, -9.53221, 1.69547, -0.842898, -6.53221, 1.69547, -0.842898, -3.53221, 6.79547, -0.842898, -1.13221, 6.79547, -0.842898, -9.53221 )
+polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 5, 4, 6 ), PoolIntArray( 6, 4, 7 ), PoolIntArray( 11, 10, 8 ), PoolIntArray( 8, 10, 9 ), PoolIntArray( 13, 12, 14 ), PoolIntArray( 14, 12, 15 ), PoolIntArray( 17, 16, 18 ), PoolIntArray( 18, 16, 19 ), PoolIntArray( 21, 20, 22 ), PoolIntArray( 22, 20, 23 ) ]
+cell/height = 1.5
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 7.30453, 0, 0, 0, 0.222044, 0, 0, 0, 4.77707, 0, -3.54661, -5.35514 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8429, -5.06423 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="Navigation/NavigationMeshInstance/MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/MeshInstance2/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="customer" parent="Navigation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.15174, -1.84404, -8.61075 )
+
+[node name="drinking_spot" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.71486, -2.15885, -5.59483 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.827022, 0.56217, 0, -0.56217, 0.827022, 0, 8.4027, 8.95585 )
