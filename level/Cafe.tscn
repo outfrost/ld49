@@ -556,3 +556,9 @@ omni_range = 10.0
 
 [node name="single_espresso_exportPrep" parent="." instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0.925, 10.325 )
+
+[node name="single_espresso_exportPrep2" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0.925, 9.325 )
+
+[node name="single_espresso_exportPrep3" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0.925, 8.325 )
