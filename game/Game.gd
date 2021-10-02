@@ -55,15 +55,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	DebugOverlay.display("fps %d" % Performance.get_monitor(Performance.TIME_FPS))
-	
-	
+
+
 	if !is_running:
 		return
-	
+
 	var tick_temperature_delta = 0
 	var tick_temper_delta = 0
 	var tick_money_delta = 0
-	
+
 	if passive_effects.size():
 		for effect in passive_effects:
 			if !effect:
@@ -76,17 +76,17 @@ func _process(delta: float) -> void:
 				tick_temper_delta += effect.update_temper_delta
 				tick_money_delta += effect.update_temperature_delta
 				effect.bump_interval()
-	
+
 	temperature += tick_temperature_delta
 	temper += tick_temper_delta
-	
+
 	var time_remaining = game_win_time_threshold - OS.get_ticks_msec()
 	var time_remaining_s = time_remaining / 1000
 	var time_remaining_ms = time_remaining % 1000
 	DebugOverlay.display("time left: %s.%0*.3d" % [time_remaining_s, 3, time_remaining_ms])
 	DebugOverlay.display("temper %s" % temper)
 	DebugOverlay.display("temperature %s" % temperature)
-	
+
 	if current_activity:
 		DebugOverlay.display("current activity %s" % current_activity.displayed_name)
 		if OS.get_ticks_msec() >= current_activity_timeout:
@@ -94,27 +94,27 @@ func _process(delta: float) -> void:
 			current_activity = null
 	else:
 		DebugOverlay.display("current activity none")
-		
-	
+
+
 	var is_out_of_temper = temper < 0
 	var is_out_of_cool = temperature > temperature_max
-	
+
 	var is_lose_condition_met = is_out_of_temper or is_out_of_cool
 	DebugOverlay.display("is_lose %s" % is_lose_condition_met)
-	
+
 	var is_win_condition_met = game_win_time_threshold <= OS.get_ticks_msec()
 	DebugOverlay.display("is_win %s" % is_win_condition_met)
-	
+
 	if is_lose_condition_met:
 		# TODO: implement gameover lose
 		print("LOST")
 		back_to_menu()
-	
+
 	if is_win_condition_met:
 		# TODO: implement gameover win
 		print("WON")
 		back_to_menu()
-	
+
 	if Input.is_action_just_pressed("menu"):
 		back_to_menu()
 
@@ -134,7 +134,7 @@ func back_to_menu() -> void:
 	main_menu.show()
 	clear_activity_buttons()
 	is_running = false
-	
+
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
 		return
@@ -148,12 +148,12 @@ func restart_passive_effects() -> void:
 func populate_activity_buttons() -> void:
 	if !activities.size():
 		return
-	
+
 	for i in range(0, activities.size()):
 		var activity = activities[i]
 		if !activity:
 			continue
-		
+
 		var activity_button = ActivityButton.new(activity)
 		activity_button.text = activity.displayed_name
 		activity_button.rect_position = Vector2(20, 150 + i * 30)

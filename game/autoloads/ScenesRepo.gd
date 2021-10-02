@@ -16,3 +16,4 @@ func change_scene_to(id:int) -> bool:
 		return false
 	ErrorHandler.handle(get_tree().change_scene_to(scenes[id]))
 	return true
+
