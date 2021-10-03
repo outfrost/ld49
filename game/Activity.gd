@@ -10,8 +10,12 @@ export var displayed_name: String = ""
 func _ready():
 	pass
 
-func _init():
-	pass
+func _init(name: String = "", duration: float = 3.0, temper: float = 0.0, temperature: float = 0.0):
+	self.duration = duration
+	self.outcome_temper_delta = temper
+	self.outcome_temperature_delta = temperature
+	self.displayed_name = name
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
