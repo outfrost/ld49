@@ -1,0 +1,147 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://game/ui-theme/panel_style_transparent.tres" type="StyleBox" id=2]
+[ext_resource path="res://font/headline/large_reg.tres" type="DynamicFont" id=3]
+[ext_resource path="res://font/stats/large_reg.tres" type="DynamicFont" id=4]
+[ext_resource path="res://game/hud/GameOverOverlay.gd" type="Script" id=5]
+
+[node name="GameOverOverlay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -400.0
+margin_right = 400.0
+margin_bottom = 100.0
+grow_horizontal = 2
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label1" type="Label" parent="TopPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 8.0
+margin_right = -24.0
+margin_bottom = -64.0
+grow_horizontal = 2
+text = "Oh no!"
+align = 1
+
+[node name="Label2" type="Label" parent="TopPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 32.0
+margin_right = -24.0
+margin_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+custom_fonts/font = ExtResource( 3 )
+text = "Your cafe is in shambles!"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -320.0
+margin_top = -140.0
+margin_right = 320.0
+grow_horizontal = 2
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeSurvivedCaption" type="Label" parent="BottomPanel"]
+anchor_right = 0.333
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = 40.0
+grow_horizontal = 2
+text = "Survived"
+align = 1
+
+[node name="TimeSurvivedValue" type="Label" parent="BottomPanel"]
+anchor_right = 0.333
+margin_left = 8.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = 96.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "263 seconds"
+align = 1
+valign = 1
+
+[node name="CustomersCaption" type="Label" parent="BottomPanel"]
+anchor_left = 0.333
+anchor_right = 0.666
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = 40.0
+grow_horizontal = 2
+text = "Customers served"
+align = 1
+
+[node name="CustomersValue" type="Label" parent="BottomPanel"]
+anchor_left = 0.333
+anchor_right = 0.666
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = 96.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "17"
+align = 1
+valign = 1
+
+[node name="TryAgainButton" type="Button" parent="BottomPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -168.0
+margin_top = -42.0
+margin_right = -8.0
+margin_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Try again"
+
+[node name="BackToMenuButton" type="Button" parent="BottomPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -42.0
+margin_right = 168.0
+margin_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back to menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
