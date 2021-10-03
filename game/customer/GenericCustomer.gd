@@ -98,7 +98,7 @@ func _ready():
 		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = max_waiting_timer.wait_time/customer_difficulty
 	find_seat()
-	
+
 func _physics_process(delta):
 	if path_node < path.size(): #Must move to reach destination
 		if current_state != states.walking:
