@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 				continue
 			while effect.has_next_tick(time_elapsed):
 				var tick_strings = [effect.displayed_name, effect.displayed_description]
-				print("Passive effect tick \"%s\": %s" % tick_strings)
+				# print("Passive effect tick \"%s\": %s" % tick_strings)
 				temperature += effect.update_temperature_delta
 				temper += effect.update_temper_delta
 #				tick_money_delta += effect.update_temperature_delta
@@ -220,8 +220,9 @@ func clear_activity_buttons() -> void:
 		$UI.remove_child(activity_object.button)
 	activities_available.clear()
 
-func set_activity(activity) -> void:
+func set_activity(activity) -> bool:
 	if current_activity:
-		return
+		return false
 	current_activity = activity
 	current_activity_timeout = time_elapsed + activity.duration
+	return true
