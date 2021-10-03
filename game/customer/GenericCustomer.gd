@@ -29,21 +29,21 @@ func find_seat():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	locked_height = global_transform.origin.y
+	#locked_height = global_transform.origin.y
 	find_seat()
-
+	
 func _physics_process(delta):
 	if path_node < path.size():
 		if current_state != states.walking:
 			current_state = states.walking
 			emit_signal("started_walking")
 		var direction:Vector3 = path[path_node] - global_transform.origin
-		if direction.length() < 1:
+		if direction.length() < 0.1:
 			path_node += 1
 		else:
 			current_speed = lerp(current_speed, max_speed, 0.01)
 			move_and_slide(direction.normalized() * current_speed, Vector3.UP)
-			global_transform.origin.y = locked_height
+			#global_transform.origin.y = locked_height
 	else:
 		if current_state == states.walking:
 			current_state = states.idle

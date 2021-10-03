@@ -1,20 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleMesh" id=1]
 
+[sub_resource type="CapsuleShape" id=2]
+
 [node name="customer" type="KinematicBody" groups=[
 "customer",
 ]]
-transform = Transform( 1.6087, 0, 0, 0, 1.91261, 0, 0, 0, 1.7468, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 0.841121, 0, 0, 0, 1.09495, 0, 0, 0, 1.0858, 0.0943828, 0.699238, 0.827141 )
 cast_to = Vector3( 0, 0, 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+disabled = true

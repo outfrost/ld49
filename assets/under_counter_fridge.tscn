@@ -3,3 +3,4 @@
 [ext_resource path="res://assets/imports/under_counter_fridge_exportPrep.gltf" type="PackedScene" id=1]
 
 [node name="under_counter_fridge_exportPrep" instance=ExtResource( 1 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0 )
