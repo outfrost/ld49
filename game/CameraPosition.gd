@@ -3,6 +3,9 @@ extends Spatial
 const ZOOM_INCREMENT: float = 0.1
 const CAMERA_LERP_RATE: float = 10.0
 const SELF_LERP_RATE: float = 8.0
+const MOVEMENT_SPEED: float = 8.0
+
+export var movement_aabb: Rect2
 
 export var min_zoom_translation: Vector3 = Vector3(0.0, 8.0, 5.75)
 export var min_zoom_rotation: Vector3 = Vector3(-55.0, 0.0, 0.0)
@@ -54,12 +57,29 @@ func _process(delta: float) -> void:
 	if game.is_running:
 		var mouse_pos: Vector2 = viewport.get_mouse_position() / viewport.size
 		if (Input.is_mouse_button_pressed(BUTTON_RIGHT)
-			or Input.is_mouse_button_pressed(BUTTON_MIDDLE)):
-			target_self_xform = target_self_xform.rotated(
+			or Input.is_mouse_button_pressed(BUTTON_MIDDLE)
+		):
+			target_self_xform.basis = target_self_xform.basis.rotated(
 				Vector3.UP,
 				(mouse_pos.x - last_mouse_pos.x) * TAU * -1.0)
 		last_mouse_pos = mouse_pos
 
+		var move: Vector3 = Vector3(
+			Input.get_action_strength("right") - Input.get_action_strength("left"),
+			0.0,
+			Input.get_action_strength("down") - Input.get_action_strength("up"))
+		move *= delta * MOVEMENT_SPEED
+
+		target_self_xform.origin = clamp_pos_to_aabb(
+			target_self_xform.origin + target_self_xform.basis.xform(move),
+			movement_aabb)
+
 	transform = transform.interpolate_with(
 		target_self_xform,
 		clamp(delta * SELF_LERP_RATE, 0.0, 1.0))
+
+func clamp_pos_to_aabb(pos: Vector3, aabb: Rect2) -> Vector3:
+	pos.x = clamp(pos.x, aabb.position.x, aabb.end.x)
+	pos.y = 0.0
+	pos.z = clamp(pos.z, aabb.position.y, aabb.end.y)
+	return pos
