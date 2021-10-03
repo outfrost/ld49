@@ -1,0 +1,9 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "woodMat"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_color = Color( 0.247801, 0.18213, 0.170749, 1 )
+metallic = 0.15
+roughness = 0.75
