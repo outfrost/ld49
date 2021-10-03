@@ -70,8 +70,11 @@ func _process(delta: float) -> void:
 #				tick_money_delta += effect.update_temperature_delta
 
 	if current_activity:
+		var time_left = current_activity_timeout - time_elapsed
+		var is_activity_over = time_left <= 0
 		DebugOverlay.display("current activity %s" % current_activity.displayed_name)
-		if time_elapsed >= current_activity_timeout:
+		DebugOverlay.display("activity time left %s" % time_left)
+		if is_activity_over:
 			temperature += current_activity.outcome_temperature_delta
 			temper += current_activity.outcome_temper_delta
 			current_activity_timeout = 0.0
@@ -183,5 +186,7 @@ func clear_activity_buttons() -> void:
 	activities_available.clear()
 
 func set_activity(activity) -> void:
+	if current_activity:
+		return
 	current_activity = activity
 	current_activity_timeout = time_elapsed + activity.duration
