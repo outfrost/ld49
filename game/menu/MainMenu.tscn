@@ -74,20 +74,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChooseLevelButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
 margin_top = 32.0
 margin_right = 256.0
 margin_bottom = 54.0
-disabled = true
-text = "Choose level"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
-margin_top = 64.0
-margin_right = 256.0
-margin_bottom = 86.0
 disabled = true
 text = "Options"
 __meta__ = {
@@ -95,18 +85,18 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 64.0
 margin_right = 256.0
-margin_bottom = 118.0
+margin_bottom = 86.0
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 128.0
+margin_top = 96.0
 margin_right = 256.0
-margin_bottom = 150.0
+margin_bottom = 118.0
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false

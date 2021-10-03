@@ -1,0 +1,14 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://art_assets/barista_textured/baristaRough.png" type="Texture" id=1]
+[ext_resource path="res://art_assets/barista_textured/baristaDiffuse.png" type="Texture" id=2]
+
+[resource]
+resource_name = "baristaMat"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 2 )
+metallic_texture = ExtResource( 1 )
+metallic_texture_channel = 2
+roughness_texture = ExtResource( 1 )
+roughness_texture_channel = 1
