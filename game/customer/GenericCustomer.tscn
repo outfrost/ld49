@@ -26,3 +26,9 @@ cast_to = Vector3( 0, 0, -1 )
 transform = Transform( 0.997199, 0.0574501, -0.047896, -0.0463545, -0.0278717, -0.998536, -0.0587009, 0.997959, -0.0251305, 0, 0, 0 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="MaxWaitingTime" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]

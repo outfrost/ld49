@@ -2,14 +2,17 @@ extends Spatial
 
 
 #Send customer once there is a free spot, optionally wait some time
+var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new() 
+
 export (Array, PackedScene) var customer_scenes = []
 var instanced_customers = []
-onready var sitting_spots:Array = get_tree().get_nodes_in_group("drinking_spot")
-onready var spawning_spots:Array = get_tree().get_nodes_in_group("spawning_spot")
+
+onready var sitting_spots:Array = get_tree().get_nodes_in_group(spots_collection.spot_names[spots_collection.drinking_spot])
+onready var spawning_spots:Array = get_tree().get_nodes_in_group(spots_collection.spot_names[spots_collection.spawning_spot])
+onready var waiting_spots:Array = get_tree().get_nodes_in_group(spots_collection.spot_names[spots_collection.waiting_spot])
 
 onready var navigation_node:Navigation = get_parent()
 onready var spawn_timer:Timer = $SpawnTimer
-
 
 var time_passed = 0
 export var randomize_time:bool = true
@@ -39,6 +42,7 @@ func has_free_seats()->bool:
 		if not i.busy:
 			return true
 	return false
+
 #manage the need for customers based on free spots
 func _process(delta):
 	if spawn_timer.is_stopped() && game_is_running:

@@ -69,8 +69,8 @@ config/icon="res://icon.png"
 [autoload]
 
 DebugOverlay="*res://game/DebugOverlay.tscn"
-ScenesRepo="*res://game/autoloads/ScenesRepo.gd"
 ErrorHandler="*res://game/autoloads/ErrorHandler.gd"
+OrderRepository="*res://game/autoloads/OrderRepository.gd"
 
 [debug]
 

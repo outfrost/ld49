@@ -16,6 +16,8 @@ var translations:Dictionary = {
 
 signal new_order(order_array)
 signal removed_order
+signal client_satisfied(node)
+signal client_enraged(node)
 
 #node_ref:order_array
 var order_queue:Dictionary = {
@@ -23,6 +25,7 @@ var order_queue:Dictionary = {
 }
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
+	randomize()
 	if number_of_items > possible_orders.size():
 		can_repeat = true
 	
