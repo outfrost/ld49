@@ -37,6 +37,8 @@ var activities_available = []
 var current_activity: Activity
 var current_activity_timeout: float = 0.0
 
+var activity_queue = []
+
 # NOTE: should all be of type Customer
 # NOTE: should likely be a bunch of nodes in the scene graph somewhere
 # TODO: populate customers
@@ -77,6 +79,7 @@ func _process(delta: float) -> void:
 				temper += effect.update_temper_delta
 #				tick_money_delta += effect.update_temperature_delta
 
+	try_pop_activity()
 	if current_activity:
 		var time_left = current_activity_timeout - time_elapsed
 		var is_activity_over = time_left <= 0
@@ -225,9 +228,37 @@ func clear_activity_buttons() -> void:
 		$UI.remove_child(activity_object.button)
 	activities_available.clear()
 
-func set_activity(activity) -> bool:
+func set_activity(activity: Activity, caller, callback_name: String, position: Position3D = null) -> bool:
 	if current_activity:
+		var activity_queued = {
+			"activity": activity,
+			"caller": caller,
+			"callback_name": callback_name,
+			# NOTE: position might make sense as part of the activity??
+			"position_marker": position,
+			# TODO: make it possible for activity to also suggest player animation
+			#"animation": ""
+		}
+		activity_queue.push_back(activity_queued)
+		var queue_length = activity_queue.size()
+		print("queued an activity \"%s\", queue size: %s" % [activity.displayed_name, queue_length])
 		return false
+	caller.call(callback_name)
 	current_activity = activity
 	current_activity_timeout = time_elapsed + activity.duration
 	return true
+
+func try_pop_activity():
+	if current_activity:
+		return
+	var activity_popped = activity_queue.pop_front()
+	if !activity_popped:
+		return
+	var activity = activity_popped["activity"]
+	activity_popped["caller"].call(activity_popped["callback_name"])
+	if activity_popped["position_marker"]:
+		# TODO: teleport player to the marker and set their rotation
+		pass
+	current_activity = activity
+	current_activity_timeout = time_elapsed + activity.duration
+

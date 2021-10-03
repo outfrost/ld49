@@ -307,14 +307,14 @@ omni_range = 10.0
 [node name="single_espresso_exportPrep" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -0.175 )
 
-[node name="Area" type="Area" parent="single_espresso_exportPrep"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.866802, 0 )
+[node name="CoffeeLogic" type="Area" parent="single_espresso_exportPrep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="single_espresso_exportPrep/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="single_espresso_exportPrep/CoffeeLogic"]
 shape = SubResource( 7 )
 
-[node name="Cup" type="MeshInstance" parent="single_espresso_exportPrep/Area"]
+[node name="Cup" type="MeshInstance" parent="single_espresso_exportPrep/CoffeeLogic"]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.30471, -0.302915 )
 visible = false
 mesh = SubResource( 1 )
@@ -322,6 +322,19 @@ material/0 = null
 
 [node name="single_espresso_exportPrep2" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -1.175 )
+
+[node name="CoffeeLogic2" type="Area" parent="single_espresso_exportPrep2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="single_espresso_exportPrep2/CoffeeLogic2"]
+shape = SubResource( 7 )
+
+[node name="Cup" type="MeshInstance" parent="single_espresso_exportPrep2/CoffeeLogic2"]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.30471, -0.302915 )
+visible = false
+mesh = SubResource( 1 )
+material/0 = null
 
 [node name="single_espresso_exportPrep4" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -1.175 )
