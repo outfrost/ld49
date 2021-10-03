@@ -3,6 +3,7 @@ extends Node
 
 onready var main_menu: Control = $UI/MainMenu
 onready var transition_screen: TransitionScreen = $UI/TransitionScreen
+onready var game_over_overlay: Control = $UI/GameOverOverlay
 
 export var level_scene: PackedScene
 onready var level_container: Node = $LevelContainer
@@ -53,6 +54,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	DebugOverlay.display("fps %d" % Performance.get_monitor(Performance.TIME_FPS))
 
+	if Input.is_action_just_pressed("menu"):
+		back_to_menu()
+
 	if !is_running:
 		return
 
@@ -97,16 +101,15 @@ func _process(delta: float) -> void:
 		# Game over
 		# TODO: implement gameover lose
 		print("LOST")
-		back_to_menu()
+		is_running = false
+		game_over_overlay.show()
 
 	if time_elapsed >= game_duration:
 		# Player wins
 		# TODO: implement gameover win
 		print("WON")
-		back_to_menu()
-
-	if Input.is_action_just_pressed("menu"):
-		back_to_menu()
+		is_running = false
+		game_over_overlay.show()
 
 func on_start_game() -> void:
 	transition_screen.fade_in()
@@ -136,6 +139,8 @@ func back_to_menu() -> void:
 	transition_screen.fade_in()
 	yield(transition_screen, "animation_finished")
 
+	game_over_overlay.hide()
+
 	# Delete level instance
 	level_container.remove_child(level)
 	level.queue_free()
@@ -145,6 +150,36 @@ func back_to_menu() -> void:
 	main_menu.show()
 
 	transition_screen.fade_out()
+
+func restart_game() -> void:
+	is_running = false
+
+	transition_screen.fade_in()
+	yield(transition_screen, "animation_finished")
+
+	game_over_overlay.hide()
+
+	# Delete level instance
+	level_container.remove_child(level)
+	level.queue_free()
+
+	clear_activity_buttons()
+
+	reset()
+
+	# Instantiate level
+	level = level_scene.instance()
+	level_container.add_child(level)
+
+	# TODO: populate activities
+	# NOTE: activities should be a part of a level
+	populate_activity_buttons()
+	restart_passive_effects()
+
+	transition_screen.fade_out()
+	yield(transition_screen, "animation_finished")
+
+	is_running = true
 
 func reset() -> void:
 	temper = temper_initial

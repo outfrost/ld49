@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://font/main/small_reg.tres" type="DynamicFont" id=1]
 [ext_resource path="res://game/menu/CreditsPopup.gd" type="Script" id=2]
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=3]
 [ext_resource path="res://game/menu/MainMenu.gd" type="Script" id=4]
@@ -36,6 +37,7 @@ margin_top = -64.0
 margin_right = 512.0
 margin_bottom = -8.0
 grow_vertical = 0
+custom_fonts/font = ExtResource( 1 )
 text = "v0.1.1"
 valign = 2
 __meta__ = {
@@ -68,16 +70,16 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 margin_right = 256.0
-margin_bottom = 22.0
+margin_bottom = 33.0
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
-margin_top = 32.0
+margin_top = 43.0
 margin_right = 256.0
-margin_bottom = 54.0
+margin_bottom = 76.0
 disabled = true
 text = "Options"
 __meta__ = {
@@ -85,18 +87,18 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
-margin_top = 64.0
+margin_top = 86.0
 margin_right = 256.0
-margin_bottom = 86.0
+margin_bottom = 119.0
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 129.0
 margin_right = 256.0
-margin_bottom = 118.0
+margin_bottom = 162.0
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
