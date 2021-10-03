@@ -26,7 +26,7 @@ func _ready() -> void:
 	ready_light.visible = true
 	brewing_sound = $Togglables/BrewingSound
 	brewing_sound.playing = false
-	
+
 	# IDEA: derive initial state of the machine based on the togglables' visibility
 	pass
 
@@ -56,7 +56,7 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 	if activity_intent:
 		var location = $ActivityLocations/Position3D
 		# TODO: have multiple locations to choose from, randomize it
-		
+
 		get_node(@"/root/Game").set_activity(activity_intent["activity"], self, activity_intent["handler"], location)
 	match state:
 		States.IDLE:

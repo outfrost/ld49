@@ -89,9 +89,12 @@ margin_right = -4.0
 margin_bottom = 96.0
 grow_horizontal = 2
 custom_fonts/font = ExtResource( 4 )
-text = "263 seconds"
+text = "NaN seconds"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CustomersCaption" type="Label" parent="BottomPanel"]
 anchor_left = 0.333
@@ -113,7 +116,7 @@ margin_right = -4.0
 margin_bottom = 96.0
 grow_horizontal = 2
 custom_fonts/font = ExtResource( 4 )
-text = "17"
+text = "-2147483648"
 align = 1
 valign = 1
 

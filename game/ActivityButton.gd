@@ -10,4 +10,4 @@ func _init(a):
 	activity = a
 
 func _pressed():
-	get_node(@"/root/Game").set_activity(activity)
+	get_node(@"/root/Game").set_activity(activity, null, "")

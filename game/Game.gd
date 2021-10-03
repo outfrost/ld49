@@ -46,6 +46,8 @@ var activity_queue = []
 # TODO: populate customers
 var customers: Array = []
 
+var customers_served: int = 0
+
 var debug: Reference
 
 func _ready() -> void:
@@ -113,14 +115,14 @@ func _process(delta: float) -> void:
 		# TODO: implement gameover lose
 		print("LOST")
 		is_running = false
-		game_over_overlay.show()
+		game_over_overlay.show_game_lost()
 
 	if time_elapsed >= game_duration:
 		# Player wins
 		# TODO: implement gameover win
 		print("WON")
 		is_running = false
-		game_over_overlay.show()
+		game_over_overlay.show_game_won()
 
 func on_start_game() -> void:
 	if !skip_menus:
@@ -129,19 +131,7 @@ func on_start_game() -> void:
 
 	main_menu.hide()
 
-	reset()
-
-	# Instantiate level
-	level = level_scene.instance()
-	level_container.add_child(level)
-	
-	spawn_location = level.find_node("PlayerSpawnLocation")
-	player_visual = level.find_node("PlayerVisual")
-
-	# TODO: populate activities
-	# NOTE: activities should be a part of a level
-	populate_activity_buttons()
-	restart_passive_effects()
+	setup()
 
 	transition_screen.fade_out()
 	yield(transition_screen, "animation_finished")
@@ -154,13 +144,7 @@ func back_to_menu() -> void:
 	transition_screen.fade_in()
 	yield(transition_screen, "animation_finished")
 
-	game_over_overlay.hide()
-
-	# Delete level instance
-	level_container.remove_child(level)
-	level.queue_free()
-
-	clear_activity_buttons()
+	teardown()
 
 	main_menu.show()
 
@@ -172,6 +156,30 @@ func restart_game() -> void:
 	transition_screen.fade_in()
 	yield(transition_screen, "animation_finished")
 
+	teardown()
+	setup()
+
+	transition_screen.fade_out()
+	yield(transition_screen, "animation_finished")
+
+	is_running = true
+
+func setup() -> void:
+	reset()
+
+	# Instantiate level
+	level = level_scene.instance()
+	level_container.add_child(level)
+
+	spawn_location = level.find_node("PlayerSpawnLocation")
+	player_visual = level.find_node("PlayerVisual")
+
+	# TODO: populate activities
+	# NOTE: activities should be a part of a level
+	populate_activity_buttons()
+	restart_passive_effects()
+
+func teardown() -> void:
 	game_over_overlay.hide()
 
 	# Delete level instance
@@ -180,26 +188,11 @@ func restart_game() -> void:
 
 	clear_activity_buttons()
 
-	reset()
-
-	# Instantiate level
-	level = level_scene.instance()
-	level_container.add_child(level)
-
-	# TODO: populate activities
-	# NOTE: activities should be a part of a level
-	populate_activity_buttons()
-	restart_passive_effects()
-
-	transition_screen.fade_out()
-	yield(transition_screen, "animation_finished")
-
-	is_running = true
-
 func reset() -> void:
 	temper = temper_initial
 	temperature = temperature_initial
 	time_elapsed = 0.0
+	customers_served = 0
 
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
@@ -257,7 +250,8 @@ func try_pop_activity():
 		return
 	var activity = activity_popped["activity"]
 	var position: Position3D = activity_popped["position_marker"]
-	activity_popped["caller"].call(activity_popped["callback_name"])
+	if activity_popped["caller"] and !activity_popped["callback_name"].empty():
+		activity_popped["caller"].call(activity_popped["callback_name"])
 	if activity_popped["position_marker"]:
 		# TODO: teleport player to the marker and set their rotation
 		pass
@@ -266,4 +260,3 @@ func try_pop_activity():
 	if player_visual and position:
 		# TODO: lerp player from one location to another
 		player_visual.transform = position.global_transform
-
