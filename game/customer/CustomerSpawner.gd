@@ -4,8 +4,9 @@ extends Spatial
 #Send customer once there is a free spot, optionally wait some time
 export (Array, PackedScene) var customer_scenes = []
 var instanced_customers = []
-onready var sitting_spots:Array = get_tree().get_nodes_in_group("sitting_spot")
-onready var spawning_spots:Array = get_tree().get_nodes_in_group("spawning_spots")
+onready var sitting_spots:Array = get_tree().get_nodes_in_group("drinking_spot")
+onready var spawning_spots:Array = get_tree().get_nodes_in_group("spawning_spot")
+
 onready var navigation_node:Navigation = get_parent()
 onready var spawn_timer:Timer = $SpawnTimer
 
@@ -22,9 +23,12 @@ func spawn_customer():
 		var spot = spawning_spots[randi() % spawning_spots.size()] #chooses random spawn spot based on the array
 		var customer_packed:PackedScene = customer_scenes[randi() % customer_scenes.size()]
 		var customer = customer_packed.instance()
+		customer.global_transform.origin = spot.global_transform.origin
 		navigation_node.add_child(customer)
 		if randomize_time:
 			spawn_timer.wait_time = randi() % random_seconds
+	else:
+		printerr("No spawning spots found!", get_stack())
 
 func _on_SpawnTimer_timeout():
 	spawn_customer()
@@ -35,3 +39,7 @@ func _process(delta):
 		for i in sitting_spots:
 			if not i.busy:
 				spawn_timer.start()
+
+func _ready():
+	yield(get_tree().create_timer(3), "timeout")
+	spawn_customer()
