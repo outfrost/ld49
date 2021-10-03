@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/GroupMessenger.gd"
 }, {
+"base": "Area",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://level/Interactable.gd"
+}, {
 "base": "Resource",
 "class": "PassiveEffect",
 "language": "GDScript",
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "ActivityButton": "",
 "Game": "",
 "GroupMessenger": "",
+"Interactable": "",
 "PassiveEffect": "",
 "TransitionScreen": ""
 }
