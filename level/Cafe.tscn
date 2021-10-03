@@ -1,12 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 22, 3, 0.5 )
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 12, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 16, 1, 32 )
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 16, 1, 20 )
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 1.2, 0.9, 0.75 )
@@ -17,290 +17,20 @@ size = Vector3( 1.25, 0.05, 0.8 )
 [sub_resource type="CubeMesh" id=5]
 size = Vector3( 1.25, 0.05, 0.85 )
 
-[sub_resource type="CubeMesh" id=6]
-size = Vector3( 12, 3, 0.5 )
-
-[sub_resource type="CubeMesh" id=7]
-size = Vector3( 16, 1, 20 )
-
 [node name="Cafe" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.707107, -0.541675, 0.45452, 0, 0.642788, 0.766044, -0.707107, -0.541675, 0.45452, 28.25, 15.25, 22.25 )
+transform = Transform( 0.707107, -0.541675, 0.45452, 0, 0.642788, 0.766044, -0.707107, -0.541675, 0.45452, 8.5, 10.75, 8 )
 current = true
 far = 200.0
 
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.75, 1.5, 8.25 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.75, 1.5, 8.25 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 19 )
-width = 8.0
-height = 3.0
-depth = 0.5
-
-[node name="CSGBox" type="CSGBox" parent="CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -0.3, 0 )
-operation = 2
-width = 1.25
-height = 2.4
-depth = 0.5
-
-[node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3 )
-width = 8.0
-height = 3.0
-depth = 0.5
-
-[node name="CSGBox" type="CSGBox" parent="CSGBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -0.3, 0 )
-operation = 2
-width = 1.25
-height = 2.4
-depth = 0.5
-
-[node name="CSGBox3" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2.5 )
-width = 8.0
-height = 3.0
-depth = 0.5
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 8.5 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Counter11" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.125, 0.45, 10.125 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter11"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter12" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.125, 0.45, 8.875 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter12"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter13" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.125, 0.45, 7.625 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter13"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter14" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.125, 0.45, 6.375 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter14"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter16" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.125, 0.45, 5.125 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter16"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.625, 0.45, 3.625 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.45, 3.625 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="Counter4" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.125, 0.45, 6.375 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="Counter5" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.125, 0.45, 7.625 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="Counter6" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.125, 0.45, 8.875 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="Counter7" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.125, 0.45, 10.125 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="Counter9" type="MeshInstance" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.625, 0.45, 11.625 )
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Counter9"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="Counter8" type="CSGBox" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.375, 0.45, 11.375 )
-width = 1.25
-height = 0.9
-depth = 1.25
-
-[node name="CSGBox" type="CSGBox" parent="Counter8"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.75, 0, -0.75 )
-operation = 2
-width = 1.25
-height = 0.9
-depth = 1.25
-
-[node name="Counter9" type="CSGBox" parent="Counter8"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
-operation = 2
-width = 0.5
-height = 0.9
-depth = 0.5
-
-[node name="Asdgf" type="CSGBox" parent="Counter8"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
-width = 1.325
-height = 0.05
-depth = 1.325
-
-[node name="CSGBox2" type="CSGBox" parent="Counter8/Asdgf"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.762, 0, -0.762 )
-operation = 2
-width = 1.25
-height = 0.1
-depth = 1.25
-
-[node name="CSGBox3" type="CSGBox" parent="Counter8/Asdgf"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
-operation = 2
-width = 0.532
-height = 0.1
-depth = 0.7
-
-[node name="Counter10" type="CSGBox" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.875, 0.45, 11.375 )
-width = 1.25
-height = 0.9
-depth = 1.25
-
-[node name="Counter9" type="CSGBox" parent="Counter10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
-operation = 2
-width = 0.5
-height = 0.9
-depth = 0.5
-
-[node name="Asdgf" type="CSGBox" parent="Counter10"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
-width = 1.325
-height = 0.05
-depth = 1.325
-
-[node name="CSGBox3" type="CSGBox" parent="Counter10/Asdgf"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
-operation = 2
-width = 0.532
-height = 0.1
-depth = 0.7
-
-[node name="Counter15" type="CSGBox" parent="."]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -2.875, 0.45, 3.875 )
-width = 1.25
-height = 0.9
-depth = 1.25
-
-[node name="Counter9" type="CSGBox" parent="Counter15"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
-operation = 2
-width = 0.5
-height = 0.9
-depth = 0.5
-
-[node name="Asdgf" type="CSGBox" parent="Counter15"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
-width = 1.325
-height = 0.05
-depth = 1.325
-
-[node name="CSGBox3" type="CSGBox" parent="Counter15/Asdgf"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
-operation = 2
-width = 0.532
-height = 0.1
-depth = 0.7
-
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 13.5 )
-light_energy = 0.5
-omni_range = 10.0
-
 [node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.25, 1.5, 13.25 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.75, 1.5, 0 )
 mesh = SubResource( 6 )
 material/0 = null
 
 [node name="CSGBox4" type="CSGBox" parent="."]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 29.825, 1.5, 17.1 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3.825, 1.5, 3.85 )
 width = 5.666
 height = 3.0
 depth = 0.5
@@ -313,7 +43,7 @@ height = 2.4
 depth = 0.5
 
 [node name="CSGBox5" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1.5, 7.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.75 )
 width = 12.0
 height = 3.0
 depth = 0.5
@@ -326,24 +56,24 @@ height = 2.4
 depth = 0.5
 
 [node name="CSGBox6" type="CSGBox" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.75, 1.5, 11.25 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.75, 1.5, -2 )
 width = 8.0
 height = 3.0
 depth = 0.5
 
 [node name="CSGBox7" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1.5, 19 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 5.75 )
 width = 8.0
 height = 3.0
 depth = 0.5
 
 [node name="MeshInstance6" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -0.5, 14.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1.25 )
 mesh = SubResource( 7 )
 material/0 = null
 
 [node name="Counter17" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.875, 0.45, 13.375 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, 0.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -353,7 +83,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter18" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.875, 0.45, 12.125 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -1.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -363,7 +93,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter19" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.875, 0.45, 10.875 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -2.375 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -373,7 +103,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter20" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.875, 0.45, 8.125 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.125, 0.45, -5.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -383,7 +113,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter21" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.875, 0.45, 9.625 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -3.625 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -393,7 +123,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter22" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.375, 0.45, 8.125 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.625, 0.45, -5.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -403,7 +133,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter23" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.625, 0.45, 8.125 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.375, 0.45, -5.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -413,7 +143,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counter24" type="MeshInstance" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 23.625, 0.45, 14.875 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.375, 0.45, 1.625 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -423,7 +153,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Counter25" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25.125, 0.45, 10.875 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, -2.375 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -433,7 +163,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Counter26" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25.125, 0.45, 12.125 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, -1.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -443,7 +173,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Counter27" type="MeshInstance" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25.125, 0.45, 13.375 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, 0.125 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -453,7 +183,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Counter28" type="MeshInstance" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 22.375, 0.45, 14.875 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.625, 0.45, 1.625 )
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -463,7 +193,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Counter29" type="CSGBox" parent="."]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24.875, 0.45, 14.625 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.125, 0.45, 1.375 )
 width = 1.25
 height = 0.9
 depth = 1.25
@@ -503,7 +233,7 @@ height = 0.1
 depth = 0.7
 
 [node name="Counter30" type="CSGBox" parent="."]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 21.125, 0.45, 14.625 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.875, 0.45, 1.375 )
 width = 1.25
 height = 0.9
 depth = 1.25
@@ -529,7 +259,7 @@ height = 0.1
 depth = 0.7
 
 [node name="Counter31" type="CSGBox" parent="."]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 21.125, 0.45, 8.375 )
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.875, 0.45, -4.875 )
 width = 1.25
 height = 0.9
 depth = 1.25
@@ -555,15 +285,15 @@ height = 0.1
 depth = 0.7
 
 [node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 2.5, 13.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.25 )
 light_energy = 0.5
 omni_range = 10.0
 
 [node name="single_espresso_exportPrep" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -3, 0.925, 10.325 )
+transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -0.175 )
 
 [node name="single_espresso_exportPrep2" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -3, 0.925, 9.325 )
+transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -1.175 )
 
 [node name="single_espresso_exportPrep3" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -3, 0.925, 8.325 )
+transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -2.175 )
