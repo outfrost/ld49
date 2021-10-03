@@ -54,7 +54,9 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 		return
 	var activity_intent = get_current_activity_intent()
 	if activity_intent:
-		get_node(@"/root/Game").set_activity(activity_intent["activity"], self, activity_intent["handler"])
+		var location = $ActivityLocations/Position3D
+		
+		get_node(@"/root/Game").set_activity(activity_intent["activity"], self, activity_intent["handler"], location)
 	match state:
 		States.IDLE:
 			return

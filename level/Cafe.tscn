@@ -24,9 +24,10 @@ size = Vector3( 1.25, 0.05, 0.8 )
 size = Vector3( 1.25, 0.05, 0.85 )
 
 [sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.25, 0.25, 0.25 )
 
 [sub_resource type="CubeMesh" id=8]
-size = Vector3( 0.2, 0.2, 0.1 )
+size = Vector3( 0.07, 0.07, 0.035 )
 
 [node name="Cafe" type="Spatial"]
 
@@ -37,6 +38,9 @@ far = 200.0
 
 [node name="CameraCounterCloseup" type="Camera" parent="."]
 transform = Transform( 0.777135, 0, 0.629334, 0, 1, 0, -0.629334, 0, 0.777135, -0.523066, 1.49308, 2.25082 )
+
+[node name="PlayerSpawnLocation" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11308, 0, -1.69147 )
 
 [node name="PlayerVisual" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11308, 0, -1.69147 )
@@ -52,313 +56,324 @@ visible = false
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance4" type="MeshInstance" parent="."]
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.25 )
+light_energy = 0.5
+omni_range = 10.0
+
+[node name="LevelStatics" type="Spatial" parent="."]
+
+[node name="MeshInstance4" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.75, 1.5, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="CSGBox4" type="CSGBox" parent="."]
+[node name="CSGBox4" type="CSGBox" parent="LevelStatics"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 3.825, 1.5, 3.85 )
 width = 5.666
 height = 3.0
 depth = 0.5
 
-[node name="CSGBox" type="CSGBox" parent="CSGBox4"]
+[node name="CSGBox" type="CSGBox" parent="LevelStatics/CSGBox4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0 )
 operation = 2
 width = 1.25
 height = 2.4
 depth = 0.5
 
-[node name="CSGBox5" type="CSGBox" parent="."]
+[node name="CSGBox5" type="CSGBox" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.75 )
 width = 12.0
 height = 3.0
 depth = 0.5
 
-[node name="CSGBox" type="CSGBox" parent="CSGBox5"]
+[node name="CSGBox" type="CSGBox" parent="LevelStatics/CSGBox5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, -0.3, 0 )
 operation = 2
 width = 1.25
 height = 2.4
 depth = 0.5
 
-[node name="CSGBox6" type="CSGBox" parent="."]
+[node name="CSGBox6" type="CSGBox" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.75, 1.5, -2 )
 width = 8.0
 height = 3.0
 depth = 0.5
 
-[node name="CSGBox7" type="CSGBox" parent="."]
+[node name="CSGBox7" type="CSGBox" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 5.75 )
 width = 8.0
 height = 3.0
 depth = 0.5
 
-[node name="MeshInstance6" type="MeshInstance" parent="."]
+[node name="MeshInstance6" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1.25 )
 mesh = SubResource( 3 )
 material/0 = null
 
-[node name="Counter17" type="MeshInstance" parent="."]
+[node name="Counter17" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, 0.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter17"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter17"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter18" type="MeshInstance" parent="."]
+[node name="Counter18" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -1.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter18"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter18"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter19" type="MeshInstance" parent="."]
+[node name="Counter19" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -2.375 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter19"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter19"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter20" type="MeshInstance" parent="."]
+[node name="Counter20" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.875, 0.45, -5.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter20"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter20"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.0249996 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter21" type="MeshInstance" parent="."]
+[node name="Counter21" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, -3.625 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter21"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter21"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter23" type="MeshInstance" parent="."]
+[node name="Counter23" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, 0.45, -5.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter23"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter23"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="Counter24" type="MeshInstance" parent="."]
+[node name="Counter24" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.375, 0.45, 1.625 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter24"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter24"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="Counter25" type="MeshInstance" parent="."]
+[node name="Counter25" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, -2.375 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter25"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter25"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="Counter26" type="MeshInstance" parent="."]
+[node name="Counter26" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, -1.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter26"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter26"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="Counter27" type="MeshInstance" parent="."]
+[node name="Counter27" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.875, 0.45, 0.125 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter27"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter27"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="Counter28" type="MeshInstance" parent="."]
+[node name="Counter28" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.625, 0.45, 1.625 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="MeshInstance" type="MeshInstance" parent="Counter28"]
+[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counter28"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.025 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[node name="Counter29" type="CSGBox" parent="."]
+[node name="Counter29" type="CSGBox" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.125, 0.45, 1.375 )
 width = 1.25
 height = 0.9
 depth = 1.25
 
-[node name="CSGBox" type="CSGBox" parent="Counter29"]
+[node name="CSGBox" type="CSGBox" parent="LevelStatics/Counter29"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.75, 0, -0.75 )
 operation = 2
 width = 1.25
 height = 0.9
 depth = 1.25
 
-[node name="Counter9" type="CSGBox" parent="Counter29"]
+[node name="Counter9" type="CSGBox" parent="LevelStatics/Counter29"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
 operation = 2
 width = 0.5
 height = 0.9
 depth = 0.5
 
-[node name="Asdgf" type="CSGBox" parent="Counter29"]
+[node name="Asdgf" type="CSGBox" parent="LevelStatics/Counter29"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
 width = 1.325
 height = 0.05
 depth = 1.325
 
-[node name="CSGBox2" type="CSGBox" parent="Counter29/Asdgf"]
+[node name="CSGBox2" type="CSGBox" parent="LevelStatics/Counter29/Asdgf"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.762, 0, -0.762 )
 operation = 2
 width = 1.25
 height = 0.1
 depth = 1.25
 
-[node name="CSGBox3" type="CSGBox" parent="Counter29/Asdgf"]
+[node name="CSGBox3" type="CSGBox" parent="LevelStatics/Counter29/Asdgf"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
 operation = 2
 width = 0.532
 height = 0.1
 depth = 0.7
 
-[node name="Counter30" type="CSGBox" parent="."]
+[node name="Counter30" type="CSGBox" parent="LevelStatics"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.875, 0.45, 1.375 )
 width = 1.25
 height = 0.9
 depth = 1.25
 
-[node name="Counter9" type="CSGBox" parent="Counter30"]
+[node name="Counter9" type="CSGBox" parent="LevelStatics/Counter30"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
 operation = 2
 width = 0.5
 height = 0.9
 depth = 0.5
 
-[node name="Asdgf" type="CSGBox" parent="Counter30"]
+[node name="Asdgf" type="CSGBox" parent="LevelStatics/Counter30"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
 width = 1.325
 height = 0.05
 depth = 1.325
 
-[node name="CSGBox3" type="CSGBox" parent="Counter30/Asdgf"]
+[node name="CSGBox3" type="CSGBox" parent="LevelStatics/Counter30/Asdgf"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
 operation = 2
 width = 0.532
 height = 0.1
 depth = 0.7
 
-[node name="Counter31" type="CSGBox" parent="."]
+[node name="Counter31" type="CSGBox" parent="LevelStatics"]
 transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.875, 0.45, -4.875 )
 width = 1.25
 height = 0.9
 depth = 1.25
 
-[node name="Counter9" type="CSGBox" parent="Counter31"]
+[node name="Counter9" type="CSGBox" parent="LevelStatics/Counter31"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0, 0.375 )
 operation = 2
 width = 0.5
 height = 0.9
 depth = 0.5
 
-[node name="Asdgf" type="CSGBox" parent="Counter31"]
+[node name="Asdgf" type="CSGBox" parent="LevelStatics/Counter31"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0.45, -0.038 )
 width = 1.325
 height = 0.05
 depth = 1.325
 
-[node name="CSGBox3" type="CSGBox" parent="Counter31/Asdgf"]
+[node name="CSGBox3" type="CSGBox" parent="LevelStatics/Counter31/Asdgf"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.613, 0, 0.613 )
 operation = 2
 width = 0.532
 height = 0.1
 depth = 0.7
 
-[node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.25 )
-light_energy = 0.5
-omni_range = 10.0
+[node name="LevelInteractables" type="Spatial" parent="."]
 
-[node name="single_espresso_exportPrep" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -0.175 )
-
-[node name="CoffeeLogic" type="Area" parent="single_espresso_exportPrep"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="CoffeeMachine" type="Area" parent="LevelInteractables"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 1, -0.175 )
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="single_espresso_exportPrep/CoffeeLogic"]
+[node name="Model" parent="LevelInteractables/CoffeeMachine" instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/CoffeeMachine"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
 shape = SubResource( 7 )
 
-[node name="Togglables" type="Spatial" parent="single_espresso_exportPrep/CoffeeLogic"]
+[node name="Togglables" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
 
-[node name="Cup" type="MeshInstance" parent="single_espresso_exportPrep/CoffeeLogic/Togglables"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.30471, -0.302917 )
-visible = false
+[node name="Cup" type="MeshInstance" parent="LevelInteractables/CoffeeMachine/Togglables"]
+transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.2, -0.105 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="ReadyLight" type="MeshInstance" parent="single_espresso_exportPrep/CoffeeLogic/Togglables"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.35, -0.65 )
+[node name="ReadyLight" type="MeshInstance" parent="LevelInteractables/CoffeeMachine/Togglables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
 mesh = SubResource( 8 )
 material/0 = null
 
-[node name="BrewingSound" type="AudioStreamPlayer3D" parent="single_espresso_exportPrep/CoffeeLogic/Togglables"]
+[node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine/Togglables"]
 
-[node name="single_espresso_exportPrep2" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -1.175 )
+[node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 
-[node name="CoffeeLogic" type="Area" parent="single_espresso_exportPrep2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine/ActivityLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47035e-08, -1.45848, -0.956016 )
+
+[node name="CoffeeMachine2" type="Area" parent="LevelInteractables"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 1, -1.175 )
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="single_espresso_exportPrep2/CoffeeLogic"]
+[node name="Model" parent="LevelInteractables/CoffeeMachine2" instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/CoffeeMachine2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
 shape = SubResource( 7 )
 
-[node name="Togglables" type="Spatial" parent="single_espresso_exportPrep2/CoffeeLogic"]
+[node name="Togglables" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
 
-[node name="Cup" type="MeshInstance" parent="single_espresso_exportPrep2/CoffeeLogic/Togglables"]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.30471, -0.302917 )
-visible = false
+[node name="Cup" type="MeshInstance" parent="LevelInteractables/CoffeeMachine2/Togglables"]
+transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.2, -0.105 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="ReadyLight" type="MeshInstance" parent="single_espresso_exportPrep2/CoffeeLogic/Togglables"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.35, -0.65 )
+[node name="ReadyLight" type="MeshInstance" parent="LevelInteractables/CoffeeMachine2/Togglables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
 mesh = SubResource( 8 )
 material/0 = null
 
-[node name="BrewingSound" type="AudioStreamPlayer3D" parent="single_espresso_exportPrep2/CoffeeLogic/Togglables"]
+[node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine2/Togglables"]
 
-[node name="single_espresso_exportPrep4" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -1.175 )
+[node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine2/ActivityLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47035e-08, -1.45848, -0.956016 )
 
 [node name="single_espresso_exportPrep3" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -5, 0.925, -2.175 )

@@ -7,6 +7,8 @@ onready var game_over_overlay: Control = $UI/GameOverOverlay
 
 export var level_scene: PackedScene
 onready var level_container: Node = $LevelContainer
+var spawn_location: Position3D
+var player_visual: Spatial
 var level
 
 export var skip_menus: bool = false
@@ -90,6 +92,8 @@ func _process(delta: float) -> void:
 			temper += current_activity.outcome_temper_delta
 			current_activity_timeout = 0.0
 			current_activity = null
+			if player_visual and spawn_location:
+				player_visual.transform = spawn_location.transform
 	else:
 		DebugOverlay.display("current activity none")
 
@@ -130,6 +134,9 @@ func on_start_game() -> void:
 	# Instantiate level
 	level = level_scene.instance()
 	level_container.add_child(level)
+	
+	spawn_location = level.find_node("PlayerSpawnLocation")
+	player_visual = level.find_node("PlayerVisual")
 
 	# TODO: populate activities
 	# NOTE: activities should be a part of a level
@@ -228,25 +235,19 @@ func clear_activity_buttons() -> void:
 		$UI.remove_child(activity_object.button)
 	activities_available.clear()
 
-func set_activity(activity: Activity, caller, callback_name: String, position: Position3D = null) -> bool:
-	if current_activity:
-		var activity_queued = {
-			"activity": activity,
-			"caller": caller,
-			"callback_name": callback_name,
-			# NOTE: position might make sense as part of the activity??
-			"position_marker": position,
-			# TODO: make it possible for activity to also suggest player animation
-			#"animation": ""
-		}
-		activity_queue.push_back(activity_queued)
-		var queue_length = activity_queue.size()
-		print("queued an activity \"%s\", queue size: %s" % [activity.displayed_name, queue_length])
-		return false
-	caller.call(callback_name)
-	current_activity = activity
-	current_activity_timeout = time_elapsed + activity.duration
-	return true
+func set_activity(activity: Activity, caller, callback_name: String, position: Position3D = null):
+	var activity_queued = {
+		"activity": activity,
+		"caller": caller,
+		"callback_name": callback_name,
+		# NOTE: position might make sense as part of the activity??
+		"position_marker": position,
+		# TODO: make it possible for activity to also suggest player animation
+		#"animation": ""
+	}
+	activity_queue.push_back(activity_queued)
+	var queue_length = activity_queue.size()
+	print("queued an activity \"%s\", queue size: %s" % [activity.displayed_name, queue_length])
 
 func try_pop_activity():
 	if current_activity:
@@ -255,10 +256,13 @@ func try_pop_activity():
 	if !activity_popped:
 		return
 	var activity = activity_popped["activity"]
+	var position: Position3D = activity_popped["position_marker"]
 	activity_popped["caller"].call(activity_popped["callback_name"])
 	if activity_popped["position_marker"]:
 		# TODO: teleport player to the marker and set their rotation
 		pass
 	current_activity = activity
 	current_activity_timeout = time_elapsed + activity.duration
+	if player_visual and position:
+		player_visual.transform = position.global_transform
 
