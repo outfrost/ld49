@@ -134,7 +134,7 @@ func on_start_game() -> void:
 	# Instantiate level
 	level = level_scene.instance()
 	level_container.add_child(level)
-	
+
 	spawn_location = level.find_node("PlayerSpawnLocation")
 	player_visual = level.find_node("PlayerVisual")
 
