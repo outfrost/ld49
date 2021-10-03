@@ -15,12 +15,19 @@ var state: int = States.IDLE
 var timeout: float = 0.0
 
 var cup_node: MeshInstance
+var ready_light: MeshInstance
+var brewing_sound: AudioStreamPlayer3D
 
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
-	cup_node = $Cup
+	cup_node = $Togglables/Cup
 	cup_node.visible = false
-	# we could even derive initial state of the machine basedon the cup visibility
+	ready_light = $Togglables/ReadyLight
+	ready_light.visible = true
+	brewing_sound = $Togglables/BrewingSound
+	brewing_sound.playing = false
+	
+	# IDEA: derive initial state of the machine based on the togglables' visibility
 	pass
 
 func hover() -> void:
@@ -64,10 +71,11 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 func _process(delta: float) -> void:
 	var is_timeout = get_node(@"/root/Game").time_elapsed > timeout
 	if state == States.WORKING and is_timeout:
-		# TODO: make a "ready" noise
-		# reset indicators in there are any
 		eprint("coffee is ready!")
 		state = States.READY
+		ready_light.visible = true
+		brewing_sound.playing = false
+		# TODO: make a "ready" noise
 		return
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
@@ -80,14 +88,14 @@ func set_working():
 	state = States.WORKING
 	timeout = get_node(@"/root/Game").time_elapsed + cooking_duration
 	cup_node.visible = true
-	# TODO: add a visual indicator to mark the machien working
+	ready_light.visible = false
+	brewing_sound.playing = true
 func set_resetting():
 	# state = States.IDLE
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
 	cup_node.visible = false
-	# set machine state to resetting
-	# setup a timeout for machine to switch to ready
+	ready_light.visible = true
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
