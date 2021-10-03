@@ -37,6 +37,7 @@ transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, 0.373641, 0.
 transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, 0.373641, 0.735948, -2.56985 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation" index="3"]
+visible = false
 navmesh = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance" index="0"]
@@ -46,6 +47,7 @@ material/0 = SubResource( 3 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance" index="1"]
 transform = Transform( 4.0942, 0, 0, 0, 2.99615, 0, 0, 0, 0.647208, -1.15836, 0, 5.60781 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
@@ -56,16 +58,19 @@ material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="Navigation/NavigationMeshInstance" index="3"]
 transform = Transform( 3.27659, 0, 0, 0, 2.99615, 0, 0, 0, 3.99639, -3.73433, 0, -2.09967 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="Navigation/NavigationMeshInstance" index="4"]
 transform = Transform( 0.74931, 0, 0.483253, 0, 2.99615, 0, -0.841096, 0, 0.430517, 4.9479, 0, 1.99497 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
 [node name="MeshInstance7" type="MeshInstance" parent="Navigation/NavigationMeshInstance" index="5"]
 transform = Transform( -0.0245147, 0, 0.647055, 0, 2.99615, 0, -4.41635, 0, -0.0552348, 5.36305, 0, -2.20055 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 

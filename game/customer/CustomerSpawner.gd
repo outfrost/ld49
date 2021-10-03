@@ -30,15 +30,20 @@ func spawn_customer():
 	else:
 		printerr("No spawning spots found!", get_stack())
 
-func _on_SpawnTimer_timeout():
-	spawn_customer()
+func _on_SpawnTimer_timeout()->void:
+	if has_free_seats():
+		spawn_customer()
 
+func has_free_seats()->bool:
+	for i in sitting_spots:
+		if not i.busy:
+			return true
+	return false
 #manage the need for customers based on free spots
 func _process(delta):
 	if spawn_timer.is_stopped() && game_is_running:
-		for i in sitting_spots:
-			if not i.busy:
-				spawn_timer.start()
+		if has_free_seats():
+			spawn_timer.start()
 
 func _ready():
 	yield(get_tree().create_timer(3), "timeout")

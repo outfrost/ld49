@@ -33,7 +33,8 @@ func find_seat():
 	var seats = get_tree().get_nodes_in_group("drinking_spot")
 	for i in seats:
 		if not i.busy:
-			i.busy = true
+			i.set_busy(true)
+			i.update()
 			target = i
 			move_to(target.global_transform.origin)
 			break
