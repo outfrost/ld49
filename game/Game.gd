@@ -264,5 +264,6 @@ func try_pop_activity():
 	current_activity = activity
 	current_activity_timeout = time_elapsed + activity.duration
 	if player_visual and position:
+		# TODO: lerp player from one location to another
 		player_visual.transform = position.global_transform
 

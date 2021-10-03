@@ -55,6 +55,7 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 	var activity_intent = get_current_activity_intent()
 	if activity_intent:
 		var location = $ActivityLocations/Position3D
+		# TODO: have multiple locations to choose from, randomize it
 		
 		get_node(@"/root/Game").set_activity(activity_intent["activity"], self, activity_intent["handler"], location)
 	match state:
@@ -82,6 +83,7 @@ func _process(delta: float) -> void:
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
 		state = States.IDLE
+		# TODO: give player the coffe cup
 		return
 	pass
 
