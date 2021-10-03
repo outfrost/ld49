@@ -9,6 +9,8 @@ export var level_scene: PackedScene
 onready var level_container: Node = $LevelContainer
 var level
 
+export var skip_menus: bool = false
+
 var is_running = false
 
 # Barista's temperature - the lower the better
@@ -50,6 +52,8 @@ func _ready() -> void:
 		debug.startup()
 
 	main_menu.connect("start_game", self, "on_start_game")
+	if skip_menus:
+		on_start_game()
 
 func _process(delta: float) -> void:
 	DebugOverlay.display("fps %d" % Performance.get_monitor(Performance.TIME_FPS))
@@ -112,8 +116,9 @@ func _process(delta: float) -> void:
 		game_over_overlay.show()
 
 func on_start_game() -> void:
-	transition_screen.fade_in()
-	yield(transition_screen, "animation_finished")
+	if !skip_menus:
+		transition_screen.fade_in()
+		yield(transition_screen, "animation_finished")
 
 	main_menu.hide()
 
