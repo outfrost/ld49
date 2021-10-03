@@ -6,16 +6,16 @@ var busy:bool = false
 
 func set_busy(value:bool)->void:
 	busy = value
+	update()
 
 func leave() -> void:
-	busy = false
-
+	set_busy(false)
 
 func _ready():
 	if not OS.has_feature("debug"):
 		hide()
 
-func update():
+func update()->void:
 	if OS.has_feature("debug"):
 		if busy:
 			var copy = $MeshInstance.get_active_material(0).duplicate()

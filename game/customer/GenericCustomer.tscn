@@ -5,6 +5,8 @@
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
+radius = 0.52163
+height = 0.455611
 
 [node name="customer" type="KinematicBody" groups=[
 "customer",
@@ -17,9 +19,10 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 0.841121, 0, 0, 0, 1.09495, 0, 0, 0, 1.0858, 0.0943828, 0.699238, 0.827141 )
-cast_to = Vector3( 0, 0, 2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.464371, -0.436241 )
+cast_to = Vector3( 0, 0, -1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.997199, 0.0574501, -0.047896, -0.0463545, -0.0278717, -0.998536, -0.0587009, 0.997959, -0.0251305, 0, 0, 0 )
 shape = SubResource( 2 )
 disabled = true

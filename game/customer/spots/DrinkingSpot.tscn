@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://game/customer/SpawningSpot.gd" type="Script" id=1]
+[ext_resource path="res://game/customer/spots/DrinkingSpot.gd" type="Script" id=1]
 
 [sub_resource type="PrismMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.917647, 1, 0.0196078, 1 )
+albedo_color = Color( 0.462745, 0.909804, 0.054902, 1 )
 
-[node name="SpawnSpot" type="Spatial" groups=[
-"spawning_spot",
+[node name="drinking_spot" type="Spatial" groups=[
+"drinking_spot",
 ]]
 script = ExtResource( 1 )
 

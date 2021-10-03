@@ -20,7 +20,6 @@ onready var navmesh:Navigation = get_parent()
 
 var locked_height:float = 0
 
-signal waiting_for_drink
 signal started_walking
 signal started_idling
 
@@ -29,17 +28,16 @@ signal started_idling
 
 var lock_z_axis:bool = false
 
-func find_seat():
+func find_seat()->void:
 	var seats = get_tree().get_nodes_in_group("drinking_spot")
 	for i in seats:
 		if not i.busy:
 			i.set_busy(true)
-			i.update()
 			target = i
 			move_to(target.global_transform.origin)
 			break
 
-func leave_and_go_away():
+func leave_and_go_away()->void:
 	if target.has_method("leave"):
 		target.leave() #current allocated seat
 	var exit_spots:Array = get_tree().get_nodes_in_group("exit_spot")
