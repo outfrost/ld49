@@ -27,7 +27,7 @@ displayed_name = "Take a break"
 script = ExtResource( 6 )
 update_interval = 1.0
 update_temper_delta = 0.0
-update_temperature_delta = 0.2
+update_temperature_delta = 0.02
 displayed_name = "Broken AC"
 displayed_description = "Temperature rises!"
 

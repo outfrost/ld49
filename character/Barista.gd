@@ -8,9 +8,9 @@ enum State {
 	Busy,
 }
 
-const ACCEL_RATE: float = 4.0
+const ACCEL_RATE: float = 5.0
 
-export var max_speed: float = 3.0
+export var max_speed: float = 2.0
 
 onready var navmesh: Navigation = get_parent().find_node("Navigation")
 onready var y_pos: float = transform.origin.y

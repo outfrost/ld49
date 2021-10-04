@@ -2,7 +2,7 @@ extends Spatial
 
 
 #Send customer once there is a free spot, optionally wait some time
-var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new() 
+var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
 export (Array, PackedScene) var customer_scenes = []
 var instanced_customers = []
