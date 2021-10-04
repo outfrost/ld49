@@ -82,8 +82,9 @@ func set_using():
 	if !HintPopup.firstfridgeuse:
 		HintPopup.firstfridgeuse = true
 		HintPopup.display("Consuming a cold refreshing beverage will help you keep your cool, and make the customers slightly more tolerable", 3.0)
+	yield(animation_player, "animation_finished")
+	animation_player.play("drink_beverage")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
 	print("FRIDGE: %s" % text)
-
