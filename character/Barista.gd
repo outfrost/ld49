@@ -50,3 +50,31 @@ func move_to(target: Vector3):
 		return
 	path = navmesh.get_simple_path(global_transform.origin, target)
 	path_node = 0
+
+func take_cup(coffee_type: int) -> bool:
+	var cup_reference = $CupReference
+	if $Items.get_child_count():
+		return false
+	#var item_position = $ItemLocations/Position3D
+	print("placing an item in barista's hands")
+
+	#var origin = item_position.global_transform.origin
+	var cup = cup_reference.duplicate()
+	cup.coffee_type = coffee_type
+	$Items.add_child(cup)
+	cup.visible = true
+	#cup.global_transform.origin = origin
+	return true
+
+func is_can_take_cup() -> bool:
+	return $Items.get_child_count() == 0
+
+func remove_cup():
+	var cup: Cup = null
+	for item in $Items.get_children():
+		if item is Cup:
+			cup = item
+		$Items.remove_child(item)
+	if cup:
+		return cup.coffee_type
+	return null

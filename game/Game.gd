@@ -110,9 +110,7 @@ func _process(delta: float) -> void:
 		for order in OrderRepository.order_queue.values():
 			var order_item_names := PoolStringArray()
 			for item_num in order:
-				if item_num in OrderRepository.translations.keys():
-					var order_item_name = OrderRepository.translations[item_num]
-					order_item_names.push_back(order_item_name)
+				order_item_names.push_back(OrderRepository.get_coffe_name(item_num))
 			var order_items_text = order_item_names.join(", ")
 			DebugOverlay.display(" - %s" % order_items_text)
 

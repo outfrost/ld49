@@ -63,10 +63,15 @@ func _process(delta: float) -> void:
 	var is_timeout = get_node(@"/root/Game").time_elapsed > timeout
 	if state == States.WORKING and is_timeout:
 		state = States.IDLE
-		# TODO: move items from player to tray
-		var new_item = $ItemSamples/CupFull.duplicate()
-		new_item.visible = true
-		if !put_item(new_item):
+		var new_item = $ItemSamples/Cup.duplicate()
+		var player_coffee_type = $"/root/Game".player_visual.remove_cup()
+		if player_coffee_type is int:
+			new_item.coffee_type = player_coffee_type
+			new_item.visible = true
+			if !put_item(new_item):
+				eprint("failed to put an item")
+				return
+		else:
 			eprint("failed to put an item")
 			return
 		# TODO: make a "SLAP" noise for putting cup on the tray
@@ -93,10 +98,12 @@ func take_items() -> Array:
 	var item_count = items_container_object.get_child_count()
 	var items = []
 	for i in items_container_object.get_children():
+		#var item_type = OrderRepository.possible_orders.coffee_americano
+		var item_type = i.coffee_type
+		items.push_back(item_type)
 		items_container_object.remove_child(i)
 		# TODO: store item type in items when they are put on the tray
-		var item_type = OrderRepository.possible_orders.coffee_americano
-		items.push_back(item_type)
+	print("items: %s" % items)
 	return items
 
 
