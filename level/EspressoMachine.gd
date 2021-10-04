@@ -7,10 +7,10 @@ const start_duration: float = 1.0 # seconds
 const cooking_duration: float = 5.0 # seconds
 const resetting_duration: float = 1.0 # seconds
 
-var coffee_name = OrderRepository.get_coffe_name(coffee_type)
+var coffee_name: String
 
-var activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
-var activity_taking_coffee = Activity.new("Take fresh %s from a coffee machine" % coffee_name, resetting_duration)
+var activity_start_machine: Activity
+var activity_taking_coffee: Activity
 
 enum States {IDLE, WORKING, READY, RESETTING}
 
@@ -25,6 +25,9 @@ var ready_light: MeshInstance
 var brewing_sound: AudioStreamPlayer3D
 
 func _ready() -> void:
+	coffee_name = OrderRepository.get_coffe_name(coffee_type)
+	activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
+	activity_taking_coffee = Activity.new("Take fresh %s from a coffee machine" % coffee_name, resetting_duration)
 	connect("mouse_entered", self, "hover")
 	cup_empty_node = $Togglables/CupEmpty
 	cup_empty_node.visible = false
