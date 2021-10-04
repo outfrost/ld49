@@ -3,7 +3,7 @@ extends Area
 
 export var activity_place_item: Resource
 
-const call_customer_duration = 2.0 # seconds
+const call_customer_duration = 1.0 # seconds
 var activity_call_customer = Activity.new("Call customer for pickup", call_customer_duration)
 
 enum States {IDLE, WORKING}
@@ -126,6 +126,8 @@ func yeet_items():
 	if !items_container_object:
 		return
 	for i in items_container_object.get_children():
+		var item_type = i.coffee_type
+		OrderRepository.barista_add_item_to_delivery(item_type)
 		items_container_object.remove_child(i)
 
 

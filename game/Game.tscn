@@ -42,7 +42,6 @@ bus = "MusicCrazy"
 [node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
-bus = "Ambient"
 
 [node name="HappyNoiseSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
