@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/coffee_pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/coffee_machine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=11]
+[ext_resource path="res://assets/drink_can.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -440,3 +441,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09976, 0.925, 0.303462 )
 
 [node name="paper_cup_empty_exportprep2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, -4.85298, 1.04781, -2.17357 )
+
+[node name="Drink_Can_exportPrep" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.856197, 0.925, 0.50096 )
