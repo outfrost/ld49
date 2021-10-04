@@ -276,6 +276,7 @@ func reset() -> void:
 	HintPopup.firstorderontray = false
 	HintPopup.firsttempwarning = false
 	HintPopup.firstmindwarning = false
+	HintPopup.firstfridgeuse = false
 
 	current_activity = null
 	activity_started = false

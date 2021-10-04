@@ -20,6 +20,7 @@ var firstmachinedone: bool = false
 var firstorderontray: bool = false
 var firsttempwarning: bool = false
 var firstmindwarning: bool = false
+var firstfridgeuse: bool = false
 
 func _ready() -> void:
 	hide()
