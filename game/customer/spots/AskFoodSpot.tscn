@@ -5,11 +5,10 @@
 [sub_resource type="PrismMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.462745, 0.909804, 0.054902, 1 )
+albedo_color = Color( 0.054902, 0.909804, 0.815686, 1 )
 
-[node name="DrinkingSpot" type="Spatial" groups=[
-"drinking_spot",
-"waiting_spot",
+[node name="AskFoodSpot" type="Spatial" groups=[
+"ask_food_spot",
 ]]
 script = ExtResource( 1 )
 
