@@ -106,6 +106,8 @@ func call_customer():
 		var customer_to_call = OrderRepository.order_queue.keys()[0]
 		OrderRepository.barista_call_client_to_get_food(customer_to_call)
 	pass
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("reachCounter")
 
 func take_items():
 	if !items_container_object:
@@ -130,6 +132,8 @@ func set_putting():
 	# TODO: play animation of moving item from hands to tray
 	var serve_duration: float = activity_place_item.duration
 	timeout = get_node(@"/root/Game").time_elapsed + serve_duration
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("armsCarryEnd")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):

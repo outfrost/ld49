@@ -69,6 +69,8 @@ func set_using():
 	OrderRepository.take_order_from_customer()
 	var order_duration: float = activity_taking_order.duration
 	timeout = get_node(@"/root/Game").time_elapsed + order_duration
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("reachAppliance")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
