@@ -78,13 +78,19 @@ func set_using():
 	var beverage_duration: float = activity_cold_beverage.duration
 	timeout = get_node(@"/root/Game").time_elapsed + beverage_duration
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	open_fridge()
 	animation_player.play("crouch")
 	if !HintPopup.firstfridgeuse:
 		HintPopup.firstfridgeuse = true
 		HintPopup.display("Consuming a cold refreshing beverage will help you keep your cool, and make the customers slightly more tolerable", 3.0)
 	yield(animation_player, "animation_finished")
-	animation_player.play("drink_beverage")
+	animation_player.play("drinkBeverage")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
 	print("FRIDGE: %s" % text)
+
+func open_fridge():
+	$under_counter_fridge_exportPrep/AnimationPlayer.play("ArmatureAction")
+	yield($under_counter_fridge_exportPrep/AnimationPlayer, "animation_finished")
+	$under_counter_fridge_exportPrep/AnimationPlayer.play_backwards("ArmatureAction")

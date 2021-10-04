@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -111,6 +111,11 @@ size = Vector3( 1.25, 0.6, 0.5 )
 
 [sub_resource type="CubeMesh" id=15]
 size = Vector3( 16, 1, 20 )
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0.85098, 0.709804, 0.678431, 1 )
+metallic_specular = 0.25
+roughness = 0.75
 
 [sub_resource type="CylinderMesh" id=16]
 
@@ -640,7 +645,7 @@ material/0 = null
 [node name="Floor" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1 )
 mesh = SubResource( 15 )
-material/0 = null
+material/0 = SubResource( 17 )
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
 
