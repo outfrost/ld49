@@ -44,7 +44,7 @@ func hover() -> void:
 
 func get_current_activity_intent():
 	if should_ignore_clicks:
-		print("this machine was clicked already")
+		eprint("was clicked already")
 		return false
 	match state:
 		States.IDLE:
