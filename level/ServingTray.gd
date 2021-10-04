@@ -17,6 +17,7 @@ var items_container_object: Spatial
 var valid_item_locations: Array = []
 
 func _ready() -> void:
+	OrderRepository.connect("client_got_order_from_counter", self, "yeet_items")
 	connect("mouse_entered", self, "hover")
 	items_container_object = $Items
 	var item_locations_container = $ItemLocations
@@ -113,6 +114,12 @@ func take_items():
 	for i in items_container_object.get_children():
 		var item_type = i.coffee_type
 		OrderRepository.barista_add_item_to_delivery(item_type)
+		items_container_object.remove_child(i)
+
+func yeet_items():
+	if !items_container_object:
+		return
+	for i in items_container_object.get_children():
 		items_container_object.remove_child(i)
 
 
