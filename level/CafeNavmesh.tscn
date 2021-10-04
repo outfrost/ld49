@@ -45,30 +45,6 @@ size = Vector3( 6, 3, 0.25 )
 
 [node name="Cafe" instance=ExtResource( 1 )]
 
-[node name="CollisionShape" parent="LevelInteractables/CoffeeMachine" index="1"]
-shape = null
-
-[node name="ReadyLight" parent="LevelInteractables/CoffeeMachine/Togglables" index="0"]
-mesh = null
-
-[node name="CollisionShape" parent="LevelInteractables/CoffeeMachine2" index="1"]
-shape = null
-
-[node name="ReadyLight" parent="LevelInteractables/CoffeeMachine2/Togglables" index="0"]
-mesh = null
-
-[node name="CollisionShape" parent="LevelInteractables/CoffeeMachine3" index="1"]
-shape = null
-
-[node name="ReadyLight" parent="LevelInteractables/CoffeeMachine3/Togglables" index="0"]
-mesh = null
-
-[node name="CollisionShape" parent="LevelInteractables/CoffeeMachine4" index="1"]
-shape = null
-
-[node name="ReadyLight" parent="LevelInteractables/CoffeeMachine4/Togglables" index="0"]
-mesh = null
-
 [node name="Navigation" type="Navigation" parent="." index="11"]
 
 [node name="DrinkingSpot" parent="Navigation" index="0" instance=ExtResource( 3 )]
