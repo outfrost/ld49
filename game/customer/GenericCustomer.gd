@@ -44,15 +44,18 @@ onready var customer_generated_food_order = OrderRepository.generate_order(custo
 var allocated_spot:Spatial = null
 
 func _get_and_allocate_spot(group_name:String)->Spatial:
-	if allocated_spot != null:
+	if allocated_spot != null and allocated_spot.has_method("leave"):
 		allocated_spot.leave()
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
 	seats.shuffle()
 	for i in seats:
 		if not i.busy:
-			i.set_busy(true)
-			allocated_spot = i
-			return i
+			var attempt = i.set_busy(true, self)
+			if attempt:
+				allocated_spot = i
+				return i
+			else:
+				return null
 	#Did not find spot
 	return null
 
