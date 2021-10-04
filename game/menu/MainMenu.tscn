@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://font/main/small_reg.tres" type="DynamicFont" id=1]
 [ext_resource path="res://game/menu/CreditsPopup.gd" type="Script" id=2]
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=3]
 [ext_resource path="res://game/menu/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://game/ui-theme/panel_style_popup.tres" type="StyleBox" id=5]
+[ext_resource path="res://font/stats/large_reg.tres" type="DynamicFont" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -38,7 +39,7 @@ margin_right = 512.0
 margin_bottom = -8.0
 grow_vertical = 0
 custom_fonts/font = ExtResource( 1 )
-text = "v0.1.1"
+text = "v0.1.2"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -58,7 +59,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.4
-anchor_top = 0.6
+anchor_top = 0.63
 anchor_right = 0.6
 anchor_bottom = 0.9
 grow_horizontal = 2
@@ -76,12 +77,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="ControlsButton" type="Button" parent="VBoxContainer"]
 margin_top = 43.0
 margin_right = 256.0
 margin_bottom = 76.0
-disabled = true
-text = "Options"
+text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -119,10 +119,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -430.0
-margin_top = -286.0
-margin_right = 430.0
-margin_bottom = 286.0
+margin_left = -460.0
+margin_top = -320.0
+margin_right = 460.0
+margin_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_styles/panel = ExtResource( 5 )
@@ -136,8 +136,42 @@ anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 16.0
 margin_right = -8.0
-margin_bottom = -54.0
+margin_bottom = -66.0
+custom_fonts/italics_font = ExtResource( 6 )
 bbcode_enabled = true
+bbcode_text = "[center][i]Art & animation[/i]
+[b]CJGladback[/b]
+[b]666Savior[/b]
+
+[i]Music & sound design[/i]
+[b]Marek Domagała[/b]
+
+[i]Programming[/i]
+[b]Kiskadee[/b]
+[b]L1Q[/b]
+[b]Outfrost[/b]
+
+[i]Writing[/i]
+[b]666Savior[/b]
+
+[i]A [url=https://ldjam.com/events/ludum-dare/49/$258396]Ludum Dare 49[/url] game[/i][/center]"
+text = "Art & animation
+CJGladback
+666Savior
+
+Music & sound design
+Marek Domagała
+
+Programming
+Kiskadee
+L1Q
+Outfrost
+
+Writing
+666Savior
+
+A Ludum Dare 49 game"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,8 +183,44 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 16.0
 margin_right = -16.0
-margin_bottom = -54.0
+margin_bottom = -66.0
+custom_fonts/italics_font = ExtResource( 6 )
 bbcode_enabled = true
+bbcode_text = "[center][i]Production[/i]
+[b]Outfrost[/b]
+
+[i]Additional assets[/i]
+[b]Alex Tengu[/b]
+
+[i]Sound samples[/i]
+HonestDan
+[b]freesound.org users:[/b]
+GowlerMusic
+jameswrowles
+TheGloomWorker
+vdm.r
+
+
+
+[i]Made with Godot[/i][/center]"
+text = "Production
+Outfrost
+
+Additional assets
+Alex Tengu
+
+Sound samples
+HonestDan
+freesound.org users:
+GowlerMusic
+jameswrowles
+TheGloomWorker
+vdm.r
+
+
+
+Made with Godot"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,7 +231,127 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -176.0
-margin_top = -38.0
+margin_top = -50.0
+margin_right = -16.0
+margin_bottom = -16.0
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsPopup" type="Popup" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="ControlsPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -460.0
+margin_top = -320.0
+margin_right = 460.0
+margin_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ControlsPopup/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -66.0
+custom_fonts/italics_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center][i]Move around[/i]
+[W][A][S][D] [^][<][v][>]
+
+[i]Rotate camera[/i]
+[Mouse 2] [Mouse 3]
+
+[i]Zoom[/i]
+[Mouse Wheel] [-][=]
+
+[i]Use appliance[/i]
+[Mouse 1]
+
+[i]Back to menu[/i]
+[Backspace][/center]"
+text = "Move around
+[W][A][S][D] [^][<][v][>]
+
+Rotate camera
+[Mouse 2] [Mouse 3]
+
+Zoom
+[Mouse Wheel] [-][=]
+
+Use appliance
+[Mouse 1]
+
+Back to menu
+[Backspace]"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ControlsPopup/Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -66.0
+custom_fonts/italics_font = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center][i]Move around[/i]
+[W][A][S][D] [^][<][v][>]
+
+[i]Rotate camera[/i]
+[Mouse 2] [Mouse 3]
+
+[i]Zoom[/i]
+[Mouse Wheel] [-][=]
+
+[i]Back to menu[/i]
+[Backspace][/center]"
+text = "Move around
+[W][A][S][D] [^][<][v][>]
+
+Rotate camera
+[Mouse 2] [Mouse 3]
+
+Zoom
+[Mouse Wheel] [-][=]
+
+Back to menu
+[Backspace]"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="ControlsPopup/Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -176.0
+margin_top = -50.0
 margin_right = -16.0
 margin_bottom = -16.0
 text = "Close"
