@@ -65,6 +65,7 @@ func set_using():
 	should_ignore_clicks = false
 	eprint("using the register...")
 	state = States.WORKING
+	$OrderSfx.play()
 	# NOTE: it seems this can sometimes return false (failed to take order)
 	OrderRepository.take_order_from_customer()
 	var order_duration: float = activity_taking_order.duration

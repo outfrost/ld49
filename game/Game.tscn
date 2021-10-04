@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://sound/music_gameplay_tension_v3_loop.ogg" type="AudioStream" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://level/CafeNavmesh.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/hud/GameOverOverlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sound/music_gameplay_crazy_v2_loop.ogg" type="AudioStream" id=9]
+[ext_resource path="res://sound/sfx_ambient-chatter_v1_loop.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sound/sfx_customerhappy_v1.ogg" type="AudioStream" id=11]
+[ext_resource path="res://sound/sfx_customersad_v1.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
@@ -35,6 +38,21 @@ bus = "MusicTension"
 stream = ExtResource( 9 )
 autoplay = true
 bus = "MusicCrazy"
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+bus = "Ambient"
+
+[node name="HappyNoiseSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+bus = "Effects"
+
+[node name="SadNoiseSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "Effects"
 
 [node name="LevelContainer" type="Node" parent="."]
 

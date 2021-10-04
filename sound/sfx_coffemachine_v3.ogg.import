@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sfx_coffemachine_v3.ogg-01c9c05377790bd406eb0313907e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

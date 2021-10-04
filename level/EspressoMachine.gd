@@ -23,6 +23,7 @@ var cup_empty_node: Spatial
 var cup_full_node: Spatial
 var ready_light: MeshInstance
 var brewing_sound: AudioStreamPlayer3D
+var ready_sound: AudioStreamPlayer3D
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
@@ -37,6 +38,8 @@ func _ready() -> void:
 	ready_light.visible = true
 	brewing_sound = $Togglables/BrewingSound
 	brewing_sound.playing = false
+	ready_sound = $Togglables/ReadySound
+	ready_sound.playing = false
 
 	# IDEA: derive initial state of the machine based on the togglables' visibility
 	pass
@@ -94,8 +97,8 @@ func _process(delta: float) -> void:
 		cup_empty_node.visible = false
 		cup_full_node.visible = true
 		ready_light.visible = true
-		brewing_sound.playing = false
-		# TODO: make a "ready" noise
+		brewing_sound.stop()
+		ready_sound.play()
 		return
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
@@ -113,7 +116,7 @@ func set_working():
 	timeout = get_node(@"/root/Game").time_elapsed + cooking_duration
 	cup_empty_node.visible = true
 	ready_light.visible = false
-	brewing_sound.playing = true
+	brewing_sound.play()
 func set_resetting():
 	should_ignore_clicks = false
 	if !$"/root/Game".player_visual.is_emptyhanded():
