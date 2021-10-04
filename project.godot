@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Register.gd"
 }, {
+"base": "Area",
+"class": "ServingTray",
+"language": "GDScript",
+"path": "res://level/ServingTray.gd"
+}, {
 "base": "Control",
 "class": "TransitionScreen",
 "language": "GDScript",
@@ -69,6 +74,7 @@ _global_script_class_icons={
 "Interactable": "",
 "PassiveEffect": "",
 "Register": "",
+"ServingTray": "",
 "TransitionScreen": ""
 }
 

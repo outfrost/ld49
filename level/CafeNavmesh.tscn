@@ -105,4 +105,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 34.6198 )
 transform = Transform( 0.326376, 0, 0, 0, 0.326376, 0, 0, 0, 0.326376, 0, 0.549713, -1.28215 )
 
 [node name="GetFoodSpot" parent="Navigation" index="13" instance=ExtResource( 8 )]
-transform = Transform( -1.92617e-08, 0, -0.440657, 0, 0.440657, 0, 0.440657, 0, -1.92617e-08, -3.66272, 0.547837, 2.74309 )
+transform = Transform( -1.92617e-08, 0, -0.440657, 0, 0.440657, 0, 0.440657, 0, -1.92617e-08, -2.07905, 0.547837, 2.74309 )

@@ -20,3 +20,10 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.3, 0 )
 shape = SubResource( 1 )
+
+[node name="Items" type="Spatial" parent="."]
+
+[node name="ItemLocations" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532828, 0.25791 )
