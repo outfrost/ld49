@@ -59,5 +59,4 @@ func _process(delta):
 			spawn_timer.start()
 
 func _ready():
-	yield(get_tree().create_timer(3), "timeout")
-	spawn_customer()
+	spawn_timer.start()
