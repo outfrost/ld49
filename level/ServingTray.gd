@@ -32,7 +32,7 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	#print("ACTIVITY TITLE: %s" % current_activity_title)
+	print("Click to %s" % current_activity_title)
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
