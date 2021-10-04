@@ -194,6 +194,11 @@ func reset() -> void:
 	time_elapsed = 0.0
 	customers_served = 0
 
+	current_activity = null
+	current_activity_timeout = 0.0
+	activity_queue.clear()
+	customers.clear()
+
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
 		return

@@ -21,7 +21,7 @@ signal client_enraged(node)
 
 #node_ref:order_array
 var order_queue:Dictionary = {
-	
+
 }
 
 var barista_prepared_order:Array = []
@@ -40,7 +40,7 @@ func generate_order(number_of_items:int, can_repeat:bool)->Array:
 	randomize()
 	if number_of_items > possible_orders.size():
 		can_repeat = true
-	
+
 	var chosen_items = []
 	for i in range(number_of_items):
 		var order = randi() % possible_orders.size()
