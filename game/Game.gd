@@ -62,6 +62,8 @@ func _ready() -> void:
 	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(0.0))
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
 
+	OrderRepository.connect("client_satisfied", self, "inc_customers_served")
+
 	main_menu.connect("start_game", self, "on_start_game")
 	if OS.has_feature("debug") and skip_menus:
 		on_start_game()
@@ -290,3 +292,6 @@ func start_activity():
 	if current_activity["caller"] and !current_activity["callback_name"].empty():
 		current_activity["caller"].call(current_activity["callback_name"])
 	activity_started = true
+
+func inc_customers_served(_customer) -> void:
+	customers_served += 1
