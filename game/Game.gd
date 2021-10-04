@@ -63,7 +63,7 @@ func _ready() -> void:
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
 
 	main_menu.connect("start_game", self, "on_start_game")
-	if skip_menus:
+	if OS.has_feature("debug") and skip_menus:
 		on_start_game()
 
 func _process(delta: float) -> void:
@@ -178,7 +178,7 @@ func _process(delta: float) -> void:
 		game_over_overlay.show_game_won()
 
 func on_start_game() -> void:
-	if !skip_menus:
+	if !OS.has_feature("debug") or !skip_menus:
 		transition_screen.fade_in()
 		yield(transition_screen, "animation_finished")
 
