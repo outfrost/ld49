@@ -77,6 +77,11 @@ func _process(delta: float) -> void:
 		back_to_menu()
 
 	var is_crazy: bool = temperature >= crazy_temperature or temper <= crazy_temper
+	if is_crazy and !HintPopup.firstmindwarning:
+		HintPopup.firstmindwarning = true
+		HintPopup.display("Watch out, you're starting to lose it", 3.0)
+		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
+
 	var target_tension_vol_linear = 0.0
 	var target_crazy_vol_linear = 0.0
 	if is_running and !is_crazy:
@@ -264,6 +269,17 @@ func reset() -> void:
 	time_elapsed = 0.0
 	customers_served = 0
 
+	# Reset all the first time hints
+	HintPopup.firstenrage = false
+	HintPopup.firsthappy = false
+	HintPopup.firstorder = false
+	HintPopup.firstorderstart = false
+	HintPopup.firstmachineuse = false
+	HintPopup.firstmachinedone = false
+	HintPopup.firstorderontray = false
+	HintPopup.firsttempwarning = false
+	HintPopup.firstmindwarning = false
+
 	current_activity = null
 	activity_started = false
 	current_activity_timeout = 0.0
@@ -271,9 +287,10 @@ func reset() -> void:
 	customers.clear()
 
 func on_started_running() -> void:
-#	yield(get_tree().create_timer(2.0), "timeout")
-#	HintPopup.display("YEET YEET YEET YEET YEET YEET", 5.0)
-	pass
+	yield(get_tree().create_timer(1.0), "timeout")
+	HintPopup.display("Oh No! The AC unit died", 5.0)
+	HintPopup.display("I guess you'll just have to try and keep your cool", 5.0)
+
 
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
@@ -320,6 +337,14 @@ func start_activity():
 func on_customer_satisfied(_customer) -> void:
 	customers_served += 1
 	$HappyNoiseSfx.play()
+	if !HintPopup.firsthappy:
+		HintPopup.firsthappy = true
+		HintPopup.display("Good Job, the customer is satisfied", 5.0)
+		HintPopup.display("Keep up the good work", 5.0)
 
 func on_customer_enraged(_customer) -> void:
 	$SadNoiseSfx.play()
+	if !HintPopup.firstenrage:
+		HintPopup.firstenrage = true
+		HintPopup.display("Oh No, you made a customer upset", 3.5)
+		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 3.5)

@@ -96,6 +96,10 @@ func add_order(node:Spatial, order:Array)->void:
 		return
 	order_queue[node] = order
 	emit_signal("new_order", order )
+	if !HintPopup.firstorderstart:
+		HintPopup.firstorderstart = true
+		HintPopup.display("The customer wants a drink, click on the machine to start making one", 3.0)
+		HintPopup.display("Match the machine to the drink type", 3.0)
 
 func remove_order(node:Spatial)->bool:
 	if not (node in order_queue.keys()):
