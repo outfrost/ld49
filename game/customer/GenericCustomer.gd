@@ -10,7 +10,7 @@ enum feelings {happy, indifferent, bored, insane}
 
 var current_state:int = states.idle
 
-var customer_possible_difficulty = [1, 2, 3, 4] #Difficulty will halve time to please the customer
+var customer_possible_difficulty = [1, 2, 3] #Difficulty will halve time to please the customer
 onready var customer_difficulty = customer_possible_difficulty[randi() % customer_possible_difficulty.size()]
 export var max_speed:float = 10
 export var waiting_time_tolerance = 100
@@ -250,7 +250,6 @@ func _on_MaxWaitingTime_timeout():
 			print("Customer expired, reason: expired while idling")
 			leave_and_go_away()
 		states.walking:
-			print("Customer expired, reason: expired while walking")
-			leave_and_go_away()
+			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
 		_:
 			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
