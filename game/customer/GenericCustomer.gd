@@ -46,6 +46,8 @@ var _last_frame_position:Vector3 = Vector3()
 onready var customer_mesh:Spatial = $customer
 onready var rotation_mesh:Spatial = $MeshInstance
 
+var order_score = 0
+
 func _get_and_allocate_spot(group_name:String)->Spatial:
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
 	seats.shuffle()
@@ -173,8 +175,8 @@ func _physics_process(delta):
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
 					got_food = true
 					OrderRepository.client_got_order_from_the_counter()
-					var score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
-					print("The customer gave a rating to the food: ", score)
+					order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
+					print("The customer gave a rating to the food: ", order_score)
 					OrderRepository.remove_order(self)
 					var will_stay_or_leave = rand_range(100, 105)
 					if will_stay_or_leave < 10:
@@ -236,7 +238,10 @@ func _on_MaxWaitingTime_timeout():
 			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
 		states.drinking:
 			print("Customer expired, reason: consumed drink")
-			needs_fullfilled()
+			if order_score > 50:
+				needs_fullfilled()
+			else:
+				OrderRepository.emit_signal("client_enraged")
 			leave_and_go_away()
 		states.idle:
 			print("Customer expired, reason: expired while idling")

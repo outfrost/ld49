@@ -19,7 +19,7 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	#print("ACTIVITY TITLE: %s" % current_activity_title)
+	print("Click to %s" % current_activity_title)
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
@@ -70,6 +70,8 @@ func set_using():
 	OrderRepository.take_order_from_customer()
 	var order_duration: float = activity_taking_order.duration
 	timeout = get_node(@"/root/Game").time_elapsed + order_duration
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("reachAppliance")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):

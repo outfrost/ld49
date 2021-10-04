@@ -19,7 +19,7 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	#print("ACTIVITY TITLE: %s" % current_activity_title)
+	print("Click to %s" % current_activity_title)
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
@@ -54,6 +54,8 @@ func _process(delta: float) -> void:
 	if state == States.WORKING and is_timeout:
 		eprint("finished chilling at the fridge")
 		state = States.IDLE
+		var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+		animation_player.play("uncrouch")
 		# TODO: make a "fridge closing" noise
 		return
 	pass
@@ -64,6 +66,8 @@ func set_using():
 	state = States.WORKING
 	var beverage_duration: float = activity_cold_beverage.duration
 	timeout = get_node(@"/root/Game").time_elapsed + beverage_duration
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("crouch")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):

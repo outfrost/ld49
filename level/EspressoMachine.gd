@@ -5,7 +5,7 @@ export(OrderRepository.possible_orders) var coffee_type
 
 const start_duration: float = 1.0 # seconds
 const cooking_duration: float = 5.0 # seconds
-const resetting_duration: float = 1.0 # seconds
+const resetting_duration: float = 0.2 # seconds
 
 var coffee_name: String
 
@@ -49,7 +49,7 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	#print("ACTIVITY TITLE: %s" % current_activity_title)
+	print("Click to %s" % current_activity_title)
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
@@ -117,6 +117,8 @@ func set_working():
 	cup_empty_node.visible = true
 	ready_light.visible = false
 	brewing_sound.play()
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("reachAppliance")
 func set_resetting():
 	should_ignore_clicks = false
 	if !$"/root/Game".player_visual.is_emptyhanded():
@@ -125,6 +127,8 @@ func set_resetting():
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
 	ready_light.visible = true
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	animation_player.play("armsCarryStart")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
