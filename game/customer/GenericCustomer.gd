@@ -172,6 +172,7 @@ func _physics_process(delta):
 					current_state = states.drinking
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
 					got_food = true
+					OrderRepository.client_got_order_from_the_counter()
 					var score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
 					print("The customer gave a rating to the food: ", score)
 					OrderRepository.remove_order(self)

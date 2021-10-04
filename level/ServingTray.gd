@@ -3,6 +3,9 @@ extends Area
 
 export var activity_place_item: Resource
 
+const call_customer_duration = 2.0 # seconds
+var activity_call_customer = Activity.new("Call customer for pickup", call_customer_duration)
+
 enum States {IDLE, WORKING}
 
 var should_ignore_clicks: bool = false
@@ -14,6 +17,7 @@ var items_container_object: Spatial
 var valid_item_locations: Array = []
 
 func _ready() -> void:
+	OrderRepository.connect("client_got_order_from_counter", self, "yeet_items")
 	connect("mouse_entered", self, "hover")
 	items_container_object = $Items
 	var item_locations_container = $ItemLocations
@@ -39,7 +43,11 @@ func get_current_activity_intent():
 	if should_ignore_clicks:
 		eprint("was clicked already")
 		return false
-	return {"activity": activity_place_item, "handler": "set_putting"}
+	var is_barista_empty = $"/root/Game".player_visual.is_emptyhanded()
+	if is_barista_empty:
+		return {"activity": activity_call_customer, "handler": "call_customer"}
+	else:
+		return {"activity": activity_place_item, "handler": "set_putting"}
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
 	if !(event is InputEventMouseButton) or event.button_index != BUTTON_LEFT or !event.pressed:
@@ -55,8 +63,7 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 		States.IDLE:
 			return
 		States.WORKING:
-			eprint("putting item already")
-			# make some unhappy machine noises as machine is buy
+			eprint("using tray already")
 			return
 
 func _process(delta: float) -> void:
@@ -92,20 +99,28 @@ func put_item(item: Spatial) -> bool:
 	item.global_transform.origin = origin
 	return true
 
-func take_items() -> Array:
-	if !items_container_object:
-		return []
-	var item_count = items_container_object.get_child_count()
-	var items = []
-	for i in items_container_object.get_children():
-		#var item_type = OrderRepository.possible_orders.coffee_americano
-		var item_type = i.coffee_type
-		items.push_back(item_type)
-		items_container_object.remove_child(i)
-		# TODO: store item type in items when they are put on the tray
-	print("items: %s" % items)
-	return items
+func call_customer():
+	should_ignore_clicks = false
+	if OrderRepository.order_queue.size():
+		eprint("calling customer!")
+		var customer_to_call = OrderRepository.order_queue.keys()[0]
+		OrderRepository.barista_call_client_to_get_food(customer_to_call)
+	pass
 
+func take_items():
+	if !items_container_object:
+		return
+	var item_count = items_container_object.get_child_count()
+	for i in items_container_object.get_children():
+		var item_type = i.coffee_type
+		OrderRepository.barista_add_item_to_delivery(item_type)
+		items_container_object.remove_child(i)
+
+func yeet_items():
+	if !items_container_object:
+		return
+	for i in items_container_object.get_children():
+		items_container_object.remove_child(i)
 
 
 func set_putting():

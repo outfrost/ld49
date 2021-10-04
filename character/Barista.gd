@@ -66,7 +66,7 @@ func take_cup(coffee_type: int) -> bool:
 	#cup.global_transform.origin = origin
 	return true
 
-func is_can_take_cup() -> bool:
+func is_emptyhanded() -> bool:
 	return $Items.get_child_count() == 0
 
 func remove_cup():
