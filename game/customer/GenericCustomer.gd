@@ -30,7 +30,10 @@ var locked_height:float = 0
 signal started_walking
 signal started_idling
 signal despawning(node)
+
 var barista_took_order:bool = false
+var barista_called_for_delivery:bool = false
+var got_food:bool = false
 
 #Maybe for some reason the characters are supposed to be locked on the y axis, so they don't climb stuff, not that they will or should
 #I'm not sure if they would climb stairs by default
@@ -52,6 +55,10 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 			return i
 	#Did not find spot
 	return null
+
+func call_customer_to_deliver_zone():
+	barista_called_for_delivery = true
+	go_get_food_spot()
 
 func needs_fullfilled():
 	OrderRepository.remove_order(self)
@@ -136,6 +143,18 @@ func _physics_process(delta):
 						#wait on a table, if none available, will wait until finds one
 						go_waiting_spot()
 			states.walking:
+				if got_food:
+					current_state = states.drinking
+				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
+					got_food = true
+					var score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
+					print("The customer gave a rating to the food: ", score)
+					var will_stay_or_leave = rand_range(0, 100)
+					if will_stay_or_leave < 20:
+						leave_and_go_away()
+					else:
+						go_waiting_spot()
+
 				if not barista_took_order:
 					current_state = states.idle
 				else:
