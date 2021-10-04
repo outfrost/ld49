@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/imports/door_exportprep.gltf" type="PackedScene" id=1]
+[ext_resource path="res://assets/imports/wall_doorway_exportprep.gltf" type="PackedScene" id=2]
+
+[node name="wall_doorway_exportprep" instance=ExtResource( 2 )]
+
+[node name="door_exportprep" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 0.0871558, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871558, 0.525, 0, -0.63 )
