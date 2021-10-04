@@ -92,7 +92,7 @@ func find_seat()->void:
 
 #TODO: wait on counter to deliver order
 #TODO: after, go wait somewhere else
-#TODO: the barista can call the customer to deliver bewerage 
+#TODO: the barista can call the customer to deliver bewerage
 
 func leave_and_go_away()->void:
 	if allocated_spot != null:
