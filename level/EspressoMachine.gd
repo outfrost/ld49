@@ -10,6 +10,7 @@ var activity_taking_coffee = Activity.new("Take fresh coffee from a coffee machi
 
 enum States {IDLE, WORKING, READY, RESETTING}
 
+var should_ignore_clicks: bool = false
 
 var state: int = States.IDLE
 var timeout: float = 0.0
@@ -42,6 +43,9 @@ func hover() -> void:
 	pass
 
 func get_current_activity_intent():
+	if should_ignore_clicks:
+		print("this machine was clicked already")
+		return false
 	match state:
 		States.IDLE:
 			return {"activity": activity_start_machine, "handler": "set_working"}
@@ -54,6 +58,7 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 		return
 	var activity_intent = get_current_activity_intent()
 	if activity_intent:
+		should_ignore_clicks = true
 		var location = $ActivityLocations/Position3D
 		# TODO: have multiple locations to choose from, randomize it
 
@@ -88,6 +93,7 @@ func _process(delta: float) -> void:
 	pass
 
 func set_working():
+	should_ignore_clicks = false
 	eprint("brewing the coffee...")
 	state = States.WORKING
 	timeout = get_node(@"/root/Game").time_elapsed + cooking_duration
@@ -95,6 +101,7 @@ func set_working():
 	ready_light.visible = false
 	brewing_sound.playing = true
 func set_resetting():
+	should_ignore_clicks = false
 	# state = States.IDLE
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
