@@ -24,12 +24,14 @@ var cup_full_node: Spatial
 var ready_light: MeshInstance
 var brewing_sound: AudioStreamPlayer3D
 var ready_sound: AudioStreamPlayer3D
+var outline: Spatial
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
 	activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
 	activity_taking_coffee = Activity.new("Take fresh %s from a coffee machine" % coffee_name, resetting_duration)
 	connect("mouse_entered", self, "hover")
+	connect("mouse_exited", self, "unhover")
 	cup_empty_node = $Togglables/CupEmpty
 	cup_empty_node.visible = false
 	cup_full_node = $Togglables/CupFull
@@ -40,6 +42,7 @@ func _ready() -> void:
 	brewing_sound.playing = false
 	ready_sound = $Togglables/ReadySound
 	ready_sound.playing = false
+	outline = find_node("Outline", true, false)
 
 	# IDEA: derive initial state of the machine based on the togglables' visibility
 	pass
@@ -53,7 +56,13 @@ func hover() -> void:
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
+	if outline:
+		outline.show()
 	pass
+
+func unhover() -> void:
+	if outline:
+		outline.hide()
 
 func get_current_activity_intent():
 	if !$"/root/Game".player_visual.is_emptyhanded():

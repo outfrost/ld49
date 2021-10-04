@@ -62,6 +62,7 @@ func _ready() -> void:
 
 	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(0.0))
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
+	AudioServer.set_bus_volume_db(bus_ambient, linear2db(0.0))
 
 	OrderRepository.connect("client_satisfied", self, "on_customer_satisfied")
 	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
@@ -77,10 +78,6 @@ func _process(delta: float) -> void:
 		back_to_menu()
 
 	var is_crazy: bool = temperature >= crazy_temperature or temper <= crazy_temper
-	if is_crazy and !HintPopup.firstmindwarning:
-		HintPopup.firstmindwarning = true
-		HintPopup.display("Watch out, you're starting to lose it", 3.0)
-		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
 
 	var target_tension_vol_linear = 0.0
 	var target_crazy_vol_linear = 0.0
@@ -88,7 +85,7 @@ func _process(delta: float) -> void:
 		target_tension_vol_linear = 1.0
 	elif is_running and is_crazy:
 		target_crazy_vol_linear = 1.0
-	var target_ambient_vol_linear = 1.0 if is_running else 0.0
+	var target_ambient_vol_linear = 1.0
 
 	var tension_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_music_tension))
 	if target_tension_vol_linear > tension_vol_linear:
@@ -132,6 +129,11 @@ func _process(delta: float) -> void:
 	if !is_running:
 		return
 
+	if is_crazy and !HintPopup.firstmindwarning:
+		HintPopup.firstmindwarning = true
+		HintPopup.display("Watch out, you're starting to lose it", 3.0)
+		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
+
 	time_elapsed += delta
 
 	if passive_effects.size():
@@ -150,8 +152,8 @@ func _process(delta: float) -> void:
 		var activity = current_activity["activity"]
 		var time_left = current_activity_timeout - time_elapsed
 		var is_activity_over = time_left <= 0
-		DebugOverlay.display("current activity %s" % activity.displayed_name)
-		DebugOverlay.display("activity time left %s" % time_left)
+#		DebugOverlay.display("current activity %s" % activity.displayed_name)
+#		DebugOverlay.display("activity time left %s" % time_left)
 		if is_activity_over:
 			temperature += activity.outcome_temperature_delta
 			temper += activity.outcome_temper_delta
@@ -160,18 +162,18 @@ func _process(delta: float) -> void:
 			activity_started = false
 #			if player_visual and spawn_location:
 #				player_visual.transform = spawn_location.transform
-	else:
-		DebugOverlay.display("current activity none")
+#	else:
+#		DebugOverlay.display("current activity none")
 
 	# limit temper value
 	if temper > temper_max:
 		temper = temper_max
 
-	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
-	DebugOverlay.display("temper %.1f" % temper)
-	DebugOverlay.display("temperature %.2f" % temperature)
+#	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
+	DebugOverlay.display("Your temper %.1f" % temper)
+	DebugOverlay.display("Temperature %.2f" % temperature)
 
-	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
+#	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
 	if OrderRepository.order_queue.size():
 		for order in OrderRepository.order_queue.values():
 			var order_item_names := PoolStringArray()
@@ -203,6 +205,8 @@ func on_start_game() -> void:
 		yield(transition_screen, "animation_finished")
 
 	main_menu.hide()
+	$Background/Cafe.hide()
+	$Background/Cafe/CameraPosition/Camera.current = false
 
 	setup()
 
@@ -220,6 +224,8 @@ func back_to_menu() -> void:
 
 	teardown()
 
+	$Background/Cafe.show()
+	$Background/Cafe/CameraPosition/Camera.current = true
 	main_menu.show()
 
 	transition_screen.fade_out()
@@ -276,6 +282,7 @@ func reset() -> void:
 	HintPopup.firstorderontray = false
 	HintPopup.firsttempwarning = false
 	HintPopup.firstmindwarning = false
+	HintPopup.firstfridgeuse = false
 
 	current_activity = null
 	activity_started = false
