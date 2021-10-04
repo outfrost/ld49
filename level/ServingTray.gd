@@ -123,6 +123,8 @@ func yeet_items():
 	if !items_container_object:
 		return
 	for i in items_container_object.get_children():
+		var item_type = i.coffee_type
+		OrderRepository.barista_add_item_to_delivery(item_type)
 		items_container_object.remove_child(i)
 
 
