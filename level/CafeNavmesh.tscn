@@ -145,16 +145,16 @@ material/0 = null
 customer_scenes = [ ExtResource( 5 ) ]
 
 [node name="SpawnSpot" parent="Navigation" index="12" instance=ExtResource( 2 )]
-transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, 9.79864, 1.67883, 19.1289 )
+transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, 7.1, 1.679, -4.9 )
 
 [node name="SpawnSpot2" parent="Navigation" index="13" instance=ExtResource( 2 )]
-transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, -10.1762, 1.67883, 19.1289 )
+transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, -5.4762, 1.67883, 8.0289 )
 
 [node name="SpawnSpot3" parent="Navigation" index="14" instance=ExtResource( 2 )]
-transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, -6.79502, 1.67883, 36.345 )
+transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, 6.70498, 1.67883, 9.845 )
 
 [node name="ExitSpot" parent="Navigation" index="15" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 34.6198 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, 0, 9.8198 )
 
 [node name="AskFoodSpot" parent="Navigation" index="16" instance=ExtResource( 7 )]
 transform = Transform( 0.326376, 0, 0, 0, 0.326376, 0, 0, 0, 0.326376, 1, 0.549713, -1.48215 )
