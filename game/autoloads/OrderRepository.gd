@@ -40,6 +40,13 @@ export var debugging = false
 func _ready():
 	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
 
+func client_is_satisfied(node:Spatial)->void:
+	emit_signal("client_satisfied", node)
+
+func client_is_enraged(node:Spatial)->void:
+	emit_signal("client_is_enraged", node)
+
+
 func clean_barista_prepared_order()->void:
 	barista_prepared_order.clear()
 
@@ -48,18 +55,22 @@ func barista_add_item_to_delivery(item:int)->void:
 
 #0 means garbage, #100 means excellent
 func compare_order(barista_order:Array, customer_order:Array)->int:
+	barista_order.sort()
+	customer_order.sort()
+	print(barista_order, customer_order)
 	var barista_order_siz = barista_order.size()
 	var customer_order_size = customer_order.size()
 
 	#Client will not accept missing items from the orders, also won't accept more than he is willingly to pay
-	if barista_order_siz != customer_order_size:
-		print("Reason: barista gave me missing/more items than I need", barista_order, customer_order)
+	if barista_order_siz < customer_order_size:
+		print("Reason: barista gave me less items than I need", barista_order, customer_order)
 		return 0
 
 	var missed_items:float = 0
 	for i in range(barista_order_siz):
-		if barista_order[i] != customer_order[i]:
-			missed_items += 1
+		if i < customer_order.size():
+			if barista_order[i] != customer_order[i]:
+				missed_items += 1
 
 	client_got_order_from_the_counter()
 	if missed_items == customer_order_size:
