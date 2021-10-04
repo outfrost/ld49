@@ -14,6 +14,12 @@ var translations:Dictionary = {
 	possible_orders.coffee_cappuccino:"Coffee cappuccino",
 }
 
+func get_coffe_name(coffee_type: int) -> String:
+	if coffee_type in translations.keys():
+		return translations[coffee_type]
+	else:
+		return ""
+
 signal new_order(order_array)
 signal removed_order
 signal client_satisfied(node) #Called from customer directly

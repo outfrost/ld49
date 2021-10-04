@@ -45,7 +45,7 @@ size = Vector3( 6, 3, 0.25 )
 
 [node name="Cafe" instance=ExtResource( 1 )]
 
-[node name="Navigation" type="Navigation" parent="." index="12"]
+[node name="Navigation" type="Navigation" parent="." index="11"]
 
 [node name="DrinkingSpot" parent="Navigation" index="0" instance=ExtResource( 3 )]
 transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, 3.78147, 0.735948, -0.11592 )

@@ -1,12 +1,16 @@
 class_name EspressoMachine
 extends Area
 
+export(OrderRepository.possible_orders) var coffee_type
+
 const start_duration: float = 1.0 # seconds
 const cooking_duration: float = 5.0 # seconds
 const resetting_duration: float = 1.0 # seconds
 
-var activity_start_machine = Activity.new("Start a coffee machine", start_duration)
-var activity_taking_coffee = Activity.new("Take fresh coffee from a coffee machine", resetting_duration)
+var coffee_name = OrderRepository.get_coffe_name(coffee_type)
+
+var activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
+var activity_taking_coffee = Activity.new("Take fresh %s from a coffee machine" % coffee_name, resetting_duration)
 
 enum States {IDLE, WORKING, READY, RESETTING}
 
@@ -95,7 +99,7 @@ func _process(delta: float) -> void:
 		state = States.IDLE
 		cup_empty_node.visible = false
 		cup_full_node.visible = false
-		# TODO: give player the coffe cup
+		$"/root/Game".player_visual.take_cup(coffee_type)
 		return
 	pass
 
@@ -109,6 +113,8 @@ func set_working():
 	brewing_sound.playing = true
 func set_resetting():
 	should_ignore_clicks = false
+	if !$"/root/Game".player_visual.is_can_take_cup():
+		return false
 	# state = States.IDLE
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
