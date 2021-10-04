@@ -113,7 +113,7 @@ func set_working():
 	brewing_sound.playing = true
 func set_resetting():
 	should_ignore_clicks = false
-	if !$"/root/Game".player_visual.is_can_take_cup():
+	if !$"/root/Game".player_visual.is_emptyhanded():
 		return false
 	# state = States.IDLE
 	state = States.RESETTING
