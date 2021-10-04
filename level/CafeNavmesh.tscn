@@ -27,7 +27,10 @@ albedo_color = Color( 0.152941, 0.12549, 0.12549, 1 )
 [node name="DrinkingSpot" parent="Navigation" index="0" instance=ExtResource( 3 )]
 transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, 2.98147, 0.735948, 0.38408 )
 
-[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation" index="1"]
+[node name="DrinkingSpot2" parent="Navigation" index="1" instance=ExtResource( 3 )]
+transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, 2.98147, 0.735948, -1.77584 )
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation" index="2"]
 visible = false
 navmesh = SubResource( 1 )
 
@@ -70,20 +73,20 @@ transform = Transform( 0.403594, 0, 0.26029, 0, 2.99615, 0, -0.453031, 0, 0.2318
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="CustomerSpawner" parent="Navigation" index="2" instance=ExtResource( 4 )]
+[node name="CustomerSpawner" parent="Navigation" index="3" instance=ExtResource( 4 )]
 customer_scenes = [ ExtResource( 5 ) ]
 
-[node name="SpawnSpot" parent="Navigation" index="3" instance=ExtResource( 2 )]
+[node name="SpawnSpot" parent="Navigation" index="4" instance=ExtResource( 2 )]
 transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, 9.79864, 1.67883, 19.1289 )
 
-[node name="SpawnSpot2" parent="Navigation" index="4" instance=ExtResource( 2 )]
+[node name="SpawnSpot2" parent="Navigation" index="5" instance=ExtResource( 2 )]
 transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, -10.1762, 1.67883, 19.1289 )
 
-[node name="SpawnSpot3" parent="Navigation" index="5" instance=ExtResource( 2 )]
+[node name="SpawnSpot3" parent="Navigation" index="6" instance=ExtResource( 2 )]
 transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, -6.79502, 1.67883, 36.345 )
 
-[node name="ExitSpot" parent="Navigation" index="6" instance=ExtResource( 6 )]
+[node name="ExitSpot" parent="Navigation" index="7" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 34.6198 )
 
-[node name="AskFoodSpot" parent="Navigation" index="7" instance=ExtResource( 7 )]
+[node name="AskFoodSpot" parent="Navigation" index="8" instance=ExtResource( 7 )]
 transform = Transform( 0.326376, 0, 0, 0, 0.326376, 0, 0, 0, 0.326376, 0, 0.549713, -1.28215 )

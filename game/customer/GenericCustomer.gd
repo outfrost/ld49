@@ -50,7 +50,6 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 			i.set_busy(true)
 			allocated_spot = i
 			return i
-			break
 	#Did not find spot
 	return null
 
@@ -76,6 +75,9 @@ func go_ask_for_food_spot()->Spatial:
 	return target
 
 func go_waiting_spot()->void:
+	if allocated_spot != null:
+		if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.waiting_spot]):
+			return
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 	move_to(target)
 
@@ -137,10 +139,7 @@ func _physics_process(delta):
 					current_state = states.idle
 				else:
 					current_state = states.waiting_to_order
-					
 				emit_signal("started_idling")
-				if target.is_in_group(spots_collection.spot_names[spots_collection.drinking_spot]):
-					current_state = states.waiting_to_order
 				if target.is_in_group("exit_spot"):
 					emit_signal("despawning", self)
 					call_deferred("queue_free")
@@ -148,6 +147,10 @@ func _physics_process(delta):
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
 					max_waiting_timer.start()
+				#If the customer is waiting to ask for order, it will wait for the ask_spot to be free
+				if allocated_spot != null:
+					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
+						go_ask_for_food_spot()
 			states.waiting_for_order:
 				if max_waiting_timer.is_stopped():
 					#Restart timer
