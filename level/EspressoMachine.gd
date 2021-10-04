@@ -110,6 +110,9 @@ func _process(delta: float) -> void:
 		ready_light.visible = true
 		brewing_sound.stop()
 		ready_sound.play()
+		if !HintPopup.firstmachinedone:
+			HintPopup.firstmachinedone = true
+			HintPopup.display("The coffee machine is done brewing, go grab the drink and place it on the order tray", 3.0)
 		return
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
@@ -130,6 +133,11 @@ func set_working():
 	brewing_sound.play()
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("reachAppliance")
+	if !HintPopup.firstmachineuse:
+		HintPopup.firstmachineuse = true
+		HintPopup.display("Keep in mind, you can queue up multiple machines, even if a customer hasn't ordered yet", 3.0)
+		HintPopup.display("Be carefule though, too much time near the machines will make you hot", 3.0)
+
 func set_resetting():
 	should_ignore_clicks = false
 	if !$"/root/Game".player_visual.is_emptyhanded():

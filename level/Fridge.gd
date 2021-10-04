@@ -79,6 +79,9 @@ func set_using():
 	timeout = get_node(@"/root/Game").time_elapsed + beverage_duration
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("crouch")
+	if !HintPopup.firstfridgeuse:
+		HintPopup.firstfridgeuse = true
+		HintPopup.display("Consuming a cold refreshing beverage will help you keep your cool, and make the customers slightly more tolerable", 3.0)
 
 # TODO: convert this into speech baloons
 func eprint(text: String):

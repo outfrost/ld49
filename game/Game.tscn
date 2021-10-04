@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://sound/music_gameplay_tension_v3_loop.ogg" type="AudioStream" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://sound/sfx_ambient-chatter_v1_loop.ogg" type="AudioStream" id=10]
 [ext_resource path="res://sound/sfx_customerhappy_v1.ogg" type="AudioStream" id=11]
 [ext_resource path="res://sound/sfx_customersad_v1.ogg" type="AudioStream" id=12]
+[ext_resource path="res://level/CafeMenu.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
@@ -24,7 +25,6 @@ displayed_description = "Temperature rises!"
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
 level_scene = ExtResource( 7 )
-skip_menus = true
 crazy_temperature = 38.0
 game_duration = 200
 passive_effects = [ SubResource( 1 ) ]
@@ -42,7 +42,6 @@ bus = "MusicCrazy"
 [node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
-bus = "Ambient"
 
 [node name="HappyNoiseSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
@@ -55,6 +54,8 @@ volume_db = -10.0
 bus = "Effects"
 
 [node name="LevelContainer" type="Node" parent="."]
+
+[node name="Cafe" parent="LevelContainer" instance=ExtResource( 13 )]
 
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
