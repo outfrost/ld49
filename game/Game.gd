@@ -208,6 +208,8 @@ func on_start_game() -> void:
 	yield(transition_screen, "animation_finished")
 
 	is_running = true
+#	yield(get_tree().create_timer(2.0), "timeout")
+#	HintPopup.display("YEET YEET YEET YEET YEET YEET", 5.0)
 
 func back_to_menu() -> void:
 	is_running = false
@@ -250,6 +252,7 @@ func setup() -> void:
 
 func teardown() -> void:
 	game_over_overlay.hide()
+	HintPopup.reset()
 
 	# Delete level instance
 	level_container.remove_child(level)

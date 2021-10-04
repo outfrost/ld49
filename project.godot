@@ -95,6 +95,7 @@ config/icon="res://icon.png"
 DebugOverlay="*res://game/DebugOverlay.tscn"
 ErrorHandler="*res://game/autoloads/ErrorHandler.gd"
 OrderRepository="*res://game/autoloads/OrderRepository.gd"
+HintPopup="*res://game/hud/HintPopup.tscn"
 
 [debug]
 

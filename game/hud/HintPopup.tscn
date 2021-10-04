@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://game/ui-theme/panel_style_transparent.tres" type="StyleBox" id=2]
+[ext_resource path="res://game/hud/HintPopup.gd" type="Script" id=5]
+
+[node name="HintPopup" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.05
+anchor_top = 0.9
+anchor_right = 0.05
+anchor_bottom = 0.9
+margin_top = -120.0
+margin_right = 420.0
+grow_horizontal = 2
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -8.0
+grow_horizontal = 2
+bbcode_enabled = true
+bbcode_text = "Text"
+text = "Text"
+scroll_active = false
