@@ -2,6 +2,7 @@ extends Spatial
 
 #Define locations for the customers to go
 
+onready var original_material = $MeshInstance.get_active_material(0).duplicate()
 var busy:bool = false
 
 func set_busy(value:bool)->void:
@@ -24,6 +25,4 @@ func update()->void:
 			copy.albedo_color = Color(1,0,0)
 			$MeshInstance.material_override = copy
 		else:
-			var copy = $MeshInstance.get_active_material(0).duplicate()
-			copy.albedo_color = Color(0,1,0)
-			$MeshInstance.material_override = copy
+			$MeshInstance.material_override = original_material

@@ -1,0 +1,9 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "mat-black-metal"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_color = Color( 0.0333266, 0.0333266, 0.0333266, 1 )
+metallic = 1.0
+roughness = 0.5

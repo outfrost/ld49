@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/imports/air_conditioner_exportprep.gltf" type="PackedScene" id=1]
+
+[node name="air_conditioner_exportprep" instance=ExtResource( 1 )]
