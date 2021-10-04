@@ -28,6 +28,8 @@ var order_queue:Dictionary = {
 var barista_prepared_order:Array = []
 var customer_waiting_on_ask_spot:Spatial = null
 
+export var debugging = true
+
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
@@ -52,8 +54,9 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 
 #Calls any client with a matching order
 func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if client_node.has("receive_order"):
-		client_node.call_customer_to_deliver_zone()
+	if client_node != null:
+		if client_node.has_method("receive_order"):
+			client_node.call_customer_to_deliver_zone()
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
 	randomize()
@@ -99,3 +102,15 @@ func take_order_from_customer()->bool:
 
 func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
+
+func _process(delta):
+	#Debug purposes
+	if not debugging:
+		return
+	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
+		yield(get_tree().create_timer(rand_range(7, 20)), "timeout")
+		take_order_from_customer()
+	if order_queue.size() > 0:
+		yield(get_tree().create_timer(rand_range(10, 20)), "timeout")
+		for i in order_queue:
+			barista_call_client_to_get_food(i)

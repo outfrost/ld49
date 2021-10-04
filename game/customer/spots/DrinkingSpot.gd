@@ -4,13 +4,19 @@ extends Spatial
 
 onready var original_material = $MeshInstance.get_active_material(0).duplicate()
 var busy:bool = false
+var allocated_by:Spatial = null
 
-func set_busy(value:bool)->void:
+func set_busy(value:bool, node:Spatial)->bool:
+	if allocated_by != null and node != null:
+		if allocated_by != node:
+			return false
 	busy = value
+	allocated_by = node
 	update()
+	return true
 
 func leave() -> void:
-	set_busy(false)
+	set_busy(false, null)
 	if(self.is_in_group("ask_food_spot")):
 		OrderRepository.set_customer_waiting_on_ask_spot(null)
 

@@ -29,13 +29,8 @@ export(float, 0.0, 200.0, 2.0) var temper_max: float = 100.0
 var time_elapsed: float = 0.0
 export var game_duration: int = 20.0
 
-# NOTE: should all be of type Activity
-# TODO: attach them to scene objects with clickable models
-export(Array, Resource) var activities
-
 export(Array, Resource) var passive_effects
 
-var activities_available = []
 var current_activity = null
 var activity_started: bool = false
 var current_activity_timeout: float = 0.0
@@ -178,9 +173,6 @@ func setup() -> void:
 	player_visual = level.find_node("PlayerVisual")
 	player_visual.connect("done_walking", self, "start_activity")
 
-	# TODO: populate activities
-	# NOTE: activities should be a part of a level
-	populate_activity_buttons()
 	restart_passive_effects()
 
 func teardown() -> void:
@@ -189,8 +181,6 @@ func teardown() -> void:
 	# Delete level instance
 	level_container.remove_child(level)
 	level.queue_free()
-
-	clear_activity_buttons()
 
 func reset() -> void:
 	temper = temper_initial
@@ -211,37 +201,6 @@ func restart_passive_effects() -> void:
 		if !pe:
 			continue
 		pe.next_update_time = time_elapsed + pe.update_interval
-
-func populate_activity_buttons() -> void:
-	if !activities.size():
-		return
-
-	for i in range(0, activities.size()):
-		var activity = activities[i]
-		if !activity:
-			continue
-
-		var activity_button = ActivityButton.new(activity)
-		activity_button.text = activity.displayed_name
-		activity_button.rect_position = Vector2(20, 150 + i * 30)
-		$UI.add_child(activity_button)
-		var activity_object = {
-			"button": activity_button,
-			"activity": {
-				"activity": activity,
-				"caller": null,
-				"callback_name": "",
-				"position_marker": null,
-			}
-		}
-		activities_available.push_back(activity_object)
-
-func clear_activity_buttons() -> void:
-	if !activities_available.size():
-		return
-	for activity_object in activities_available:
-		$UI.remove_child(activity_object.button)
-	activities_available.clear()
 
 func set_activity(activity: Activity, caller, callback_name: String, position: Position3D = null):
 	var activity_queued = {

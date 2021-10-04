@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
-[ext_resource path="res://game/Activity.gd" type="Script" id=2]
 [ext_resource path="res://game/menu/MainMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/loading/TransitionScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/Game.gd" type="Script" id=5]
@@ -10,20 +9,6 @@
 [ext_resource path="res://game/hud/GameOverOverlay.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-duration = 3.0
-outcome_temper_delta = 0.0
-outcome_temperature_delta = 0.5
-displayed_name = "Cook"
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 2 )
-duration = 3.0
-outcome_temper_delta = 10.0
-outcome_temperature_delta = 0.0
-displayed_name = "Take a break"
-
-[sub_resource type="Resource" id=3]
 script = ExtResource( 6 )
 update_interval = 1.0
 update_temper_delta = 0.0
@@ -36,8 +21,7 @@ script = ExtResource( 5 )
 level_scene = ExtResource( 7 )
 skip_menus = true
 game_duration = 200
-activities = [ SubResource( 1 ), SubResource( 2 ), null, null, null, null, null, null, null ]
-passive_effects = [ SubResource( 3 ) ]
+passive_effects = [ SubResource( 1 ) ]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 

@@ -34,7 +34,7 @@ func spawn_customer():
 		customer.global_transform.origin = spot.global_transform.origin
 		customer.connect("despawning", self, "customer_despawning")
 		if randomize_time:
-			spawn_timer.wait_time = randi() % random_seconds
+			spawn_timer.wait_time = rand_range(1,random_seconds)
 	else:
 		pass
 
