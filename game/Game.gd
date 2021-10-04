@@ -124,9 +124,6 @@ func _process(delta: float) -> void:
 			ambient_vol_linear)
 	AudioServer.set_bus_volume_db(bus_ambient, linear2db(ambient_vol_linear))
 
-	for i in range(0, 5):
-		DebugOverlay.display(str(db2linear(AudioServer.get_bus_volume_db(i))))
-
 	if !is_running:
 		return
 
