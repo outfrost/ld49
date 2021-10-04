@@ -49,6 +49,7 @@ var customers_served: int = 0
 # Audio shit
 onready var bus_music_tension: int = AudioServer.get_bus_index("MusicTension")
 onready var bus_music_crazy: int = AudioServer.get_bus_index("MusicCrazy")
+onready var bus_ambient: int = AudioServer.get_bus_index("Ambient")
 
 var debug: Reference
 
@@ -62,7 +63,8 @@ func _ready() -> void:
 	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(0.0))
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
 
-	OrderRepository.connect("client_satisfied", self, "inc_customers_served")
+	OrderRepository.connect("client_satisfied", self, "on_customer_satisfied")
+	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
 
 	main_menu.connect("start_game", self, "on_start_game")
 	if OS.has_feature("debug") and skip_menus:
@@ -81,6 +83,7 @@ func _process(delta: float) -> void:
 		target_tension_vol_linear = 1.0
 	elif is_running and is_crazy:
 		target_crazy_vol_linear = 1.0
+	var target_ambient_vol_linear = 1.0 if is_running else 0.0
 
 	var tension_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_music_tension))
 	if target_tension_vol_linear > tension_vol_linear:
@@ -107,6 +110,19 @@ func _process(delta: float) -> void:
 			target_crazy_vol_linear,
 			crazy_vol_linear)
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(crazy_vol_linear))
+
+	var ambient_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_ambient))
+	if target_ambient_vol_linear > ambient_vol_linear:
+		ambient_vol_linear = clamp(
+			ambient_vol_linear + delta * 0.25,
+			ambient_vol_linear,
+			target_ambient_vol_linear)
+	else:
+		ambient_vol_linear = clamp(
+			ambient_vol_linear - delta * 0.25,
+			target_ambient_vol_linear,
+			ambient_vol_linear)
+	AudioServer.set_bus_volume_db(bus_ambient, linear2db(ambient_vol_linear))
 
 	for i in range(0, 5):
 		DebugOverlay.display(str(db2linear(AudioServer.get_bus_volume_db(i))))
@@ -293,5 +309,9 @@ func start_activity():
 		current_activity["caller"].call(current_activity["callback_name"])
 	activity_started = true
 
-func inc_customers_served(_customer) -> void:
+func on_customer_satisfied(_customer) -> void:
 	customers_served += 1
+	$HappyNoiseSfx.play()
+
+func on_customer_enraged(_customer) -> void:
+	$SadNoiseSfx.play()

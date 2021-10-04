@@ -30,4 +30,5 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
 stream = ExtResource( 2 )
+volume_db = -3.0
 script = ExtResource( 3 )
