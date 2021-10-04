@@ -208,8 +208,7 @@ func on_start_game() -> void:
 	yield(transition_screen, "animation_finished")
 
 	is_running = true
-#	yield(get_tree().create_timer(2.0), "timeout")
-#	HintPopup.display("YEET YEET YEET YEET YEET YEET", 5.0)
+	on_started_running()
 
 func back_to_menu() -> void:
 	is_running = false
@@ -236,6 +235,7 @@ func restart_game() -> void:
 	yield(transition_screen, "animation_finished")
 
 	is_running = true
+	on_started_running()
 
 func setup() -> void:
 	reset()
@@ -269,6 +269,11 @@ func reset() -> void:
 	current_activity_timeout = 0.0
 	activity_queue.clear()
 	customers.clear()
+
+func on_started_running() -> void:
+#	yield(get_tree().create_timer(2.0), "timeout")
+#	HintPopup.display("YEET YEET YEET YEET YEET YEET", 5.0)
+	pass
 
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
