@@ -22,7 +22,7 @@ var waiting:bool = false
 var game_is_running = true #Otherwise shut down the spawning, can be replaced for a more direct access
 
 func spawn_customer():
-	if not spawning_spots.empty():
+	if not spawning_spots.empty() and has_free_seats():
 		var spot = spawning_spots[randi() % spawning_spots.size()] #chooses random spawn spot based on the array
 		var customer_packed:PackedScene = customer_scenes[randi() % customer_scenes.size()]
 		var customer = customer_packed.instance()
@@ -31,7 +31,7 @@ func spawn_customer():
 		if randomize_time:
 			spawn_timer.wait_time = randi() % random_seconds
 	else:
-		printerr("No spawning spots found!", get_stack())
+		pass
 
 func _on_SpawnTimer_timeout()->void:
 	if has_free_seats():

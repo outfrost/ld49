@@ -38,12 +38,15 @@ var lock_z_axis:bool = false
 
 onready var customer_generated_food_order = OrderRepository.generate_order(customer_difficulty, false)
 
+var allocated_spot:Spatial = null
+
 func _get_and_allocate_spot(group_name:String)->Spatial:
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
 	seats.shuffle()
 	for i in seats:
 		if not i.busy:
 			i.set_busy(true)
+			allocated_spot = i
 			return i
 			break
 	#Did not find spot
@@ -65,17 +68,19 @@ func receive_order(received_item:int)->bool: #True = the delivered item is corre
 		return true
 	return false
 
-func go_ask_for_food_spot()->void:
+func go_ask_for_food_spot()->Spatial:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.ask_food_spot])
 	move_to(target)
+	return target
 
 func go_waiting_spot()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 	move_to(target)
 
-func go_get_food_spot()->void:
+func go_get_food_spot()->Spatial:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.get_food_spot])
 	move_to(target)
+	return target
 
 func find_seat()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.drinking_spot])
@@ -86,18 +91,22 @@ func find_seat()->void:
 #TODO: the barista can call the customer to deliver bewerage 
 
 func leave_and_go_away()->void:
-	if target.has_method("leave"):
-		target.leave() #current allocated seat
+	if allocated_spot != null:
+		if allocated_spot.has_method("leave"):
+			target.leave() #current allocated seat
+
 	var exit_spots:Array = get_tree().get_nodes_in_group(spots_collection.spot_names[spots_collection.exit_spot])
 	var chosen_exit:Spatial = exit_spots[randi() % exit_spots.size()]
 	target = chosen_exit
+	allocated_spot = chosen_exit
+	move_to(target)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = max_waiting_timer.wait_time/customer_difficulty
-	find_seat()
+	max_waiting_timer.start()
 
 func _physics_process(delta):
 	if path_node < path.size(): #Must move to reach destination
@@ -116,7 +125,8 @@ func _physics_process(delta):
 		match current_state:
 			states.idle:
 				if not customer_generated_food_order.empty() and not barista_took_order:
-					if go_ask_for_food_spot() == null:
+					var ask_food_spot = go_ask_for_food_spot()
+					if ask_food_spot == null:
 						#wait on a table, if none available, will wait until finds one
 						go_waiting_spot()
 
@@ -132,11 +142,13 @@ func _physics_process(delta):
 				if target.is_in_group("exit_spot"):
 					call_deferred("queue_free")
 			states.waiting_to_order:
-				#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
-				max_waiting_timer.start()
+				if max_waiting_timer.is_stopped():
+					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
+					max_waiting_timer.start()
 			states.waiting_for_order:
-				#Restart timer
-				max_waiting_timer.start()
+				if max_waiting_timer.is_stopped():
+					#Restart timer
+					max_waiting_timer.start()
 				if barista_took_order and target.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
 					#Move to some table
 					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
@@ -166,6 +178,10 @@ func _on_MaxWaitingTime_timeout():
 			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
 		states.drinking:
 			needs_fullfilled()
+			leave_and_go_away()
+		states.idle:
+			leave_and_go_away()
+		states.walking:
 			leave_and_go_away()
 		_:
 			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
