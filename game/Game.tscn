@@ -8,7 +8,7 @@
 [ext_resource path="res://level/CafeNavmesh.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/hud/GameOverOverlay.tscn" type="PackedScene" id=8]
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
 update_interval = 1.0
 update_temper_delta = 0.0
@@ -20,8 +20,8 @@ displayed_description = "Temperature rises!"
 script = ExtResource( 5 )
 level_scene = ExtResource( 7 )
 skip_menus = true
-game_duration = 200
-passive_effects = [ SubResource( 3 ) ]
+game_duration = 10
+passive_effects = [ SubResource( 1 ) ]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 

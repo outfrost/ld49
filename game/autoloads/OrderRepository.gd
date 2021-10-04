@@ -54,8 +54,9 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 
 #Calls any client with a matching order
 func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if client_node.has_method("receive_order"):
-		client_node.call_customer_to_deliver_zone()
+	if client_node != null:
+		if client_node.has_method("receive_order"):
+			client_node.call_customer_to_deliver_zone()
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
 	randomize()

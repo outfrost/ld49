@@ -91,10 +91,12 @@ func go_waiting_spot()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 	move_to(target)
 
-func go_get_food_spot()->Spatial:
+func go_get_food_spot()->void:
+	if allocated_spot != null:
+		if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.get_food_spot]):
+			return
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.get_food_spot])
 	move_to(target)
-	return target
 
 func find_seat()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.drinking_spot])
@@ -151,18 +153,22 @@ func _physics_process(delta):
 					got_food = true
 					var score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
 					print("The customer gave a rating to the food: ", score)
-					var will_stay_or_leave = rand_range(0, 100)
-					if will_stay_or_leave < 20:
+					OrderRepository.remove_order(self)
+					var will_stay_or_leave = rand_range(100, 105)
+					if will_stay_or_leave < 10:
 						leave_and_go_away()
+						return
 					else:
 						go_waiting_spot()
+						return
 
 				if not barista_took_order:
 					current_state = states.idle
 				else:
-					current_state = states.waiting_for_order
+					if not got_food:
+						current_state = states.waiting_for_order
 				emit_signal("started_idling")
-				if allocated_spot.is_in_group("exit_spot"):
+				if target and target.is_in_group("exit_spot"):
 					emit_signal("despawning", self)
 					call_deferred("queue_free")
 				if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
