@@ -24,6 +24,16 @@ var order_queue:Dictionary = {
 	
 }
 
+var barista_prepared_order:Array = []
+
+func barista_add_item_to_delivery(item:int)->void:
+	barista_prepared_order.append(item)
+
+func barista_call_client_to_get_order()->void:
+	barista_prepared_order.sort()
+	for client_order in order_queue:
+		pass
+
 var customer_waiting_on_ask_spot:Spatial = null
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:

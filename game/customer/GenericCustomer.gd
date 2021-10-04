@@ -135,7 +135,6 @@ func _physics_process(delta):
 					if ask_food_spot == null:
 						#wait on a table, if none available, will wait until finds one
 						go_waiting_spot()
-
 			states.walking:
 				if not barista_took_order:
 					current_state = states.idle
