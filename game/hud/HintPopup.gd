@@ -15,8 +15,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !visible and !queue.empty():
 		var disp = queue.pop_front()
-		reset()
+		label.percent_visible = 0.0
 		label.bbcode_text = disp.text
+		time_shown = 0.0
 		self.duration = disp.duration
 		show()
 
