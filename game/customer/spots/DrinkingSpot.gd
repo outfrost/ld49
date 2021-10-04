@@ -10,6 +10,8 @@ func set_busy(value:bool)->void:
 
 func leave() -> void:
 	set_busy(false)
+	if(self.is_in_group("ask_food_spot")):
+		OrderRepository.set_customer_waiting_on_ask_spot(null)
 
 func _ready():
 	if not OS.has_feature("debug"):

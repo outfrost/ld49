@@ -70,6 +70,8 @@ func receive_order(received_item:int)->bool: #True = the delivered item is corre
 	return false
 
 func go_ask_for_food_spot()->Spatial:
+	if allocated_spot != null and allocated_spot.is_in_group("ask_food_spot"):
+		return allocated_spot
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.ask_food_spot])
 	move_to(target)
 	return target
@@ -143,6 +145,8 @@ func _physics_process(delta):
 				if target.is_in_group("exit_spot"):
 					emit_signal("despawning", self)
 					call_deferred("queue_free")
+				if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
+					OrderRepository.set_customer_waiting_on_ask_spot(self)
 			states.waiting_to_order:
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away

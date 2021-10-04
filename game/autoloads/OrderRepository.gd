@@ -24,6 +24,8 @@ var order_queue:Dictionary = {
 	
 }
 
+var customer_waiting_on_ask_spot:Spatial = null
+
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
 	randomize()
 	if number_of_items > possible_orders.size():
@@ -51,3 +53,14 @@ func remove_order(node:Spatial)->bool:
 	order_queue.erase(node)
 	emit_signal("removed_order")
 	return true
+
+func take_order_from_customer()->void:
+	if customer_waiting_on_ask_spot == null:
+		return
+	if not customer_waiting_on_ask_spot.has_method("deliver_order_to_barista"):
+		printerr("The node is not a customer", get_stack())
+		return
+	customer_waiting_on_ask_spot.deliver_order_to_barista()
+
+func set_customer_waiting_on_ask_spot(node:Spatial)->void:
+	customer_waiting_on_ask_spot = node
