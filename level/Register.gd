@@ -10,8 +10,11 @@ var should_ignore_clicks: bool = false
 var state: int = States.IDLE
 var timeout: float = 0.0
 
+onready var outline = find_node("Outline", true, false)
+
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
+	connect("mouse_exited", self, "unhover")
 	pass
 
 func hover() -> void:
@@ -23,7 +26,13 @@ func hover() -> void:
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
+	if outline:
+		outline.show()
 	pass
+
+func unhover() -> void:
+	if outline:
+		outline.hide()
 
 func get_current_activity_intent():
 	if !$"/root/Game".player_visual.is_emptyhanded():

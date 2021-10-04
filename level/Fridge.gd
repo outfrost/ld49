@@ -10,8 +10,11 @@ var should_ignore_clicks: bool = false
 var state: int = States.IDLE
 var timeout: float = 0.0
 
+onready var outline = find_node("Outline", true, false)
+
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
+	connect("mouse_exited", self, "unhover")
 	pass
 
 func hover() -> void:
@@ -23,7 +26,13 @@ func hover() -> void:
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
+	if outline:
+		outline.show()
 	pass
+
+func unhover() -> void:
+	if outline:
+		outline.hide()
 
 func get_current_activity_intent():
 	if !$"/root/Game".player_visual.is_emptyhanded():
@@ -69,9 +78,19 @@ func set_using():
 	var beverage_duration: float = activity_cold_beverage.duration
 	timeout = get_node(@"/root/Game").time_elapsed + beverage_duration
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
+	open_fridge()
 	animation_player.play("crouch")
+	if !HintPopup.firstfridgeuse:
+		HintPopup.firstfridgeuse = true
+		HintPopup.display("Consuming a cold refreshing beverage will help you keep your cool, and make the customers slightly more tolerable", 3.0)
+	yield(animation_player, "animation_finished")
+	animation_player.play("drinkBeverage")
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
 	print("FRIDGE: %s" % text)
 
+func open_fridge():
+	$under_counter_fridge_exportPrep/AnimationPlayer.play("ArmatureAction")
+	yield($under_counter_fridge_exportPrep/AnimationPlayer, "animation_finished")
+	$under_counter_fridge_exportPrep/AnimationPlayer.play_backwards("ArmatureAction")
