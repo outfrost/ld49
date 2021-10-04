@@ -28,7 +28,7 @@
 [ext_resource path="res://assets/imports/posters/calendar.gltf" type="PackedScene" id=26]
 [ext_resource path="res://assets/imports/posters/poster-1.gltf" type="PackedScene" id=27]
 
-[sub_resource type="GIProbeData" id=11]
+[sub_resource type="GIProbeData" id=1]
 bounds = AABB( -8.05, -3.05, -10.05, 16.1, 6.1, 20.1 )
 cell_size = 0.0785156
 to_cell_xform = Transform( 12.7363, 0, 0, 0, 12.7363, 0, 0, 0, 12.7363, 102.527, 38.8458, 128 )
@@ -38,53 +38,53 @@ bias = 0.05
 normal_bias = 0.0
 propagation = 0.7
 
-[sub_resource type="CubeMesh" id=14]
+[sub_resource type="CubeMesh" id=2]
 size = Vector3( 6.5, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=15]
+[sub_resource type="CubeMesh" id=3]
 size = Vector3( 4.25, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=16]
+[sub_resource type="CubeMesh" id=4]
 size = Vector3( 1.25, 0.6, 0.5 )
 
-[sub_resource type="CubeMesh" id=13]
+[sub_resource type="CubeMesh" id=5]
 size = Vector3( 8, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=12]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 8, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=17]
+[sub_resource type="CubeMesh" id=7]
 size = Vector3( 12, 0.5, 12 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=8]
 size = Vector3( 12, 3, 0.5 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=9]
 size = Vector3( 16, 1, 20 )
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="CubeMesh" id=10]
 size = Vector3( 1.2, 0.9, 0.75 )
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="CubeMesh" id=11]
 size = Vector3( 1.25, 0.05, 0.8 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=12]
 extents = Vector3( 0.25, 0.25, 0.25 )
 
-[sub_resource type="CylinderMesh" id=1]
-
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=14]
 size = Vector3( 0.07, 0.07, 0.035 )
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=15]
 script = ExtResource( 15 )
 duration = 5.0
 outcome_temper_delta = 5.0
 outcome_temperature_delta = -2.0
 displayed_name = "Have a cold beverage"
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=16]
 extents = Vector3( 0.754747, 0.422994, 0.379959 )
+
+[sub_resource type="CylinderMesh" id=13]
 
 [node name="Cafe" type="Spatial"]
 
@@ -93,7 +93,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1 )
 subdiv = 2
 extents = Vector3( 8.05, 3.05, 10.05 )
 bias = 0.05
-data = SubResource( 11 )
+data = SubResource( 1 )
 
 [node name="CameraPosition" type="Position3D" parent="."]
 transform = Transform( 0.382683, 0, 0.923879, 0, 1, 0, -0.923879, 0, 0.382683, 0, 0, 0 )
@@ -132,43 +132,43 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.75 )
 
 [node name="MeshInstance" type="MeshInstance" parent="LevelStatics/BackWall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0, 0 )
-mesh = SubResource( 14 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="LevelStatics/BackWall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.875, 0, 0 )
-mesh = SubResource( 15 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="LevelStatics/BackWall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 1.2, 0 )
-mesh = SubResource( 16 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Box6" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.75, 1.5, -2 )
-mesh = SubResource( 13 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="Box7" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 5.75 )
-mesh = SubResource( 12 )
+mesh = SubResource( 6 )
 material/0 = null
 
 [node name="Ceiling" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0 )
 visible = false
-mesh = SubResource( 17 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.75, 1.5, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="MeshInstance6" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1 )
-mesh = SubResource( 3 )
+mesh = SubResource( 9 )
 material/0 = null
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
@@ -176,12 +176,12 @@ material/0 = null
 [node name="Counter17" type="MeshInstance" parent="LevelStatics/Counters"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.11501, 0.437448, 0.121501 )
 visible = false
-mesh = SubResource( 4 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="MeshInstance" type="MeshInstance" parent="LevelStatics/Counters/Counter17"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.025 )
-mesh = SubResource( 5 )
+mesh = SubResource( 11 )
 material/0 = null
 
 [node name="counterCornerSharp" parent="LevelStatics/Counters" instance=ExtResource( 18 )]
@@ -268,21 +268,24 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/CoffeeMachine"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
-shape = SubResource( 7 )
+shape = SubResource( 12 )
 
 [node name="Togglables" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
 
-[node name="Cup" type="MeshInstance" parent="LevelInteractables/CoffeeMachine/Togglables"]
-transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.2, -0.105 )
-mesh = SubResource( 1 )
-material/0 = null
-
 [node name="ReadyLight" type="MeshInstance" parent="LevelInteractables/CoffeeMachine/Togglables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
-mesh = SubResource( 8 )
+mesh = SubResource( 14 )
 material/0 = null
 
 [node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine/Togglables"]
+
+[node name="CupEmpty" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 5 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+visible = false
+
+[node name="CupFull" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 11 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+visible = false
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
 
@@ -297,46 +300,78 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/CoffeeMachine2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
-shape = SubResource( 7 )
+shape = SubResource( 12 )
 
 [node name="Togglables" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
 
-[node name="Cup" type="MeshInstance" parent="LevelInteractables/CoffeeMachine2/Togglables"]
-transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.2, -0.105 )
-mesh = SubResource( 1 )
-material/0 = null
-
 [node name="ReadyLight" type="MeshInstance" parent="LevelInteractables/CoffeeMachine2/Togglables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
-mesh = SubResource( 8 )
+mesh = SubResource( 14 )
 material/0 = null
 
 [node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine2/Togglables"]
+
+[node name="CupEmpty" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 5 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+visible = false
+
+[node name="CupFull" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 11 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+visible = false
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
 
 [node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine2/ActivityLocations"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.956 )
 
+[node name="CoffeeMachine3" type="Area" parent="LevelInteractables"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.8, 1, -2.17443 )
+script = ExtResource( 2 )
+
+[node name="Model" parent="LevelInteractables/CoffeeMachine3" instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/CoffeeMachine3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
+shape = SubResource( 12 )
+
+[node name="Togglables" type="Spatial" parent="LevelInteractables/CoffeeMachine3"]
+
+[node name="ReadyLight" type="MeshInstance" parent="LevelInteractables/CoffeeMachine3/Togglables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine3/Togglables"]
+
+[node name="CupEmpty" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 5 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+visible = false
+
+[node name="CupFull" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 11 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+visible = false
+
+[node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine3"]
+
+[node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine3/ActivityLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.956 )
+
 [node name="Fridge" type="Area" parent="LevelInteractables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, -4.5 )
 script = ExtResource( 16 )
-activity_cold_beverage = SubResource( 9 )
+activity_cold_beverage = SubResource( 15 )
 
 [node name="under_counter_fridge_exportPrep" parent="LevelInteractables/Fridge" instance=ExtResource( 4 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="LevelInteractables/Fridge"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.444968, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 16 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/Fridge"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Position3D" type="Position3D" parent="LevelInteractables/Fridge/ActivityLocations"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.9 )
-
-[node name="single_espresso_exportPrep3" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.5299e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5299e-08, -4.8, 1, -2.175 )
 
 [node name="register_exportPrep" parent="." instance=ExtResource( 6 )]
 transform = Transform( -1.28741e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, -1.28741e-07, -0.2, 1, -1.325 )
@@ -374,9 +409,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88006, 1, 1.10374 )
 [node name="paper_cup_empty_exportprep" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79976, 1, 1.00346 )
 
-[node name="paper_cup_empty_exportprep2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, -4.653, 1.125, -2.174 )
-
 [node name="Drink_Can_exportPrep" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556197, 1, 1.20096 )
 
@@ -389,5 +421,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.25, -5.5 )
 [node name="Cup2" type="MeshInstance" parent="."]
 transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -1.109, 1.05, 1.434 )
 visible = false
-mesh = SubResource( 1 )
+mesh = SubResource( 13 )
 material/0 = null

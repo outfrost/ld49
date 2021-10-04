@@ -15,14 +15,17 @@ var should_ignore_clicks: bool = false
 var state: int = States.IDLE
 var timeout: float = 0.0
 
-var cup_node: MeshInstance
+var cup_empty_node: Spatial
+var cup_full_node: Spatial
 var ready_light: MeshInstance
 var brewing_sound: AudioStreamPlayer3D
 
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
-	cup_node = $Togglables/Cup
-	cup_node.visible = false
+	cup_empty_node = $Togglables/CupEmpty
+	cup_empty_node.visible = false
+	cup_full_node = $Togglables/CupFull
+	cup_full_node.visible = false
 	ready_light = $Togglables/ReadyLight
 	ready_light.visible = true
 	brewing_sound = $Togglables/BrewingSound
@@ -81,6 +84,8 @@ func _process(delta: float) -> void:
 	if state == States.WORKING and is_timeout:
 		eprint("coffee is ready!")
 		state = States.READY
+		cup_empty_node.visible = false
+		cup_full_node.visible = true
 		ready_light.visible = true
 		brewing_sound.playing = false
 		# TODO: make a "ready" noise
@@ -88,6 +93,8 @@ func _process(delta: float) -> void:
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
 		state = States.IDLE
+		cup_empty_node.visible = false
+		cup_full_node.visible = false
 		# TODO: give player the coffe cup
 		return
 	pass
@@ -97,7 +104,7 @@ func set_working():
 	eprint("brewing the coffee...")
 	state = States.WORKING
 	timeout = get_node(@"/root/Game").time_elapsed + cooking_duration
-	cup_node.visible = true
+	cup_empty_node.visible = true
 	ready_light.visible = false
 	brewing_sound.playing = true
 func set_resetting():
@@ -105,7 +112,6 @@ func set_resetting():
 	# state = States.IDLE
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
-	cup_node.visible = false
 	ready_light.visible = true
 
 # TODO: convert this into speech baloons
