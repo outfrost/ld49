@@ -56,6 +56,8 @@ func hover() -> void:
 	pass
 
 func get_current_activity_intent():
+	if !$"/root/Game".player_visual.is_emptyhanded():
+		return false
 	if should_ignore_clicks:
 		eprint("was clicked already")
 		return false

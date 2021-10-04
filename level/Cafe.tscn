@@ -149,11 +149,11 @@ unit_db = 18.0
 bus = "Effects"
 
 [node name="CupEmpty" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 5 )]
-transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+transform = Transform( -8.74228e-08, 0, 2, 0, 1, 0, -2, 0, -8.74228e-08, 0.000431538, 0.125, -0.105652 )
 visible = false
 
 [node name="CupFull" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 11 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
@@ -190,11 +190,11 @@ unit_db = 18.0
 bus = "Effects"
 
 [node name="CupEmpty" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 5 )]
-transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+transform = Transform( -8.74228e-08, 0, 2, 0, 1, 0, -2, 0, -8.74228e-08, 0.000431538, 0.125, -0.105652 )
 visible = false
 
 [node name="CupFull" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 11 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
@@ -231,11 +231,11 @@ unit_db = 18.0
 bus = "Effects"
 
 [node name="CupEmpty" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 5 )]
-transform = Transform( -6.55671e-08, 0, 1.5, 0, 1, 0, -1.5, 0, -6.55671e-08, 0.000431538, 0.125, -0.105652 )
+transform = Transform( -8.74228e-08, 0, 2, 0, 1, 0, -2, 0, -8.74228e-08, 0.000431538, 0.125, -0.105652 )
 visible = false
 
 [node name="CupFull" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 11 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.125, -0.106 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine3"]
