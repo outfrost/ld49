@@ -94,6 +94,7 @@ func put_item(item: Spatial) -> bool:
 		#take_items()
 		return false
 	var position: Position3D = valid_item_locations[index]
+	item.transform = item.transform.scaled(Vector3(1.8, 1, 1.8))
 	var origin = position.global_transform.origin
 	items_container_object.add_child(item)
 	item.global_transform.origin = origin

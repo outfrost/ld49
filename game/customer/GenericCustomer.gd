@@ -241,7 +241,7 @@ func _on_MaxWaitingTime_timeout():
 			if order_score > 50:
 				needs_fullfilled()
 			else:
-				OrderRepository.emit_signal("client_enraged")
+				OrderRepository.emit_signal("client_enraged", self)
 			leave_and_go_away()
 		states.idle:
 			print("Customer expired, reason: expired while idling")

@@ -37,12 +37,17 @@ var customer_waiting_on_ask_spot:Spatial = null
 
 export var debugging = false
 
+func _ready():
+	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
+
+func clean_barista_prepared_order()->void:
+	barista_prepared_order.clear()
+
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
 #0 means garbage, #100 means excellent
 func compare_order(barista_order:Array, customer_order:Array)->int:
-	client_got_order_from_the_counter()
 	var barista_order_siz = barista_order.size()
 	var customer_order_size = customer_order.size()
 
@@ -56,6 +61,7 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 		if barista_order[i] != customer_order[i]:
 			missed_items += 1
 
+	client_got_order_from_the_counter()
 	if missed_items == customer_order_size:
 		print("All of the items are wrong")
 		return 0
