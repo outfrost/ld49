@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal done_walking()
+
 enum State {
 	Idle,
 	Walking,
@@ -35,6 +37,7 @@ func _physics_process(delta):
 					transform.origin.y = y_pos
 			else:
 				current_state = State.Idle
+				emit_signal("done_walking")
 		State.Busy:
 			pass
 		_:
