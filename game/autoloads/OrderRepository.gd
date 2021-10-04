@@ -111,7 +111,7 @@ func _process(delta):
 		return
 	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
 		yield(get_tree().create_timer(rand_range(7, 20)), "timeout")
-		take_order_from_customer()
+		#take_order_from_customer()
 	if order_queue.size() > 0:
 		yield(get_tree().create_timer(rand_range(10, 20)), "timeout")
 		for i in order_queue:

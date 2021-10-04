@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/PassiveEffect.gd"
 }, {
+"base": "Area",
+"class": "Register",
+"language": "GDScript",
+"path": "res://level/Register.gd"
+}, {
 "base": "Control",
 "class": "TransitionScreen",
 "language": "GDScript",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "GroupMessenger": "",
 "Interactable": "",
 "PassiveEffect": "",
+"Register": "",
 "TransitionScreen": ""
 }
 

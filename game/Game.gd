@@ -105,6 +105,8 @@ func _process(delta: float) -> void:
 	DebugOverlay.display("temper %.1f" % temper)
 	DebugOverlay.display("temperature %.2f" % temperature)
 
+	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
+
 	var is_out_of_temper = temper < temper_min
 	var is_out_of_cool = temperature > temperature_max
 
