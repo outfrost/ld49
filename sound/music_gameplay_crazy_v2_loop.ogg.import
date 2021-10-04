@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music_gameplay_crazy_v2_loop.ogg-43fd21b14474376b840b5847df08a75e.oggstr"
+
+[deps]
+
+source_file="res://sound/music_gameplay_crazy_v2_loop.ogg"
+dest_files=[ "res://.import/music_gameplay_crazy_v2_loop.ogg-43fd21b14474376b840b5847df08a75e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
