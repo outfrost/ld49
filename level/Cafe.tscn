@@ -319,6 +319,8 @@ width = 0.532
 height = 0.1
 depth = 0.7
 
+[node name="Decorations" type="Spatial" parent="LevelStatics"]
+
 [node name="LevelInteractables" type="Spatial" parent="."]
 
 [node name="CoffeeMachine" type="Area" parent="LevelInteractables"]

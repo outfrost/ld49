@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_coffemachine_v3.ogg-01c9c05377790bd406eb0313907ec04f.oggstr"
+
+[deps]
+
+source_file="res://sound/sfx_coffemachine_v3.ogg"
+dest_files=[ "res://.import/sfx_coffemachine_v3.ogg-01c9c05377790bd406eb0313907ec04f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
