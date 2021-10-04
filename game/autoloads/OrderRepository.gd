@@ -102,7 +102,7 @@ func get_order(node:Spatial)->Array:
 	return order_queue[node]
 
 func take_order_from_customer()->bool:
-	if customer_waiting_on_ask_spot == null:
+	if !customer_waiting_on_ask_spot or !is_instance_valid(customer_waiting_on_ask_spot):
 		return false
 	if not customer_waiting_on_ask_spot.has_method("deliver_order_to_barista"):
 		printerr("The node is not a customer", get_stack())
