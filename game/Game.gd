@@ -289,7 +289,6 @@ func on_started_running() -> void:
 	HintPopup.display("Oh No! The AC unit died", 5.0)
 	HintPopup.display("I guess you'll just have to try and keep your cool", 5.0)
 
-
 func restart_passive_effects() -> void:
 	if !passive_effects.size():
 		return

@@ -9,7 +9,6 @@ var duration: float = 0.0
 
 var queue = []
 
-
 # First time hint variables
 var firstenrage: bool = false
 var firstorder: bool = false
