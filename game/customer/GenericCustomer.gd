@@ -197,6 +197,9 @@ func _physics_process(delta):
 					call_deferred("queue_free")
 				if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
 					OrderRepository.set_customer_waiting_on_ask_spot(self)
+					if !HintPopup.firstorder:
+						HintPopup.firstorder = true
+						HintPopup.display("A customer is ready to order, don't make them wait too long", 3.0)
 			states.waiting_to_order:
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away

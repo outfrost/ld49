@@ -75,6 +75,9 @@ func _process(delta: float) -> void:
 		if player_coffee_type is int:
 			new_item.coffee_type = player_coffee_type
 			new_item.visible = true
+			if !HintPopup.firstorderontray:
+				HintPopup.firstorderontray = true
+				HintPopup.display("Now that the order is on the tray, click the tray again to call the customer", 3.0)
 			if !put_item(new_item):
 				eprint("failed to put an item")
 				return

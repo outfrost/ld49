@@ -9,6 +9,18 @@ var duration: float = 0.0
 
 var queue = []
 
+
+# First time hint variables
+var firstenrage: bool = false
+var firstorder: bool = false
+var firsthappy: bool = false
+var firstorderstart: bool = false
+var firstmachineuse: bool = false
+var firstmachinedone: bool = false
+var firstorderontray: bool = false
+var firsttempwarning: bool = false
+var firstmindwarning: bool = false
+
 func _ready() -> void:
 	hide()
 
