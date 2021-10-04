@@ -16,9 +16,12 @@ var timeout: float = 0.0
 var items_container_object: Spatial
 var valid_item_locations: Array = []
 
+onready var outline = find_node("Outline", true, false)
+
 func _ready() -> void:
 	OrderRepository.connect("client_got_order_from_counter", self, "yeet_items")
 	connect("mouse_entered", self, "hover")
+	connect("mouse_exited", self, "unhover")
 	items_container_object = $Items
 	var item_locations_container = $ItemLocations
 	if item_locations_container:
@@ -36,7 +39,13 @@ func hover() -> void:
 	# TODO: add a tooltip saying current title
 	# TODO: add outline effect to the object
 		# NOTE: make sure there is only one object outlined at a time
+	if outline:
+		outline.show()
 	pass
+
+func unhover() -> void:
+	if outline:
+		outline.hide()
 
 func get_current_activity_intent():
 	# TODO: check if player has anything to put on the tray
