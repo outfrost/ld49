@@ -28,6 +28,8 @@ var order_queue:Dictionary = {
 var barista_prepared_order:Array = []
 var customer_waiting_on_ask_spot:Spatial = null
 
+export var debugging = true
+
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
@@ -35,16 +37,16 @@ func barista_add_item_to_delivery(item:int)->void:
 func compare_order(barista_order:Array, customer_order:Array)->int:
 	var barista_order_siz = barista_order.size()
 	var customer_order_size = customer_order.size()
-	
+
 	#Client will not accept missing items from the orders, also won't accept more than he is willingly to pay
 	if barista_order_siz != customer_order_size:
 		 return 0
-	
+
 	var missed_items:float = 0
 	for i in range(barista_order_siz):
 		if barista_order[i] != customer_order[i]:
 			missed_items += 1
-	
+
 	if missed_items == customer_order_size:
 		return 0
 	else:
@@ -52,7 +54,7 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 
 #Calls any client with a matching order
 func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if client_node.has("receive_order"):
+	if client_node.has_method("receive_order"):
 		client_node.call_customer_to_deliver_zone()
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
@@ -99,3 +101,14 @@ func take_order_from_customer()->bool:
 
 func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
+
+func _process(delta):
+	#Debug purposes
+	if not debugging:
+		return
+	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
+		take_order_from_customer()
+	if order_queue.size() > 0:
+		yield(get_tree().create_timer(randi() % 4), "timeout")
+		for i in order_queue:
+			barista_call_client_to_get_food(i)

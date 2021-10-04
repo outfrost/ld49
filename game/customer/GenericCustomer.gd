@@ -66,6 +66,7 @@ func needs_fullfilled():
 
 func deliver_order_to_barista()->void:
 	barista_took_order = true
+	go_waiting_spot()
 	OrderRepository.add_order(self, customer_generated_food_order)
 
 func receive_order(received_item:int)->bool: #True = the delivered item is correct
@@ -113,6 +114,7 @@ func leave_and_go_away()->void:
 	target = chosen_exit
 	allocated_spot = chosen_exit
 	move_to(target)
+	OrderRepository.remove_order(self)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -158,9 +160,9 @@ func _physics_process(delta):
 				if not barista_took_order:
 					current_state = states.idle
 				else:
-					current_state = states.waiting_to_order
+					current_state = states.waiting_for_order
 				emit_signal("started_idling")
-				if target.is_in_group("exit_spot"):
+				if allocated_spot.is_in_group("exit_spot"):
 					emit_signal("despawning", self)
 					call_deferred("queue_free")
 				if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
@@ -177,7 +179,7 @@ func _physics_process(delta):
 				if max_waiting_timer.is_stopped():
 					#Restart timer
 					max_waiting_timer.start()
-				if barista_took_order and target.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
+				if barista_took_order and allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
 					#Move to some table
 					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 					target = waiting_spot
@@ -198,11 +200,9 @@ func _on_MaxWaitingTime_timeout():
 	match current_state:
 		states.waiting_for_order:
 			leave_and_go_away()
-			OrderRepository.remove_order(self)
 			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
 		states.waiting_to_order:
 			leave_and_go_away()
-			OrderRepository.remove_order(self)
 			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
 		states.drinking:
 			needs_fullfilled()
