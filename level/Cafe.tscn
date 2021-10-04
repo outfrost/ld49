@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -35,6 +35,9 @@
 [ext_resource path="res://assets/wall_window.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/wall_doorway_angle_openinward.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/wall_plain.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/imports/posters/winter.gltf" type="PackedScene" id=36]
+[ext_resource path="res://assets/imports/posters/calendar2.gltf" type="PackedScene" id=37]
+[ext_resource path="res://assets/imports/posters/city.gltf" type="PackedScene" id=38]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.25, 0.25, 0.25 )
@@ -634,23 +637,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0 )
 [node name="landscape" parent="LevelStatics/Decorations" instance=ExtResource( 22 )]
 transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -3.01, 1.9, -5.51 )
 
-[node name="landscape2" parent="LevelStatics/Decorations" instance=ExtResource( 22 )]
-transform = Transform( 3.89414e-07, 0, -2, 0, 2, 0, 2, 0, 3.89414e-07, -5.51, 1.9, 3.7 )
+[node name="winter" parent="LevelStatics/Decorations" instance=ExtResource( 36 )]
+transform = Transform( 3.89414e-07, 0, -2, 0, 2, 0, 2, 0, 3.89414e-07, -5.51, 1.9, 1.5 )
 
 [node name="ludumdare" parent="LevelStatics/Decorations" instance=ExtResource( 23 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 2.89, 1.5, -5.5 )
 
 [node name="coffeeposter" parent="LevelStatics/Decorations" instance=ExtResource( 24 )]
-transform = Transform( 1.50996e-07, 0, -2, 0, 2, 0, 2, 0, 1.50996e-07, -5.51, 1.9, 0 )
+transform = Transform( 1.50996e-07, 0, -2, 0, 2, 0, 2, 0, 1.50996e-07, -5.51, 2.2, -1.1 )
 
 [node name="balerine" parent="LevelStatics/Decorations" instance=ExtResource( 25 )]
-transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -5.5, 1.9, -3 )
+transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -5.5, 1.9, -3.9 )
 
 [node name="calendar" parent="LevelStatics/Decorations" instance=ExtResource( 26 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.11, 1.8, -5.5 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5.32, 1.8, 2.64 )
+
+[node name="calendar2" parent="LevelStatics/Decorations" instance=ExtResource( 37 )]
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -1.11, 1.8, -5.5 )
 
 [node name="poster-1" parent="LevelStatics/Decorations" instance=ExtResource( 27 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1.8, -5.5 )
+
+[node name="city" parent="LevelStatics/Decorations" instance=ExtResource( 38 )]
+transform = Transform( 2.62268e-07, 0, -2, 0, 2, 0, 2, 0, 2.62268e-07, -5.51, 2, 4.2 )
 
 [node name="table_high_rect_exportprep" parent="LevelStatics" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
@@ -684,6 +693,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78942, 1, 1.27809 )
 
 [node name="air_conditioner_exportprep" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
+
+[node name="Skidmark" type="OmniLight" parent="air_conditioner_exportprep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
+light_color = Color( 1, 0.933333, 0.8, 1 )
+light_energy = 2.0
+light_negative = true
+light_specular = 0.0
+shadow_enabled = true
+omni_range = 0.6
+omni_attenuation = 2.0
 
 [node name="Cup2" type="MeshInstance" parent="."]
 transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -1.109, 1.05, 1.434 )
