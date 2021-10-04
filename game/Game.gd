@@ -19,11 +19,13 @@ var is_running = false
 var temperature: float
 export(float, 35.0, 45.0, 0.1) var temperature_initial: float = 37.0
 export(float, 35.0, 45.0, 0.5) var temperature_max: float = 40.0
+export(float, 35.0, 45.0, 0.1) var crazy_temperature: float = 39.0
 
 # Barista's "cool" - the higher the better
 var temper: float
 export(float, 0.0, 200.0, 2.0) var temper_initial: float = 100.0
 export(float, 0.0, 200.0, 2.0) var temper_min: float = 0.0
+export(float, 35.0, 45.0, 0.1) var crazy_temper: float = 30.0
 export(float, 0.0, 200.0, 2.0) var temper_max: float = 100.0
 
 var time_elapsed: float = 0.0
@@ -44,6 +46,10 @@ var customers: Array = []
 
 var customers_served: int = 0
 
+# Audio shit
+onready var bus_music_tension: int = AudioServer.get_bus_index("MusicTension")
+onready var bus_music_crazy: int = AudioServer.get_bus_index("MusicCrazy")
+
 var debug: Reference
 
 func _ready() -> void:
@@ -52,6 +58,9 @@ func _ready() -> void:
 		var debug_script = load(debug_script_name)
 		debug = debug_script.new(self)
 		debug.startup()
+
+	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(0.0))
+	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
 
 	main_menu.connect("start_game", self, "on_start_game")
 	if skip_menus:
@@ -62,6 +71,43 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("menu"):
 		back_to_menu()
+
+	var is_crazy: bool = temperature >= crazy_temperature or temper <= crazy_temper
+	var target_tension_vol_linear = 0.0
+	var target_crazy_vol_linear = 0.0
+	if is_running and !is_crazy:
+		target_tension_vol_linear = 1.0
+	elif is_running and is_crazy:
+		target_crazy_vol_linear = 1.0
+
+	var tension_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_music_tension))
+	if target_tension_vol_linear > tension_vol_linear:
+		tension_vol_linear = clamp(
+			tension_vol_linear + delta * 0.25,
+			tension_vol_linear,
+			target_tension_vol_linear)
+	else:
+		tension_vol_linear = clamp(
+			tension_vol_linear - delta * 0.25,
+			target_tension_vol_linear,
+			tension_vol_linear)
+	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(tension_vol_linear))
+
+	var crazy_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_music_crazy))
+	if target_crazy_vol_linear > crazy_vol_linear:
+		crazy_vol_linear = clamp(
+			crazy_vol_linear + delta * 0.25,
+			crazy_vol_linear,
+			target_crazy_vol_linear)
+	else:
+		crazy_vol_linear = clamp(
+			crazy_vol_linear - delta * 0.25,
+			target_crazy_vol_linear,
+			crazy_vol_linear)
+	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(crazy_vol_linear))
+
+	for i in range(0, 5):
+		DebugOverlay.display(str(db2linear(AudioServer.get_bus_volume_db(i))))
 
 	if !is_running:
 		return
