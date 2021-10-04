@@ -152,8 +152,8 @@ func _process(delta: float) -> void:
 		var activity = current_activity["activity"]
 		var time_left = current_activity_timeout - time_elapsed
 		var is_activity_over = time_left <= 0
-		DebugOverlay.display("current activity %s" % activity.displayed_name)
-		DebugOverlay.display("activity time left %s" % time_left)
+#		DebugOverlay.display("current activity %s" % activity.displayed_name)
+#		DebugOverlay.display("activity time left %s" % time_left)
 		if is_activity_over:
 			temperature += activity.outcome_temperature_delta
 			temper += activity.outcome_temper_delta
@@ -162,18 +162,18 @@ func _process(delta: float) -> void:
 			activity_started = false
 #			if player_visual and spawn_location:
 #				player_visual.transform = spawn_location.transform
-	else:
-		DebugOverlay.display("current activity none")
+#	else:
+#		DebugOverlay.display("current activity none")
 
 	# limit temper value
 	if temper > temper_max:
 		temper = temper_max
 
-	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
-	DebugOverlay.display("temper %.1f" % temper)
-	DebugOverlay.display("temperature %.2f" % temperature)
+#	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
+	DebugOverlay.display("Your temper %.1f" % temper)
+	DebugOverlay.display("Temperature %.2f" % temperature)
 
-	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
+#	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
 	if OrderRepository.order_queue.size():
 		for order in OrderRepository.order_queue.values():
 			var order_item_names := PoolStringArray()
