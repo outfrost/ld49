@@ -13,9 +13,7 @@ var current_state:int = states.idle
 var customer_possible_difficulty = [1, 2, 3, 4] #Difficulty will halve time to please the customer
 onready var customer_difficulty = customer_possible_difficulty[randi() % customer_possible_difficulty.size()]
 export var max_speed:float = 10
-export var waiting_for_order_time_tolerance = 60
-export var waiting_to_order_time_tolerance = 60
-export var consuming_food_time = 60
+export var waiting_time_tolerance = 100
 onready var max_waiting_timer:Timer = $MaxWaitingTime
 
 var current_speed:float = 0
@@ -42,6 +40,11 @@ var lock_z_axis:bool = false
 onready var customer_generated_food_order = OrderRepository.generate_order(customer_difficulty, false)
 
 var allocated_spot:Spatial = null
+
+var _current_position:Vector3 = Vector3()
+var _last_frame_position:Vector3 = Vector3()
+onready var customer_mesh:Spatial = $customer
+onready var rotation_mesh:Spatial = $MeshInstance
 
 func _get_and_allocate_spot(group_name:String)->Spatial:
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
@@ -125,10 +128,23 @@ func leave_and_go_away()->void:
 func _ready():
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
-	max_waiting_timer.wait_time = max_waiting_timer.wait_time/customer_difficulty
+	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
 
 func _physics_process(delta):
+	#Store the position to get the direction, so the customers can look where they are moving
+	#if _current_position != global_transform.origin:
+	#	if (_last_frame_position - _current_position).length_squared() > 0.01:
+	#		_last_frame_position = _current_position
+	#	_current_position = global_transform.origin
+
+	#if (_current_position - _last_frame_position).length_squared() > 0.01:
+	#	var look_direction = _current_position - _last_frame_position
+
+		#rotation_mesh.look_at(global_transform.origin - look_direction.normalized(), Vector3.UP)
+		#customer_mesh.rotation_degrees = customer_mesh.rotation_degrees.linear_interpolate(rotation_mesh.rotation_degrees, 0.1)
+		#customer_mesh.rotation_degrees.x = 0
+
 	if path_node < path.size(): #Must move to reach destination
 		if current_state != states.walking:
 			current_state = states.walking
@@ -150,6 +166,8 @@ func _physics_process(delta):
 						#wait on a table, if none available, will wait until finds one
 						go_waiting_spot()
 			states.walking:
+				#Every time the customer walks, the timer is reseted
+				max_waiting_timer.start()
 				if got_food:
 					current_state = states.drinking
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot

@@ -6,4 +6,4 @@
 [node name="wall_doorway_angle_exportprep" instance=ExtResource( 2 )]
 
 [node name="door_exportprep" parent="." index="1" instance=ExtResource( 1 )]
-transform = Transform( -0.0871559, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871559, 0.525, 0, 0.63 )
+transform = Transform( 0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0.725, 0, 0.59 )
