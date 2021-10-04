@@ -166,7 +166,7 @@ func _physics_process(delta):
 						return
 
 				if not barista_took_order:
-					current_state = states.idle
+					current_state = states.waiting_to_order
 				else:
 					if not got_food:
 						current_state = states.waiting_for_order
@@ -208,17 +208,22 @@ func move_to(target:Spatial):
 func _on_MaxWaitingTime_timeout():
 	match current_state:
 		states.waiting_for_order:
+			print("Customer expired, reason: waited for order too long")
 			leave_and_go_away()
 			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
 		states.waiting_to_order:
+			print("Customer expired, reason: waited to order too long")
 			leave_and_go_away()
 			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
 		states.drinking:
+			print("Customer expired, reason: consumed drink")
 			needs_fullfilled()
 			leave_and_go_away()
 		states.idle:
+			print("Customer expired, reason: expired while idling")
 			leave_and_go_away()
 		states.walking:
+			print("Customer expired, reason: expired while walking")
 			leave_and_go_away()
 		_:
 			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())

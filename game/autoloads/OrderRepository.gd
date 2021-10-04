@@ -104,6 +104,8 @@ func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
 
 func _process(delta):
+	if customer_waiting_on_ask_spot == null:
+		return
 	#Debug purposes
 	if not debugging:
 		return
