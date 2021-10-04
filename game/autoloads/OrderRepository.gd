@@ -37,6 +37,12 @@ var customer_waiting_on_ask_spot:Spatial = null
 
 export var debugging = false
 
+func _ready():
+	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
+
+func clean_barista_prepared_order()->void:
+	barista_prepared_order.clear()
+
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
