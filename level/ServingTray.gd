@@ -3,7 +3,7 @@ extends Area
 
 export var activity_place_item: Resource
 
-const call_customer_duration = 2.0 # seconds
+const call_customer_duration = 1.0 # seconds
 var activity_call_customer = Activity.new("Call customer for pickup", call_customer_duration)
 
 enum States {IDLE, WORKING}

@@ -54,7 +54,7 @@ extents = Vector3( 0.191637, 0.51773, 0.37785 )
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 15 )
-duration = 3.0
+duration = 2.0
 outcome_temper_delta = 2.0
 outcome_temperature_delta = -0.5
 displayed_name = "Take client order"
