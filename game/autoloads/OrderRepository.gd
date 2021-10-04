@@ -18,6 +18,7 @@ signal new_order(order_array)
 signal removed_order
 signal client_satisfied(node) #Called from customer directly
 signal client_enraged(node) #Called from customer directly
+signal client_got_order_from_counter
 
 #Stores the orders the player accepted
 #node_ref:order_array
@@ -28,7 +29,7 @@ var order_queue:Dictionary = {
 var barista_prepared_order:Array = []
 var customer_waiting_on_ask_spot:Spatial = null
 
-export var debugging = true
+export var debugging = false
 
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
@@ -51,6 +52,7 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 		return 0
 	else:
 		return (customer_order_size/(customer_order_size-missed_items) )*100
+	client_got_order_from_the_counter()
 
 #Calls any client with a matching order
 func barista_call_client_to_get_food(client_node:Spatial)->void:
@@ -83,8 +85,10 @@ func remove_order(node:Spatial)->bool:
 	if not (node in order_queue.keys()):
 		return false
 	order_queue.erase(node)
-	emit_signal("removed_order")
 	return true
+
+func client_got_order_from_the_counter()->void:
+	emit_signal("client_got_order_from_counter")
 
 func get_order(node:Spatial)->Array:
 	if not (node in order_queue.keys()):
@@ -103,15 +107,16 @@ func take_order_from_customer()->bool:
 func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
 
+#This whole process is for debug purposes
 func _process(delta):
-	if customer_waiting_on_ask_spot == null:
-		return
 	#Debug purposes
 	if not debugging:
 		return
+	if customer_waiting_on_ask_spot == null:
+		return
 	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
 		yield(get_tree().create_timer(rand_range(7, 20)), "timeout")
-		#take_order_from_customer()
+		take_order_from_customer()
 	if order_queue.size() > 0:
 		yield(get_tree().create_timer(rand_range(10, 20)), "timeout")
 		for i in order_queue:
