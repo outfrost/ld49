@@ -33,7 +33,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="MaxWaitingTime" type="Timer" parent="."]
-wait_time = 120.0
+wait_time = 200.0
 one_shot = true
 
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
