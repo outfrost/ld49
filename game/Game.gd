@@ -36,7 +36,8 @@ export(Array, Resource) var activities
 export(Array, Resource) var passive_effects
 
 var activities_available = []
-var current_activity: Activity
+var current_activity = null
+var activity_started: bool = false
 var current_activity_timeout: float = 0.0
 
 var activity_queue = []
@@ -84,18 +85,20 @@ func _process(delta: float) -> void:
 #				tick_money_delta += effect.update_temperature_delta
 
 	try_pop_activity()
-	if current_activity:
+	if current_activity and activity_started:
+		var activity = current_activity["activity"]
 		var time_left = current_activity_timeout - time_elapsed
 		var is_activity_over = time_left <= 0
-		DebugOverlay.display("current activity %s" % current_activity.displayed_name)
+		DebugOverlay.display("current activity %s" % activity.displayed_name)
 		DebugOverlay.display("activity time left %s" % time_left)
 		if is_activity_over:
-			temperature += current_activity.outcome_temperature_delta
-			temper += current_activity.outcome_temper_delta
+			temperature += activity.outcome_temperature_delta
+			temper += activity.outcome_temper_delta
 			current_activity_timeout = 0.0
 			current_activity = null
-			if player_visual and spawn_location:
-				player_visual.transform = spawn_location.transform
+			activity_started = false
+#			if player_visual and spawn_location:
+#				player_visual.transform = spawn_location.transform
 	else:
 		DebugOverlay.display("current activity none")
 
@@ -173,6 +176,7 @@ func setup() -> void:
 
 	spawn_location = level.find_node("PlayerSpawnLocation")
 	player_visual = level.find_node("PlayerVisual")
+	player_visual.connect("done_walking", self, "start_activity")
 
 	# TODO: populate activities
 	# NOTE: activities should be a part of a level
@@ -195,6 +199,7 @@ func reset() -> void:
 	customers_served = 0
 
 	current_activity = null
+	activity_started = false
 	current_activity_timeout = 0.0
 	activity_queue.clear()
 	customers.clear()
@@ -222,7 +227,12 @@ func populate_activity_buttons() -> void:
 		$UI.add_child(activity_button)
 		var activity_object = {
 			"button": activity_button,
-			"activity": activity
+			"activity": {
+				"activity": activity,
+				"caller": null,
+				"callback_name": "",
+				"position_marker": null,
+			}
 		}
 		activities_available.push_back(activity_object)
 
@@ -240,8 +250,6 @@ func set_activity(activity: Activity, caller, callback_name: String, position: P
 		"callback_name": callback_name,
 		# NOTE: position might make sense as part of the activity??
 		"position_marker": position,
-		# TODO: make it possible for activity to also suggest player animation
-		#"animation": ""
 	}
 	activity_queue.push_back(activity_queued)
 	var queue_length = activity_queue.size()
@@ -253,15 +261,18 @@ func try_pop_activity():
 	var activity_popped = activity_queue.pop_front()
 	if !activity_popped:
 		return
-	var activity = activity_popped["activity"]
+	var activity = activity_popped
 	var position: Position3D = activity_popped["position_marker"]
-	if activity_popped["caller"] and !activity_popped["callback_name"].empty():
-		activity_popped["caller"].call(activity_popped["callback_name"])
-	if activity_popped["position_marker"]:
-		# TODO: teleport player to the marker and set their rotation
-		pass
 	current_activity = activity
-	current_activity_timeout = time_elapsed + activity.duration
 	if player_visual and position:
-		# TODO: lerp player from one location to another
-		player_visual.transform = position.global_transform
+		player_visual.move_to(position.global_transform.origin)
+	else:
+		start_activity()
+
+func start_activity():
+	if !current_activity:
+		return
+	current_activity_timeout = time_elapsed + current_activity["activity"].duration
+	if current_activity["caller"] and !current_activity["callback_name"].empty():
+		current_activity["caller"].call(current_activity["callback_name"])
+	activity_started = true
