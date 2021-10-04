@@ -1,14 +1,18 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
 [ext_resource path="res://character/PlayerVisual.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/under_counter_fridge.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/imports/paper_cup_empty_exportprep.gltf" type="PackedScene" id=5]
 [ext_resource path="res://assets/register.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/table_high_rect.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/CameraPosition.gd" type="Script" id=8]
 [ext_resource path="res://assets/coffee_pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/coffee_machine.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=11]
+[ext_resource path="res://assets/drink_can.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/wattlebotter.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -429,3 +433,18 @@ transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.15, 0.
 
 [node name="Coffe_Pot_exportPrep2" parent="Coffe_Machine_exportPrep" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.6, 0 )
+
+[node name="paper_cup_ready_exportprep" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18006, 0.925, 0.40374 )
+
+[node name="paper_cup_empty_exportprep" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09976, 0.925, 0.303462 )
+
+[node name="paper_cup_empty_exportprep2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, -4.85298, 1.04781, -2.17357 )
+
+[node name="Drink_Can_exportPrep" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.856197, 0.925, 0.50096 )
+
+[node name="wattleboter_exportprep" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08942, 0.925, 0.578087 )
