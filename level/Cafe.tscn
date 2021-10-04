@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/register.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/table_high_rect.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/CameraPosition.gd" type="Script" id=8]
+[ext_resource path="res://assets/coffee_pot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/coffee_machine.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CylinderMesh" id=1]
 
@@ -117,7 +119,7 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Counter17" type="MeshInstance" parent="LevelStatics"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.125, 0.45, 0.125 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.11501, 0.437448, 0.121501 )
 mesh = SubResource( 4 )
 material/0 = null
 
@@ -424,3 +426,12 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.025, 
 
 [node name="table_high_rect_exportprep6" parent="." instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.375, 0, 4.85 )
+
+[node name="Coffe_Machine_exportPrep" parent="." instance=ExtResource( 10 )]
+transform = Transform( -1.25, 0, -1.88745e-07, 0, 1.25, 0, 1.88745e-07, 0, -1.25, -5.1, 0.925, 0.5 )
+
+[node name="Coffe_Pot_exportPrep" parent="Coffe_Machine_exportPrep" instance=ExtResource( 9 )]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.15, 0.08, 0 )
+
+[node name="Coffe_Pot_exportPrep2" parent="Coffe_Machine_exportPrep" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.6, 0 )
