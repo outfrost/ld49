@@ -62,6 +62,7 @@ func _ready() -> void:
 
 	AudioServer.set_bus_volume_db(bus_music_tension, linear2db(0.0))
 	AudioServer.set_bus_volume_db(bus_music_crazy, linear2db(0.0))
+	AudioServer.set_bus_volume_db(bus_ambient, linear2db(0.0))
 
 	OrderRepository.connect("client_satisfied", self, "on_customer_satisfied")
 	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
@@ -77,10 +78,6 @@ func _process(delta: float) -> void:
 		back_to_menu()
 
 	var is_crazy: bool = temperature >= crazy_temperature or temper <= crazy_temper
-	if is_crazy and !HintPopup.firstmindwarning:
-		HintPopup.firstmindwarning = true
-		HintPopup.display("Watch out, you're starting to lose it", 3.0)
-		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
 
 	var target_tension_vol_linear = 0.0
 	var target_crazy_vol_linear = 0.0
@@ -88,7 +85,7 @@ func _process(delta: float) -> void:
 		target_tension_vol_linear = 1.0
 	elif is_running and is_crazy:
 		target_crazy_vol_linear = 1.0
-	var target_ambient_vol_linear = 1.0 if is_running else 0.0
+	var target_ambient_vol_linear = 1.0
 
 	var tension_vol_linear = db2linear(AudioServer.get_bus_volume_db(bus_music_tension))
 	if target_tension_vol_linear > tension_vol_linear:
@@ -131,6 +128,11 @@ func _process(delta: float) -> void:
 
 	if !is_running:
 		return
+
+	if is_crazy and !HintPopup.firstmindwarning:
+		HintPopup.firstmindwarning = true
+		HintPopup.display("Watch out, you're starting to lose it", 3.0)
+		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
 
 	time_elapsed += delta
 
@@ -203,6 +205,8 @@ func on_start_game() -> void:
 		yield(transition_screen, "animation_finished")
 
 	main_menu.hide()
+	$Background/Cafe.hide()
+	$Background/Cafe/CameraPosition/Camera.current = false
 
 	setup()
 
@@ -220,6 +224,8 @@ func back_to_menu() -> void:
 
 	teardown()
 
+	$Background/Cafe.show()
+	$Background/Cafe/CameraPosition/Camera.current = true
 	main_menu.show()
 
 	transition_screen.fade_out()
