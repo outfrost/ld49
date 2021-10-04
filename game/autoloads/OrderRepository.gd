@@ -108,8 +108,9 @@ func _process(delta):
 	if not debugging:
 		return
 	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
+		yield(get_tree().create_timer(rand_range(7, 20)), "timeout")
 		take_order_from_customer()
 	if order_queue.size() > 0:
-		yield(get_tree().create_timer(randi() % 4), "timeout")
+		yield(get_tree().create_timer(rand_range(10, 20)), "timeout")
 		for i in order_queue:
 			barista_call_client_to_get_food(i)
