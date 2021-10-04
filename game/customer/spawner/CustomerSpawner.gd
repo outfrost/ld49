@@ -29,9 +29,9 @@ func spawn_customer():
 		var spot = spawning_spots[randi() % spawning_spots.size()] #chooses random spawn spot based on the array
 		var customer_packed:PackedScene = customer_scenes[randi() % customer_scenes.size()]
 		var customer = customer_packed.instance()
-		customer.global_transform.origin = spot.global_transform.origin
 		navigation_node.add_child(customer)
 		instanced_customers.append(customer)
+		customer.global_transform.origin = spot.global_transform.origin
 		customer.connect("despawning", self, "customer_despawning")
 		if randomize_time:
 			spawn_timer.wait_time = randi() % random_seconds
