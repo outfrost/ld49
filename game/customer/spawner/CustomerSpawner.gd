@@ -21,6 +21,9 @@ var waiting:bool = false
 
 var game_is_running = true #Otherwise shut down the spawning, can be replaced for a more direct access
 
+func customer_despawning(node:Spatial):
+	instanced_customers.erase(node)
+
 func spawn_customer():
 	if not spawning_spots.empty() and has_free_seats():
 		var spot = spawning_spots[randi() % spawning_spots.size()] #chooses random spawn spot based on the array
@@ -28,6 +31,8 @@ func spawn_customer():
 		var customer = customer_packed.instance()
 		customer.global_transform.origin = spot.global_transform.origin
 		navigation_node.add_child(customer)
+		instanced_customers.append(customer)
+		customer.connect("despawning", self, "customer_despawning")
 		if randomize_time:
 			spawn_timer.wait_time = randi() % random_seconds
 	else:
@@ -38,10 +43,14 @@ func _on_SpawnTimer_timeout()->void:
 		spawn_customer()
 
 func has_free_seats()->bool:
+	var free_seats = false
 	for i in sitting_spots:
 		if not i.busy:
-			return true
-	return false
+			free_seats = true
+
+	if instanced_customers.size() >= waiting_spots.size():
+		free_seats = false
+	return free_seats
 
 #manage the need for customers based on free spots
 func _process(delta):

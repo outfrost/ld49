@@ -29,7 +29,7 @@ var locked_height:float = 0
 
 signal started_walking
 signal started_idling
-
+signal despawning(node)
 var barista_took_order:bool = false
 
 #Maybe for some reason the characters are supposed to be locked on the y axis, so they don't climb stuff, not that they will or should
@@ -41,6 +41,8 @@ onready var customer_generated_food_order = OrderRepository.generate_order(custo
 var allocated_spot:Spatial = null
 
 func _get_and_allocate_spot(group_name:String)->Spatial:
+	if allocated_spot != null:
+		allocated_spot.leave()
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
 	seats.shuffle()
 	for i in seats:
@@ -93,7 +95,7 @@ func find_seat()->void:
 func leave_and_go_away()->void:
 	if allocated_spot != null:
 		if allocated_spot.has_method("leave"):
-			target.leave() #current allocated seat
+			allocated_spot.leave() #current allocated seat
 
 	var exit_spots:Array = get_tree().get_nodes_in_group(spots_collection.spot_names[spots_collection.exit_spot])
 	var chosen_exit:Spatial = exit_spots[randi() % exit_spots.size()]
@@ -140,6 +142,7 @@ func _physics_process(delta):
 				if target.is_in_group(spots_collection.spot_names[spots_collection.drinking_spot]):
 					current_state = states.waiting_to_order
 				if target.is_in_group("exit_spot"):
+					emit_signal("despawning", self)
 					call_deferred("queue_free")
 			states.waiting_to_order:
 				if max_waiting_timer.is_stopped():
