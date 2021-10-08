@@ -134,18 +134,6 @@ func _ready():
 	max_waiting_timer.start()
 
 func _physics_process(delta):
-	#Store the position to get the direction, so the customers can look where they are moving
-	#if _current_position != global_transform.origin:
-	#	if (_last_frame_position - _current_position).length_squared() > 0.01:
-	#		_last_frame_position = _current_position
-	#	_current_position = global_transform.origin
-
-	#if (_current_position - _last_frame_position).length_squared() > 0.01:
-	#	var look_direction = _current_position - _last_frame_position
-
-		#rotation_mesh.look_at(global_transform.origin - look_direction.normalized(), Vector3.UP)
-		#customer_mesh.rotation_degrees = customer_mesh.rotation_degrees.linear_interpolate(rotation_mesh.rotation_degrees, 0.1)
-		#customer_mesh.rotation_degrees.x = 0
 
 	if path_node < path.size(): #Must move to reach destination
 		if current_state != states.walking:
@@ -157,6 +145,9 @@ func _physics_process(delta):
 		else:
 			current_speed = lerp(current_speed, max_speed, 0.01)
 			move_and_slide(direction.normalized() * current_speed, Vector3.UP)
+			#Store the position to get the direction, so the customers can look where they are moving
+			rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
+
 			if lock_z_axis:
 				global_transform.origin.y = locked_height
 	else: #Reached destination
