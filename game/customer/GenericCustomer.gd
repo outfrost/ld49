@@ -145,7 +145,7 @@ func _physics_process(delta):
 		else:
 			current_speed = lerp(current_speed, max_speed, 0.01)
 			move_and_slide(direction.normalized() * current_speed, Vector3.UP)
-			#Store the position to get the direction, so the customers can look where they are moving
+			#Customers can look where they are moving
 			rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
 
 			if lock_z_axis:
