@@ -287,6 +287,7 @@ func reset() -> void:
 	current_activity = null
 	activity_started = false
 	current_activity_timeout = 0.0
+	OrderRepository.order_queue.clear()
 	activity_queue.clear()
 	customers.clear()
 
