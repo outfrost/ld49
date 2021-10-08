@@ -53,9 +53,9 @@ func get_current_activity_intent():
 		eprint("was clicked already")
 		return false
 	var is_barista_empty = $"/root/Game".player_visual.is_emptyhanded()
-	if is_barista_empty:
+	if is_barista_empty and items_container_object.get_child_count() != 0:
 		return {"activity": activity_call_customer, "handler": "call_customer"}
-	else:
+	elif !is_barista_empty:
 		return {"activity": activity_place_item, "handler": "set_putting"}
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
@@ -97,6 +97,8 @@ func _process(delta: float) -> void:
 		eprint("just put an item on the tray")
 		return
 	pass
+
+	DebugOverlay.display("Tray item count %.f" % items_container_object.get_child_count())
 
 func put_item(item: Spatial) -> bool:
 	if !items_container_object:
