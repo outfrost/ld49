@@ -53,7 +53,7 @@ func get_current_activity_intent():
 		eprint("was clicked already")
 		return false
 	var is_barista_empty = $"/root/Game".player_visual.is_emptyhanded()
-	if is_barista_empty and items_container_object.get_child_count() != 0:
+	if is_barista_empty and !self.is_empty():
 		return {"activity": activity_call_customer, "handler": "call_customer"}
 	elif !is_barista_empty:
 		return {"activity": activity_place_item, "handler": "set_putting"}
@@ -151,6 +151,9 @@ func set_putting():
 	timeout = get_node(@"/root/Game").time_elapsed + serve_duration
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("armsCarryEnd")
+
+func is_empty() -> bool:
+	return items_container_object.get_child_count() == 0
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
