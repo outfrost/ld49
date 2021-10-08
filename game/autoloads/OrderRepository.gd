@@ -2,14 +2,14 @@ extends Node
 
 enum possible_orders {
 	coffee_americano,
-	coffee_expresso,
+	coffee_espresso,
 	coffee_latte,
 	coffee_cappuccino
 }
 
 var translations:Dictionary = {
 	possible_orders.coffee_americano:"Coffee americano",
-	possible_orders.coffee_expresso:"Coffee expresso",
+	possible_orders.coffee_espresso:"Coffee espresso",
 	possible_orders.coffee_latte:"Coffee latte",
 	possible_orders.coffee_cappuccino:"Coffee cappuccino",
 }
