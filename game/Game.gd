@@ -350,5 +350,5 @@ func on_customer_enraged(_customer) -> void:
 	$SadNoiseSfx.play()
 	if !HintPopup.firstenrage:
 		HintPopup.firstenrage = true
-		HintPopup.display("Oh No, you made a customer upset", 5)
-		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 5)
+		HintPopup.display("Oh No, you made a customer upset", 5.0)
+		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 5.0)
