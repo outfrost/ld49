@@ -86,7 +86,7 @@ func _process(delta: float) -> void:
 			new_item.visible = true
 			if !HintPopup.firstorderontray:
 				HintPopup.firstorderontray = true
-				HintPopup.display("Now that the order is on the tray, click the tray again to call the customer", 3.0)
+				HintPopup.display("Now that the order is on the tray, click the tray again to call the customer", 5.0)
 			if !put_item(new_item):
 				eprint("failed to put an item")
 				return

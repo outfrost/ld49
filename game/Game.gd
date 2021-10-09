@@ -131,8 +131,8 @@ func _process(delta: float) -> void:
 
 	if is_crazy and !HintPopup.firstmindwarning:
 		HintPopup.firstmindwarning = true
-		HintPopup.display("Watch out, you're starting to lose it", 3.0)
-		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 3.0)
+		HintPopup.display("Watch out, you're starting to lose it", 5.0)
+		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 5.0)
 
 	time_elapsed += delta
 
@@ -350,5 +350,5 @@ func on_customer_enraged(_customer) -> void:
 	$SadNoiseSfx.play()
 	if !HintPopup.firstenrage:
 		HintPopup.firstenrage = true
-		HintPopup.display("Oh No, you made a customer upset", 3.5)
-		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 3.5)
+		HintPopup.display("Oh No, you made a customer upset", 5)
+		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 5)
