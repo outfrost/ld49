@@ -44,6 +44,9 @@ func _physics_process(delta):
 			printerr("Invalid Barista state? %s" % str(current_state))
 			current_state = State.Idle
 
+func _process(delta:float) -> void:
+	DebugOverlay.display("Cups in hand %d" % $Items.get_child_count())
+
 func move_to(target: Vector3):
 	if !navmesh:
 		printerr("Tried to move but navmesh had not been found")

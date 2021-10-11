@@ -98,7 +98,7 @@ func _process(delta: float) -> void:
 		return
 	pass
 
-	DebugOverlay.display("Tray item count %.f" % items_container_object.get_child_count())
+	DebugOverlay.display("Tray item count %d" % items_container_object.get_child_count())
 
 func put_item(item: Spatial) -> bool:
 	if !items_container_object:
