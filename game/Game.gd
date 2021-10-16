@@ -324,6 +324,9 @@ func start_activity():
 	current_activity_timeout = time_elapsed + current_activity["activity"].duration
 	if current_activity["caller"] and !current_activity["callback_name"].empty():
 		current_activity["caller"].call(current_activity["callback_name"])
+	var position: Position3D = current_activity["position_marker"]
+	if player_visual and position:
+		player_visual.rotation.y = position.rotation.y
 	activity_started = true
 
 func on_customer_satisfied(_customer) -> void:

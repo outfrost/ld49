@@ -35,6 +35,8 @@ func _physics_process(delta):
 					current_speed = lerp(current_speed, max_speed, delta * ACCEL_RATE)
 					move_and_slide(move.normalized() * current_speed, Vector3.UP)
 					transform.origin.y = y_pos
+					var direction:Vector3 = move.normalized()
+					rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
 			else:
 				current_state = State.Idle
 				emit_signal("done_walking")
