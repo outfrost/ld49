@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/city.gltf-b544f740cae698e315f719444d39613b.scn"
+path="res://.import/poster-1.gltf-a008bf93dc3a0a8366c8a56d6173487e.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/city.gltf"
-dest_files=[ "res://.import/city.gltf-b544f740cae698e315f719444d39613b.scn" ]
+source_file="res://assets/imports/props/poster-1.gltf"
+dest_files=[ "res://.import/poster-1.gltf-a008bf93dc3a0a8366c8a56d6173487e.scn" ]
 
 [params]
 

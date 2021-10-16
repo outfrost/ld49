@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/landscape.gltf-1a70d39421bfed3ce945a2f4d441da3f.scn"
+path="res://.import/balerine.gltf-024b3a0d00b116e6a5a2f42b236aefa4.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/landscape.gltf"
-dest_files=[ "res://.import/landscape.gltf-1a70d39421bfed3ce945a2f4d441da3f.scn" ]
+source_file="res://assets/imports/props/balerine.gltf"
+dest_files=[ "res://.import/balerine.gltf-024b3a0d00b116e6a5a2f42b236aefa4.scn" ]
 
 [params]
 

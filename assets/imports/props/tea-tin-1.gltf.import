@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/coffeeposter.gltf-349ea708cb263fcda8eb8b2e466e89f8.scn"
+path="res://.import/tea-tin-1.gltf-ebaa04f362687b10d7eaef4d9c8ac826.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/coffeeposter.gltf"
-dest_files=[ "res://.import/coffeeposter.gltf-349ea708cb263fcda8eb8b2e466e89f8.scn" ]
+source_file="res://assets/imports/props/tea-tin-1.gltf"
+dest_files=[ "res://.import/tea-tin-1.gltf-ebaa04f362687b10d7eaef4d9c8ac826.scn" ]
 
 [params]
 
