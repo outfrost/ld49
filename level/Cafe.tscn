@@ -178,7 +178,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.0999999 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
 
@@ -222,7 +222,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.0999999 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
 
@@ -266,7 +266,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
 [node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.0999999 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine3"]
 
@@ -325,7 +325,7 @@ transform = Transform( -5.46392e-08, 0, -1.25, 0, 1.25, 0, 1.25, 0, -5.46392e-08
 transform = Transform( -5.46392e-08, 0, -1.25, 0, 1.25, 0, 1.25, 0, -5.46392e-08, 0, -0.123, -0.360025 )
 
 [node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine4/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.2 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine4"]
 
@@ -357,7 +357,7 @@ bus = "Effects"
 [node name="Togglables" type="Spatial" parent="LevelInteractables/Register"]
 
 [node name="SpatialLabel" parent="LevelInteractables/Register/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0.666667, 0 )
+transform = Transform( 1, 0, 4.26326e-14, 0, 1, 0, -4.26326e-14, 0, 1, 0, 0.75, 0 )
 
 [node name="Fridge" type="Area" parent="LevelInteractables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, -4.5 )
@@ -379,7 +379,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.9 )
 [node name="Togglables" type="Spatial" parent="LevelInteractables/Fridge"]
 
 [node name="SpatialLabel" parent="LevelInteractables/Fridge/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 
 [node name="ServingTray" type="Area" parent="LevelInteractables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29588, 1.02872, 1.3146 )
@@ -581,7 +581,7 @@ visible = false
 [node name="Togglables" type="Spatial" parent="LevelInteractables/ServingTray"]
 
 [node name="SpatialLabel" parent="LevelInteractables/ServingTray/Togglables" instance=ExtResource( 48 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
 
 [node name="LevelStatics" type="Spatial" parent="."]
 

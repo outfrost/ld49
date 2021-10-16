@@ -11,6 +11,7 @@ var state: int = States.IDLE
 var timeout: float = 0.0
 
 onready var outline = find_node("Outline", true, false)
+onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
@@ -22,15 +23,13 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	print("Click to %s" % current_activity_title)
-	# TODO: add a tooltip saying current title
-	# TODO: add outline effect to the object
-		# NOTE: make sure there is only one object outlined at a time
+	tooltip.show_text(current_activity_title)
 	if outline:
 		outline.show()
 	pass
 
 func unhover() -> void:
+	tooltip.hide()
 	if outline:
 		outline.hide()
 

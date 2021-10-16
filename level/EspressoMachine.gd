@@ -26,6 +26,8 @@ var brewing_sound: AudioStreamPlayer3D
 var ready_sound: AudioStreamPlayer3D
 var outline: Spatial
 
+onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
+
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
 	activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
@@ -52,15 +54,13 @@ func hover() -> void:
 	if !activity_intent:
 		return
 	var current_activity_title = activity_intent["activity"].displayed_name
-	print("Click to %s" % current_activity_title)
-	# TODO: add a tooltip saying current title
-	# TODO: add outline effect to the object
-		# NOTE: make sure there is only one object outlined at a time
+	tooltip.show_text(current_activity_title)
 	if outline:
 		outline.show()
 	pass
 
 func unhover() -> void:
+	tooltip.hide()
 	if outline:
 		outline.hide()
 

@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 [node name="SpatialLabelSprite" type="Spatial" parent="."]
 
 [node name="Viewport" type="Viewport" parent="SpatialLabelSprite"]
-size = Vector2( 256, 128 )
+size = Vector2( 192, 128 )
 transparent_bg = true
 hdr = false
 usage = 0
@@ -37,5 +37,6 @@ autowrap = true
 [node name="Sprite3D" type="Sprite3D" parent="SpatialLabelSprite"]
 cast_shadow = 0
 generate_lightmap = false
+pixel_size = 0.0075
 billboard = 1
 texture = SubResource( 1 )
