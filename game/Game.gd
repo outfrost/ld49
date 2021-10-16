@@ -15,12 +15,6 @@ export var skip_menus: bool = false
 
 var is_running = false
 
-# Barista's temperature - the lower the better
-var temperature: float
-export(float, 35.0, 45.0, 0.1) var temperature_initial: float = 37.0
-export(float, 35.0, 45.0, 0.5) var temperature_max: float = 40.0
-export(float, 35.0, 45.0, 0.1) var crazy_temperature: float = 39.0
-
 # Barista's "cool" - the higher the better
 var temper: float
 export(float, 0.0, 200.0, 2.0) var temper_initial: float = 100.0
@@ -77,7 +71,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		back_to_menu()
 
-	var is_crazy: bool = temperature >= crazy_temperature or temper <= crazy_temper
+	var is_crazy: bool = temper <= crazy_temper
 
 	var target_tension_vol_linear = 0.0
 	var target_crazy_vol_linear = 0.0
@@ -143,9 +137,7 @@ func _process(delta: float) -> void:
 			while effect.has_next_tick(time_elapsed):
 				var tick_strings = [effect.displayed_name, effect.displayed_description]
 				# print("Passive effect tick \"%s\": %s" % tick_strings)
-				temperature += effect.update_temperature_delta
 				temper += effect.update_temper_delta
-#				tick_money_delta += effect.update_temperature_delta
 
 	try_pop_activity()
 	if current_activity and activity_started:
@@ -155,7 +147,6 @@ func _process(delta: float) -> void:
 #		DebugOverlay.display("current activity %s" % activity.displayed_name)
 #		DebugOverlay.display("activity time left %s" % time_left)
 		if is_activity_over:
-			temperature += activity.outcome_temperature_delta
 			temper += activity.outcome_temper_delta
 			current_activity_timeout = 0.0
 			current_activity = null
@@ -171,7 +162,6 @@ func _process(delta: float) -> void:
 
 #	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
 	DebugOverlay.display("Your temper %.1f" % temper)
-	DebugOverlay.display("Temperature %.2f" % temperature)
 
 #	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
 	if OrderRepository.order_queue.size():
@@ -183,9 +173,8 @@ func _process(delta: float) -> void:
 			DebugOverlay.display(" - %s" % order_items_text)
 
 	var is_out_of_temper = temper < temper_min
-	var is_out_of_cool = temperature > temperature_max
 
-	if is_out_of_temper or is_out_of_cool:
+	if is_out_of_temper:
 		# Game over
 		# TODO: implement gameover lose
 		print("LOST")
@@ -268,7 +257,6 @@ func teardown() -> void:
 
 func reset() -> void:
 	temper = temper_initial
-	temperature = temperature_initial
 	time_elapsed = 0.0
 	customers_served = 0
 

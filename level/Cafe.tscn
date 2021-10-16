@@ -70,7 +70,6 @@ extents = Vector3( 0.191637, 0.51773, 0.37785 )
 script = ExtResource( 15 )
 duration = 2.0
 outcome_temper_delta = 2.0
-outcome_temperature_delta = -0.5
 displayed_name = "Take client order"
 
 [sub_resource type="BoxShape" id=5]
@@ -80,7 +79,6 @@ extents = Vector3( 0.241728, 0.177857, 0.180513 )
 script = ExtResource( 15 )
 duration = 5.0
 outcome_temper_delta = 5.0
-outcome_temperature_delta = -2.0
 displayed_name = "Have a cold beverage"
 
 [sub_resource type="BoxShape" id=7]
@@ -90,7 +88,6 @@ extents = Vector3( 0.754747, 0.422994, 0.379959 )
 script = ExtResource( 15 )
 duration = 0.0
 outcome_temper_delta = 0.5
-outcome_temperature_delta = -0.1
 displayed_name = "Put item on the tray"
 
 [sub_resource type="CubeMesh" id=9]

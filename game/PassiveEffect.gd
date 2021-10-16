@@ -5,7 +5,6 @@ extends Resource
 export var update_interval: float = 1.0 # seconds
 export var update_temper_delta: float = 0.0
 #export var update_money_delta: int = 0
-export var update_temperature_delta: float = 0.0
 export var displayed_name: String = ""
 export var displayed_description: String = ""
 

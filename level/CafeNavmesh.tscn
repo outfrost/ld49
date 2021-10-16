@@ -45,9 +45,6 @@ size = Vector3( 6, 3, 0.25 )
 
 [node name="Cafe" instance=ExtResource( 1 )]
 
-[node name="Floor" parent="LevelStatics" index="2"]
-material/0 = null
-
 [node name="Cup2" parent="." index="10"]
 mesh = null
 
