@@ -26,6 +26,7 @@ signal client_satisfied(node) #Called from customer directly
 signal client_enraged(node) #Called from customer directly
 signal client_got_order_from_counter
 signal client_review(score)
+signal clicked_customer_to_deliver_bewerage(customer)
 #Stores the orders the player accepted
 #node_ref:order_array
 var order_queue:Dictionary = {
@@ -38,7 +39,24 @@ var customer_waiting_on_ask_spot:Spatial = null
 export var debugging = false
 
 func _ready():
+	randomize()
 	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
+	connect("clicked_customer_to_deliver_bewerage", self, "barista_call_client_to_get_food")
+
+#Called from the Customer's CustomerClick.gd
+func customer_clicked(customer:Spatial):
+	if not is_instance_valid(customer) or not customer.has_method("call_customer_to_deliver_zone"):
+		print("Somehow it's trying to click an invalid customer! ", get_stack())
+		return
+	match customer.current_state:
+		customer.states.waiting_for_order:
+			if customer.barista_called_for_delivery:
+				return
+			emit_signal("clicked_customer_to_deliver_bewerage", customer)
+			print("Called customer to deliver *bewerage* ", customer)
+
+		_:
+			return
 
 func client_is_satisfied(node:Spatial)->void:
 	emit_signal("client_satisfied", node)
@@ -83,12 +101,11 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 
 #Calls any client with a matching order
 func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if client_node != null:
+	if is_instance_valid(client_node):
 		if client_node.has_method("receive_order"):
 			client_node.call_customer_to_deliver_zone()
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
-	randomize()
 	if number_of_items > possible_orders.size():
 		can_repeat = true
 

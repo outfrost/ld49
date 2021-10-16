@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
+[ext_resource path="res://game/customer/CustomerClick.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.52163
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.543002, 0.57038, 1.05343 )
 
 [node name="customer" type="KinematicBody" groups=[
 "customer",
@@ -23,10 +27,6 @@ material/0 = null
 [node name="customer" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.702458, 0 )
 
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.464371, -0.436241 )
-cast_to = Vector3( 0, 0, -1 )
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.265404, 0 )
 shape = SubResource( 2 )
@@ -36,4 +36,16 @@ disabled = true
 wait_time = 200.0
 one_shot = true
 
+[node name="Selection and stuff" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="AreaUserCustomerInteraction" type="Area" parent="Selection and stuff"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Selection and stuff/AreaUserCustomerInteraction"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.321759, 0 )
+shape = SubResource( 3 )
+
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
+[connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]
+[connection signal="mouse_entered" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_entered"]
+[connection signal="mouse_exited" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_exited"]
