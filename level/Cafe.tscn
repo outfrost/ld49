@@ -112,12 +112,12 @@ size = Vector3( 1.25, 0.6, 0.5 )
 [sub_resource type="CubeMesh" id=15]
 size = Vector3( 16, 1, 20 )
 
-[sub_resource type="SpatialMaterial" id=17]
+[sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.85098, 0.709804, 0.678431, 1 )
 metallic_specular = 0.25
 roughness = 0.75
 
-[sub_resource type="CylinderMesh" id=16]
+[sub_resource type="CylinderMesh" id=17]
 
 [node name="Cafe" type="Spatial"]
 
@@ -645,7 +645,7 @@ material/0 = null
 [node name="Floor" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1 )
 mesh = SubResource( 15 )
-material/0 = SubResource( 17 )
+material/0 = SubResource( 16 )
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
 
@@ -775,5 +775,5 @@ omni_attenuation = 2.0
 [node name="Cup2" type="MeshInstance" parent="."]
 transform = Transform( 0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -1.109, 1.05, 1.434 )
 visible = false
-mesh = SubResource( 16 )
+mesh = SubResource( 17 )
 material/0 = null
