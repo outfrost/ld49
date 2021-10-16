@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/balerine.gltf-244bfc83cc04f28956660c31b3c28141.scn"
+path="res://.import/calendar.gltf-f15beb02af1c0783d4841c0d695dee22.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/balerine.gltf"
-dest_files=[ "res://.import/balerine.gltf-244bfc83cc04f28956660c31b3c28141.scn" ]
+source_file="res://assets/imports/props/calendar.gltf"
+dest_files=[ "res://.import/calendar.gltf-f15beb02af1c0783d4841c0d695dee22.scn" ]
 
 [params]
 

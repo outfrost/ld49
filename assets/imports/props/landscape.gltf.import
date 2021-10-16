@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/winter.gltf-a381c3e0aa44b409f687b3134d26973a.scn"
+path="res://.import/landscape.gltf-5b6b5ca1135f4cda625aae9fd0efa8bd.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/winter.gltf"
-dest_files=[ "res://.import/winter.gltf-a381c3e0aa44b409f687b3134d26973a.scn" ]
+source_file="res://assets/imports/props/landscape.gltf"
+dest_files=[ "res://.import/landscape.gltf-5b6b5ca1135f4cda625aae9fd0efa8bd.scn" ]
 
 [params]
 
