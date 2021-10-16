@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/balerine.gltf-244bfc83cc04f28956660c31b3c28141.scn"
+path="res://.import/tea-tin-1.gltf-ebaa04f362687b10d7eaef4d9c8ac826.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/balerine.gltf"
-dest_files=[ "res://.import/balerine.gltf-244bfc83cc04f28956660c31b3c28141.scn" ]
+source_file="res://assets/imports/props/tea-tin-1.gltf"
+dest_files=[ "res://.import/tea-tin-1.gltf-ebaa04f362687b10d7eaef4d9c8ac826.scn" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/calendar2.gltf-d9819d763812ae010232d030fef3a0c9.scn"
+path="res://.import/coffee-box-2.gltf-079bd5c289392d5d243638fd52f2afd0.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/calendar2.gltf"
-dest_files=[ "res://.import/calendar2.gltf-d9819d763812ae010232d030fef3a0c9.scn" ]
+source_file="res://assets/imports/props/coffee-box-2.gltf"
+dest_files=[ "res://.import/coffee-box-2.gltf-079bd5c289392d5d243638fd52f2afd0.scn" ]
 
 [params]
 

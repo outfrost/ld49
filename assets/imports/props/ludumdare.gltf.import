@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/coffeeposter.gltf-349ea708cb263fcda8eb8b2e466e89f8.scn"
+path="res://.import/ludumdare.gltf-7e64a66a4513e385f907a3a16b2ee356.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/coffeeposter.gltf"
-dest_files=[ "res://.import/coffeeposter.gltf-349ea708cb263fcda8eb8b2e466e89f8.scn" ]
+source_file="res://assets/imports/props/ludumdare.gltf"
+dest_files=[ "res://.import/ludumdare.gltf-7e64a66a4513e385f907a3a16b2ee356.scn" ]
 
 [params]
 

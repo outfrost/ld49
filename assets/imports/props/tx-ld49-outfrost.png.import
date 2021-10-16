@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/tx-ld49-outfrost.png-6bf5777a229d9ac9748affd7be771e3e.s3tc.stex"
-path.etc2="res://.import/tx-ld49-outfrost.png-6bf5777a229d9ac9748affd7be771e3e.etc2.stex"
+path.s3tc="res://.import/tx-ld49-outfrost.png-ca02f2ae8c364ec4d33806a85515c3ab.s3tc.stex"
+path.etc2="res://.import/tx-ld49-outfrost.png-ca02f2ae8c364ec4d33806a85515c3ab.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/imports/posters/tx-ld49-outfrost.png"
-dest_files=[ "res://.import/tx-ld49-outfrost.png-6bf5777a229d9ac9748affd7be771e3e.s3tc.stex", "res://.import/tx-ld49-outfrost.png-6bf5777a229d9ac9748affd7be771e3e.etc2.stex" ]
+source_file="res://assets/imports/props/tx-ld49-outfrost.png"
+dest_files=[ "res://.import/tx-ld49-outfrost.png-ca02f2ae8c364ec4d33806a85515c3ab.s3tc.stex", "res://.import/tx-ld49-outfrost.png-ca02f2ae8c364ec4d33806a85515c3ab.etc2.stex" ]
 
 [params]
 

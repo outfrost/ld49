@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/winter.gltf-a381c3e0aa44b409f687b3134d26973a.scn"
+path="res://.import/ragNeck.gltf-c8d878c2c8c097f977ff77bbc7ee1da1.scn"
 
 [deps]
 
-source_file="res://assets/imports/posters/winter.gltf"
-dest_files=[ "res://.import/winter.gltf-a381c3e0aa44b409f687b3134d26973a.scn" ]
+source_file="res://art_assets/counters/ragNeck.gltf"
+dest_files=[ "res://.import/ragNeck.gltf-c8d878c2c8c097f977ff77bbc7ee1da1.scn" ]
 
 [params]
 
