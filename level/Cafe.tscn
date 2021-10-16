@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -50,6 +50,9 @@
 [ext_resource path="res://game/util/SpatialLabel.tscn" type="PackedScene" id=48]
 [ext_resource path="res://assets/imports/Pavement_square_exportprep.gltf" type="PackedScene" id=49]
 [ext_resource path="res://assets/imports/Pavement_L45_exportprep.gltf" type="PackedScene" id=50]
+[ext_resource path="res://assets/props/coffee-box-2.tscn" type="PackedScene" id=51]
+[ext_resource path="res://assets/props/coffee-box-1.tscn" type="PackedScene" id=52]
+[ext_resource path="res://assets/props/coffee-box-3.tscn" type="PackedScene" id=53]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.25, 0.25, 0.25 )
@@ -681,6 +684,90 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0
 
 [node name="counterShelves2" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -0.8 )
+
+[node name="coffee-box-1" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.82, 0.54, -0.51 )
+
+[node name="coffee-box-2" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.54, -0.38 )
+
+[node name="coffee-box-3" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.54, -0.26 )
+
+[node name="coffee-box-4" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.26 )
+
+[node name="coffee-box-5" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.38 )
+
+[node name="coffee-box-6" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.5 )
+
+[node name="coffee-box-25" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.28 )
+
+[node name="coffee-box-26" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.4 )
+
+[node name="coffee-box-27" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.52 )
+
+[node name="coffee-box-7" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.28, 0.54, -0.49 )
+
+[node name="coffee-box-8" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.54, -0.36 )
+
+[node name="coffee-box-9" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.54, -0.24 )
+
+[node name="coffee-box-10" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.5 )
+
+[node name="coffee-box-11" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.38 )
+
+[node name="coffee-box-12" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.26 )
+
+[node name="coffee-box-13" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.5 )
+
+[node name="coffee-box-14" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.37 )
+
+[node name="coffee-box-15" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.24 )
+
+[node name="coffee-box-16" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0.0699998, 0.54, -0.53 )
+
+[node name="coffee-box-17" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699999, 0.54, -0.37 )
+
+[node name="coffee-box-18" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699999, 0.54, -0.24 )
+
+[node name="coffee-box-19" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.4 )
+
+[node name="coffee-box-20" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.27 )
+
+[node name="coffee-box-21" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.14 )
+
+[node name="coffee-box-22" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.18 )
+
+[node name="coffee-box-23" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.31 )
+
+[node name="coffee-box-24" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 53 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.44 )
+
+[node name="coffee-box-28" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 51 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0.1, -0.5 )
 
 [node name="counterShelves3" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 1.3 )
