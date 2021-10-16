@@ -298,7 +298,7 @@ material/0 = null
 
 [node name="BrewingSound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine4/Togglables"]
 stream = ExtResource( 40 )
-unit_db = 12.0
+unit_db = 15.0
 bus = "Effects"
 
 [node name="ReadySound" type="AudioStreamPlayer3D" parent="LevelInteractables/CoffeeMachine4/Togglables"]
