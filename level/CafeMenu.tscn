@@ -1,15 +1,21 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/FloorTile_Left45.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/imports/Pavement_square_exportprep.gltf" type="PackedScene" id=3]
 [ext_resource path="res://assets/under_counter_fridge.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/imports/paper_cup_empty_exportprep.gltf" type="PackedScene" id=5]
 [ext_resource path="res://assets/register.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/table_high_rect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/FloorTile_square.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/coffee_pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/coffee_machine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=11]
 [ext_resource path="res://assets/drink_can.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/FloorConcrete_square.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/air_conditioner.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/FloorConcrete_Left45.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/imports/Pavement_L45_exportprep.gltf" type="PackedScene" id=16]
 [ext_resource path="res://assets/ceil-lamp.tscn" type="PackedScene" id=17]
 [ext_resource path="res://art_assets/counters/counterCornerSharp.gltf" type="PackedScene" id=18]
 [ext_resource path="res://art_assets/counters/counterShelves.gltf" type="PackedScene" id=19]
@@ -21,7 +27,9 @@
 [ext_resource path="res://assets/imports/props/balerine.gltf" type="PackedScene" id=25]
 [ext_resource path="res://assets/imports/props/calendar.gltf" type="PackedScene" id=26]
 [ext_resource path="res://assets/imports/props/poster-1.gltf" type="PackedScene" id=27]
+[ext_resource path="res://assets/Clock.tscn" type="PackedScene" id=28]
 [ext_resource path="res://art_assets/counters/woodMat.tres" type="Material" id=29]
+[ext_resource path="res://art_assets/counters/counterSink.gltf" type="PackedScene" id=30]
 [ext_resource path="res://game/cup/Cup.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/wall_doorway_closed.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/wall_window.tscn" type="PackedScene" id=33]
@@ -34,6 +42,12 @@
 [ext_resource path="res://sound/sfx_dripping_b_v1_loop.ogg" type="AudioStream" id=40]
 [ext_resource path="res://sound/sfx_coffemachine_v3.ogg" type="AudioStream" id=41]
 [ext_resource path="res://sound/sfx_coffemachine_ready_v1.ogg" type="AudioStream" id=42]
+[ext_resource path="res://assets/props/tea-tin-2.tscn" type="PackedScene" id=43]
+[ext_resource path="res://assets/props/tea-tin-1.tscn" type="PackedScene" id=44]
+[ext_resource path="res://assets/props/coffee-box-1.tscn" type="PackedScene" id=45]
+[ext_resource path="res://assets/props/coffee-box-3.tscn" type="PackedScene" id=46]
+[ext_resource path="res://assets/props/tea-tin-3.tscn" type="PackedScene" id=47]
+[ext_resource path="res://assets/props/coffee-box-2.tscn" type="PackedScene" id=48]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.25, 0.25, 0.25 )
@@ -471,6 +485,19 @@ script = null
 
 [node name="LevelStatics" type="Spatial" parent="."]
 
+[node name="air_conditioner_exportprep" parent="LevelStatics" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
+
+[node name="Skidmark" type="OmniLight" parent="LevelStatics/air_conditioner_exportprep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
+light_color = Color( 1, 0.933333, 0.8, 1 )
+light_energy = 2.0
+light_negative = true
+light_specular = 0.0
+shadow_enabled = true
+omni_range = 0.6
+omni_attenuation = 2.0
+
 [node name="Walls" type="Spatial" parent="LevelStatics"]
 
 [node name="wall_plain_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
@@ -536,11 +563,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0, -5.66 )
 [node name="wall_doorway_angle_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 34 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.095, 0, 4.095 )
 
-[node name="Floor" type="MeshInstance" parent="LevelStatics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1 )
-mesh = SubResource( 8 )
-material/0 = null
-
 [node name="Floor2" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.49862, 1 )
 mesh = SubResource( 8 )
@@ -548,23 +570,17 @@ material/0 = null
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
 
+[node name="counterSink" parent="LevelStatics/Counters" instance=ExtResource( 30 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.8, 0, -4.9 )
+
 [node name="counterCornerSharp" parent="LevelStatics/Counters" instance=ExtResource( 18 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.3, 0, -4.9 )
 
 [node name="counterCornerSharp2" parent="LevelStatics/Counters" instance=ExtResource( 18 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4.9, 0, 0.7 )
 
-[node name="counterShelves" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -2.8 )
-
-[node name="counterShelves2" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -0.8 )
-
 [node name="counterShelves3" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 1.3 )
-
-[node name="counterShelves4" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.8, 0, -4.9 )
 
 [node name="counterHollow" parent="LevelStatics/Counters" instance=ExtResource( 20 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.8, 0, -4.9 )
@@ -574,6 +590,363 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.2, 0
 
 [node name="counterCornerRound" parent="LevelStatics/Counters" instance=ExtResource( 21 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 1.3 )
+
+[node name="counterShelves" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -2.8 )
+
+[node name="tea-tin-3" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.54, -0.43 )
+
+[node name="tea-tin-17" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.54, -0.210001 )
+
+[node name="tea-tin-18" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.54, 0.00999928 )
+
+[node name="tea-tin-2" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 43 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.76, 0.54, -0.4 )
+
+[node name="tea-tin-12" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 43 )]
+transform = Transform( 1.39091e-08, 0, -1, 0, 1, 0, 1, 0, 1.39091e-08, 0.76, 0.54, -0.0800004 )
+
+[node name="tea-tin-1" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, -0.8, 0.54, -0.47 )
+
+[node name="tea-tin-9" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.54, -0.4 )
+
+[node name="tea-tin-10" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.54, -0.2 )
+
+[node name="tea-tin-11" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.54, -4.76837e-07 )
+
+[node name="tea-tin-14" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3, 0.54, -0.47 )
+
+[node name="tea-tin-15" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.54, -0.27 )
+
+[node name="tea-tin-16" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.54, -0.0700006 )
+
+[node name="tea-tin-7" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 0.54, -0.260001 )
+
+[node name="tea-tin-8" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 0.54, -0.0600009 )
+
+[node name="tea-tin-13" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 43 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -0.26, 0.54, -0.38 )
+
+[node name="tea-tin-19" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 43 )]
+transform = Transform( -0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -0.26, 0.54, -0.0599999 )
+
+[node name="tea-tin-4" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56, 0.54, -0.39 )
+
+[node name="tea-tin-5" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56, 0.54, -0.17 )
+
+[node name="tea-tin-6" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56, 0.54, 0.0499997 )
+
+[node name="tea-tin-20" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.1, -0.48 )
+
+[node name="tea-tin-21" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.1, -0.28 )
+
+[node name="tea-tin-22" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.1, -0.0800004 )
+
+[node name="tea-tin-23" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, -0.48 )
+
+[node name="tea-tin-24" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, -0.28 )
+
+[node name="tea-tin-25" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, -0.0800004 )
+
+[node name="tea-tin-26" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, -0.48 )
+
+[node name="tea-tin-27" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, -0.28 )
+
+[node name="tea-tin-28" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 44 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, -0.0800004 )
+
+[node name="tea-tin-29" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.19, 0.1, -0.41 )
+
+[node name="tea-tin-30" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 47 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.19, 0.1, -0.0899997 )
+
+[node name="coffee-box-1" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.47 )
+
+[node name="coffee-box-2" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.35 )
+
+[node name="coffee-box-3" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.23 )
+
+[node name="coffee-box-4" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7, 0.1, -0.25 )
+
+[node name="coffee-box-5" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7, 0.1, -0.37 )
+
+[node name="coffee-box-6" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 45 )]
+transform = Transform( -0.996195, 0, 0.0871556, 0, 1, 0, -0.0871556, 0, -0.996195, -0.7, 0.1, -0.5 )
+
+[node name="coffee-box-7" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.18, 0.1, -0.52 )
+
+[node name="coffee-box-8" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.18, 0.1, -0.42 )
+
+[node name="coffee-box-9" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.18, 0.1, -0.32 )
+
+[node name="coffee-box-10" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.35, 0.1, -0.52 )
+
+[node name="coffee-box-11" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.35, 0.1, -0.42 )
+
+[node name="coffee-box-12" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.35, 0.1, -0.32 )
+
+[node name="coffee-box-13" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( -0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, -0.939693, -0.52, 0.1, -0.32 )
+
+[node name="coffee-box-14" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( -0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, -0.939693, -0.52, 0.1, -0.42 )
+
+[node name="coffee-box-15" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 48 )]
+transform = Transform( -0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, -0.939693, -0.52, 0.1, -0.52 )
+
+[node name="coffee-box-16" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 46 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.85, 0.1, -0.460001 )
+
+[node name="coffee-box-17" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 46 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.85, 0.1, -0.260001 )
+
+[node name="coffee-box-18" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 46 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.85, 0.1, -0.0600009 )
+
+[node name="counterShelves2" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -0.8 )
+
+[node name="coffee-box-1" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.82, 0.54, -0.51 )
+
+[node name="coffee-box-2" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.54, -0.38 )
+
+[node name="coffee-box-3" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.54, -0.26 )
+
+[node name="coffee-box-4" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.26 )
+
+[node name="coffee-box-5" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.38 )
+
+[node name="coffee-box-6" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.1, 0.54, -0.5 )
+
+[node name="coffee-box-25" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.28 )
+
+[node name="coffee-box-26" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.4 )
+
+[node name="coffee-box-27" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.24, 0.54, -0.52 )
+
+[node name="coffee-box-7" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.28, 0.54, -0.49 )
+
+[node name="coffee-box-8" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.54, -0.36 )
+
+[node name="coffee-box-9" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.54, -0.24 )
+
+[node name="coffee-box-10" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.5 )
+
+[node name="coffee-box-11" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.38 )
+
+[node name="coffee-box-12" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.54, -0.26 )
+
+[node name="coffee-box-13" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.5 )
+
+[node name="coffee-box-14" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.37 )
+
+[node name="coffee-box-15" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63, 0.54, -0.24 )
+
+[node name="coffee-box-16" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0.0699998, 0.54, -0.53 )
+
+[node name="coffee-box-17" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699999, 0.54, -0.37 )
+
+[node name="coffee-box-18" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0699999, 0.54, -0.24 )
+
+[node name="coffee-box-19" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.4 )
+
+[node name="coffee-box-20" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.27 )
+
+[node name="coffee-box-21" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81, 0.54, -0.14 )
+
+[node name="coffee-box-22" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.18 )
+
+[node name="coffee-box-23" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.31 )
+
+[node name="coffee-box-24" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.41, 0.54, -0.44 )
+
+[node name="coffee-box-28" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.57628e-07, 0.1, -0.52 )
+
+[node name="coffee-box-29" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.76837e-07, 0.1, -0.42 )
+
+[node name="coffee-box-30" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.96046e-07, 0.1, -0.32 )
+
+[node name="coffee-box-31" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.819999, 0.1, -0.52 )
+
+[node name="coffee-box-32" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.819999, 0.1, -0.42 )
+
+[node name="coffee-box-33" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.819999, 0.1, -0.32 )
+
+[node name="coffee-box-34" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.65, 0.1, -0.47 )
+
+[node name="coffee-box-35" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.65, 0.1, -0.35 )
+
+[node name="coffee-box-36" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.65, 0.1, -0.23 )
+
+[node name="coffee-box-37" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.82, 0.1, -0.23 )
+
+[node name="coffee-box-38" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.82, 0.1, -0.35 )
+
+[node name="coffee-box-39" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 46 )]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.82, 0.1, -0.49 )
+
+[node name="coffee-box-40" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0.1, -0.5 )
+
+[node name="coffee-box-41" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0.1, -0.33 )
+
+[node name="coffee-box-42" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0.1, -0.15 )
+
+[node name="coffee-box-43" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.38, 0.1, -0.5 )
+
+[node name="coffee-box-44" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.38, 0.1, -0.33 )
+
+[node name="coffee-box-45" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.38, 0.1, -0.15 )
+
+[node name="coffee-box-46" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.26, 0.1, -0.5 )
+
+[node name="coffee-box-47" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.26, 0.1, -0.33 )
+
+[node name="coffee-box-48" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.26, 0.1, -0.15 )
+
+[node name="coffee-box-49" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.14, 0.1, -0.5 )
+
+[node name="coffee-box-50" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.14, 0.1, -0.33 )
+
+[node name="coffee-box-51" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.139999, 0.1, -0.15 )
+
+[node name="coffee-box-52" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.18, 0.1, -0.52 )
+
+[node name="coffee-box-53" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 1.39091e-08, 0, 1, 0, -1.39091e-08, 0, 1, -0.180001, 0.1, -0.38 )
+
+[node name="coffee-box-54" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 45 )]
+transform = Transform( 1, 0, 1.39091e-08, 0, 1, 0, -1.39091e-08, 0, 1, -0.180001, 0.1, -0.26 )
+
+[node name="coffee-box-55" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.34, 0.1, -0.46 )
+
+[node name="coffee-box-56" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.34, 0.1, -0.29 )
+
+[node name="coffee-box-57" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.34, 0.1, -0.12 )
+
+[node name="coffee-box-58" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.43, 0.1, -0.46 )
+
+[node name="coffee-box-59" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.43, 0.1, -0.29 )
+
+[node name="coffee-box-60" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.43, 0.1, -0.12 )
+
+[node name="coffee-box-61" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.52, 0.1, -0.46 )
+
+[node name="coffee-box-62" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.52, 0.1, -0.29 )
+
+[node name="coffee-box-63" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.52, 0.1, -0.12 )
+
+[node name="coffee-box-64" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.61, 0.1, -0.46 )
+
+[node name="coffee-box-65" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.61, 0.1, -0.29 )
+
+[node name="coffee-box-66" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.61, 0.1, -0.12 )
+
+[node name="coffee-box-67" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.7, 0.1, -0.46 )
+
+[node name="coffee-box-68" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.7, 0.1, -0.29 )
+
+[node name="coffee-box-69" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 48 )]
+transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.7, 0.1, -0.12 )
 
 [node name="Decorations" type="Spatial" parent="LevelStatics"]
 
@@ -628,6 +1001,557 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1
 [node name="city" parent="LevelStatics/Decorations" instance=ExtResource( 38 )]
 transform = Transform( 2.62268e-07, 0, -2, 0, 2, 0, 2, 0, 2.62268e-07, -5.51, 2, 4.2 )
 
+[node name="Flooring" type="Spatial" parent="LevelStatics"]
+
+[node name="Cafe" type="Spatial" parent="LevelStatics/Flooring"]
+
+[node name="Floor_45_exportprep" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.2, 0, 3.2 )
+
+[node name="Floor_45_exportprep2" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.2, 0, 5.2 )
+
+[node name="Floor_square_exportprep" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 3.2 )
+
+[node name="Floor_square_exportprep2" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 3.2 )
+
+[node name="Floor_square_exportprep3" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 3.2 )
+
+[node name="Floor_square_exportprep4" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 3.2 )
+
+[node name="Floor_square_exportprep5" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 3.2 )
+
+[node name="Floor_square_exportprep10" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 1.2 )
+
+[node name="Floor_square_exportprep15" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 1.2 )
+
+[node name="Floor_square_exportprep11" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 1.2 )
+
+[node name="Floor_square_exportprep12" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 1.2 )
+
+[node name="Floor_square_exportprep13" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 1.2 )
+
+[node name="Floor_square_exportprep14" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 1.2 )
+
+[node name="Floor_square_exportprep16" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, -0.8 )
+
+[node name="Floor_square_exportprep17" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -0.8 )
+
+[node name="Floor_square_exportprep18" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -0.8 )
+
+[node name="Floor_square_exportprep19" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -0.8 )
+
+[node name="Floor_square_exportprep20" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -0.8 )
+
+[node name="Floor_square_exportprep21" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -0.8 )
+
+[node name="Floor_square_exportprep22" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, -2.8 )
+
+[node name="Floor_square_exportprep23" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -2.8 )
+
+[node name="Floor_square_exportprep24" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -2.8 )
+
+[node name="Floor_square_exportprep25" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -2.8 )
+
+[node name="Floor_square_exportprep26" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -2.8 )
+
+[node name="Floor_square_exportprep27" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -2.8 )
+
+[node name="Floor_square_exportprep28" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, -4.8 )
+
+[node name="Floor_square_exportprep29" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -4.8 )
+
+[node name="Floor_square_exportprep30" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -4.8 )
+
+[node name="Floor_square_exportprep31" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -4.8 )
+
+[node name="Floor_square_exportprep32" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -4.8 )
+
+[node name="Floor_square_exportprep33" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -4.8 )
+
+[node name="Floor_square_exportprep6" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 5.2 )
+
+[node name="Floor_square_exportprep7" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 5.2 )
+
+[node name="Floor_square_exportprep8" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 5.2 )
+
+[node name="Floor_square_exportprep9" parent="LevelStatics/Flooring/Cafe" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 5.2 )
+
+[node name="Sidewalk" type="Spatial" parent="LevelStatics/Flooring"]
+
+[node name="Concrete_square_exportprep" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 5.2 )
+
+[node name="Concrete_square_exportprep2" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 5.2 )
+
+[node name="Concrete_square_exportprep3" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 3.2 )
+
+[node name="Concrete_square_exportprep4" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 1.2 )
+
+[node name="Concrete_square_exportprep5" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -0.8 )
+
+[node name="Concrete_square_exportprep7" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 7.2 )
+
+[node name="Concrete_square_exportprep8" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 7.2 )
+
+[node name="Concrete_square_exportprep9" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 7.2 )
+
+[node name="Concrete_square_exportprep10" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep11" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep12" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep20" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep21" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep22" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep23" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep24" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep25" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 7.2 )
+
+[node name="Concrete_square_exportprep26" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep27" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep38" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep40" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep42" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 13.2 )
+
+[node name="Concrete_square_exportprep43" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep48" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 13.2 )
+
+[node name="Concrete_square_exportprep44" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 11.2 )
+
+[node name="Concrete_square_exportprep45" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 9.2 )
+
+[node name="Concrete_square_exportprep46" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 7.2 )
+
+[node name="Concrete_square_exportprep47" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 5.2 )
+
+[node name="Concrete_square_exportprep39" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep28" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 15.2 )
+
+[node name="Concrete_square_exportprep29" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep30" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep31" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep32" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep33" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep34" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep35" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep36" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep37" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 15.2 )
+
+[node name="Concrete_square_exportprep13" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -2.8 )
+
+[node name="Concrete_square_exportprep14" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -4.8 )
+
+[node name="Concrete_square_exportprep15" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -6.8 )
+
+[node name="Concrete_square_exportprep16" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -8.8 )
+
+[node name="Concrete_square_exportprep17" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -10.8 )
+
+[node name="Concrete_square_exportprep18" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -12.8 )
+
+[node name="Concrete_square_exportprep19" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, -14.8 )
+
+[node name="Concrete_square_exportprep6" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 3.2 )
+
+[node name="Concrete_square_exportprep41" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 1.2 )
+
+[node name="Concrete_square_exportprep49" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -0.8 )
+
+[node name="Concrete_square_exportprep50" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -2.8 )
+
+[node name="Concrete_square_exportprep51" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -4.8 )
+
+[node name="Concrete_square_exportprep52" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -6.8 )
+
+[node name="Concrete_square_exportprep53" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -8.8 )
+
+[node name="Concrete_square_exportprep54" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -10.8 )
+
+[node name="Concrete_square_exportprep55" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -12.8 )
+
+[node name="Concrete_square_exportprep56" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -14.8 )
+
+[node name="Concrete_L45_exportprep" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 5.2 )
+
+[node name="Concrete_L45_exportprep3" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.2, 0, 7.2 )
+
+[node name="Concrete_L45_exportprep6" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15.2, 0, 15.2 )
+
+[node name="Concrete_L45_exportprep2" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 3.2 )
+
+[node name="Concrete_L45_exportprep4" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 13.2 )
+
+[node name="Concrete_L45_exportprep5" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 11.2 )
+
+[node name="Road" type="Spatial" parent="LevelStatics/Flooring"]
+
+[node name="Pavement_square_exportprep" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep2" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep3" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep4" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep5" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep6" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep7" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep8" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep21" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep22" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep23" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep24" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep25" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep26" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep27" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep28" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep29" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 13.2 )
+
+[node name="Pavement_square_exportprep37" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep38" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep39" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 13.2 )
+
+[node name="Pavement_square_exportprep40" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep41" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep42" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 13.2 )
+
+[node name="Pavement_square_exportprep43" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep44" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 11.2 )
+
+[node name="Pavement_square_exportprep46" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 9.2 )
+
+[node name="Pavement_square_exportprep49" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 3.2 )
+
+[node name="Pavement_square_exportprep50" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 5.2 )
+
+[node name="Pavement_square_exportprep51" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 7.2 )
+
+[node name="Pavement_square_exportprep52" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 3.2 )
+
+[node name="Pavement_square_exportprep53" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 5.2 )
+
+[node name="Pavement_square_exportprep54" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 7.2 )
+
+[node name="Pavement_square_exportprep55" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 3.2 )
+
+[node name="Pavement_square_exportprep56" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 5.2 )
+
+[node name="Pavement_square_exportprep57" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 7.2 )
+
+[node name="Pavement_square_exportprep58" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -2.8 )
+
+[node name="Pavement_square_exportprep59" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -0.8 )
+
+[node name="Pavement_square_exportprep60" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, 1.2 )
+
+[node name="Pavement_square_exportprep61" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -2.8 )
+
+[node name="Pavement_square_exportprep62" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -0.8 )
+
+[node name="Pavement_square_exportprep63" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, 1.2 )
+
+[node name="Pavement_square_exportprep64" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -2.8 )
+
+[node name="Pavement_square_exportprep65" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -0.8 )
+
+[node name="Pavement_square_exportprep66" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 1.2 )
+
+[node name="Pavement_square_exportprep67" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -8.8 )
+
+[node name="Pavement_square_exportprep68" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -6.8 )
+
+[node name="Pavement_square_exportprep69" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -4.8 )
+
+[node name="Pavement_square_exportprep70" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -8.8 )
+
+[node name="Pavement_square_exportprep71" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -6.8 )
+
+[node name="Pavement_square_exportprep72" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -4.8 )
+
+[node name="Pavement_square_exportprep73" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -8.8 )
+
+[node name="Pavement_square_exportprep74" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -6.8 )
+
+[node name="Pavement_square_exportprep75" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -4.8 )
+
+[node name="Pavement_square_exportprep76" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -14.8 )
+
+[node name="Pavement_square_exportprep77" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -12.8 )
+
+[node name="Pavement_square_exportprep78" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -10.8 )
+
+[node name="Pavement_square_exportprep79" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -14.8 )
+
+[node name="Pavement_square_exportprep80" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -12.8 )
+
+[node name="Pavement_square_exportprep81" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 0, -10.8 )
+
+[node name="Pavement_square_exportprep82" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -14.8 )
+
+[node name="Pavement_square_exportprep83" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -12.8 )
+
+[node name="Pavement_square_exportprep84" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -10.8 )
+
+[node name="Pavement_square_exportprep30" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 13.2 )
+
+[node name="Pavement_square_exportprep31" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 13.2 )
+
+[node name="Pavement_square_exportprep32" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep33" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep34" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep35" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep36" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep9" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep10" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep11" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep12" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 9.2 )
+
+[node name="Pavement_square_exportprep13" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep14" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep15" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep16" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep17" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, 11.2 )
+
+[node name="Pavement_square_exportprep18" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep19" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, 13.2 )
+
+[node name="Pavement_square_exportprep20" parent="LevelStatics/Flooring/Road" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 0, 11.2 )
+
+[node name="Pavement_L45_exportprep" parent="LevelStatics/Flooring/Road" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 7.2 )
+
+[node name="Pavement_L45_exportprep2" parent="LevelStatics/Flooring/Road" instance=ExtResource( 16 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 11.2, 0, 13.2 )
+
+[node name="Pavement_L45_exportprep3" parent="LevelStatics/Flooring/Road" instance=ExtResource( 16 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 13.2, 0, 11.2 )
+
 [node name="table_high_rect_exportprep" parent="LevelStatics" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
 
@@ -646,24 +1570,14 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 
 [node name="table_high_rect_exportprep6" parent="LevelStatics" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
 
+[node name="Clock_exportprep" parent="LevelStatics" instance=ExtResource( 28 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.475, 2.6, 0.2 )
+
 [node name="paper_cup_ready_exportprep" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342534, 1.00209, -4.88459 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142534, 1.00209, -4.88459 )
 
 [node name="paper_cup_empty_exportprep" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.759391, 1, 1.37732 )
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.759391, 1, 1.37732 )
 
 [node name="Drink_Can_exportPrep" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556197, 1, 1.20096 )
-
-[node name="air_conditioner_exportprep" parent="." instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
-
-[node name="Skidmark" type="OmniLight" parent="air_conditioner_exportprep"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
-light_color = Color( 1, 0.933333, 0.8, 1 )
-light_energy = 2.0
-light_negative = true
-light_specular = 0.0
-shadow_enabled = true
-omni_range = 0.6
-omni_attenuation = 2.0
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.556197, 1, 1.20096 )
