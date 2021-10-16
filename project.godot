@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/ServingTray.gd"
 }, {
+"base": "Sprite3D",
+"class": "SpatialLabel",
+"language": "GDScript",
+"path": "res://game/util/SpatialLabel.gd"
+}, {
 "base": "Control",
 "class": "TransitionScreen",
 "language": "GDScript",
@@ -81,6 +86,7 @@ _global_script_class_icons={
 "PassiveEffect": "",
 "Register": "",
 "ServingTray": "",
+"SpatialLabel": "",
 "TransitionScreen": ""
 }
 
