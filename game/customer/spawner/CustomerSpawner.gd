@@ -19,16 +19,21 @@ export var randomize_time:bool = true
 export (int, 0, 120) var random_seconds:int = 10
 var waiting:bool = false
 
-var game_is_running = true #Otherwise shut down the spawning, can be replaced for a more direct access
+var game_manager_node:Node
 
 var increasing_difficulty:bool = true
 var current_max_customers = 0
 var global_max_customers = 7 #Won't override the available seats
 
-func customer_despawning(node:Spatial):
+func customer_despawning(node:Spatial)->void:
 	instanced_customers.erase(node)
 
-func spawn_customer():
+func spawn_customer()->void:
+	#Game isn't running, abort
+	if not game_manager_node.is_running:
+		return
+
+	#Must have free spawning spots, free seats, and less customers than the limit
 	if not spawning_spots.empty() and has_free_seats() and instanced_customers.size() < current_max_customers:
 		var spot = spawning_spots[randi() % spawning_spots.size()] #chooses random spawn spot based on the array
 		var customer_packed:PackedScene = customer_scenes[randi() % customer_scenes.size()]
@@ -40,7 +45,7 @@ func spawn_customer():
 		if randomize_time:
 			spawn_timer.wait_time = rand_range(1,random_seconds)
 	else:
-		pass
+		return
 
 func _on_SpawnTimer_timeout()->void:
 	if has_free_seats():
@@ -56,17 +61,27 @@ func has_free_seats()->bool:
 		free_seats = false
 	return free_seats
 
-#manage the need for customers based on free spots
+#Manage the need of new customers based on free spots
 func _process(delta):
-	if spawn_timer.is_stopped() && game_is_running:
+	if spawn_timer.is_stopped() && game_manager_node.is_running:
 		if has_free_seats():
 			spawn_timer.start()
 
 func _ready():
-	spawn_timer.start()
+	#Locate the game manager node, for some reason root.find_node("Game") does not work
+	var root_children = get_tree().root.get_children()
+	for i in root_children:
+		if i.has_method("back_to_menu"):
+			game_manager_node = i
+			break
+	if is_instance_valid(game_manager_node):
+		spawn_timer.start()
+	else:
+		printerr("Could not find the Game node, customers will not spawn ", get_stack())
 
 
-func _on_RampDifficultyTimer_timeout():
+#Increase the difficulty (customer limit) by 1 until the limit is reached, then decrease by 1 until 0
+func _on_RampDifficultyTimer_timeout()->void:
 	if increasing_difficulty:
 		current_max_customers+=1
 		print("Increased limit of customers ", current_max_customers)
