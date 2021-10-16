@@ -357,6 +357,11 @@ stream = ExtResource( 39 )
 unit_db = 12.0
 bus = "Effects"
 
+[node name="Togglables" type="Spatial" parent="LevelInteractables/Register"]
+
+[node name="SpatialLabel" parent="LevelInteractables/Register/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 0, 0.666667, 0 )
+
 [node name="Fridge" type="Area" parent="LevelInteractables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, -4.5 )
 script = ExtResource( 16 )
@@ -373,6 +378,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Position3D" type="Position3D" parent="LevelInteractables/Fridge/ActivityLocations"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.9 )
+
+[node name="Togglables" type="Spatial" parent="LevelInteractables/Fridge"]
+
+[node name="SpatialLabel" parent="LevelInteractables/Fridge/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
 [node name="ServingTray" type="Area" parent="LevelInteractables"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29588, 1.02872, 1.3146 )
@@ -570,6 +580,11 @@ visible = false
 [node name="CupFull" parent="LevelInteractables/ServingTray/ItemSamples" instance=ExtResource( 11 )]
 
 [node name="Cup" parent="LevelInteractables/ServingTray/ItemSamples" instance=ExtResource( 31 )]
+
+[node name="Togglables" type="Spatial" parent="LevelInteractables/ServingTray"]
+
+[node name="SpatialLabel" parent="LevelInteractables/ServingTray/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
 
 [node name="LevelStatics" type="Spatial" parent="."]
 
