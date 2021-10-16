@@ -30,8 +30,8 @@ onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
-	activity_start_machine = Activity.new("Start making %s" % coffee_name, start_duration)
-	activity_taking_coffee = Activity.new("Take fresh %s from a coffee machine" % coffee_name, resetting_duration)
+	activity_start_machine = Activity.new("Make %s" % coffee_name, start_duration)
+	activity_taking_coffee = Activity.new("Take %s" % coffee_name, resetting_duration)
 	connect("mouse_entered", self, "hover")
 	connect("mouse_exited", self, "unhover")
 	cup_empty_node = $Togglables/CupEmpty
