@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/EspressoMachine.gd" type="Script" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://assets/FloorTile_Left45.tscn" type="PackedScene" id=45]
 [ext_resource path="res://assets/FloorConcrete_Left45.tscn" type="PackedScene" id=46]
 [ext_resource path="res://assets/FloorConcrete_square.tscn" type="PackedScene" id=47]
+[ext_resource path="res://game/util/SpatialLabel.tscn" type="PackedScene" id=48]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.25, 0.25, 0.25 )
@@ -179,6 +180,9 @@ visible = false
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
+[node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine"]
 
 [node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine/ActivityLocations"]
@@ -220,6 +224,9 @@ visible = false
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
 
+[node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine2/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine2"]
 
 [node name="Position3D" type="Position3D" parent="LevelInteractables/CoffeeMachine2/ActivityLocations"]
@@ -260,6 +267,9 @@ visible = false
 [node name="CupFull" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 11 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
 visible = false
+
+[node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine3/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine3"]
 
@@ -316,6 +326,9 @@ transform = Transform( -5.46392e-08, 0, -1.25, 0, 1.25, 0, 1.25, 0, -5.46392e-08
 
 [node name="CupFull" parent="LevelInteractables/CoffeeMachine4/Togglables" instance=ExtResource( 9 )]
 transform = Transform( -5.46392e-08, 0, -1.25, 0, 1.25, 0, 1.25, 0, -5.46392e-08, 0, -0.123, -0.360025 )
+
+[node name="SpatialLabel" parent="LevelInteractables/CoffeeMachine4/Togglables" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.2 )
 
 [node name="ActivityLocations" type="Spatial" parent="LevelInteractables/CoffeeMachine4"]
 
