@@ -26,6 +26,8 @@ func _physics_process(delta):
 		State.Idle:
 			if path_node < path.size():
 				current_state = State.Walking
+				var animation_name = "walkFast" if is_emptyhanded() else "walkFastCarrying"
+				$baristaLowPoly/AnimationPlayer.current_animation = animation_name
 		State.Walking:
 			if path_node < path.size():
 				var move: Vector3 = path[path_node] - global_transform.origin
@@ -39,6 +41,7 @@ func _physics_process(delta):
 					rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
 			else:
 				current_state = State.Idle
+				$baristaLowPoly/AnimationPlayer.current_animation = "stop"
 				emit_signal("done_walking")
 		State.Busy:
 			pass
