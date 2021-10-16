@@ -7,4 +7,4 @@ resource_name = "mat-paper-generic"
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 albedo_texture = ExtResource( 1 )
-roughness = 0.477941
+roughness = 0.6
