@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/ServingTray.gd"
 }, {
-"base": "Sprite3D",
+"base": "Spatial",
 "class": "SpatialLabel",
 "language": "GDScript",
 "path": "res://game/util/SpatialLabel.gd"

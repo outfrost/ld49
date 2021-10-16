@@ -1,7 +1,7 @@
 class_name SpatialLabel
-extends Sprite3D
+extends Spatial
 
-onready var label: Label = $Viewport/Label
+onready var label: Label = $SpatialLabelSprite/Viewport/Label
 
 func _ready() -> void:
 	hide()
