@@ -27,7 +27,7 @@
                     "index" : 0
                 },
                 "metallicFactor" : 0.800000011920929,
-                "roughnessFactor" : 0.13970588147640228
+                "roughnessFactor" : 0.20000000298023224
             }
         }
     ],
@@ -64,7 +64,7 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 1064,
+            "count" : 1062,
             "max" : [
                 0.0960821807384491,
                 0.15585288405418396,
@@ -80,13 +80,13 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 1064,
+            "count" : 1062,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 1064,
+            "count" : 1062,
             "type" : "VEC2"
         },
         {
@@ -99,23 +99,23 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 12768,
+            "byteLength" : 12744,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 12768,
-            "byteOffset" : 12768
+            "byteLength" : 12744,
+            "byteOffset" : 12744
         },
         {
             "buffer" : 0,
-            "byteLength" : 8512,
-            "byteOffset" : 25536
+            "byteLength" : 8496,
+            "byteOffset" : 25488
         },
         {
             "buffer" : 0,
             "byteLength" : 3336,
-            "byteOffset" : 34048
+            "byteOffset" : 33984
         }
     ],
     "samplers" : [
@@ -126,7 +126,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 37384,
+            "byteLength" : 37320,
             "uri" : "tea-tin-3.bin"
         }
     ]
