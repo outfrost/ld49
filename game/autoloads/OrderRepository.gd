@@ -8,10 +8,10 @@ enum possible_orders {
 }
 
 var translations:Dictionary = {
-	possible_orders.coffee_americano:"Coffee americano",
-	possible_orders.coffee_espresso:"Coffee espresso",
-	possible_orders.coffee_latte:"Coffee latte",
-	possible_orders.coffee_cappuccino:"Coffee cappuccino",
+	possible_orders.coffee_americano:"Caffè Americano",
+	possible_orders.coffee_espresso:"Espresso",
+	possible_orders.coffee_latte:"Caffè latte",
+	possible_orders.coffee_cappuccino:"Cappuccino",
 }
 
 func get_coffe_name(coffee_type: int) -> String:
