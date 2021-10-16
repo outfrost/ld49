@@ -6,6 +6,12 @@ onready var original_material = $MeshInstance.get_active_material(0).duplicate()
 var busy:bool = false
 var allocated_by:Spatial = null
 
+onready var _forward_debug_mesh:MeshInstance = $DebugForwardMesh
+
+func get_focus_direction()->Vector3:
+	var forward:Vector3 = global_transform.basis.z
+	return forward
+
 func set_busy(value:bool, node:Spatial)->bool:
 	if allocated_by != null and node != null:
 		if allocated_by != node:
@@ -23,6 +29,9 @@ func leave() -> void:
 func _ready():
 	if not OS.has_feature("debug"):
 		hide()
+	else:
+		_forward_debug_mesh.global_transform.origin = _forward_debug_mesh.global_transform.origin + (get_focus_direction())
+
 
 func update()->void:
 	if OS.has_feature("debug"):
