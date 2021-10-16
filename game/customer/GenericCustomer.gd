@@ -48,6 +48,16 @@ onready var rotation_mesh:Spatial = $MeshInstance
 
 var order_score = 0
 
+func _face_focus_direction()->void:
+	if current_state == states.walking:
+		return
+	if allocated_spot == null:
+		return
+	if not allocated_spot.has_method("get_focus_direction"):
+		return
+	var direction:Vector3 = (allocated_spot.global_transform.origin+allocated_spot.get_focus_direction())-global_transform.origin
+	rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
+
 func _get_and_allocate_spot(group_name:String)->Spatial:
 	var seats:Array = get_tree().get_nodes_in_group(group_name)
 	seats.shuffle()
@@ -110,10 +120,6 @@ func find_seat()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.drinking_spot])
 	move_to(target)
 
-#TODO: wait on counter to deliver order
-#TODO: after, go wait somewhere else
-#TODO: the barista can call the customer to deliver bewerage
-
 func leave_and_go_away()->void:
 	if allocated_spot != null:
 		if allocated_spot.has_method("leave"):
@@ -134,7 +140,6 @@ func _ready():
 	max_waiting_timer.start()
 
 func _physics_process(delta):
-
 	if path_node < path.size(): #Must move to reach destination
 		if current_state != states.walking:
 			current_state = states.walking
@@ -176,7 +181,6 @@ func _physics_process(delta):
 					else:
 						go_waiting_spot()
 						return
-
 				if not barista_took_order:
 					current_state = states.waiting_to_order
 				else:
@@ -192,6 +196,7 @@ func _physics_process(delta):
 						HintPopup.firstorder = true
 						HintPopup.display("A customer is ready to order, don't make them wait too long", 5.0)
 			states.waiting_to_order:
+				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
 					max_waiting_timer.start()
@@ -200,6 +205,7 @@ func _physics_process(delta):
 					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
 						go_ask_for_food_spot()
 			states.waiting_for_order:
+				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Restart timer
 					max_waiting_timer.start()
@@ -208,6 +214,7 @@ func _physics_process(delta):
 					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 					target = waiting_spot
 			states.drinking:
+				_face_focus_direction()
 				#Will change automatically to leaving after some time
 				pass
 			_:
