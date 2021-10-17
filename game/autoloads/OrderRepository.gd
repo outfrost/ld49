@@ -15,10 +15,10 @@ var translations:Dictionary = {
 }
 
 var order_textures:Dictionary = {
-	possible_orders.coffee_americano:preload("res://art_assets/ui/logoCupAmericano.png"),
-	possible_orders.coffee_espresso:preload("res://art_assets/ui/logoCupEspresso.png"),
-	possible_orders.coffee_latte:preload("res://art_assets/ui/logoCupLatte.png"),
-	possible_orders.coffee_cappuccino:preload("res://art_assets/ui/logoCupCappuccino.png"),
+	possible_orders.coffee_americano:load("res://art_assets/ui/logoCupAmericano.png"),
+	possible_orders.coffee_espresso:load("res://art_assets/ui/logoCupEspresso.png"),
+	possible_orders.coffee_latte:load("res://art_assets/ui/logoCupLatte.png"),
+	possible_orders.coffee_cappuccino:load("res://art_assets/ui/logoCupCappuccino.png"),
 }
 
 func get_coffe_name(coffee_type: int) -> String:
