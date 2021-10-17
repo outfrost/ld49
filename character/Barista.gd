@@ -8,6 +8,16 @@ enum State {
 	Busy,
 }
 
+enum possible_icons {
+	barista_hot,
+	barista_insane
+}
+
+var icon_scenes: Dictionary = {
+	possible_icons.barista_hot:load("res://assets/Icon_Hot.tscn"),
+	possible_icons.barista_insane:load("res://assets/Icon_Insane.tscn")
+}
+
 const ACCEL_RATE: float = 2.0
 
 export var max_speed: float = 3.0
@@ -25,6 +35,7 @@ var path = []
 var path_node = 0
 
 var carry_attachment: BoneAttachment
+onready var icon_attachment: Node = $Icon
 
 func _ready() -> void:
 	anim.get_animation("walkFast").loop = true
@@ -105,3 +116,16 @@ func remove_cup():
 	if cup:
 		return cup.coffee_type
 	return null
+
+func add_icon(icon_type:int) -> void:
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)
+
+	var icon_instance = icon_scenes[icon_type].instance()
+	icon_attachment.add_child(icon_instance)
+
+func remove_icon() -> void:
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)
