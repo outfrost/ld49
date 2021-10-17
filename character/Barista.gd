@@ -50,8 +50,6 @@ func _ready() -> void:
 	carry_attachment.bone_name = "baristaCarried"
 	$baristaLowPoly/baristaArmature/Skeleton.add_child(carry_attachment)
 
-
-
 func _physics_process(delta):
 	match current_state:
 		State.Idle:
