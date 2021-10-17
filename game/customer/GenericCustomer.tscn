@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
 [ext_resource path="res://game/customer/CustomerClick.gd" type="Script" id=3]
+[ext_resource path="res://game/customer/speech_bubble/SpatialSpeechBubble.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -44,6 +45,9 @@ script = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="Selection and stuff/AreaUserCustomerInteraction"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.321759, 0 )
 shape = SubResource( 3 )
+
+[node name="SpeechBubble" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )
 
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
 [connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]

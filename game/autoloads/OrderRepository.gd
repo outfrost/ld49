@@ -14,6 +14,13 @@ var translations:Dictionary = {
 	possible_orders.coffee_cappuccino:"Cappuccino",
 }
 
+var order_textures:Dictionary = {
+	possible_orders.coffee_americano:preload("res://art_assets/ui/logoCupAmericano.png"),
+	possible_orders.coffee_espresso:preload("res://art_assets/ui/logoCupEspresso.png"),
+	possible_orders.coffee_latte:preload("res://art_assets/ui/logoCupLatte.png"),
+	possible_orders.coffee_cappuccino:preload("res://art_assets/ui/logoCupCappuccino.png"),
+}
+
 func get_coffe_name(coffee_type: int) -> String:
 	if coffee_type in translations.keys():
 		return translations[coffee_type]
