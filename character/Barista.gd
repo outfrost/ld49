@@ -125,7 +125,10 @@ func add_icon(icon_type:int) -> void:
 	var icon_instance = icon_scenes[icon_type].instance()
 	icon_attachment.add_child(icon_instance)
 
+	var icon = icon_attachment.get_child(icon_instance)
+
 func remove_icon() -> void:
+
 	if icon_attachment.get_child_count() > 0:
 		for child in icon_attachment.get_children():
 			icon_attachment.remove_child(child)
