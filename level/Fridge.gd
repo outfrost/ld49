@@ -63,9 +63,11 @@ func _input_event(camera, event, click_position, click_normal, shape_idx):
 func _process(delta: float) -> void:
 	var is_timeout = get_node(@"/root/Game").time_elapsed > timeout
 	if state == States.WORKING and is_timeout:
+		var barista = $"/root/Game".player_visual
+		if barista:
+			barista.cooling_off_sfx.play()
 		eprint("finished chilling at the fridge")
 		state = States.IDLE
-		# TODO: make a "fridge closing" noise
 		return
 	pass
 

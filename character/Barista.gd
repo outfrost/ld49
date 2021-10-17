@@ -13,6 +13,7 @@ const ACCEL_RATE: float = 2.0
 export var max_speed: float = 3.0
 
 onready var anim = $baristaLowPoly/AnimationPlayer
+onready var cooling_off_sfx = $CoolingOffSfx
 
 onready var navmesh: Navigation = get_parent().find_node("Navigation")
 onready var y_pos: float = transform.origin.y
