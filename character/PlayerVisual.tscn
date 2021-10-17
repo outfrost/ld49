@@ -28,3 +28,5 @@ transform = Transform( 3, 0, 0, 0, 2, 0, 0, 0, 3, -0.0170299, 0.459355, 0.32373 
 
 [node name="Position3D" type="Position3D" parent="ItemLocations"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532828, 0.25791 )
+
+[node name="Tween" type="Tween" parent="."]

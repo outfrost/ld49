@@ -23,6 +23,8 @@ var current_speed: float = 0.0
 var path = []
 var path_node = 0
 
+var carry_attachment: BoneAttachment
+
 func _ready() -> void:
 	anim.get_animation("walkFast").loop = true
 	anim.get_animation("walkFastCarrying").loop = true
@@ -31,6 +33,10 @@ func _ready() -> void:
 	anim.play("walkFast")
 	anim.seek(anim.current_animation_length, true)
 	anim.stop(false)
+
+	carry_attachment = BoneAttachment.new()
+	carry_attachment.bone_name = "baristaCarried"
+	$baristaLowPoly/baristaArmature/Skeleton.add_child(carry_attachment)
 
 func _physics_process(delta):
 	match current_state:
