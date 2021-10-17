@@ -618,7 +618,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0 )
 
 [node name="landscape" parent="LevelStatics/Decorations" instance=ExtResource( 22 )]
-transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -3.01, 1.9, -5.51 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -3.41, 1.9, -5.51 )
 
 [node name="winter" parent="LevelStatics/Decorations" instance=ExtResource( 36 )]
 transform = Transform( 3.89414e-07, 0, -2, 0, 2, 0, 2, 0, 3.89414e-07, -5.51, 1.9, 1.5 )
@@ -636,7 +636,7 @@ transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -5.5, 1
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5.32, 1.8, 2.64 )
 
 [node name="calendar2" parent="LevelStatics/Decorations" instance=ExtResource( 37 )]
-transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -1.11, 1.8, -5.5 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -0.51, 1.8, -5.5 )
 
 [node name="poster-1" parent="LevelStatics/Decorations" instance=ExtResource( 27 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1.8, -5.5 )
@@ -1216,4 +1216,4 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
 
 [node name="Clock" parent="LevelStatics" instance=ExtResource( 58 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.475, 2.6, 0.2 )
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.61, 2.4, -5.475 )
