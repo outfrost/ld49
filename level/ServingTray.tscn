@@ -1,0 +1,237 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://level/ServingTray.gd" type="Script" id=1]
+[ext_resource path="res://assets/outline_basic.tres" type="Material" id=2]
+[ext_resource path="res://art_assets/counters/woodMat.tres" type="Material" id=4]
+[ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=5]
+[ext_resource path="res://game/cup/Cup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/util/SpatialLabel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/Activity.gd" type="Script" id=8]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 8 )
+duration = 0.0
+outcome_temper_delta = 0.5
+displayed_name = "Put cup on the tray"
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 4 )
+size = Vector3( 1, 0.05, 0.8 )
+
+[sub_resource type="ArrayMesh" id=3]
+surfaces/0 = {
+"aabb": AABB( -0.557735, -0.082735, -0.457735, 1.11547, 0.16548, 0.91548 ),
+"array_data": PoolByteArray( 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 62, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 190, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 0, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 62, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 0, 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 190, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 0, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 62, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 56, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 190, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 56, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 62, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 56, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 190, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 56, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 62, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 0, 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 190, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 56, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 190, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 0, 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 62, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 56, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 62, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 56, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 190, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 60, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 190, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 56, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 62, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 60, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 62, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 56, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 62, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 56, 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 62, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 56, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 62, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 56, 185, 199, 14, 63, 251, 112, 169, 61, 63, 92, 234, 190, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 60, 185, 199, 14, 191, 251, 112, 169, 189, 63, 92, 234, 190, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 60, 185, 199, 14, 191, 251, 112, 169, 61, 63, 92, 234, 190, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 60, 185, 199, 14, 63, 251, 112, 169, 189, 63, 92, 234, 190, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 60 ),
+"array_index_data": PoolByteArray( 0, 0, 4, 0, 2, 0, 2, 0, 4, 0, 6, 0, 1, 0, 5, 0, 3, 0, 3, 0, 5, 0, 7, 0, 8, 0, 12, 0, 10, 0, 10, 0, 12, 0, 14, 0, 9, 0, 13, 0, 11, 0, 11, 0, 13, 0, 15, 0, 16, 0, 20, 0, 18, 0, 18, 0, 20, 0, 22, 0, 17, 0, 21, 0, 19, 0, 19, 0, 21, 0, 23, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 36,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 24
+}
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.5, 0.025, 0.4 )
+
+[node name="ServingTray" type="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 1 )
+activity_place_item = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Outline" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.02, 0 )
+visible = false
+mesh = SubResource( 3 )
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
+
+[node name="ActivityLocations" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="ActivityLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.999572 )
+
+[node name="Items" type="Spatial" parent="."]
+
+[node name="ItemLocations" type="Spatial" parent="."]
+visible = false
+
+[node name="Position3D" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.310129, 0.0236391, -0.249232 )
+
+[node name="Position3D2" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.159189, 0.0236391, -0.249232 )
+
+[node name="Position3D3" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00715566, 0.0236391, -0.249232 )
+
+[node name="Position3D4" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.142529, 0.0236391, -0.249232 )
+
+[node name="Position3D5" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.293497, 0.0236391, -0.249232 )
+
+[node name="Position3D6" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.268025, 0.0236391, -0.141634 )
+
+[node name="Position3D7" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117085, 0.0236391, -0.141634 )
+
+[node name="Position3D8" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0349481, 0.0236391, -0.141634 )
+
+[node name="Position3D9" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184633, 0.0236391, -0.141634 )
+
+[node name="Position3D10" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3356, 0.0236391, -0.141634 )
+
+[node name="Position3D11" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.308569, 0.0236391, -0.0246787 )
+
+[node name="Position3D12" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.157629, 0.0236391, -0.0246787 )
+
+[node name="Position3D13" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00559616, 0.0236391, -0.0246787 )
+
+[node name="Position3D14" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144089, 0.0236391, -0.0246787 )
+
+[node name="Position3D15" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.295056, 0.0236391, -0.0246787 )
+
+[node name="Position3D16" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264906, 0.0236391, 0.095395 )
+
+[node name="Position3D17" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.113966, 0.0236391, 0.095395 )
+
+[node name="Position3D18" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0380669, 0.0236391, 0.095395 )
+
+[node name="Position3D19" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187752, 0.0236391, 0.095395 )
+
+[node name="Position3D20" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.338719, 0.0236391, 0.095395 )
+
+[node name="Position3D21" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30701, 0.0236391, 0.218587 )
+
+[node name="Position3D22" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15607, 0.0236391, 0.218587 )
+
+[node name="Position3D23" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00403714, 0.0236391, 0.218587 )
+
+[node name="Position3D24" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145648, 0.0236391, 0.218587 )
+
+[node name="Position3D25" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.296615, 0.0236391, 0.218587 )
+
+[node name="Position3D32" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1723, 0.173953, -0.197431 )
+
+[node name="Position3D33" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020267, 0.173953, -0.197431 )
+
+[node name="Position3D34" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129418, 0.173953, -0.197431 )
+
+[node name="Position3D35" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.280385, 0.173953, -0.197431 )
+
+[node name="Position3D37" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.212845, 0.173953, -0.080476 )
+
+[node name="Position3D38" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0608115, 0.173953, -0.080476 )
+
+[node name="Position3D39" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0888734, 0.173953, -0.080476 )
+
+[node name="Position3D40" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239841, 0.173953, -0.080476 )
+
+[node name="Position3D42" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.169182, 0.173953, 0.0395976 )
+
+[node name="Position3D43" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0171485, 0.173953, 0.0395976 )
+
+[node name="Position3D44" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132536, 0.173953, 0.0395976 )
+
+[node name="Position3D45" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283504, 0.173953, 0.0395976 )
+
+[node name="Position3D47" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211286, 0.173953, 0.16279 )
+
+[node name="Position3D48" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0592523, 0.173953, 0.16279 )
+
+[node name="Position3D49" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0904326, 0.173953, 0.16279 )
+
+[node name="Position3D50" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2414, 0.173953, 0.16279 )
+
+[node name="Position3D53" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107565, 0.323866, -0.120885 )
+
+[node name="Position3D54" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04212, 0.323866, -0.120885 )
+
+[node name="Position3D55" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193088, 0.323866, -0.120885 )
+
+[node name="Position3D57" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0639019, 0.323866, -0.000810981 )
+
+[node name="Position3D58" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.085783, 0.323866, -0.000810981 )
+
+[node name="Position3D59" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236751, 0.323866, -0.000810981 )
+
+[node name="Position3D61" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106006, 0.323866, 0.122381 )
+
+[node name="Position3D62" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0436792, 0.323866, 0.122381 )
+
+[node name="Position3D63" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194646, 0.323866, 0.122381 )
+
+[node name="Position3D66" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0450773, 0.472976, -0.0366344 )
+
+[node name="Position3D67" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196045, 0.472976, -0.0366344 )
+
+[node name="Position3D69" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00297356, 0.472976, 0.086558 )
+
+[node name="Position3D70" type="Position3D" parent="ItemLocations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153941, 0.472976, 0.086558 )
+
+[node name="ItemSamples" type="Spatial" parent="."]
+visible = false
+
+[node name="CupFull" parent="ItemSamples" instance=ExtResource( 5 )]
+
+[node name="Cup" parent="ItemSamples" instance=ExtResource( 6 )]
+
+[node name="Togglables" type="Spatial" parent="."]
+
+[node name="SpatialLabel" parent="Togglables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
