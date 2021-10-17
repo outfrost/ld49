@@ -78,6 +78,12 @@ func clean_barista_prepared_order()->void:
 func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
+#Calls any customer to the deliver zone
+func barista_call_client_to_get_food(client_node:Spatial)->void:
+	if is_instance_valid(client_node):
+		if client_node.has_method("receive_order"):
+			client_node.call_customer_to_deliver_zone()
+
 #0 means garbage, #100 means excellent
 func compare_order(barista_order:Array, customer_order:Array)->int:
 	barista_order.sort()
@@ -86,7 +92,7 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 	var barista_order_siz = barista_order.size()
 	var customer_order_size = customer_order.size()
 
-	#Client will not accept missing items from the orders, also won't accept more than he is willingly to pay
+	#Client will not accept less items than the order size, won't mind if there's more than asked
 	if barista_order_siz < customer_order_size:
 		print("Reason: barista gave me less items than I need", barista_order, customer_order)
 		return 0
@@ -106,11 +112,6 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 		var score = (missed_items/customer_order_size)*100
 		return 100-score
 
-#Calls any client with a matching order
-func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if is_instance_valid(client_node):
-		if client_node.has_method("receive_order"):
-			client_node.call_customer_to_deliver_zone()
 
 func generate_order(number_of_items:int, can_repeat:bool)->Array:
 	if number_of_items > possible_orders.size():

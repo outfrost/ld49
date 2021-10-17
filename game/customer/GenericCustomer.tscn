@@ -1,16 +1,16 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
 [ext_resource path="res://game/customer/CustomerClick.gd" type="Script" id=3]
 [ext_resource path="res://game/customer/speech_bubble/SpatialSpeechBubble.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CapsuleMesh" id=1]
+[sub_resource type="CapsuleMesh" id=26]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=27]
 radius = 0.52163
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=28]
 extents = Vector3( 0.543002, 0.57038, 1.05343 )
 
 [sub_resource type="AnimationNodeAnimation" id=4]
@@ -21,6 +21,12 @@ animation = "customerDrinkIdle"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "customerDrinkSettle"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "customerOrdering"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "customerPickup"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "customerWaitRegister"
@@ -55,24 +61,40 @@ xfade_time = 1.0
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 xfade_time = 1.0
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+xfade_time = 0.2
+
 [sub_resource type="AnimationNodeStateMachine" id=18]
 states/customerDrinkExit/node = SubResource( 4 )
-states/customerDrinkExit/position = Vector2( 782, -23.5902 )
+states/customerDrinkExit/position = Vector2( 592.667, -74.5532 )
 states/customerDrinkIdle/node = SubResource( 5 )
-states/customerDrinkIdle/position = Vector2( 516.667, -28.084 )
+states/customerDrinkIdle/position = Vector2( 346, -75.8371 )
 states/customerDrinkSettle/node = SubResource( 6 )
-states/customerDrinkSettle/position = Vector2( 264.667, -28.2322 )
+states/customerDrinkSettle/position = Vector2( 86.1975, -76.2322 )
+states/customerOrdering/node = SubResource( 20 )
+states/customerOrdering/position = Vector2( 459.93, 202.131 )
+states/customerPickup/node = SubResource( 21 )
+states/customerPickup/position = Vector2( -237.902, 83.5348 )
 states/wait_register/node = SubResource( 7 )
-states/wait_register/position = Vector2( 361.222, 103.333 )
+states/wait_register/position = Vector2( 454.555, 84.1838 )
 states/wait_table/node = SubResource( 8 )
 states/wait_table/position = Vector2( 85.8148, 208.667 )
 states/walking/node = SubResource( 9 )
 states/walking/position = Vector2( 86.8354, 84.1235 )
-transitions = [ "walking", "wait_register", SubResource( 10 ), "walking", "wait_table", SubResource( 11 ), "wait_table", "walking", SubResource( 12 ), "wait_register", "walking", SubResource( 13 ), "customerDrinkSettle", "customerDrinkIdle", SubResource( 14 ), "customerDrinkIdle", "customerDrinkExit", SubResource( 15 ), "customerDrinkExit", "walking", SubResource( 16 ), "walking", "customerDrinkSettle", SubResource( 17 ) ]
+transitions = [ "walking", "wait_register", SubResource( 10 ), "walking", "wait_table", SubResource( 11 ), "wait_table", "walking", SubResource( 12 ), "wait_register", "walking", SubResource( 13 ), "customerDrinkSettle", "customerDrinkIdle", SubResource( 14 ), "customerDrinkIdle", "customerDrinkExit", SubResource( 15 ), "customerDrinkExit", "walking", SubResource( 16 ), "walking", "customerDrinkSettle", SubResource( 17 ), "wait_register", "customerOrdering", SubResource( 22 ), "customerOrdering", "walking", SubResource( 23 ), "walking", "customerPickup", SubResource( 24 ), "customerPickup", "walking", SubResource( 25 ) ]
 start_node = "wait_register"
-graph_offset = Vector2( -97.9018, -36.869 )
+graph_offset = Vector2( -287.902, 17.131 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="customer" type="KinematicBody" groups=[
 "customer",
@@ -83,7 +105,7 @@ max_speed = 4.0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0 )
 visible = false
-mesh = SubResource( 1 )
+mesh = SubResource( 26 )
 material/0 = null
 
 [node name="customer" parent="." instance=ExtResource( 2 )]
@@ -91,7 +113,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.702458, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.265404, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 27 )
 disabled = true
 
 [node name="MaxWaitingTime" type="Timer" parent="."]
@@ -105,7 +127,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Selection and stuff/AreaUserCustomerInteraction"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.321759, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 28 )
 
 [node name="SpeechBubble" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )
@@ -114,9 +136,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )
 tree_root = SubResource( 18 )
 anim_player = NodePath("../customer/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 19 )
+parameters/playback = SubResource( 29 )
+
+[node name="AnimationTimers" type="Spatial" parent="."]
+
+[node name="PickupFoodTimer" type="Timer" parent="AnimationTimers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="PlaceOrderTimer" type="Timer" parent="AnimationTimers"]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
 [connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]
 [connection signal="mouse_entered" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_entered"]
 [connection signal="mouse_exited" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_exited"]
+[connection signal="timeout" from="AnimationTimers/PlaceOrderTimer" to="." method="_on_PlaceOrderTimer_timeout"]

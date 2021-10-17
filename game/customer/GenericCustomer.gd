@@ -48,8 +48,14 @@ onready var animPlayer:AnimationPlayer = $customer/AnimationPlayer
 
 var order_score = 0
 
-func _face_focus_direction()->void:
-	if current_state == states.walking:
+#Animation timers, will make the customer wait before changing state, so the animation has time to play
+onready var pickup_food_timer:Timer = $AnimationTimers/PickupFoodTimer
+onready var place_order_timer:Timer = $AnimationTimers/PlaceOrderTimer
+var pickup_food_order_check:bool = false
+var place_order_timer_check:bool = false
+
+func _face_focus_direction(override_for_animation:bool = false)->void:
+	if current_state == states.walking and not override_for_animation:
 		return
 	if allocated_spot == null:
 		return
@@ -65,7 +71,7 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 		if not i.busy:
 			var attempt = i.set_busy(true, self)
 			if attempt:
-				if allocated_spot != null and allocated_spot.has_method("leave"):
+				if is_instance_valid(allocated_spot) and allocated_spot.has_method("leave"):
 					allocated_spot.leave()
 				allocated_spot = i
 				return i
@@ -75,8 +81,8 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 	return null
 
 func call_customer_to_deliver_zone():
-	barista_called_for_delivery = true
-	go_get_food_spot()
+	if go_get_food_spot(): #Only true if the spot is allocated by this customer
+		barista_called_for_delivery = true
 
 func needs_fullfilled():
 	OrderRepository.remove_order(self)
@@ -84,7 +90,8 @@ func needs_fullfilled():
 
 func deliver_order_to_barista()->void:
 	barista_took_order = true
-	go_waiting_spot()
+	place_order_timer.start()
+	anim_state_machine.travel("customerOrdering")
 	OrderRepository.add_order(self, customer_generated_food_order)
 	speech_bubble.render_orders(customer_generated_food_order)
 	speech_bubble.show_bubble()
@@ -113,12 +120,15 @@ func go_waiting_spot()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 	move_to(target)
 
-func go_get_food_spot()->void:
-	if allocated_spot != null:
+func go_get_food_spot()->bool:
+	if is_instance_valid(allocated_spot):
 		if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.get_food_spot]):
-			return
+			return true
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.get_food_spot])
-	move_to(target)
+	if is_instance_valid(target):
+		move_to(target)
+		return true
+	return false
 
 func find_seat()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.drinking_spot])
@@ -143,6 +153,7 @@ func _ready():
 	animPlayer.get_animation("customerWaitTable").loop = true
 	animPlayer.get_animation("customerWaitRegister").loop = true
 	animPlayer.get_animation("customerDrinkIdle").loop = true
+
 
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
@@ -179,6 +190,16 @@ func _physics_process(delta):
 				if got_food:
 					current_state = states.drinking
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
+					#Play pickup food animation
+					if not pickup_food_timer.is_stopped():
+						_face_focus_direction(true)
+						return
+					if pickup_food_timer.is_stopped() and not pickup_food_order_check:
+						pickup_food_timer.start()
+						pickup_food_order_check = true
+						anim_state_machine.travel("customerPickup")
+						return
+
 					got_food = true
 					OrderRepository.client_got_order_from_the_counter()
 					order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
@@ -207,25 +228,30 @@ func _physics_process(delta):
 						HintPopup.firstorder = true
 						HintPopup.display("A customer is ready to order, don't make them wait too long", 5.0)
 			states.waiting_to_order:
-				anim_state_machine.travel("wait_register")
+				if barista_took_order:
+					current_state = states.waiting_for_order
+					return
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
 					max_waiting_timer.start()
 				#If the customer is waiting to ask for order, it will wait for the ask_spot to be free
-				if allocated_spot != null:
+				if is_instance_valid(allocated_spot):
 					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
 						go_ask_for_food_spot()
+					else:
+						anim_state_machine.travel("wait_register")
 			states.waiting_for_order:
-				anim_state_machine.travel("wait_table")
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Restart timer
 					max_waiting_timer.start()
 				if barista_took_order and allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
-					#Move to some table
-					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
-					target = waiting_spot
+					pass
+				else: #Customer is waiting for order on a table
+					if place_order_timer.is_stopped():
+						anim_state_machine.travel("wait_table")
+
 			states.drinking:
 				anim_state_machine.travel("customerDrinkIdle")
 				_face_focus_direction()
@@ -265,3 +291,8 @@ func _on_MaxWaitingTime_timeout():
 			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
 		_:
 			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
+
+
+#After the customer placed the order
+func _on_PlaceOrderTimer_timeout():
+	go_waiting_spot()
