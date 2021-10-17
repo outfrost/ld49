@@ -4,5 +4,5 @@
 resource_name = "ColorBand"
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
-albedo_color = Color( 0.8, 0.423529, 0.0235294, 1 )
+albedo_color = Color( 0.8, 0.545098, 0.270588, 1 )
 roughness = 0.5
