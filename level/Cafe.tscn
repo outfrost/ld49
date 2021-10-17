@@ -100,6 +100,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.296, 1, 1.315 )
 
 [node name="LevelStatics" type="Spatial" parent="."]
 
+[node name="air_conditioner_exportprep" parent="LevelStatics" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
+
+[node name="Skidmark" type="OmniLight" parent="LevelStatics/air_conditioner_exportprep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
+light_color = Color( 1, 0.933333, 0.8, 1 )
+light_energy = 2.0
+light_negative = true
+light_specular = 0.0
+shadow_enabled = true
+omni_range = 0.6
+omni_attenuation = 2.0
+
+[node name="paper_cup_ready_exportprep" parent="LevelStatics" instance=ExtResource( 11 )]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.88006, 1, 1.10374 )
+
+[node name="paper_cup_empty_exportprep" parent="LevelStatics" instance=ExtResource( 5 )]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.79976, 1, 1.00346 )
+
+[node name="Drink_Can_exportPrep" parent="LevelStatics" instance=ExtResource( 12 )]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.556197, 1, 1.20096 )
+
+[node name="wattleboter_exportprep" parent="LevelStatics" instance=ExtResource( 13 )]
+transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.78942, 1, 1.27809 )
+
 [node name="Walls" type="Spatial" parent="LevelStatics"]
 
 [node name="wall_plain_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
@@ -618,24 +643,6 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1
 
 [node name="city" parent="LevelStatics/Decorations" instance=ExtResource( 38 )]
 transform = Transform( 2.62268e-07, 0, -2, 0, 2, 0, 2, 0, 2.62268e-07, -5.51, 2, 4.2 )
-
-[node name="table_high_rect_exportprep" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
-
-[node name="table_high_rect_exportprep3" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, 0.2 )
-
-[node name="table_high_rect_exportprep2" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -4.2 )
-
-[node name="table_high_rect_exportprep4" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.875, 0, 5.15 )
-
-[node name="table_high_rect_exportprep5" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 0, 5.15 )
-
-[node name="table_high_rect_exportprep6" parent="LevelStatics" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
 
 [node name="Flooring" type="Spatial" parent="LevelStatics"]
 
@@ -1188,30 +1195,23 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 11.2, 0
 [node name="Pavement_L45_exportprep3" parent="LevelStatics/Flooring/Road" instance=ExtResource( 50 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 13.2, 0, 11.2 )
 
+[node name="table_high_rect_exportprep" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
+
+[node name="table_high_rect_exportprep3" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, 0.2 )
+
+[node name="table_high_rect_exportprep2" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -4.2 )
+
+[node name="table_high_rect_exportprep4" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.875, 0, 5.15 )
+
+[node name="table_high_rect_exportprep5" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 0, 5.15 )
+
+[node name="table_high_rect_exportprep6" parent="LevelStatics" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
+
 [node name="Clock_exportprep" parent="LevelStatics" instance=ExtResource( 58 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.475, 2.6, 0.2 )
-
-[node name="paper_cup_ready_exportprep" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.88006, 1, 1.10374 )
-
-[node name="paper_cup_empty_exportprep" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.79976, 1, 1.00346 )
-
-[node name="Drink_Can_exportPrep" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.556197, 1, 1.20096 )
-
-[node name="wattleboter_exportprep" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.78942, 1, 1.27809 )
-
-[node name="air_conditioner_exportprep" parent="." instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
-
-[node name="Skidmark" type="OmniLight" parent="air_conditioner_exportprep"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
-light_color = Color( 1, 0.933333, 0.8, 1 )
-light_energy = 2.0
-light_negative = true
-light_specular = 0.0
-shadow_enabled = true
-omni_range = 0.6
-omni_attenuation = 2.0
