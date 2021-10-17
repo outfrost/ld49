@@ -1,0 +1,121 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art_assets/ui/logoCupAmericano.png" type="Texture" id=1]
+[ext_resource path="res://art_assets/ui/wordbubble.png" type="Texture" id=2]
+
+[node name="Control_SpeechBubble" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 20, 20 )
+input_pass_on_modal_close_click = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.96844
+margin_top = -9.52441
+margin_right = 3.96851
+margin_bottom = -9.52441
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer1" type="MarginContainer" parent="CenterContainer"]
+margin_left = 522.0
+margin_top = 325.0
+margin_right = 758.0
+margin_bottom = 395.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 0
+custom_constants/margin_left = 20
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/MarginContainer1"]
+self_modulate = Color( 1, 1, 1, 0.537255 )
+margin_left = 20.0
+margin_right = 216.0
+margin_bottom = 70.0
+texture = ExtResource( 2 )
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/MarginContainer1"]
+margin_left = 20.0
+margin_right = 216.0
+margin_bottom = 70.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer1/MarginContainer2"]
+margin_left = 10.0
+margin_right = 186.0
+margin_bottom = 70.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer"]
+margin_top = 19.0
+margin_right = 176.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect5" type="TextureRect" parent="CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
