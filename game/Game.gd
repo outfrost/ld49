@@ -4,6 +4,7 @@ extends Node
 onready var main_menu: Control = $UI/MainMenu
 onready var transition_screen: TransitionScreen = $UI/TransitionScreen
 onready var game_over_overlay: Control = $UI/GameOverOverlay
+onready var brain_gauge: Control = $UI/BrainGauge
 
 export var level_scene: PackedScene
 onready var level_container: Node = $LevelContainer
@@ -67,6 +68,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	DebugOverlay.display("fps %d" % Performance.get_monitor(Performance.TIME_FPS))
+	DebugOverlay.display("BrAIn %.2f" % temper)
 
 	if Input.is_action_just_pressed("menu"):
 		back_to_menu()
@@ -212,6 +214,7 @@ func back_to_menu() -> void:
 	transition_screen.fade_in()
 	yield(transition_screen, "animation_finished")
 
+	brain_gauge.hide()
 	teardown()
 
 	$Background/Cafe.show()
@@ -245,6 +248,8 @@ func setup() -> void:
 	spawn_location = level.find_node("PlayerSpawnLocation")
 	player_visual = level.find_node("PlayerVisual")
 	player_visual.connect("done_walking", self, "start_activity")
+
+	brain_gauge.show()
 
 	restart_passive_effects()
 
