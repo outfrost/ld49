@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://sound/sfx_coffemachine_ready_v1.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sound/sfx_coffemachine_v3.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=4]
+[ext_resource path="res://level/EspressoMachine.gd" type="Script" id=5]
+[ext_resource path="res://assets/single_espressomachine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/imports/paper_cup_empty_exportprep.gltf" type="PackedScene" id=7]
+[ext_resource path="res://game/util/SpatialLabel.tscn" type="PackedScene" id=8]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.25, 0.25, 0.25 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.07, 0.07, 0.035 )
+
+[node name="EspressoMachine" type="Area"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0 )
+script = ExtResource( 5 )
+coffee_type = 1
+
+[node name="Model" parent="." instance=ExtResource( 6 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271587, 0.0092535 )
+shape = SubResource( 1 )
+
+[node name="Togglables" type="Spatial" parent="."]
+
+[node name="ReadyLight" type="MeshInstance" parent="Togglables"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0.45, -0.24 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="BrewingSound" type="AudioStreamPlayer3D" parent="Togglables"]
+stream = ExtResource( 3 )
+unit_db = 18.0
+bus = "Effects"
+
+[node name="ReadySound" type="AudioStreamPlayer3D" parent="Togglables"]
+stream = ExtResource( 2 )
+unit_db = 18.0
+bus = "Effects"
+
+[node name="CupEmpty" parent="Togglables" instance=ExtResource( 7 )]
+transform = Transform( -8.74228e-08, 0, 2, 0, 1, 0, -2, 0, -8.74228e-08, 0.000431538, 0.125, -0.105652 )
+visible = false
+
+[node name="CupFull" parent="Togglables" instance=ExtResource( 4 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.125, -0.106 )
+visible = false
+
+[node name="SpatialLabel" parent="Togglables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.0999999 )
+
+[node name="ActivityLocations" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="ActivityLocations"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1, -0.956 )
