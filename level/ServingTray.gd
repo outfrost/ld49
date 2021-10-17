@@ -3,9 +3,6 @@ extends Area
 
 export var activity_place_item: Resource
 
-const call_customer_duration = 1.0 # seconds
-var activity_call_customer = Activity.new("Call customer for pickup", call_customer_duration)
-
 enum States {IDLE, WORKING}
 
 var should_ignore_clicks: bool = false
@@ -50,12 +47,10 @@ func get_current_activity_intent():
 	# TODO: check if player has anything to put on the tray
 	if should_ignore_clicks:
 		eprint("was clicked already")
-		return false
-	var is_barista_empty = $"/root/Game".player_visual.is_emptyhanded()
-	if is_barista_empty and !self.is_empty():
-		return {"activity": activity_call_customer, "handler": "call_customer"}
-	elif !is_barista_empty:
+		return null
+	if !$"/root/Game".player_visual.is_emptyhanded():
 		return {"activity": activity_place_item, "handler": "set_putting"}
+	return null
 
 func _input_event(camera, event, click_position, click_normal, shape_idx):
 	if !(event is InputEventMouseButton) or event.button_index != BUTTON_LEFT or !event.pressed:
@@ -85,7 +80,7 @@ func _process(delta: float) -> void:
 			new_item.visible = true
 			if !HintPopup.firstorderontray:
 				HintPopup.firstorderontray = true
-				HintPopup.display("Now that the order is on the tray, click the tray again to call the customer", 5.0)
+				HintPopup.display("Now that the order is on the tray, click the customer to call them to pick it up.", 6.0)
 			if !put_item(new_item):
 				eprint("failed to put an item")
 				return
@@ -112,16 +107,6 @@ func put_item(item: Spatial) -> bool:
 	items_container_object.add_child(item)
 	item.global_transform.origin = origin
 	return true
-
-func call_customer():
-	should_ignore_clicks = false
-	if OrderRepository.order_queue.size():
-		eprint("calling customer!")
-		var customer_to_call = OrderRepository.order_queue.keys()[0]
-		OrderRepository.barista_call_client_to_get_food(customer_to_call)
-	pass
-	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
-	animation_player.play("reachCounter")
 
 func take_items():
 	if !items_container_object:
