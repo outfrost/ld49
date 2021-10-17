@@ -25,6 +25,8 @@ var ready_light: MeshInstance
 var brewing_sound: AudioStreamPlayer3D
 var ready_sound: AudioStreamPlayer3D
 var outline: Spatial
+var brewing_particles: Particles
+var brewing_particles2: Particles
 
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
@@ -42,6 +44,9 @@ func _ready() -> void:
 	ready_light.visible = true
 	brewing_sound = $Togglables/BrewingSound
 	brewing_sound.playing = false
+	brewing_particles = $Model/SteamEmitter/Particles
+	brewing_particles2 = $Model/SteamEmitter2/Particles
+	self._emitParticles(false)
 	ready_sound = $Togglables/ReadySound
 	ready_sound.playing = false
 	outline = find_node("Outline", true, false)
@@ -110,6 +115,7 @@ func _process(delta: float) -> void:
 		ready_light.visible = true
 		brewing_sound.stop()
 		ready_sound.play()
+		self._emitParticles(false)
 		if !HintPopup.firstmachinedone:
 			HintPopup.firstmachinedone = true
 			HintPopup.display("The coffee machine is done brewing, go grab the drink and place it on the order tray", 5.0)
@@ -133,6 +139,7 @@ func set_working():
 	brewing_sound.play()
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("reachAppliance")
+	self._emitParticles(true)
 	if !HintPopup.firstmachineuse:
 		HintPopup.firstmachineuse = true
 		HintPopup.display("Keep in mind, you can queue up multiple machines, even if a customer hasn't ordered yet", 5.0)
@@ -146,6 +153,7 @@ func set_resetting():
 	state = States.RESETTING
 	timeout = get_node(@"/root/Game").time_elapsed + resetting_duration
 	ready_light.visible = true
+	self._emitParticles(false)
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("armsCarryStart")
 
@@ -153,3 +161,6 @@ func set_resetting():
 func eprint(text: String):
 	print("ESPRESSO: %s" % text)
 
+func _emitParticles(enable:bool):
+	brewing_particles.emitting = enable
+	brewing_particles2.emitting = enable
