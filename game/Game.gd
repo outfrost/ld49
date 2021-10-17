@@ -161,16 +161,17 @@ func _process(delta: float) -> void:
 		temper = temper_max
 
 #	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
-	DebugOverlay.display("Your temper %.1f" % temper)
+#	DebugOverlay.display("Your temper %.1f" % temper)
 
 #	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
-	if OrderRepository.order_queue.size():
-		for order in OrderRepository.order_queue.values():
-			var order_item_names := PoolStringArray()
-			for item_num in order:
-				order_item_names.push_back(OrderRepository.get_coffe_name(item_num))
-			var order_items_text = order_item_names.join(", ")
-			DebugOverlay.display(" - %s" % order_items_text)
+
+#	if OrderRepository.order_queue.size():
+#		for order in OrderRepository.order_queue.values():
+#			var order_item_names := PoolStringArray()
+#			for item_num in order:
+#				order_item_names.push_back(OrderRepository.get_coffe_name(item_num))
+#			var order_items_text = order_item_names.join(", ")
+#			DebugOverlay.display(" - %s" % order_items_text)
 
 	var is_out_of_temper = temper < temper_min
 

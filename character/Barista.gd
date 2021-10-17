@@ -67,7 +67,8 @@ func _physics_process(delta):
 			current_state = State.Idle
 
 func _process(delta:float) -> void:
-	DebugOverlay.display("Cups in hand %d" % $Items.get_child_count())
+#	DebugOverlay.display("Cups in hand %d" % $Items.get_child_count())
+	pass
 
 func move_to(target: Vector3):
 	if !navmesh:
