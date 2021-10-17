@@ -5,12 +5,12 @@
 [ext_resource path="res://game/customer/CustomerClick.gd" type="Script" id=3]
 [ext_resource path="res://game/customer/speech_bubble/SpatialSpeechBubble.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CapsuleMesh" id=1]
+[sub_resource type="CapsuleMesh" id=26]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=27]
 radius = 0.52163
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=28]
 extents = Vector3( 0.543002, 0.57038, 1.05343 )
 
 [sub_resource type="AnimationNodeAnimation" id=4]
@@ -92,9 +92,9 @@ states/walking/node = SubResource( 9 )
 states/walking/position = Vector2( 86.8354, 84.1235 )
 transitions = [ "walking", "wait_register", SubResource( 10 ), "walking", "wait_table", SubResource( 11 ), "wait_table", "walking", SubResource( 12 ), "wait_register", "walking", SubResource( 13 ), "customerDrinkSettle", "customerDrinkIdle", SubResource( 14 ), "customerDrinkIdle", "customerDrinkExit", SubResource( 15 ), "customerDrinkExit", "walking", SubResource( 16 ), "walking", "customerDrinkSettle", SubResource( 17 ), "wait_register", "customerOrdering", SubResource( 22 ), "customerOrdering", "walking", SubResource( 23 ), "walking", "customerPickup", SubResource( 24 ), "customerPickup", "walking", SubResource( 25 ) ]
 start_node = "wait_register"
-graph_offset = Vector2( -365.902, -7.86899 )
+graph_offset = Vector2( -287.902, 17.131 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="customer" type="KinematicBody" groups=[
 "customer",
@@ -105,7 +105,7 @@ max_speed = 4.0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0 )
 visible = false
-mesh = SubResource( 1 )
+mesh = SubResource( 26 )
 material/0 = null
 
 [node name="customer" parent="." instance=ExtResource( 2 )]
@@ -113,7 +113,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.702458, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.265404, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 27 )
 disabled = true
 
 [node name="MaxWaitingTime" type="Timer" parent="."]
@@ -127,7 +127,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Selection and stuff/AreaUserCustomerInteraction"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.321759, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 28 )
 
 [node name="SpeechBubble" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )
@@ -136,7 +136,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )
 tree_root = SubResource( 18 )
 anim_player = NodePath("../customer/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 19 )
+parameters/playback = SubResource( 29 )
 
 [node name="AnimationTimers" type="Spatial" parent="."]
 
@@ -145,9 +145,11 @@ wait_time = 2.0
 one_shot = true
 
 [node name="PlaceOrderTimer" type="Timer" parent="AnimationTimers"]
+wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
 [connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]
 [connection signal="mouse_entered" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_entered"]
 [connection signal="mouse_exited" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_exited"]
+[connection signal="timeout" from="AnimationTimers/PlaceOrderTimer" to="." method="_on_PlaceOrderTimer_timeout"]

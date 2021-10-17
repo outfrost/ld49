@@ -90,7 +90,8 @@ func needs_fullfilled():
 
 func deliver_order_to_barista()->void:
 	barista_took_order = true
-	go_waiting_spot()
+	place_order_timer.start()
+	anim_state_machine.travel("customerOrdering")
 	OrderRepository.add_order(self, customer_generated_food_order)
 	speech_bubble.render_orders(customer_generated_food_order)
 	speech_bubble.show_bubble()
@@ -152,6 +153,7 @@ func _ready():
 	animPlayer.get_animation("customerWaitTable").loop = true
 	animPlayer.get_animation("customerWaitRegister").loop = true
 	animPlayer.get_animation("customerDrinkIdle").loop = true
+
 
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
@@ -226,25 +228,30 @@ func _physics_process(delta):
 						HintPopup.firstorder = true
 						HintPopup.display("A customer is ready to order, don't make them wait too long", 5.0)
 			states.waiting_to_order:
-				anim_state_machine.travel("wait_register")
+				if barista_took_order:
+					current_state = states.waiting_for_order
+					return
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
 					max_waiting_timer.start()
 				#If the customer is waiting to ask for order, it will wait for the ask_spot to be free
-				if allocated_spot != null:
+				if is_instance_valid(allocated_spot):
 					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
 						go_ask_for_food_spot()
+					else:
+						anim_state_machine.travel("wait_register")
 			states.waiting_for_order:
-				anim_state_machine.travel("wait_table")
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Restart timer
 					max_waiting_timer.start()
 				if barista_took_order and allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
-					#Move to some table
-					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
-					target = waiting_spot
+					pass
+				else: #Customer is waiting for order on a table
+					if place_order_timer.is_stopped():
+						anim_state_machine.travel("wait_table")
+
 			states.drinking:
 				anim_state_machine.travel("customerDrinkIdle")
 				_face_focus_direction()
@@ -284,3 +291,8 @@ func _on_MaxWaitingTime_timeout():
 			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
 		_:
 			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
+
+
+#After the customer placed the order
+func _on_PlaceOrderTimer_timeout():
+	go_waiting_spot()
