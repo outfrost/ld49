@@ -125,10 +125,16 @@ func _process(delta: float) -> void:
 	if !is_running:
 		return
 
-	if is_crazy and !HintPopup.firstmindwarning:
-		HintPopup.firstmindwarning = true
-		HintPopup.display("Watch out, you're starting to lose it", 5.0)
-		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 5.0)
+	if is_crazy:
+		if !HintPopup.firstmindwarning:
+			HintPopup.firstmindwarning = true
+			HintPopup.display("Watch out, you're starting to lose it", 5.0)
+			HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 5.0)
+		player_visual.add_icon(player_visual.possible_icons.barista_insane)
+	elif temper <= temper_max/2 :
+		player_visual.add_icon(player_visual.possible_icons.barista_hot)
+	else:
+		player_visual.remove_icon()
 
 	time_elapsed += delta
 
