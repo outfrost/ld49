@@ -47,25 +47,25 @@
 [ext_resource path="res://assets/props/coffee-box-2.tscn" type="PackedScene" id=48]
 [ext_resource path="res://assets/syrup_pump.tscn" type="PackedScene" id=49]
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 4 )
 duration = 2.0
 outcome_temper_delta = 2.0
 displayed_name = "Take order"
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=2]
 script = ExtResource( 4 )
 duration = 5.0
 outcome_temper_delta = 5.0
 displayed_name = "Have a cold beverage"
 
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=3]
 script = ExtResource( 4 )
 duration = 0.0
 outcome_temper_delta = 0.5
 displayed_name = "Put cup on the tray"
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=4]
 size = Vector3( 16, 1, 20 )
 
 [node name="Cafe" type="Spatial"]
@@ -96,16 +96,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 1, 1.5 )
 
 [node name="Register" parent="LevelInteractables" instance=ExtResource( 10 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.125, 1, -1.4 )
-activity_taking_order = SubResource( 9 )
+activity_taking_order = SubResource( 1 )
 
 [node name="Fridge" parent="LevelInteractables" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -4.5 )
-activity_cold_beverage = SubResource( 10 )
+activity_cold_beverage = SubResource( 2 )
 cold_beverage_scene = ExtResource( 12 )
 
 [node name="ServingTray" parent="LevelInteractables" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.296, 1, 1.315 )
-activity_place_item = SubResource( 11 )
+activity_place_item = SubResource( 3 )
 
 [node name="LevelStatics" type="Spatial" parent="."]
 
@@ -189,7 +189,7 @@ transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107,
 
 [node name="Ceiling" type="MeshInstance" parent="LevelStatics"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.49862, 1 )
-mesh = SubResource( 8 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
