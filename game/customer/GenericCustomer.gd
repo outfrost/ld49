@@ -41,10 +41,7 @@ onready var customer_generated_food_order = OrderRepository.generate_order(custo
 
 var allocated_spot:Spatial = null
 
-var _current_position:Vector3 = Vector3()
-var _last_frame_position:Vector3 = Vector3()
-onready var customer_mesh:Spatial = $customer
-onready var rotation_mesh:Spatial = $MeshInstance
+onready var speech_bubble = $SpeechBubble
 
 var order_score = 0
 
@@ -86,13 +83,17 @@ func deliver_order_to_barista()->void:
 	barista_took_order = true
 	go_waiting_spot()
 	OrderRepository.add_order(self, customer_generated_food_order)
+	speech_bubble.render_orders(customer_generated_food_order)
+	speech_bubble.show_bubble()
 
 func receive_order(received_item:int)->bool: #True = the delivered item is correct
 	if received_item in customer_generated_food_order:
 		customer_generated_food_order.erase(received_item)
 		if customer_generated_food_order.empty():
 			needs_fullfilled()
-		return true
+			speech_bubble.hide_bubble()
+			return true
+		speech_bubble.render_orders(customer_generated_food_order)
 	return false
 
 func go_ask_for_food_spot()->Spatial:
@@ -174,6 +175,7 @@ func _physics_process(delta):
 					order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
 					print("The customer gave a rating to the food: ", order_score)
 					OrderRepository.remove_order(self)
+					speech_bubble.hide_bubble()
 					var will_stay_or_leave = rand_range(100, 105)
 					if will_stay_or_leave < 10:
 						leave_and_go_away()
