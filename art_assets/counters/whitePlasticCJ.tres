@@ -5,4 +5,4 @@ resource_name = "whitePlasticCJ"
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 albedo_color = Color( 0.912973, 0.906074, 0.869621, 1 )
-roughness = 0.5
+roughness = 0.6
