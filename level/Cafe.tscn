@@ -1195,22 +1195,24 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 11.2, 0
 [node name="Pavement_L45_exportprep3" parent="LevelStatics/Flooring/Road" instance=ExtResource( 50 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 13.2, 0, 11.2 )
 
-[node name="table_high_rect_exportprep" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="Furniture" type="Spatial" parent="LevelStatics"]
+
+[node name="table_high_rect_exportprep" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
 
-[node name="table_high_rect_exportprep3" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="table_high_rect_exportprep3" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, 0.2 )
 
-[node name="table_high_rect_exportprep2" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="table_high_rect_exportprep2" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -4.2 )
 
-[node name="table_high_rect_exportprep4" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="table_high_rect_exportprep4" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.875, 0, 5.15 )
 
-[node name="table_high_rect_exportprep5" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="table_high_rect_exportprep5" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 0, 5.15 )
 
-[node name="table_high_rect_exportprep6" parent="LevelStatics" instance=ExtResource( 7 )]
+[node name="table_high_rect_exportprep6" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
 
 [node name="Clock_exportprep" parent="LevelStatics" instance=ExtResource( 58 )]
