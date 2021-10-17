@@ -67,7 +67,7 @@ func _physics_process(delta):
 			current_state = State.Idle
 
 func _process(delta:float) -> void:
-	DebugOverlay.display("Cups in hand %d" % $Items.get_child_count())
+	DebugOverlay.display("Cups in hand %d" % carry_attachment.get_child_count())
 
 func move_to(target: Vector3):
 	if !navmesh:
@@ -78,7 +78,7 @@ func move_to(target: Vector3):
 
 func take_cup(coffee_type: int) -> bool:
 	var cup_reference = $CupReference
-	if $Items.get_child_count():
+	if carry_attachment.get_child_count():
 		return false
 	#var item_position = $ItemLocations/Position3D
 	print("placing an item in barista's hands")
@@ -86,20 +86,20 @@ func take_cup(coffee_type: int) -> bool:
 	#var origin = item_position.global_transform.origin
 	var cup = cup_reference.duplicate()
 	cup.coffee_type = coffee_type
-	$Items.add_child(cup)
+	carry_attachment.add_child(cup)
 	cup.visible = true
 	#cup.global_transform.origin = origin
 	return true
 
 func is_emptyhanded() -> bool:
-	return $Items.get_child_count() == 0
+	return carry_attachment.get_child_count() == 0
 
 func remove_cup():
 	var cup: Cup = null
-	for item in $Items.get_children():
+	for item in carry_attachment.get_children():
 		if item is Cup:
 			cup = item
-		$Items.remove_child(item)
+		carry_attachment.remove_child(item)
 	if cup:
 		return cup.coffee_type
 	return null
