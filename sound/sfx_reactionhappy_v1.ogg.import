@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_reactionhappy_v1.ogg-a492aeeb960c73ab2804312f3d7491db.oggstr"
+
+[deps]
+
+source_file="res://sound/sfx_reactionhappy_v1.ogg"
+dest_files=[ "res://.import/sfx_reactionhappy_v1.ogg-a492aeeb960c73ab2804312f3d7491db.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

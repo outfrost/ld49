@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_baristaveryfrustrated_v1.ogg-8066a556be2708e7dd92f7f917df6579.oggstr"
+
+[deps]
+
+source_file="res://sound/sfx_baristaveryfrustrated_v1.ogg"
+dest_files=[ "res://.import/sfx_baristaveryfrustrated_v1.ogg-8066a556be2708e7dd92f7f917df6579.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
