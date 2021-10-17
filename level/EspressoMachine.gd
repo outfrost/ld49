@@ -9,6 +9,13 @@ const resetting_duration: float = 0.2 # seconds
 
 var coffee_name: String
 
+var coffee_materials:Dictionary ={
+	OrderRepository.possible_orders.coffee_americano:load("res://assets/imports/ColorBand_Americano.tres"),
+	OrderRepository.possible_orders.coffee_cappuccino:load("res://assets/imports/ColorBand_Cappuccino.tres"),
+	OrderRepository.possible_orders.coffee_espresso:load("res://assets/imports/ColorBand_Espresso.tres"),
+	OrderRepository.possible_orders.coffee_latte:load("res://assets/imports/ColorBand_Latte.tres")
+}
+
 var activity_start_machine: Activity
 var activity_taking_coffee: Activity
 
@@ -32,6 +39,14 @@ onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
+
+	if $Model.has_node("CoffeeMachine"):
+		$Model/CoffeeMachine.set_surface_material(5, coffee_materials[coffee_type])
+	elif $Model.has_node("EspressoMachine"):
+		$Model/EspressoMachine.set_surface_material(5, coffee_materials[coffee_type])
+	else:
+		print("Model does not have any of the expected nodes")
+
 	activity_start_machine = Activity.new("Make %s" % coffee_name, start_duration)
 	activity_taking_coffee = Activity.new("Take %s" % coffee_name, resetting_duration)
 	connect("mouse_entered", self, "hover")

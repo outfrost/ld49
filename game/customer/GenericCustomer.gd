@@ -42,6 +42,9 @@ onready var customer_generated_food_order = OrderRepository.generate_order(custo
 var allocated_spot:Spatial = null
 
 onready var speech_bubble = $SpeechBubble
+onready var anim_tree = $AnimationTree
+onready var anim_state_machine = anim_tree.get("parameters/playback")
+onready var animPlayer:AnimationPlayer = $customer/AnimationPlayer
 
 var order_score = 0
 
@@ -135,6 +138,12 @@ func leave_and_go_away()->void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	animPlayer.get_animation("customerWalk").loop = true
+	animPlayer.get_animation("drinkBeverage").loop = true
+	animPlayer.get_animation("customerWaitTable").loop = true
+	animPlayer.get_animation("customerWaitRegister").loop = true
+	animPlayer.get_animation("customerDrinkIdle").loop = true
+
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
@@ -153,7 +162,7 @@ func _physics_process(delta):
 			move_and_slide(direction.normalized() * current_speed, Vector3.UP)
 			#Customers can look where they are moving
 			rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
-
+			anim_state_machine.travel("walking")
 			if lock_z_axis:
 				global_transform.origin.y = locked_height
 	else: #Reached destination
@@ -198,6 +207,7 @@ func _physics_process(delta):
 						HintPopup.firstorder = true
 						HintPopup.display("A customer is ready to order, don't make them wait too long", 5.0)
 			states.waiting_to_order:
+				anim_state_machine.travel("wait_register")
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
@@ -207,6 +217,7 @@ func _physics_process(delta):
 					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
 						go_ask_for_food_spot()
 			states.waiting_for_order:
+				anim_state_machine.travel("wait_table")
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
 					#Restart timer
@@ -216,6 +227,7 @@ func _physics_process(delta):
 					var waiting_spot = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 					target = waiting_spot
 			states.drinking:
+				anim_state_machine.travel("customerDrinkIdle")
 				_face_focus_direction()
 				#Will change automatically to leaving after some time
 				pass
