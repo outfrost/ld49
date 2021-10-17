@@ -2,6 +2,7 @@ class_name Fridge
 extends Area
 
 export var activity_cold_beverage: Resource
+export var cold_beverage_scene: PackedScene
 
 enum States {IDLE, WORKING}
 
@@ -12,11 +13,11 @@ var timeout: float = 0.0
 
 onready var outline = find_node("Outline", true, false)
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
+onready var cold_beverage = cold_beverage_scene.instance()
 
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
 	connect("mouse_exited", self, "unhover")
-	pass
 
 func hover() -> void:
 	var activity_intent = get_current_activity_intent()
@@ -64,8 +65,6 @@ func _process(delta: float) -> void:
 	if state == States.WORKING and is_timeout:
 		eprint("finished chilling at the fridge")
 		state = States.IDLE
-		var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
-		animation_player.play("uncrouch")
 		# TODO: make a "fridge closing" noise
 		return
 	pass
@@ -76,20 +75,27 @@ func set_using():
 	state = States.WORKING
 	var beverage_duration: float = activity_cold_beverage.duration
 	timeout = get_node(@"/root/Game").time_elapsed + beverage_duration
-	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
-	open_fridge()
+	var animation_player: AnimationPlayer = $"/root/Game".player_visual.anim
+	$under_counter_fridge_exportPrep/AnimationPlayer.play("ArmatureAction")
 	animation_player.play("crouch")
 	if !HintPopup.firstfridgeuse:
 		HintPopup.firstfridgeuse = true
 		HintPopup.display("Consuming a cold refreshing beverage will help you keep your cool, and make the customers slightly more tolerable", 3.0)
 	yield(animation_player, "animation_finished")
+	var barista = $"/root/Game".player_visual
+	barista.carry_attachment.add_child(cold_beverage)
+	yield(get_tree().create_timer(0.25), "timeout")
+	$under_counter_fridge_exportPrep/AnimationPlayer.play_backwards("ArmatureAction")
+	animation_player.play("uncrouch")
+	yield(animation_player, "animation_finished")
+	var tween = barista.get_node("Tween")
+	tween.interpolate_property(barista, "rotation:y", barista.rotation.y, barista.rotation.y + (0.5 * TAU), 0.25)
+	tween.start()
+	yield(tween, "tween_completed")
 	animation_player.play("drinkBeverage")
+	yield(animation_player, "animation_finished")
+	barista.carry_attachment.remove_child(cold_beverage)
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
 	print("FRIDGE: %s" % text)
-
-func open_fridge():
-	$under_counter_fridge_exportPrep/AnimationPlayer.play("ArmatureAction")
-	yield($under_counter_fridge_exportPrep/AnimationPlayer, "animation_finished")
-	$under_counter_fridge_exportPrep/AnimationPlayer.play_backwards("ArmatureAction")
