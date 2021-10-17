@@ -8,9 +8,11 @@ enum State {
 	Busy,
 }
 
-const ACCEL_RATE: float = 5.0
+const ACCEL_RATE: float = 2.0
 
-export var max_speed: float = 4.0
+export var max_speed: float = 3.0
+
+onready var anim = $baristaLowPoly/AnimationPlayer
 
 onready var navmesh: Navigation = get_parent().find_node("Navigation")
 onready var y_pos: float = transform.origin.y
@@ -21,13 +23,22 @@ var current_speed: float = 0.0
 var path = []
 var path_node = 0
 
+func _ready() -> void:
+	anim.get_animation("walkFast").loop = true
+	anim.get_animation("walkFastCarrying").loop = true
+
+	# Starting pose: end of walk cycle
+	anim.play("walkFast")
+	anim.seek(anim.current_animation_length, true)
+	anim.stop(false)
+
 func _physics_process(delta):
 	match current_state:
 		State.Idle:
 			if path_node < path.size():
 				current_state = State.Walking
 				var animation_name = "walkFast" if is_emptyhanded() else "walkFastCarrying"
-				$baristaLowPoly/AnimationPlayer.current_animation = animation_name
+				anim.play(animation_name, -1.0, max_speed)
 		State.Walking:
 			if path_node < path.size():
 				var move: Vector3 = path[path_node] - global_transform.origin
@@ -41,7 +52,7 @@ func _physics_process(delta):
 					rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
 			else:
 				current_state = State.Idle
-				$baristaLowPoly/AnimationPlayer.current_animation = "[stop]"
+				anim.stop()
 				emit_signal("done_walking")
 		State.Busy:
 			pass
