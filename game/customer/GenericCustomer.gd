@@ -7,6 +7,15 @@ var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
 enum states {idle, waiting_to_order, waiting_for_order, drinking, walking}
 enum feelings {happy, indifferent, bored, insane}
+enum possible_icons {wait_chill, wait_warning, wait_angry}
+
+var icon_scenes: Dictionary = {
+	possible_icons.wait_chill:load("res://assets/Icon_Waiting_Chill.tscn"),
+	possible_icons.wait_warning:load("res://assets/Icon_Waiting_Warning.tscn"),
+	possible_icons.wait_angry:load("res://assets/Icon_Waiting_Angry.tscn")
+}
+
+onready var icon_attachment: Node = $Icon
 
 var current_state:int = states.idle
 
@@ -191,6 +200,7 @@ func _physics_process(delta):
 					current_state = states.drinking
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
 					#Play pickup food animation
+					remove_icon()
 					if not pickup_food_timer.is_stopped():
 						_face_focus_direction(true)
 						return
@@ -215,6 +225,7 @@ func _physics_process(delta):
 						return
 				if not barista_took_order:
 					current_state = states.waiting_to_order
+					add_icon(possible_icons.wait_chill)
 				else:
 					if not got_food:
 						current_state = states.waiting_for_order
@@ -230,6 +241,7 @@ func _physics_process(delta):
 			states.waiting_to_order:
 				if barista_took_order:
 					current_state = states.waiting_for_order
+					remove_icon()
 					return
 				_face_focus_direction()
 				if max_waiting_timer.is_stopped():
@@ -251,6 +263,11 @@ func _physics_process(delta):
 				else: #Customer is waiting for order on a table
 					if place_order_timer.is_stopped():
 						anim_state_machine.travel("wait_table")
+
+				if inverse_lerp(0, max_waiting_timer.wait_time, max_waiting_timer.time_left) < 0.25:
+					add_icon(possible_icons.wait_angry)
+				elif inverse_lerp(0, max_waiting_timer.wait_time, max_waiting_timer.time_left) < 0.5:
+					add_icon(possible_icons.wait_warning)
 
 			states.drinking:
 				anim_state_machine.travel("customerDrinkIdle")
@@ -296,3 +313,17 @@ func _on_MaxWaitingTime_timeout():
 #After the customer placed the order
 func _on_PlaceOrderTimer_timeout():
 	go_waiting_spot()
+
+func add_icon(icon_type:int) -> void:
+	# Remove any other icons that are currently displayed above the model
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)
+
+	var icon_instance = icon_scenes[icon_type].instance()
+	icon_attachment.add_child(icon_instance)
+
+func remove_icon() -> void:
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)
