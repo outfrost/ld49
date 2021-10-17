@@ -48,8 +48,14 @@ onready var animPlayer:AnimationPlayer = $customer/AnimationPlayer
 
 var order_score = 0
 
-func _face_focus_direction()->void:
-	if current_state == states.walking:
+#Animation timers, will make the customer wait before changing state, so the animation has time to play
+onready var pickup_food_timer:Timer = $AnimationTimers/PickupFoodTimer
+onready var place_order_timer:Timer = $AnimationTimers/PlaceOrderTimer
+var pickup_food_order_check:bool = false
+var place_order_timer_check:bool = false
+
+func _face_focus_direction(override_for_animation:bool = false)->void:
+	if current_state == states.walking and not override_for_animation:
 		return
 	if allocated_spot == null:
 		return
@@ -65,7 +71,7 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 		if not i.busy:
 			var attempt = i.set_busy(true, self)
 			if attempt:
-				if allocated_spot != null and allocated_spot.has_method("leave"):
+				if is_instance_valid(allocated_spot) and allocated_spot.has_method("leave"):
 					allocated_spot.leave()
 				allocated_spot = i
 				return i
@@ -75,8 +81,8 @@ func _get_and_allocate_spot(group_name:String)->Spatial:
 	return null
 
 func call_customer_to_deliver_zone():
-	barista_called_for_delivery = true
-	go_get_food_spot()
+	if go_get_food_spot(): #Only true if the spot is allocated by this customer
+		barista_called_for_delivery = true
 
 func needs_fullfilled():
 	OrderRepository.remove_order(self)
@@ -113,12 +119,15 @@ func go_waiting_spot()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
 	move_to(target)
 
-func go_get_food_spot()->void:
-	if allocated_spot != null:
+func go_get_food_spot()->bool:
+	if is_instance_valid(allocated_spot):
 		if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.get_food_spot]):
-			return
+			return true
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.get_food_spot])
-	move_to(target)
+	if is_instance_valid(target):
+		move_to(target)
+		return true
+	return false
 
 func find_seat()->void:
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.drinking_spot])
@@ -179,6 +188,16 @@ func _physics_process(delta):
 				if got_food:
 					current_state = states.drinking
 				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
+					#Play pickup food animation
+					if not pickup_food_timer.is_stopped():
+						_face_focus_direction(true)
+						return
+					if pickup_food_timer.is_stopped() and not pickup_food_order_check:
+						pickup_food_timer.start()
+						pickup_food_order_check = true
+						anim_state_machine.travel("customerPickup")
+						return
+
 					got_food = true
 					OrderRepository.client_got_order_from_the_counter()
 					order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
