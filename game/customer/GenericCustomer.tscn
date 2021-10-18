@@ -170,6 +170,10 @@ script = ExtResource( 9 )
 [node name="drinking" type="Node" parent="FSM"]
 script = ExtResource( 10 )
 
+[node name="MaxDrinkingTime" type="Timer" parent="FSM/drinking"]
+wait_time = 10.0
+one_shot = true
+
 [node name="walking" type="Node" parent="FSM"]
 script = ExtResource( 6 )
 
@@ -191,5 +195,6 @@ one_shot = true
 [connection signal="mouse_entered" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_entered"]
 [connection signal="mouse_exited" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_exited"]
 [connection signal="timeout" from="AnimationTimers/PlaceOrderTimer" to="." method="_on_PlaceOrderTimer_timeout"]
+[connection signal="timeout" from="FSM/drinking/MaxDrinkingTime" to="FSM/drinking" method="_on_MaxDrinkingTime_timeout"]
 [connection signal="timeout" from="FSM/delivering_order_to_barista/Timer" to="FSM/delivering_order_to_barista" method="_on_Timer_timeout"]
 [connection signal="timeout" from="FSM/picking_up_bewerage/Timer" to="FSM/picking_up_bewerage" method="_on_Timer_timeout"]
