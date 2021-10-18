@@ -161,7 +161,6 @@ func leave_and_go_away()->void:
 	move_to(target)
 	OrderRepository.remove_order(self)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	animPlayer.get_animation("customerWalk").loop = true
 	animPlayer.get_animation("drinkBeverage").loop = true
@@ -175,9 +174,17 @@ func _ready():
 	max_waiting_timer.start()
 
 	var model: MeshInstance = $customer/customerArmature/Skeleton/customer
-	var mat: SpatialMaterial = model.mesh.surface_get_material(0).duplicate()
+	# Clone the mesh to prevent artifacts from shape keys
+	var mesh: Mesh = model.mesh.duplicate()
+	model.mesh = mesh
+	# Clone the material to prevent overwriting source albedo
+	var mat: SpatialMaterial = mesh.surface_get_material(0).duplicate()
 	mat.albedo_texture = TEXTURES[randi() % TEXTURES.size()]
 	model.set_surface_material(0, mat)
+
+	model.set("blend_shapes/bodyThicker", randf())
+	model.set("blend_shapes/hairRound", randf())
+	model.set("blend_shapes/hairSharp", randf())
 
 func _physics_process(delta):
 	if path_node < path.size(): #Must move to reach destination
