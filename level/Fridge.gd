@@ -3,6 +3,7 @@ extends Area
 
 export var activity_cold_beverage: Resource
 export var cold_beverage_scene: PackedScene
+export var recovery_effect: float
 
 enum States {IDLE, WORKING}
 
@@ -14,10 +15,12 @@ var timeout: float = 0.0
 onready var outline = find_node("Outline", true, false)
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 onready var cold_beverage = cold_beverage_scene.instance()
+onready var game_node = $"/root/Game"
 
 func _ready() -> void:
 	connect("mouse_entered", self, "hover")
 	connect("mouse_exited", self, "unhover")
+
 
 func hover() -> void:
 	var activity_intent = get_current_activity_intent()
@@ -67,6 +70,7 @@ func _process(delta: float) -> void:
 		if barista:
 			barista.cooling_off_sfx.play()
 		eprint("finished chilling at the fridge")
+		game_node.update_temper(recovery_effect)
 		state = States.IDLE
 		return
 	pass

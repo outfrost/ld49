@@ -27,8 +27,14 @@ var current_state:int = states.idle
 
 var customer_possible_difficulty = [1, 2, 3] #Difficulty will halve time to please the customer
 onready var customer_difficulty = customer_possible_difficulty[randi() % customer_possible_difficulty.size()]
+onready var effect_multiplier = 0.5 + 0.5 * customer_difficulty
 export var max_speed:float = 10
 export var waiting_time_tolerance = 100
+
+export var happy_effect: float = 5
+export var grumble_effect: float = -1
+export var angry_effect: float = -5
+
 onready var max_waiting_timer:Timer = $MaxWaitingTime
 
 var current_speed:float = 0
@@ -101,7 +107,7 @@ func call_customer_to_deliver_zone():
 
 func needs_fullfilled():
 	OrderRepository.remove_order(self)
-	OrderRepository.emit_signal("client_satisfied", self)
+	OrderRepository.emit_signal("client_satisfied", self, happy_effect * effect_multiplier)
 
 func deliver_order_to_barista()->void:
 	barista_took_order = true
@@ -172,7 +178,6 @@ func _ready():
 		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
-
 	var model: MeshInstance = $customer/customerArmature/Skeleton/customer
 	# Clone the mesh to prevent artifacts from shape keys
 	var mesh: Mesh = model.mesh.duplicate()
@@ -306,17 +311,17 @@ func _on_MaxWaitingTime_timeout():
 		states.waiting_for_order:
 			print("Customer expired, reason: waited for order too long")
 			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
+			OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier) #Kept waiting forever, not cool
 		states.waiting_to_order:
 			print("Customer expired, reason: waited to order too long")
 			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
+			OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier) #Not delivered on time, very mad
 		states.drinking:
 			print("Customer expired, reason: consumed drink")
 			if order_score > 50:
 				needs_fullfilled()
 			else:
-				OrderRepository.emit_signal("client_enraged", self)
+				OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier)
 			leave_and_go_away()
 		states.idle:
 			print("Customer expired, reason: expired while idling")

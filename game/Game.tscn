@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://game/ui-theme/ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://sound/music_gameplay_tension_v3_loop.ogg" type="AudioStream" id=2]
@@ -13,11 +13,20 @@
 [ext_resource path="res://sound/sfx_customerhappy_v1.ogg" type="AudioStream" id=11]
 [ext_resource path="res://sound/sfx_customersad_v1.ogg" type="AudioStream" id=12]
 [ext_resource path="res://level/CafeMenu.tscn" type="PackedScene" id=13]
+[ext_resource path="res://game/PassiveEffect.gd" type="Script" id=14]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 14 )
+update_interval = 1.0
+update_temper_delta = -0.25
+displayed_name = ""
+displayed_description = ""
 
 [node name="Game" type="Node"]
 script = ExtResource( 5 )
 level_scene = ExtResource( 7 )
 game_duration = 200
+passive_effects = [ SubResource( 1 ) ]
 
 [node name="MusicPlayerTension" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
