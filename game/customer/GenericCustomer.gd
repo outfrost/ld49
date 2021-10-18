@@ -44,11 +44,15 @@ onready var place_order_timer:Timer = $AnimationTimers/PlaceOrderTimer
 var pickup_food_order_check:bool = false
 var place_order_timer_check:bool = false
 
+func emit_started_walking():
+	emit_signal("started_walking")
+
+func emit_started_idling():
+	emit_signal("started_idling")
 
 func _face_focus_direction(override_for_animation:bool = false)->void:
-#TODO: update to new FSM
-#	if current_state == states.walking and not override_for_animation:
-#		return
+	if FSM.current_state == FSM.walking and not override_for_animation:
+		return
 	if allocated_spot == null:
 		return
 	if not allocated_spot.has_method("get_focus_direction"):
@@ -157,32 +161,31 @@ func move_to(target:Spatial):
 
 
 func _on_MaxWaitingTime_timeout():
-	pass
-	#TODO: Update to new FSM
-#	match current_state:
-#		states.waiting_for_order:
-#			print("Customer expired, reason: waited for order too long")
-#			leave_and_go_away()
-#			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
-#		states.waiting_to_order:
-#			print("Customer expired, reason: waited to order too long")
-#			leave_and_go_away()
-#			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
-#		states.drinking:
-#			print("Customer expired, reason: consumed drink")
-#			if order_score > 50:
-#				needs_fullfilled()
-#			else:
-#				OrderRepository.emit_signal("client_enraged", self)
-#			leave_and_go_away()
-#		states.idle:
-#			print("Customer expired, reason: expired while idling")
-#			leave_and_go_away()
-#		states.walking:
-#			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
-#		_:
-#			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
-
+	match FSM.current_state:
+		FSM.waiting_for_order:
+			print("Customer expired, reason: waited for order too long")
+			leave_and_go_away()
+			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
+		FSM.waiting_to_order:
+			print("Customer expired, reason: waited to order too long")
+			leave_and_go_away()
+			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
+		FSM.drinking:
+			print("Customer expired, reason: consumed drink")
+			#This will decide if the customer will be satisfied or not
+			#The order_score is computed on picking_up_bewerage.gd
+			if order_score > 50:
+				needs_fullfilled()
+			else:
+				OrderRepository.emit_signal("client_enraged", self)
+			leave_and_go_away()
+		FSM.idle:
+			print("Customer expired, reason: expired while idling")
+			leave_and_go_away()
+		FSM.walking:
+			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
+		_:
+			printerr("Customer tolerance time expired while he was in a unexpected state", FSM.current_state, get_stack())
 
 #After the customer placed the order
 func _on_PlaceOrderTimer_timeout():

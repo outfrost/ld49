@@ -19,12 +19,12 @@ onready var states = {
 	picking_up_bewerage:$picking_up_bewerage
 }
 
-onready var current_state:Node = states[idle]
+onready var current_state:int = idle
 
 func _ready():
 	change_state(idle)
 
 func change_state(next_state:int)->void:
-	current_state.exit()
-	current_state = states[next_state]
+	states[current_state].exit()
+	current_state = next_state
 	states[next_state].enter()

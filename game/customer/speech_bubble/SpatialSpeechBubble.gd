@@ -64,9 +64,6 @@ func show_bubble():
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
-	pass
-	speechbubble.modulate.a
-
 func hide_bubble():
 	var current:Color = speechbubble.modulate
 	var tween = $Tween
