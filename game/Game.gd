@@ -341,7 +341,8 @@ func start_activity():
 		player_visual.rotation.y = position.rotation.y
 	activity_started = true
 
-func on_customer_satisfied(_customer) -> void:
+func on_customer_satisfied(_customer, temper_delta) -> void:
+	update_temper(temper_delta)
 	customers_served += 1
 	$HappyNoiseSfx.play()
 	if !HintPopup.firsthappy:
@@ -349,9 +350,13 @@ func on_customer_satisfied(_customer) -> void:
 		HintPopup.display("Good Job, the customer is satisfied", 5.0)
 		HintPopup.display("Keep up the good work", 5.0)
 
-func on_customer_enraged(_customer) -> void:
+func on_customer_enraged(_customer, temper_delta) -> void:
+	update_temper(temper_delta)
 	$SadNoiseSfx.play()
 	if !HintPopup.firstenrage:
 		HintPopup.firstenrage = true
 		HintPopup.display("Oh No, you made a customer upset", 5.0)
 		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 5.0)
+
+func update_temper(temper_delta:float) -> void:
+	temper += temper_delta
