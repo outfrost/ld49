@@ -1,0 +1,82 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=21 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "customerDrinkExit"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "customerDrinkIdle"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "customerDrinkSettle"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "customerOrdering"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "customerPickup"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "customerWaitRegister"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "customerWaitTable"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "customerWalk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+xfade_time = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+xfade_time = 0.2
+
+[resource]
+states/customerDrinkExit/node = SubResource( 1 )
+states/customerDrinkExit/position = Vector2( 592.667, -74.5532 )
+states/customerDrinkIdle/node = SubResource( 2 )
+states/customerDrinkIdle/position = Vector2( 346, -75.8371 )
+states/customerDrinkSettle/node = SubResource( 3 )
+states/customerDrinkSettle/position = Vector2( 86.1317, -74.3721 )
+states/customerOrdering/node = SubResource( 4 )
+states/customerOrdering/position = Vector2( 454.986, 207.29 )
+states/customerPickup/node = SubResource( 5 )
+states/customerPickup/position = Vector2( -237.902, 83.5348 )
+states/wait_register/node = SubResource( 6 )
+states/wait_register/position = Vector2( 454.555, 84.1838 )
+states/wait_table/node = SubResource( 7 )
+states/wait_table/position = Vector2( 85.8148, 208.667 )
+states/walking/node = SubResource( 8 )
+states/walking/position = Vector2( 86.8354, 84.1235 )
+transitions = [ "walking", "wait_register", SubResource( 9 ), "walking", "wait_table", SubResource( 10 ), "wait_table", "walking", SubResource( 11 ), "wait_register", "walking", SubResource( 12 ), "customerDrinkSettle", "customerDrinkIdle", SubResource( 13 ), "customerDrinkIdle", "customerDrinkExit", SubResource( 14 ), "customerDrinkExit", "walking", SubResource( 15 ), "walking", "customerDrinkSettle", SubResource( 16 ), "wait_register", "customerOrdering", SubResource( 17 ), "customerOrdering", "walking", SubResource( 18 ), "walking", "customerPickup", SubResource( 19 ), "customerPickup", "walking", SubResource( 20 ) ]
+start_node = "wait_register"
+graph_offset = Vector2( -308.902, -138.869 )

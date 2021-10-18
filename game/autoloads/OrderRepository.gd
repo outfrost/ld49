@@ -108,7 +108,6 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 		print("All of the items are wrong")
 		return 0
 	else:
-		print("Evaluated score: ")
 		var score = (missed_items/customer_order_size)*100
 		return 100-score
 

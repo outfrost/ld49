@@ -207,13 +207,13 @@ func _on_MaxWaitingTime_timeout():
 			leave_and_go_away()
 			OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier) #Not delivered on time, very mad
 		FSM.drinking:
-			print("Customer expired, reason: consumed drink")
 			#This will decide if the customer will be satisfied or not
 			#The order_score is computed on picking_up_bewerage.gd
 			if order_score > 50:
 				needs_fullfilled()
 			else:
 				OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier)
+			print("Customer expired, reason: consumed drink: ", order_score)
 			leave_and_go_away()
 		FSM.idle:
 			print("Customer expired, reason: expired while idling")
