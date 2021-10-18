@@ -41,14 +41,14 @@ func _physics_process(delta):
 		#Customer drinking
 		if base_customer.got_food:
 			FSM.change_state(FSM.drinking)
-		##################################
+		###############################################
 
 		#Customer picking up food
 		if base_customer.barista_called_for_delivery and not base_customer.got_food: #Stopped walking at the checkout spot
 			#TODO: pick up food
 			FSM.change_state(FSM.picking_up_bewerage)
 			return
-			#######################################
+		###############################################
 
 		#Customer waiting to/for order
 		if not base_customer.barista_took_order:
@@ -60,7 +60,7 @@ func _physics_process(delta):
 
 		#Customer at despawn point
 		if base_customer.target and base_customer.target.is_in_group("exit_spot"):
-			base_customer.emit_signal("despawning", self)
+			base_customer.emit_despawning()
 			base_customer.call_deferred("queue_free")
 		##############################################
 

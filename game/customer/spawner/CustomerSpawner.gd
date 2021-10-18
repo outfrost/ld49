@@ -77,17 +77,17 @@ func _ready():
 	if is_instance_valid(game_manager_node):
 		spawn_timer.start()
 	else:
-		printerr("Could not find the Game node, customers will not spawn ", get_stack())
+		printerr("[CustomerSpawner] Could not find the Game node, customers will not spawn ", get_stack())
 
 
 #Increase the difficulty (customer limit) by 1 until the limit is reached, then decrease by 1 until 0
 func _on_RampDifficultyTimer_timeout()->void:
 	if increasing_difficulty:
 		current_max_customers+=1
-		print("Increased limit of customers ", current_max_customers)
+		print_debug("[CustomerSpawner] Increased limit of customers ", current_max_customers)
 		if current_max_customers > global_max_customers:
 			increasing_difficulty = false
 	else:
 		if current_max_customers > 0:
-			print("Decreased limit of customers ", current_max_customers)
+			print_debug("[CustomerSpawner] Decreased limit of customers ", current_max_customers)
 			current_max_customers-=1

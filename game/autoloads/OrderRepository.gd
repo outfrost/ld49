@@ -43,8 +43,6 @@ var order_queue:Dictionary = {
 var barista_prepared_order:Array = []
 var customer_waiting_on_ask_spot:Spatial = null
 
-export var debugging = false
-
 func _ready():
 	randomize()
 	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
@@ -53,7 +51,7 @@ func _ready():
 #Called from the Customer's CustomerClick.gd
 func customer_clicked(customer:Spatial):
 	if not is_instance_valid(customer) or not customer.has_method("call_customer_to_deliver_zone"):
-		print("Somehow it's trying to click an invalid customer! ", get_stack())
+		printerr("Somehow it's trying to click an invalid customer! ", get_stack())
 		return
 
 	match customer.FSM.current_state:
@@ -61,21 +59,23 @@ func customer_clicked(customer:Spatial):
 			if customer.barista_called_for_delivery:
 				return
 			emit_signal("clicked_customer_to_deliver_bewerage", customer)
-			print("Called customer to deliver *bewerage* ", customer)
+			print_debug("Called customer to deliver *bewerage* ", customer)
 		_:
 			return
 
-func client_is_satisfied(node:Spatial, temper_delta:float)->void:
+func emit_client_is_satisfied(node:Spatial, temper_delta:float)->void:
 	emit_signal("client_satisfied", node, temper_delta)
 
-func client_is_enraged(node:Spatial, temper_delta:float)->void:
-	emit_signal("client_is_enraged", node, temper_delta)
+func emit_client_is_enraged(node:Spatial, temper_delta:float)->void:
+	emit_signal("client_enraged", node, temper_delta)
 
 
 func clean_barista_prepared_order()->void:
 	barista_prepared_order.clear()
 
 func barista_add_item_to_delivery(item:int)->void:
+	if not (item in possible_orders.values()):
+		push_warning("[barista_add_item_to_delivery] The added item is not valid, the game will catch fire: {0} not any of {1}".format({0:str(item), 1:str(possible_orders.values())}))
 	barista_prepared_order.append(item)
 
 #Calls any customer to the deliver zone
@@ -88,13 +88,13 @@ func barista_call_client_to_get_food(client_node:Spatial)->void:
 func compare_order(barista_order:Array, customer_order:Array)->int:
 	barista_order.sort()
 	customer_order.sort()
-	print(barista_order, customer_order)
+	print_debug("[compare_order] Barista: {0}, Cutomer: {1}".format({0:str(barista_order), 1:str(customer_order)}))
 	var barista_order_siz = barista_order.size()
 	var customer_order_size = customer_order.size()
 
 	#Client will not accept less items than the order size, won't mind if there's more than asked
 	if barista_order_siz < customer_order_size:
-		print("Reason: barista gave me less items than I need", barista_order, customer_order)
+		print_debug("[compare_order] barista gave less items than asked", barista_order, customer_order)
 		return 0
 
 	var missed_items:float = 0
@@ -105,7 +105,7 @@ func compare_order(barista_order:Array, customer_order:Array)->int:
 
 	client_got_order_from_the_counter()
 	if missed_items == customer_order_size:
-		print("All of the items are wrong")
+		print_debug("[compare_order] All of the items are wrong")
 		return 0
 	else:
 		var score = (missed_items/customer_order_size)*100
@@ -127,7 +127,7 @@ func generate_order(number_of_items:int, can_repeat:bool)->Array:
 
 func add_order(node:Spatial, order:Array)->void:
 	if node in order_queue.keys():
-		printerr("Node already with some orders on queue")
+		printerr("[add_order] Node already with some orders on queue, will skip")
 		return
 	order_queue[node] = order
 	emit_signal("new_order", order )
@@ -145,7 +145,7 @@ func remove_order(node:Spatial)->bool:
 
 func client_gave_review(review:float)->void:
 	emit_signal("client_review", review)
-	print("The customer gave a rating to the food: ", review)
+	print_debug("[client_gave_review] The customer gave a rating to the food: ", review)
 
 func client_got_order_from_the_counter()->void:
 	emit_signal("client_got_order_from_counter")
@@ -167,18 +167,3 @@ func take_order_from_customer()->bool:
 
 func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
-
-#This whole process is for debug purposes
-func _process(delta):
-	#Debug purposes
-	if not debugging:
-		return
-	if customer_waiting_on_ask_spot == null:
-		return
-	if customer_waiting_on_ask_spot != null and not customer_waiting_on_ask_spot.barista_took_order:
-		yield(get_tree().create_timer(rand_range(7, 20)), "timeout")
-		take_order_from_customer()
-	if order_queue.size() > 0:
-		yield(get_tree().create_timer(rand_range(10, 20)), "timeout")
-		for i in order_queue:
-			barista_call_client_to_get_food(i)

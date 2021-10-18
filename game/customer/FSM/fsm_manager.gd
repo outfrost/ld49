@@ -4,7 +4,8 @@ enum {
 	idle,
 	waiting_to_order,
 	waiting_for_order,
-	drinking, walking,
+	drinking,
+	walking,
 	delivering_order_to_barista,
 	picking_up_bewerage
 }
