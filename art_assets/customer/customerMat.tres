@@ -4,4 +4,3 @@
 resource_name = "customerMat"
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
-albedo_color = Color( 0.349006, 0.339128, 0.336896, 1 )

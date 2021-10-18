@@ -1,11 +1,9 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
 [ext_resource path="res://game/customer/CustomerClick.gd" type="Script" id=3]
 [ext_resource path="res://game/customer/speech_bubble/SpatialSpeechBubble.tscn" type="PackedScene" id=4]
-
-[sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.52163
@@ -101,12 +99,6 @@ graph_offset = Vector2( -287.902, 17.131 )
 ]]
 script = ExtResource( 1 )
 max_speed = 4.0
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0 )
-visible = false
-mesh = SubResource( 1 )
-material/0 = null
 
 [node name="customer" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )

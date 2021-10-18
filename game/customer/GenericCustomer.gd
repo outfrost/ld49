@@ -5,6 +5,12 @@ extends KinematicBody
 
 var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
+const TEXTURES: Array = [
+	preload("res://art_assets/customer/customerDiffuseA.png"),
+	preload("res://art_assets/customer/customerDiffuseB.png"),
+	preload("res://art_assets/customer/customerDiffuseC.png"),
+]
+
 enum states {idle, waiting_to_order, waiting_for_order, drinking, walking}
 enum feelings {happy, indifferent, bored, insane}
 enum possible_icons {wait_chill, wait_warning, wait_angry}
@@ -163,11 +169,15 @@ func _ready():
 	animPlayer.get_animation("customerWaitRegister").loop = true
 	animPlayer.get_animation("customerDrinkIdle").loop = true
 
-
 	if lock_z_axis:
 		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
+
+	var model: MeshInstance = $customer/customerArmature/Skeleton/customer
+	var mat: SpatialMaterial = model.mesh.surface_get_material(0).duplicate()
+	mat.albedo_texture = TEXTURES[randi() % TEXTURES.size()]
+	model.set_surface_material(0, mat)
 
 func _physics_process(delta):
 	if path_node < path.size(): #Must move to reach destination
