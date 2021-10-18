@@ -55,15 +55,16 @@ func customer_clicked(customer:Spatial):
 	if not is_instance_valid(customer) or not customer.has_method("call_customer_to_deliver_zone"):
 		print("Somehow it's trying to click an invalid customer! ", get_stack())
 		return
-	match customer.current_state:
-		customer.states.waiting_for_order:
-			if customer.barista_called_for_delivery:
-				return
-			emit_signal("clicked_customer_to_deliver_bewerage", customer)
-			print("Called customer to deliver *bewerage* ", customer)
-
-		_:
-			return
+	#TODO: UPDATE to new FSM
+#	match customer.current_state:
+#		customer.states.waiting_for_order:
+#			if customer.barista_called_for_delivery:
+#				return
+#			emit_signal("clicked_customer_to_deliver_bewerage", customer)
+#			print("Called customer to deliver *bewerage* ", customer)
+#
+#		_:
+#			return
 
 func client_is_satisfied(node:Spatial)->void:
 	emit_signal("client_satisfied", node)

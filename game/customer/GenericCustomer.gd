@@ -5,25 +5,13 @@ extends KinematicBody
 
 var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
-enum states {idle, waiting_to_order, waiting_for_order, drinking, walking}
-enum feelings {happy, indifferent, bored, insane}
-
-var current_state:int = states.idle
 
 var customer_possible_difficulty = [1, 2, 3] #Difficulty will halve time to please the customer
 onready var customer_difficulty = customer_possible_difficulty[randi() % customer_possible_difficulty.size()]
-export var max_speed:float = 10
+
 export var waiting_time_tolerance = 100
 onready var max_waiting_timer:Timer = $MaxWaitingTime
 
-var current_speed:float = 0
-var target:Spatial = null
-
-var path = []
-var path_node = 0
-onready var navmesh:Navigation = get_parent()
-
-var locked_height:float = 0
 
 signal started_walking
 signal started_idling
@@ -33,9 +21,11 @@ var barista_took_order:bool = false
 var barista_called_for_delivery:bool = false
 var got_food:bool = false
 
-#Maybe for some reason the characters are supposed to be locked on the y axis, so they don't climb stuff, not that they will or should
-#I'm not sure if they would climb stairs by default
-var lock_z_axis:bool = false
+var target:Spatial = null
+var path = []
+var path_node = 0
+onready var navmesh:Navigation =  get_parent()
+onready var FSM:Node = get_node("FSM")
 
 onready var customer_generated_food_order = OrderRepository.generate_order(customer_difficulty, false)
 
@@ -54,9 +44,11 @@ onready var place_order_timer:Timer = $AnimationTimers/PlaceOrderTimer
 var pickup_food_order_check:bool = false
 var place_order_timer_check:bool = false
 
+
 func _face_focus_direction(override_for_animation:bool = false)->void:
-	if current_state == states.walking and not override_for_animation:
-		return
+#TODO: update to new FSM
+#	if current_state == states.walking and not override_for_animation:
+#		return
 	if allocated_spot == null:
 		return
 	if not allocated_spot.has_method("get_focus_direction"):
@@ -89,9 +81,8 @@ func needs_fullfilled():
 	OrderRepository.emit_signal("client_satisfied", self)
 
 func deliver_order_to_barista()->void:
+	FSM.change_state(FSM.delivering_order_to_barista)
 	barista_took_order = true
-	place_order_timer.start()
-	anim_state_machine.travel("customerOrdering")
 	OrderRepository.add_order(self, customer_generated_food_order)
 	speech_bubble.render_orders(customer_generated_food_order)
 	speech_bubble.show_bubble()
@@ -107,14 +98,14 @@ func receive_order(received_item:int)->bool: #True = the delivered item is corre
 	return false
 
 func go_ask_for_food_spot()->Spatial:
-	if allocated_spot != null and allocated_spot.is_in_group("ask_food_spot"):
+	if is_instance_valid(allocated_spot) and allocated_spot.is_in_group("ask_food_spot"):
 		return allocated_spot
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.ask_food_spot])
 	move_to(target)
 	return target
 
 func go_waiting_spot()->void:
-	if allocated_spot != null:
+	if is_instance_valid(allocated_spot):
 		if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.waiting_spot]):
 			return
 	target = _get_and_allocate_spot(spots_collection.spot_names[spots_collection.waiting_spot])
@@ -154,143 +145,43 @@ func _ready():
 	animPlayer.get_animation("customerWaitRegister").loop = true
 	animPlayer.get_animation("customerDrinkIdle").loop = true
 
-
-	if lock_z_axis:
-		locked_height = global_transform.origin.y
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
-
-func _physics_process(delta):
-	if path_node < path.size(): #Must move to reach destination
-		if current_state != states.walking:
-			current_state = states.walking
-			emit_signal("started_walking")
-		var direction:Vector3 = path[path_node] - global_transform.origin
-		if direction.length() < 0.1:
-			path_node += 1
-		else:
-			current_speed = lerp(current_speed, max_speed, 0.01)
-			move_and_slide(direction.normalized() * current_speed, Vector3.UP)
-			#Customers can look where they are moving
-			rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
-			anim_state_machine.travel("walking")
-			if lock_z_axis:
-				global_transform.origin.y = locked_height
-	else: #Reached destination
-		match current_state:
-			states.idle:
-				if not customer_generated_food_order.empty() and not barista_took_order:
-					var ask_food_spot = go_ask_for_food_spot()
-					if ask_food_spot == null:
-						#wait on a table, if none available, will wait until finds one
-						go_waiting_spot()
-			states.walking:
-				#Every time the customer walks, the timer is reseted
-				max_waiting_timer.start()
-				if got_food:
-					current_state = states.drinking
-				if barista_called_for_delivery and not got_food: #Stopped walking at the checkout spot
-					#Play pickup food animation
-					if not pickup_food_timer.is_stopped():
-						_face_focus_direction(true)
-						return
-					if pickup_food_timer.is_stopped() and not pickup_food_order_check:
-						pickup_food_timer.start()
-						pickup_food_order_check = true
-						anim_state_machine.travel("customerPickup")
-						return
-
-					got_food = true
-					OrderRepository.client_got_order_from_the_counter()
-					order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(self))
-					print("The customer gave a rating to the food: ", order_score)
-					OrderRepository.remove_order(self)
-					speech_bubble.hide_bubble()
-					var will_stay_or_leave = rand_range(100, 105)
-					if will_stay_or_leave < 10:
-						leave_and_go_away()
-						return
-					else:
-						go_waiting_spot()
-						return
-				if not barista_took_order:
-					current_state = states.waiting_to_order
-				else:
-					if not got_food:
-						current_state = states.waiting_for_order
-				emit_signal("started_idling")
-				if target and target.is_in_group("exit_spot"):
-					emit_signal("despawning", self)
-					call_deferred("queue_free")
-				if allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
-					OrderRepository.set_customer_waiting_on_ask_spot(self)
-					if !HintPopup.firstorder:
-						HintPopup.firstorder = true
-						HintPopup.display("A customer is ready to order, don't make them wait too long", 5.0)
-			states.waiting_to_order:
-				if barista_took_order:
-					current_state = states.waiting_for_order
-					return
-				_face_focus_direction()
-				if max_waiting_timer.is_stopped():
-					#Barista interaction should change state to waiting_for_order, or the timeout will and the customer will get very angry and go away
-					max_waiting_timer.start()
-				#If the customer is waiting to ask for order, it will wait for the ask_spot to be free
-				if is_instance_valid(allocated_spot):
-					if not allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]):
-						go_ask_for_food_spot()
-					else:
-						anim_state_machine.travel("wait_register")
-			states.waiting_for_order:
-				_face_focus_direction()
-				if max_waiting_timer.is_stopped():
-					#Restart timer
-					max_waiting_timer.start()
-				if barista_took_order and allocated_spot.is_in_group(spots_collection.spot_names[spots_collection.ask_food_spot]): #Barista has picked the customer order and he is on the asking spot
-					pass
-				else: #Customer is waiting for order on a table
-					if place_order_timer.is_stopped():
-						anim_state_machine.travel("wait_table")
-
-			states.drinking:
-				anim_state_machine.travel("customerDrinkIdle")
-				_face_focus_direction()
-				#Will change automatically to leaving after some time
-				pass
-			_:
-				current_state = states.idle
 
 func move_to(target:Spatial):
 	if target == null:
 		return
 	path = navmesh.get_simple_path(global_transform.origin, target.global_transform.origin)
 	path_node = 0
+	FSM.change_state(FSM.walking)
 
 
 func _on_MaxWaitingTime_timeout():
-	match current_state:
-		states.waiting_for_order:
-			print("Customer expired, reason: waited for order too long")
-			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
-		states.waiting_to_order:
-			print("Customer expired, reason: waited to order too long")
-			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
-		states.drinking:
-			print("Customer expired, reason: consumed drink")
-			if order_score > 50:
-				needs_fullfilled()
-			else:
-				OrderRepository.emit_signal("client_enraged", self)
-			leave_and_go_away()
-		states.idle:
-			print("Customer expired, reason: expired while idling")
-			leave_and_go_away()
-		states.walking:
-			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
-		_:
-			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
+	pass
+	#TODO: Update to new FSM
+#	match current_state:
+#		states.waiting_for_order:
+#			print("Customer expired, reason: waited for order too long")
+#			leave_and_go_away()
+#			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
+#		states.waiting_to_order:
+#			print("Customer expired, reason: waited to order too long")
+#			leave_and_go_away()
+#			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
+#		states.drinking:
+#			print("Customer expired, reason: consumed drink")
+#			if order_score > 50:
+#				needs_fullfilled()
+#			else:
+#				OrderRepository.emit_signal("client_enraged", self)
+#			leave_and_go_away()
+#		states.idle:
+#			print("Customer expired, reason: expired while idling")
+#			leave_and_go_away()
+#		states.walking:
+#			max_waiting_timer.start() #Reset time, was walking, dont go away in this state ever
+#		_:
+#			printerr("Customer tolerance time expired while he was in a unexpected state", current_state, get_stack())
 
 
 #After the customer placed the order
