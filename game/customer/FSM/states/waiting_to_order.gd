@@ -5,6 +5,7 @@ func enter():
 	.enter()
 	base_customer.anim_state_machine.travel("wait_register")
 	base_customer.max_waiting_timer.start()
+	base_customer.add_icon(base_customer.possible_icons.wait_chill)
 
 func exit():
 	.exit()

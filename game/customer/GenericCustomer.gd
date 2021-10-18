@@ -5,11 +5,36 @@ extends KinematicBody
 
 var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
+const TEXTURES: Array = [
+	preload("res://art_assets/customer/customerDiffuseA.png"),
+	preload("res://art_assets/customer/customerDiffuseB.png"),
+	preload("res://art_assets/customer/customerDiffuseC.png"),
+]
+
+enum states {idle, waiting_to_order, waiting_for_order, drinking, walking}
+enum feelings {happy, indifferent, bored, insane}
+enum possible_icons {wait_chill, wait_warning, wait_angry}
+
+var icon_scenes: Dictionary = {
+	possible_icons.wait_chill:load("res://assets/Icon_Waiting_Chill.tscn"),
+	possible_icons.wait_warning:load("res://assets/Icon_Waiting_Warning.tscn"),
+	possible_icons.wait_angry:load("res://assets/Icon_Waiting_Angry.tscn")
+}
+
+onready var icon_attachment: Node = $Icon
+
+var current_state:int = states.idle
 
 var customer_possible_difficulty = [1, 2, 3] #Difficulty will halve time to please the customer
 onready var customer_difficulty = customer_possible_difficulty[randi() % customer_possible_difficulty.size()]
-
+onready var effect_multiplier = 0.5 + 0.5 * customer_difficulty
+export var max_speed:float = 10
 export var waiting_time_tolerance = 100
+
+export var happy_effect: float = 5
+export var grumble_effect: float = -1
+export var angry_effect: float = -5
+
 onready var max_waiting_timer:Timer = $MaxWaitingTime
 
 
@@ -82,7 +107,7 @@ func call_customer_to_deliver_zone():
 
 func needs_fullfilled():
 	OrderRepository.remove_order(self)
-	OrderRepository.emit_signal("client_satisfied", self)
+	OrderRepository.emit_signal("client_satisfied", self, happy_effect * effect_multiplier)
 
 func deliver_order_to_barista()->void:
 	FSM.change_state(FSM.delivering_order_to_barista)
@@ -141,7 +166,6 @@ func leave_and_go_away()->void:
 	move_to(target)
 	OrderRepository.remove_order(self)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	animPlayer.get_animation("customerWalk").loop = true
 	animPlayer.get_animation("drinkBeverage").loop = true
@@ -151,6 +175,18 @@ func _ready():
 
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
+	var model: MeshInstance = $customer/customerArmature/Skeleton/customer
+	# Clone the mesh to prevent artifacts from shape keys
+	var mesh: Mesh = model.mesh.duplicate()
+	model.mesh = mesh
+	# Clone the material to prevent overwriting source albedo
+	var mat: SpatialMaterial = mesh.surface_get_material(0).duplicate()
+	mat.albedo_texture = TEXTURES[randi() % TEXTURES.size()]
+	model.set_surface_material(0, mat)
+
+	model.set("blend_shapes/bodyThicker", randf())
+	model.set("blend_shapes/hairRound", randf())
+	model.set("blend_shapes/hairSharp", randf())
 
 func move_to(target:Spatial):
 	if target == null:
@@ -165,11 +201,11 @@ func _on_MaxWaitingTime_timeout():
 		FSM.waiting_for_order:
 			print("Customer expired, reason: waited for order too long")
 			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Kept waiting forever, not cool
+			OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier) #Kept waiting forever, not cool
 		FSM.waiting_to_order:
 			print("Customer expired, reason: waited to order too long")
 			leave_and_go_away()
-			OrderRepository.emit_signal("client_enraged", self) #Not delivered on time, very mad
+			OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier) #Not delivered on time, very mad
 		FSM.drinking:
 			print("Customer expired, reason: consumed drink")
 			#This will decide if the customer will be satisfied or not
@@ -177,7 +213,7 @@ func _on_MaxWaitingTime_timeout():
 			if order_score > 50:
 				needs_fullfilled()
 			else:
-				OrderRepository.emit_signal("client_enraged", self)
+				OrderRepository.emit_signal("client_enraged", self, angry_effect * effect_multiplier)
 			leave_and_go_away()
 		FSM.idle:
 			print("Customer expired, reason: expired while idling")
@@ -190,3 +226,17 @@ func _on_MaxWaitingTime_timeout():
 #After the customer placed the order
 func _on_PlaceOrderTimer_timeout():
 	go_waiting_spot()
+
+func add_icon(icon_type:int) -> void:
+	# Remove any other icons that are currently displayed above the model
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)
+
+	var icon_instance = icon_scenes[icon_type].instance()
+	icon_attachment.add_child(icon_instance)
+
+func remove_icon() -> void:
+	if icon_attachment.get_child_count() > 0:
+		for child in icon_attachment.get_children():
+			icon_attachment.remove_child(child)

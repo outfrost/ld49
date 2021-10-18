@@ -125,10 +125,16 @@ func _process(delta: float) -> void:
 	if !is_running:
 		return
 
-	if is_crazy and !HintPopup.firstmindwarning:
-		HintPopup.firstmindwarning = true
-		HintPopup.display("Watch out, you're starting to lose it", 5.0)
-		HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 5.0)
+	if is_crazy:
+		if !HintPopup.firstmindwarning:
+			HintPopup.firstmindwarning = true
+			HintPopup.display("Watch out, you're starting to lose it", 5.0)
+			HintPopup.display("Keep an eye on your sanity, try slowing down or drinking a refreshing beverage", 5.0)
+		player_visual.add_icon(player_visual.possible_icons.barista_insane)
+	elif temper <= temper_max/2 :
+		player_visual.add_icon(player_visual.possible_icons.barista_hot)
+	else:
+		player_visual.remove_icon()
 
 	time_elapsed += delta
 
@@ -335,7 +341,8 @@ func start_activity():
 		player_visual.rotation.y = position.rotation.y
 	activity_started = true
 
-func on_customer_satisfied(_customer) -> void:
+func on_customer_satisfied(_customer, temper_delta) -> void:
+	update_temper(temper_delta)
 	customers_served += 1
 	$HappyNoiseSfx.play()
 	if !HintPopup.firsthappy:
@@ -343,9 +350,13 @@ func on_customer_satisfied(_customer) -> void:
 		HintPopup.display("Good Job, the customer is satisfied", 5.0)
 		HintPopup.display("Keep up the good work", 5.0)
 
-func on_customer_enraged(_customer) -> void:
+func on_customer_enraged(_customer, temper_delta) -> void:
+	update_temper(temper_delta)
 	$SadNoiseSfx.play()
 	if !HintPopup.firstenrage:
 		HintPopup.firstenrage = true
 		HintPopup.display("Oh No, you made a customer upset", 5.0)
 		HintPopup.display("If you're not careful, too many angry customers will take a toll on you", 5.0)
+
+func update_temper(temper_delta:float) -> void:
+	temper += temper_delta

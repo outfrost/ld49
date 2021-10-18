@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_angrywaitingtime_v2.ogg-649d9c3477ed6d10f25b92d373df7990.oggstr"
+
+[deps]
+
+source_file="res://sound/sfx_angrywaitingtime_v2.ogg"
+dest_files=[ "res://.import/sfx_angrywaitingtime_v2.ogg-649d9c3477ed6d10f25b92d373df7990.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

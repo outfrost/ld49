@@ -5,5 +5,5 @@ resource_name = "metalCJ"
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 albedo_color = Color( 0.796078, 0.764706, 0.721569, 1 )
-metallic = 0.6
+metallic = 0.65
 roughness = 0.5

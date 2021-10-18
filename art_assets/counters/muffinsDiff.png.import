@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/customerDiffuseA.png-02c6f7913679c8a1407f6f484b24ba3c.s3tc.stex"
-path.etc2="res://.import/customerDiffuseA.png-02c6f7913679c8a1407f6f484b24ba3c.etc2.stex"
+path.s3tc="res://.import/muffinsDiff.png-fae6398006cb7d6ffb0f3f6b5c8b72d2.s3tc.stex"
+path.etc2="res://.import/muffinsDiff.png-fae6398006cb7d6ffb0f3f6b5c8b72d2.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art_assets/customer/customerDiffuseA.png"
-dest_files=[ "res://.import/customerDiffuseA.png-02c6f7913679c8a1407f6f484b24ba3c.s3tc.stex", "res://.import/customerDiffuseA.png-02c6f7913679c8a1407f6f484b24ba3c.etc2.stex" ]
+source_file="res://art_assets/counters/muffinsDiff.png"
+dest_files=[ "res://.import/muffinsDiff.png-fae6398006cb7d6ffb0f3f6b5c8b72d2.s3tc.stex", "res://.import/muffinsDiff.png-fae6398006cb7d6ffb0f3f6b5c8b72d2.etc2.stex" ]
 
 [params]
 
