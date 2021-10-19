@@ -60,6 +60,7 @@ func _ready() -> void:
 	AudioServer.set_bus_volume_db(bus_ambient, linear2db(0.0))
 
 	OrderRepository.connect("client_satisfied", self, "on_customer_satisfied")
+	OrderRepository.connect("client_unhappy", self, "on_customer_unhappy")
 	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
 
 	main_menu.connect("start_game", self, "on_start_game")
@@ -349,6 +350,10 @@ func on_customer_satisfied(_customer, temper_delta) -> void:
 		HintPopup.firsthappy = true
 		HintPopup.display("Good Job, the customer is satisfied", 5.0)
 		HintPopup.display("Keep up the good work", 5.0)
+
+#Used for when customer 'grumbles'
+func on_customer_unhappy(_customer, temper_delta) -> void:
+	update_temper(temper_delta)
 
 func on_customer_enraged(_customer, temper_delta) -> void:
 	update_temper(temper_delta)

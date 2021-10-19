@@ -114,6 +114,9 @@ func needs_fullfilled()->void:
 	OrderRepository.remove_order(self)
 	OrderRepository.emit_client_is_satisfied(self, happy_effect * effect_multiplier)
 
+func grumble()->void:
+	OrderRepository.emit_client_is_unhappy(self, grumble_effect * effect_multiplier) #Customer is grumbly
+
 func needs_failed()->void:
 	leave_and_go_away()
 	OrderRepository.emit_client_is_enraged(self, angry_effect * effect_multiplier) #Kept waiting forever, not cool

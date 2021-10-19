@@ -30,6 +30,7 @@ func get_coffe_name(coffee_type: int) -> String:
 signal new_order(order_array)
 signal removed_order
 signal client_satisfied(node, temper_delta) #Called from customer directly
+signal client_unhappy(node, temper_delta) #Called from customer directly
 signal client_enraged(node, temper_delta) #Called from customer directly
 signal client_got_order_from_counter
 signal client_review(score)
@@ -66,9 +67,11 @@ func customer_clicked(customer:Spatial):
 func emit_client_is_satisfied(node:Spatial, temper_delta:float)->void:
 	emit_signal("client_satisfied", node, temper_delta)
 
+func emit_client_is_unhappy(node:Spatial, temper_delta:float)->void:
+	emit_signal("client_unhappy", node, temper_delta)
+
 func emit_client_is_enraged(node:Spatial, temper_delta:float)->void:
 	emit_signal("client_enraged", node, temper_delta)
-
 
 func clean_barista_prepared_order()->void:
 	barista_prepared_order.clear()
