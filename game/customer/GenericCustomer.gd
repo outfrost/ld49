@@ -219,7 +219,7 @@ func _on_MaxWaitingTime_timeout():
 			needs_failed()
 		FSM.drinking:
 			#This will decide if the customer will be satisfied or not
-			#The order_score is computed on picking_up_bewerage.gd
+			#The order_score is computed on picking_up_beverage.gd
 			if order_score > 50:
 				needs_fullfilled()
 				leave_and_go_away()

@@ -11,7 +11,7 @@
 [ext_resource path="res://game/customer/FSM/states/waiting_for_order.gd" type="Script" id=9]
 [ext_resource path="res://game/customer/FSM/states/drinking.gd" type="Script" id=10]
 [ext_resource path="res://game/customer/FSM/states/delivering_order_to_barista.gd" type="Script" id=11]
-[ext_resource path="res://game/customer/FSM/states/picking_up_bewerage.gd" type="Script" id=12]
+[ext_resource path="res://game/customer/FSM/states/picking_up_beverage.gd" type="Script" id=12]
 [ext_resource path="res://game/customer/GenericCustomerAnimationTree.tres" type="AnimationNodeStateMachine" id=13]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -95,10 +95,10 @@ script = ExtResource( 11 )
 [node name="Timer" type="Timer" parent="FSM/delivering_order_to_barista"]
 one_shot = true
 
-[node name="picking_up_bewerage" type="Node" parent="FSM"]
+[node name="picking_up_beverage" type="Node" parent="FSM"]
 script = ExtResource( 12 )
 
-[node name="Timer" type="Timer" parent="FSM/picking_up_bewerage"]
+[node name="Timer" type="Timer" parent="FSM/picking_up_beverage"]
 wait_time = 1.5
 one_shot = true
 
@@ -112,4 +112,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0 )
 [connection signal="timeout" from="AnimationTimers/PlaceOrderTimer" to="." method="_on_PlaceOrderTimer_timeout"]
 [connection signal="timeout" from="FSM/drinking/MaxDrinkingTime" to="FSM/drinking" method="_on_MaxDrinkingTime_timeout"]
 [connection signal="timeout" from="FSM/delivering_order_to_barista/Timer" to="FSM/delivering_order_to_barista" method="_on_Timer_timeout"]
-[connection signal="timeout" from="FSM/picking_up_bewerage/Timer" to="FSM/picking_up_bewerage" method="_on_Timer_timeout"]
+[connection signal="timeout" from="FSM/picking_up_beverage/Timer" to="FSM/picking_up_beverage" method="_on_Timer_timeout"]

@@ -34,7 +34,7 @@ signal client_unhappy(node, temper_delta) #Called from customer directly
 signal client_enraged(node, temper_delta) #Called from customer directly
 signal client_got_order_from_counter
 signal client_review(score)
-signal clicked_customer_to_deliver_bewerage(customer)
+signal clicked_customer_to_deliver_beverage(customer)
 #Stores the orders the player accepted
 #node_ref:order_array
 var order_queue:Dictionary = {
@@ -47,7 +47,7 @@ var customer_waiting_on_ask_spot:Spatial = null
 func _ready():
 	randomize()
 	connect("client_got_order_from_counter", self, "clean_barista_prepared_order")
-	connect("clicked_customer_to_deliver_bewerage", self, "barista_call_client_to_get_food")
+	connect("clicked_customer_to_deliver_beverage", self, "barista_call_client_to_get_food")
 
 #Called from the Customer's CustomerClick.gd
 func customer_clicked(customer:Spatial):
@@ -59,8 +59,8 @@ func customer_clicked(customer:Spatial):
 		customer.FSM.waiting_for_order:
 			if customer.barista_called_for_delivery:
 				return
-			emit_signal("clicked_customer_to_deliver_bewerage", customer)
-			print_debug("Called customer to deliver *bewerage* ", customer)
+			emit_signal("clicked_customer_to_deliver_beverage", customer)
+			print_debug("Called customer to deliver *beverage* ", customer)
 		_:
 			return
 

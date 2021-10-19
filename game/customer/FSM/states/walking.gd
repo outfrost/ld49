@@ -46,7 +46,7 @@ func _physics_process(delta):
 		#Customer picking up food
 		if base_customer.barista_called_for_delivery and not base_customer.got_food: #Stopped walking at the checkout spot
 			#TODO: pick up food
-			FSM.change_state(FSM.picking_up_bewerage)
+			FSM.change_state(FSM.picking_up_beverage)
 			return
 		###############################################
 

@@ -7,7 +7,7 @@ enum {
 	drinking,
 	walking,
 	delivering_order_to_barista,
-	picking_up_bewerage
+	picking_up_beverage
 }
 
 onready var states = {
@@ -17,7 +17,7 @@ onready var states = {
 	drinking:$drinking,
 	walking:$walking,
 	delivering_order_to_barista:$delivering_order_to_barista,
-	picking_up_bewerage:$picking_up_bewerage
+	picking_up_beverage:$picking_up_beverage
 }
 
 onready var current_state:int = idle
