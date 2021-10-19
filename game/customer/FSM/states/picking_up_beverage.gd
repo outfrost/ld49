@@ -6,6 +6,7 @@ func enter():
 	base_customer.anim_state_machine.travel("customerPickup")
 	base_customer.remove_icon()
 	$Timer.start()
+	base_customer._face_focus_direction(base_customer.allocated_spot)
 
 func exit():
 	.exit()
@@ -13,7 +14,6 @@ func exit():
 func _physics_process(delta):
 	if not active:
 		return
-	base_customer._face_focus_direction()
 
 func _on_Timer_timeout():
 	base_customer.got_food = true

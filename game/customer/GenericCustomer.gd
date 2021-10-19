@@ -70,6 +70,9 @@ onready var place_order_timer:Timer = $AnimationTimers/PlaceOrderTimer
 var pickup_food_order_check:bool = false
 var place_order_timer_check:bool = false
 
+var current_focus:Spatial = null
+onready var focus_tween:Tween = $FocusTween
+
 func emit_started_walking()->void:
 	emit_signal("started_walking")
 
@@ -79,15 +82,20 @@ func emit_started_idling()->void:
 func emit_despawning()->void:
 	emit_signal("despawning", self)
 
-func _face_focus_direction(override_for_animation:bool = false)->void:
+func _face_focus_direction(new_focus:Spatial, override_for_animation:bool = false)->void:
+	if new_focus == current_focus:
+		return
 	if FSM.current_state == FSM.walking and not override_for_animation:
 		return
-	if allocated_spot == null:
+	if not is_instance_valid(allocated_spot):
 		return
 	if not allocated_spot.has_method("get_focus_direction"):
 		return
 	var direction:Vector3 = (allocated_spot.global_transform.origin+allocated_spot.get_focus_direction())-global_transform.origin
-	rotation.y = lerp(rotation.y, atan2(direction.x, direction.z), 0.1)
+	focus_tween.interpolate_property(self, "rotation",
+		rotation, Vector3(rotation.x,atan2(direction.x, direction.z),rotation.z), 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	focus_tween.start()
 
 func _get_and_allocate_spot(group_name:String)->Spatial:
 	var seats:Array = get_tree().get_nodes_in_group(group_name)

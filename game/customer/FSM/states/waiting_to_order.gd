@@ -6,7 +6,7 @@ func enter():
 	base_customer.anim_state_machine.travel("wait_register")
 	base_customer.max_waiting_timer.start()
 	base_customer.add_icon(base_customer.possible_icons.wait_chill)
-
+	base_customer._face_focus_direction(base_customer.allocated_spot)
 func exit():
 	.exit()
 
@@ -16,7 +16,6 @@ func _physics_process(delta):
 	if base_customer.barista_took_order:
 		FSM.change_state(FSM.waiting_for_order)
 		return
-	base_customer._face_focus_direction()
 
 	#If the customer is waiting to ask for order, it will wait for the ask_spot to be free
 	if is_instance_valid(base_customer.allocated_spot):

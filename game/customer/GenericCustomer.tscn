@@ -105,6 +105,8 @@ one_shot = true
 [node name="Icon" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0 )
 
+[node name="FocusTween" type="Tween" parent="."]
+
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
 [connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]
 [connection signal="mouse_entered" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_mouse_entered"]

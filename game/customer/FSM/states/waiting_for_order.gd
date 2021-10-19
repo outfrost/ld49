@@ -9,6 +9,7 @@ func enter():
 	base_customer.max_waiting_timer.start()
 	warning = false
 	angry = false
+	base_customer._face_focus_direction(base_customer.allocated_spot)
 
 func exit():
 	.exit()
@@ -16,7 +17,7 @@ func exit():
 func _physics_process(delta):
 	if not active:
 		return
-	base_customer._face_focus_direction()
+
 	if inverse_lerp(0, base_customer.max_waiting_timer.wait_time, base_customer.max_waiting_timer.time_left) < 0.25 and !angry:
 		angry = true
 		base_customer.add_icon(base_customer.possible_icons.wait_angry)
