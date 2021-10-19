@@ -32,4 +32,4 @@ bus = "Effects"
 emission_angle_degrees = 90.0
 
 [node name="Icon" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )

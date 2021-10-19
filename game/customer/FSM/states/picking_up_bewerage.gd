@@ -4,6 +4,7 @@ extends '../base.gd'
 func enter():
 	.enter()
 	base_customer.anim_state_machine.travel("customerPickup")
+	base_customer.remove_icon()
 	$Timer.start()
 
 func exit():

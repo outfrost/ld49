@@ -9,4 +9,5 @@ func exit():
 	.exit()
 
 func _on_Timer_timeout():
+	base_customer.remove_icon()
 	base_customer.go_waiting_spot()

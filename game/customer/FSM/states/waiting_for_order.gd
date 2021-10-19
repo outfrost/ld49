@@ -11,7 +11,6 @@ func enter():
 	angry = false
 
 func exit():
-	base_customer.remove_icon()
 	.exit()
 
 func _physics_process(delta):

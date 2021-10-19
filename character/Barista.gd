@@ -36,6 +36,7 @@ var path_node = 0
 
 var carry_attachment: BoneAttachment
 onready var icon_attachment: Node = $Icon
+onready var displayed_icon:int = -1
 
 func _ready() -> void:
 	anim.get_animation("walkFast").loop = true
@@ -118,15 +119,20 @@ func remove_cup():
 	return null
 
 func add_icon(icon_type:int) -> void:
-	if icon_attachment.get_child_count() > 0:
-		for child in icon_attachment.get_children():
-			icon_attachment.remove_child(child)
+	if icon_type != displayed_icon:
+		if icon_attachment.get_child_count() > 0:
+			for child in icon_attachment.get_children():
+				icon_attachment.remove_child(child)
 
-	var icon_instance = icon_scenes[icon_type].instance()
-	icon_attachment.add_child(icon_instance)
+		var icon_instance = icon_scenes[icon_type].instance()
+		icon_attachment.add_child(icon_instance)
+		set_displayed_icon(icon_type)
 
 func remove_icon() -> void:
-
 	if icon_attachment.get_child_count() > 0:
 		for child in icon_attachment.get_children():
 			icon_attachment.remove_child(child)
+		set_displayed_icon(-1)
+
+func set_displayed_icon(icon_type:int):
+	displayed_icon = icon_type

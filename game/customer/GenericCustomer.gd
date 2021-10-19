@@ -22,6 +22,7 @@ var icon_scenes: Dictionary = {
 }
 
 onready var icon_attachment: Node = $Icon
+onready var displayed_icon: int = -1
 
 var current_state:int = states.idle
 
@@ -239,14 +240,21 @@ func _on_PlaceOrderTimer_timeout():
 
 func add_icon(icon_type:int) -> void:
 	# Remove any other icons that are currently displayed above the model
-	if icon_attachment.get_child_count() > 0:
-		for child in icon_attachment.get_children():
-			icon_attachment.remove_child(child)
+	if icon_type != displayed_icon:
+		if icon_attachment.get_child_count() > 0:
+			for child in icon_attachment.get_children():
+				icon_attachment.remove_child(child)
 
-	var icon_instance = icon_scenes[icon_type].instance()
-	icon_attachment.add_child(icon_instance)
+		var icon_instance = icon_scenes[icon_type].instance()
+		icon_attachment.add_child(icon_instance)
+		set_displayed_icon(icon_type)
 
 func remove_icon() -> void:
 	if icon_attachment.get_child_count() > 0:
 		for child in icon_attachment.get_children():
 			icon_attachment.remove_child(child)
+
+		set_displayed_icon(-1)
+
+func set_displayed_icon(icon_type:int):
+	displayed_icon = icon_type

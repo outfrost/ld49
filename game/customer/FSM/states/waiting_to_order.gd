@@ -8,7 +8,6 @@ func enter():
 	base_customer.add_icon(base_customer.possible_icons.wait_chill)
 
 func exit():
-	base_customer.remove_icon()
 	.exit()
 
 func _physics_process(delta):
