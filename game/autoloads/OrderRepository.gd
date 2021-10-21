@@ -83,7 +83,7 @@ func barista_add_item_to_delivery(item:int)->void:
 
 #Calls any customer to the deliver zone
 func barista_call_client_to_get_food(client_node:Spatial)->void:
-	if is_instance_valid(client_node):
+	if is_instance_valid(client_node) and barista_prepared_order.size() > 0:
 		if client_node.has_method("receive_order"):
 			client_node.call_customer_to_deliver_zone()
 

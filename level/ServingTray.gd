@@ -106,6 +106,8 @@ func put_item(item: Spatial) -> bool:
 	var origin = position.global_transform.origin
 	items_container_object.add_child(item)
 	item.global_transform.origin = origin
+	print(" Item type %s" % item.coffee_type)
+	OrderRepository.barista_add_item_to_delivery(item.coffee_type)
 	return true
 
 func take_items():
@@ -113,7 +115,6 @@ func take_items():
 		return
 	for i in items_container_object.get_children():
 		var item_type = i.coffee_type
-		OrderRepository.barista_add_item_to_delivery(item_type)
 		items_container_object.remove_child(i)
 
 func set_putting():
