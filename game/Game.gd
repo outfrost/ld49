@@ -146,7 +146,7 @@ func _process(delta: float) -> void:
 			while effect.has_next_tick(time_elapsed):
 				var tick_strings = [effect.displayed_name, effect.displayed_description]
 				# print("Passive effect tick \"%s\": %s" % tick_strings)
-				temper += effect.update_temper_delta
+				update_temper(effect.update_temper_delta)
 
 	try_pop_activity()
 	if current_activity and activity_started:
@@ -156,7 +156,7 @@ func _process(delta: float) -> void:
 #		DebugOverlay.display("current activity %s" % activity.displayed_name)
 #		DebugOverlay.display("activity time left %s" % time_left)
 		if is_activity_over:
-			temper += activity.outcome_temper_delta
+			update_temper(activity.outcome_temper_delta)
 			current_activity_timeout = 0.0
 			current_activity = null
 			activity_started = false
@@ -168,11 +168,6 @@ func _process(delta: float) -> void:
 	# limit temper value
 	if temper > temper_max:
 		temper = temper_max
-
-#	DebugOverlay.display("time remaining %.1f" % (game_duration - time_elapsed))
-#	DebugOverlay.display("Your temper %.1f" % temper)
-
-#	DebugOverlay.display("order queue size %d" % OrderRepository.order_queue.size())
 
 #	if OrderRepository.order_queue.size():
 #		for order in OrderRepository.order_queue.values():
