@@ -1,5 +1,6 @@
 extends '../base.gd'
 
+export (float, 0, 100) var customer_stay_chance:float = 30
 
 func enter():
 	.enter()
@@ -22,10 +23,16 @@ func _on_Timer_timeout():
 	OrderRepository.client_gave_review(base_customer.order_score)
 	OrderRepository.remove_order(base_customer)
 	base_customer.speech_bubble.hide_bubble()
-	var will_stay_or_leave = rand_range(100, 105)
-	if will_stay_or_leave < 10:
-		base_customer.leave_and_go_away()
-		return
+
+	#This will decide if the customer will be satisfied or not
+	if base_customer.order_score >= 50:
+		base_customer.needs_fullfilled()
 	else:
+		base_customer.needs_failed()
+
+	var will_stay_or_leave = rand_range(0, 100)
+	if will_stay_or_leave < customer_stay_chance:
+		base_customer.leave_and_go_away()
+	else:
+		#There the customer will timeout at the drinking state
 		base_customer.go_waiting_spot()
-		return

@@ -128,7 +128,6 @@ func grumble()->void:
 	OrderRepository.emit_client_is_unhappy(self, grumble_effect * effect_multiplier) #Customer is grumbly
 
 func needs_failed()->void:
-	leave_and_go_away()
 	OrderRepository.emit_client_is_enraged(self, angry_effect * effect_multiplier) #Kept waiting forever, not cool
 
 func deliver_order_to_barista()->void:
@@ -223,18 +222,14 @@ func _on_MaxWaitingTime_timeout():
 		FSM.waiting_for_order:
 			print_debug("Customer expired, reason: waited for order too long")
 			needs_failed()
+			leave_and_go_away()
 		FSM.waiting_to_order:
 			print_debug("Customer expired, reason: waited to order too long")
 			needs_failed()
+			leave_and_go_away()
 		FSM.drinking:
-			#This will decide if the customer will be satisfied or not
-			#The order_score is computed on picking_up_beverage.gd
-			if order_score > 50:
-				needs_fullfilled()
-				leave_and_go_away()
-			else:
-				needs_failed()
 			print_debug("Customer expired, reason: consumed drink: ", order_score)
+			leave_and_go_away()
 		FSM.idle:
 			print_debug("Customer expired, reason: expired while idling")
 			leave_and_go_away()
