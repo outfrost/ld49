@@ -133,7 +133,7 @@ func _process(delta: float) -> void:
 		self._emitParticles(false)
 		if !HintPopup.firstmachinedone:
 			HintPopup.firstmachinedone = true
-			HintPopup.display("The coffee machine is done brewing, go grab the drink and place it on the order tray", 5.0)
+			HintPopup.display("The coffee machine is done brewing, go grab the drink and place it on the tray", 5.0)
 		return
 	if state == States.RESETTING and is_timeout:
 		eprint("coffee machine is free!")
@@ -158,7 +158,7 @@ func set_working():
 	if !HintPopup.firstmachineuse:
 		HintPopup.firstmachineuse = true
 		HintPopup.display("Keep in mind, you can queue up multiple machines, even if a customer hasn't ordered yet", 5.0)
-		HintPopup.display("Be carefule though, too much time near the machines will make you hot", 5.0)
+		HintPopup.display("Be careful though, too much time near the machines will make you hot", 5.0)
 
 func set_resetting():
 	should_ignore_clicks = false

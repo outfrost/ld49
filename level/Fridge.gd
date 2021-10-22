@@ -3,7 +3,6 @@ extends Area
 
 export var activity_cold_beverage: Resource
 export var cold_beverage_scene: PackedScene
-export var recovery_effect: float
 
 enum States {IDLE, WORKING}
 
@@ -70,7 +69,6 @@ func _process(delta: float) -> void:
 		if barista:
 			barista.cooling_off_sfx.play()
 		eprint("finished chilling at the fridge")
-		game_node.update_temper(recovery_effect)
 		state = States.IDLE
 		return
 	pass

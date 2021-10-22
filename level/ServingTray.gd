@@ -17,7 +17,7 @@ onready var outline = find_node("Outline", true, false)
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
-	OrderRepository.connect("client_got_order_from_counter", self, "yeet_items")
+	OrderRepository.connect("client_got_order_from_counter", self, "take_items")
 	connect("mouse_entered", self, "hover")
 	connect("mouse_exited", self, "unhover")
 	items_container_object = $Items
@@ -106,25 +106,16 @@ func put_item(item: Spatial) -> bool:
 	var origin = position.global_transform.origin
 	items_container_object.add_child(item)
 	item.global_transform.origin = origin
+	print(" Item type %s" % item.coffee_type)
+	OrderRepository.barista_add_item_to_delivery(item.coffee_type)
 	return true
 
 func take_items():
 	if !items_container_object:
 		return
-	var item_count = items_container_object.get_child_count()
 	for i in items_container_object.get_children():
 		var item_type = i.coffee_type
-		OrderRepository.barista_add_item_to_delivery(item_type)
 		items_container_object.remove_child(i)
-
-func yeet_items():
-	if !items_container_object:
-		return
-	for i in items_container_object.get_children():
-		var item_type = i.coffee_type
-		OrderRepository.barista_add_item_to_delivery(item_type)
-		items_container_object.remove_child(i)
-
 
 func set_putting():
 	should_ignore_clicks = false

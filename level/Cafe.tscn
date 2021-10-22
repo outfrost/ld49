@@ -99,7 +99,6 @@ transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.125,
 [node name="Fridge" parent="LevelInteractables" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -4.5 )
 cold_beverage_scene = ExtResource( 12 )
-recovery_effect = 5.0
 
 [node name="ServingTray" parent="LevelInteractables" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.296, 1, 1.315 )

@@ -17,8 +17,8 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	base_customer.got_food = true
-	OrderRepository.client_got_order_from_the_counter()
 	base_customer.order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(base_customer))
+	OrderRepository.client_got_order_from_the_counter()
 	print("The customer gave a rating to the food: ", base_customer.order_score)
 	OrderRepository.remove_order(base_customer)
 	base_customer.speech_bubble.hide_bubble()
