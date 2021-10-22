@@ -19,7 +19,7 @@ func _on_Timer_timeout():
 	base_customer.got_food = true
 	base_customer.order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(base_customer))
 	OrderRepository.client_got_order_from_the_counter()
-	print("The customer gave a rating to the food: ", base_customer.order_score)
+	OrderRepository.client_gave_review(base_customer.order_score)
 	OrderRepository.remove_order(base_customer)
 	base_customer.speech_bubble.hide_bubble()
 	var will_stay_or_leave = rand_range(100, 105)

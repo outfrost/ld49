@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/cup/Cup.gd"
 }, {
+"base": "Spatial",
+"class": "CustomerClick",
+"language": "GDScript",
+"path": "res://game/customer/CustomerClick.gd"
+}, {
 "base": "Area",
 "class": "EspressoMachine",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "Activity": "",
 "ActivityButton": "",
 "Cup": "",
+"CustomerClick": "",
 "EspressoMachine": "",
 "FiniteStateMachine": "",
 "Fridge": "",
