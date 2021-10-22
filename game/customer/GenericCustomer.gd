@@ -248,7 +248,7 @@ func add_icon(icon_type:int) -> void:
 	if icon_type != displayed_icon:
 		if icon_attachment.get_child_count() > 0:
 			for child in icon_attachment.get_children():
-				icon_attachment.remove_child(child)
+				child.queue_free()
 
 		var icon_instance = icon_scenes[icon_type].instance()
 		icon_attachment.add_child(icon_instance)
@@ -257,7 +257,7 @@ func add_icon(icon_type:int) -> void:
 func remove_icon() -> void:
 	if icon_attachment.get_child_count() > 0:
 		for child in icon_attachment.get_children():
-			icon_attachment.remove_child(child)
+			child.queue_free()
 
 		set_displayed_icon(-1)
 
