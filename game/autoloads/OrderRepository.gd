@@ -42,7 +42,8 @@ var order_queue:Dictionary = {
 }
 
 var barista_prepared_order:Array = []
-var customer_waiting_on_ask_spot:Spatial = null setget set_customer_waiting_on_ask_spot, get_customer_waiting_on_ask_spot
+var customer_waiting_on_ask_spot:GenericCustomer = null setget set_customer_waiting_on_ask_spot, get_customer_waiting_on_ask_spot
+var _serving_tray:ServingTray = null setget set_serving_tray, get_serving_tray
 
 func _ready():
 	randomize()
@@ -50,7 +51,7 @@ func _ready():
 	connect("clicked_customer_to_deliver_beverage", self, "barista_call_client_to_get_food")
 
 #Called from the Customer's CustomerClick.gd
-func customer_clicked(customer:Spatial):
+func customer_clicked(customer:GenericCustomer):
 	if not is_instance_valid(customer) or not customer.has_method("call_customer_to_deliver_zone"):
 		printerr("Somehow it's trying to click an invalid customer! ", get_stack())
 		return
@@ -64,13 +65,13 @@ func customer_clicked(customer:Spatial):
 		_:
 			return
 
-func emit_client_is_satisfied(node:Spatial, temper_delta:float)->void:
+func emit_client_is_satisfied(node:GenericCustomer, temper_delta:float)->void:
 	emit_signal("client_satisfied", node, temper_delta)
 
-func emit_client_is_unhappy(node:Spatial, temper_delta:float)->void:
+func emit_client_is_unhappy(node:GenericCustomer, temper_delta:float)->void:
 	emit_signal("client_unhappy", node, temper_delta)
 
-func emit_client_is_enraged(node:Spatial, temper_delta:float)->void:
+func emit_client_is_enraged(node:GenericCustomer, temper_delta:float)->void:
 	emit_signal("client_enraged", node, temper_delta)
 
 func clean_barista_prepared_order()->void:
@@ -82,7 +83,7 @@ func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
 #Calls any customer to the deliver zone
-func barista_call_client_to_get_food(client_node:Spatial)->void:
+func barista_call_client_to_get_food(client_node:GenericCustomer)->void:
 	if is_instance_valid(client_node) and barista_prepared_order.size() > 0:
 		if client_node.has_method("receive_order"):
 			client_node.call_customer_to_deliver_zone()
@@ -128,7 +129,7 @@ func generate_order(number_of_items:int, can_repeat:bool)->Array:
 		chosen_items.append(order)
 	return chosen_items
 
-func add_order(node:Spatial, order:Array)->void:
+func add_order(node:GenericCustomer, order:Array)->void:
 	if node in order_queue.keys():
 		printerr("[add_order] Node already with some orders on queue, will skip")
 		return
@@ -139,7 +140,7 @@ func add_order(node:Spatial, order:Array)->void:
 		HintPopup.display("The customer wants a drink, click on the machine to start making one", 5.0)
 		HintPopup.display("Match the machine to the drink type", 5.0)
 
-func remove_order(node:Spatial)->bool:
+func remove_order(node:GenericCustomer)->bool:
 	if not (node in order_queue.keys()):
 		return false
 	order_queue.erase(node)
@@ -153,7 +154,7 @@ func client_gave_review(review:float)->void:
 func client_got_order_from_the_counter()->void:
 	emit_signal("client_got_order_from_counter")
 
-func get_order(node:Spatial)->Array:
+func get_order(node:GenericCustomer)->Array:
 	if not (node in order_queue.keys()):
 		return []
 	return order_queue[node]
@@ -168,8 +169,19 @@ func take_order_from_customer()->bool:
 	customer_waiting_on_ask_spot.deliver_order_to_barista()
 	return true
 
-func set_customer_waiting_on_ask_spot(node:Spatial)->void:
+func set_customer_waiting_on_ask_spot(node:GenericCustomer)->void:
 	customer_waiting_on_ask_spot = node
 
-func get_customer_waiting_on_ask_spot()->Spatial:
+func get_customer_waiting_on_ask_spot()->GenericCustomer:
 	return customer_waiting_on_ask_spot
+
+func set_serving_tray(node:ServingTray)->void:
+	_serving_tray = node
+
+func get_serving_tray()->ServingTray:
+	return _serving_tray
+
+func is_serving_tray_empty()->bool:
+	if not is_instance_valid(_serving_tray):
+		return true
+	return _serving_tray.is_empty()

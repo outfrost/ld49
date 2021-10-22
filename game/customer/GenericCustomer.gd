@@ -1,3 +1,4 @@
+class_name GenericCustomer
 extends KinematicBody
 
 #Generic Customer script
@@ -51,7 +52,7 @@ var target:Spatial = null
 var path = []
 var path_node = 0
 onready var navmesh:Navigation =  get_parent()
-onready var FSM:Node = get_node("FSM")
+onready var FSM:FiniteStateMachine = $FSM
 
 onready var customer_generated_food_order = OrderRepository.generate_order(customer_difficulty, false)
 

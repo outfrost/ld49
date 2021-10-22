@@ -18,6 +18,7 @@ onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
 	OrderRepository.connect("client_got_order_from_counter", self, "take_items")
+	OrderRepository.set_serving_tray(self)
 	connect("mouse_entered", self, "hover")
 	connect("mouse_exited", self, "unhover")
 	items_container_object = $Items

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/EspressoMachine.gd"
 }, {
+"base": "Node",
+"class": "FiniteStateMachine",
+"language": "GDScript",
+"path": "res://game/customer/FSM/fsm_manager.gd"
+}, {
 "base": "Area",
 "class": "Fridge",
 "language": "GDScript",
@@ -38,6 +43,11 @@ _global_script_classes=[ {
 "class": "Game",
 "language": "GDScript",
 "path": "res://game/Game.gd"
+}, {
+"base": "KinematicBody",
+"class": "GenericCustomer",
+"language": "GDScript",
+"path": "res://game/customer/GenericCustomer.gd"
 }, {
 "base": "Reference",
 "class": "GroupMessenger",
@@ -79,8 +89,10 @@ _global_script_class_icons={
 "ActivityButton": "",
 "Cup": "",
 "EspressoMachine": "",
+"FiniteStateMachine": "",
 "Fridge": "",
 "Game": "",
+"GenericCustomer": "",
 "GroupMessenger": "",
 "Interactable": "",
 "PassiveEffect": "",
