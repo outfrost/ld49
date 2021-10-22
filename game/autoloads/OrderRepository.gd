@@ -42,7 +42,7 @@ var order_queue:Dictionary = {
 }
 
 var barista_prepared_order:Array = []
-var customer_waiting_on_ask_spot:Spatial = null
+var customer_waiting_on_ask_spot:Spatial = null setget set_customer_waiting_on_ask_spot, get_customer_waiting_on_ask_spot
 
 func _ready():
 	randomize()
@@ -170,3 +170,6 @@ func take_order_from_customer()->bool:
 
 func set_customer_waiting_on_ask_spot(node:Spatial)->void:
 	customer_waiting_on_ask_spot = node
+
+func get_customer_waiting_on_ask_spot()->Spatial:
+	return customer_waiting_on_ask_spot
