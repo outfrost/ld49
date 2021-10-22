@@ -1,8 +1,8 @@
 extends Spatial
 
 
-onready var hbox = $SpatialLabelSprite/Viewport/Control_SpeechBubble/CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer
-onready var speechbubble = $SpatialLabelSprite/Viewport/Control_SpeechBubble
+onready var hbox:HBoxContainer = $SpatialLabelSprite/Viewport/Control_SpeechBubble/CenterContainer/MarginContainer1/MarginContainer2/CenterContainer/HBoxContainer
+onready var speechbubble:Control = $SpatialLabelSprite/Viewport/Control_SpeechBubble
 
 export (Array, Texture) var order_textures
 

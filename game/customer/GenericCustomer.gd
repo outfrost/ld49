@@ -4,7 +4,7 @@ extends KinematicBody
 #Generic Customer script
 #Implements path finding, order delivery and mood
 
-var spots_collection = load("res://game/customer/spots/SpotsGroupList.gd").new()
+onready var spots_collection:SpotsGroupList = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
 const TEXTURES: Array = [
 	preload("res://art_assets/customer/customerDiffuseA.png"),
@@ -188,6 +188,7 @@ func leave_and_go_away()->void:
 	OrderRepository.remove_order(self)
 
 func _ready():
+	add_child(spots_collection)
 	animPlayer.get_animation("customerWalk").loop = true
 	animPlayer.get_animation("drinkBeverage").loop = true
 	animPlayer.get_animation("customerWaitTable").loop = true
