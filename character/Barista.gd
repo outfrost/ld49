@@ -113,7 +113,7 @@ func remove_cup():
 	for item in carry_attachment.get_children():
 		if item is Cup:
 			cup = item
-		carry_attachment.remove_child(item)
+		item.queue_free()
 	if cup:
 		return cup.coffee_type
 	return null

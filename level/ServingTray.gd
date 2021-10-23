@@ -116,7 +116,7 @@ func take_items():
 		return
 	for i in items_container_object.get_children():
 		var item_type = i.coffee_type
-		items_container_object.remove_child(i)
+		i.queue_free()
 
 func set_putting():
 	should_ignore_clicks = false

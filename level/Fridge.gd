@@ -98,7 +98,7 @@ func set_using():
 	yield(tween, "tween_completed")
 	animation_player.play("drinkBeverage")
 	yield(animation_player, "animation_finished")
-	barista.carry_attachment.remove_child(cold_beverage)
+	cold_beverage.queue_free()
 
 # TODO: convert this into speech baloons
 func eprint(text: String):
