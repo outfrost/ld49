@@ -64,6 +64,9 @@ func _ready() -> void:
 	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
 
 	main_menu.connect("start_game", self, "on_start_game")
+
+	transition_screen.fade_out()
+
 	if OS.has_feature("debug") and skip_menus:
 		on_start_game()
 

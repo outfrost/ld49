@@ -68,13 +68,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BrainGauge" parent="UI" instance=ExtResource( 6 )]
+visible = false
+
 [node name="GameOverOverlay" parent="UI" instance=ExtResource( 8 )]
 visible = false
 
 [node name="MainMenu" parent="UI" instance=ExtResource( 3 )]
 
 [node name="TransitionScreen" parent="UI" instance=ExtResource( 4 )]
-visible = false
-
-[node name="BrainGauge" parent="UI" instance=ExtResource( 6 )]
-visible = false
