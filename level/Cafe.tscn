@@ -59,15 +59,9 @@
 [ext_resource path="res://art_assets/counters/counterSink.gltf" type="PackedScene" id=57]
 [ext_resource path="res://assets/Clock.tscn" type="PackedScene" id=58]
 [ext_resource path="res://assets/walls/InteriorWall_Door_L45.tscn" type="PackedScene" id=59]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 6.5, 3, 0.5 )
-
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 4.25, 3, 0.5 )
-
-[sub_resource type="CubeMesh" id=3]
-size = Vector3( 1.25, 0.6, 0.5 )
+[ext_resource path="res://assets/walls/InteriorWall_45Door_Capped.tscn" type="PackedScene" id=60]
+[ext_resource path="res://assets/walls/InteriorWall_Door_Str.tscn" type="PackedScene" id=61]
+[ext_resource path="res://assets/walls/ExteriorWall_45Door_Capped.tscn" type="PackedScene" id=62]
 
 [node name="Cafe" type="Spatial"]
 
@@ -205,26 +199,105 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0, -5.66 )
 [node name="wall_doorway_angle_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 34 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.095, 0, 4.095 )
 
-[node name="BackWall" type="Spatial" parent="LevelStatics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.75 )
-
-[node name="MeshInstance" type="MeshInstance" parent="LevelStatics/BackWall"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0, 0 )
+[node name="2PieceWalls" type="Spatial" parent="LevelStatics"]
 visible = false
-mesh = SubResource( 1 )
-material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="LevelStatics/BackWall"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.875, 0, 0 )
-visible = false
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Interior" type="Spatial" parent="LevelStatics/2PieceWalls"]
 
-[node name="MeshInstance3" type="MeshInstance" parent="LevelStatics/BackWall"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 1.2, 0 )
-visible = false
-mesh = SubResource( 3 )
-material/0 = null
+[node name="InteriorWall_Plain_Str_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.2, 0, 6.2 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep2" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6.2, 0, 1.2 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep6" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -5.8, 0, -2.8 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep7" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -5.8, 0, -0.8 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep8" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -5.8, 0, 1.2 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep9" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( -2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -5.8, 0, 3.2 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep3" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 3.2, 0, -5.8 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep4" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -0.800001, 0, -5.8 )
+
+[node name="InteriorWall_Plain_Str_ExportPrep5" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 42 )]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2.8, 0, -5.8 )
+
+[node name="InteriorWall_45Door_Capped_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 60 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.231, 0, 4.231 )
+
+[node name="InteriorWall_Window_Str_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 41 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -0.8 )
+
+[node name="InteriorWall_Window_Str_ExportPrep2" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 41 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -2.8 )
+
+[node name="InteriorWall_Window_Str_ExportPrep3" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 41 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, 6.2 )
+
+[node name="InteriorWall_Window_Str_ExportPrep4" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 41 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.8, 0, 6.2 )
+
+[node name="InteriorWall_Plain_L45_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 48 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -4.8 )
+
+[node name="InteriorWall_Plain_L45_ExportPrep2" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 48 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -5.8 )
+
+[node name="InteriorWall_Plain_L45_ExportPrep3" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 48 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.8, 0, 5.2 )
+
+[node name="InteriorWall_Plain_R45_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 43 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, -5.8 )
+
+[node name="InteriorWall_Plain_R45_ExportPrep2" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 43 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.8, 0, -4.8 )
+
+[node name="InteriorWall_Plain_R45_ExportPrep3" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 43 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.8, 0, 6.2 )
+
+[node name="InteriorWall_Door_Str_ExportPrep" parent="LevelStatics/2PieceWalls/Interior" instance=ExtResource( 61 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -5.8 )
+
+[node name="Exterior" type="Spatial" parent="LevelStatics/2PieceWalls"]
+
+[node name="ExteriorWall_Window_Str_ExportPrep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 40 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -0.8 )
+
+[node name="ExteriorWall_Window_Str_ExportPrep2" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 40 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -2.8 )
+
+[node name="ExteriorWall_Window_Str_ExportPrep3" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 40 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, 6.2 )
+
+[node name="ExteriorWall_Window_Str_ExportPrep4" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 40 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.800001, 0, 6.2 )
+
+[node name="ExteriorWall_Plain_Str_ExportPrep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 31 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, -4.8 )
+
+[node name="ExteriorWall_Plain_Str_ExportPrep2" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 31 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.2, 0, 1.2 )
+
+[node name="ExteriorWall_Plain_Str_ExportPrep3" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 31 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.2, 0, 6.2 )
+
+[node name="ExteriorWall_Plain_Str_ExportPrep4" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 31 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.8, 0, 6.2 )
+
+[node name="ExteriorWall_45Door_Capped_ExportPrep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 62 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.231, 0, 4.231 )
+
+[node name="door_exportprep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 29 )]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.215, 0, 4.275 )
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
 
