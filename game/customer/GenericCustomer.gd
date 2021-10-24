@@ -2,7 +2,8 @@ class_name GenericCustomer
 extends KinematicBody
 
 #Generic Customer script
-#Implements path finding, order delivery and mood
+
+var model_modifier:Array
 
 onready var spots_collection:SpotsGroupList = load("res://game/customer/spots/SpotsGroupList.gd").new()
 
@@ -43,15 +44,14 @@ onready var max_waiting_timer:Timer = $MaxWaitingTime
 signal started_walking
 signal started_idling
 signal despawning(node)
+signal new_movement_target(target)
 
 var barista_took_order:bool = false
 var barista_called_for_delivery:bool = false
 var got_food:bool = false
 
 var target:Spatial = null
-var path = []
-var path_node = 0
-onready var navmesh:Navigation =  get_parent()
+
 onready var FSM:FiniteStateMachine = $FSM
 
 onready var customer_generated_food_order = OrderRepository.generate_order(customer_difficulty, false)
@@ -206,15 +206,15 @@ func _ready():
 	mat.albedo_texture = TEXTURES[randi() % TEXTURES.size()]
 	model.set_surface_material(0, mat)
 
-	model.set("blend_shapes/bodyThicker", randf())
-	model.set("blend_shapes/hairRound", randf())
-	model.set("blend_shapes/hairSharp", randf())
+	model_modifier = [randf(), randf(), randf()]
+	model.set("blend_shapes/bodyThicker", model_modifier[0])
+	model.set("blend_shapes/hairRound", model_modifier[1])
+	model.set("blend_shapes/hairSharp", model_modifier[2])
 
 func move_to(target:Spatial):
 	if target == null:
 		return
-	path = navmesh.get_simple_path(global_transform.origin, target.global_transform.origin)
-	path_node = 0
+	emit_signal("new_movement_target", target)
 	FSM.change_state(FSM.walking)
 
 
