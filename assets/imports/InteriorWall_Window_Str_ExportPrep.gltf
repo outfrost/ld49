@@ -25,7 +25,7 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Material.003",
+            "name" : "Material",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.800000011920929,
@@ -45,7 +45,7 @@
                     "clearcoatRoughnessFactor" : 0.16605442762374878
                 }
             },
-            "name" : "Wall.001",
+            "name" : "Wall",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.8829235434532166,
@@ -65,7 +65,7 @@
                     "clearcoatRoughnessFactor" : 0.16605442762374878
                 }
             },
-            "name" : "WallColor.001",
+            "name" : "WallColor",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.058788347989320755,
@@ -88,7 +88,7 @@
                     "transmissionFactor" : 0.5884353518486023
                 }
             },
-            "name" : "WhitePlastic.001",
+            "name" : "WhitePlastic",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.6266639828681946,
@@ -111,7 +111,7 @@
                     "transmissionFactor" : 0.25
                 }
             },
-            "name" : "Glass.001",
+            "name" : "Glass",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.43695417046546936,
