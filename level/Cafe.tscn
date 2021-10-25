@@ -135,7 +135,6 @@ transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.556197, 1, 1.20096
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.78942, 1, 1.27809 )
 
 [node name="Walls" type="Spatial" parent="LevelStatics"]
-visible = false
 
 [node name="wall_plain_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.2, 0, 6.05 )
@@ -201,6 +200,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0, -5.66 )
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.095, 0, 4.095 )
 
 [node name="2PieceWalls" type="Spatial" parent="LevelStatics"]
+visible = false
 
 [node name="Interior" type="Spatial" parent="LevelStatics/2PieceWalls"]
 
