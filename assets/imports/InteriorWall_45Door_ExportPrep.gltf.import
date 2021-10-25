@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/InteriorWall_45Plain_Capped_ExportPrep.gltf-5ce4ed068f8975226d0acd527a0ec25d.scn"
+path="res://.import/InteriorWall_45Door_ExportPrep.gltf-c551c0d181e67093bf07e9e2603d3652.scn"
 
 [deps]
 
-source_file="res://assets/imports/InteriorWall_45Plain_Capped_ExportPrep.gltf"
-dest_files=[ "res://.import/InteriorWall_45Plain_Capped_ExportPrep.gltf-5ce4ed068f8975226d0acd527a0ec25d.scn" ]
+source_file="res://assets/imports/InteriorWall_45Door_ExportPrep.gltf"
+dest_files=[ "res://.import/InteriorWall_45Door_ExportPrep.gltf-c551c0d181e67093bf07e9e2603d3652.scn" ]
 
 [params]
 
