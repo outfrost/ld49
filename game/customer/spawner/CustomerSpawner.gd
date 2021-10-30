@@ -69,12 +69,7 @@ func _process(delta):
 
 func _ready():
 	add_child(spots_collection)
-	#Locate the game manager node, for some reason root.find_node("Game") does not work
-	var root_children = get_tree().root.get_children()
-	for i in root_children:
-		if i.has_method("back_to_menu"):
-			game_manager_node = i
-			break
+	game_manager_node = find_parent("Game")
 	if is_instance_valid(game_manager_node):
 		spawn_timer.start()
 	else:
