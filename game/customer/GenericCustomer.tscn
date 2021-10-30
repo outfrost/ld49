@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://game/customer/FSM/states/delivering_order_to_barista.gd" type="Script" id=11]
 [ext_resource path="res://game/customer/FSM/states/picking_up_beverage.gd" type="Script" id=12]
 [ext_resource path="res://game/customer/GenericCustomerAnimationTree.tres" type="AnimationNodeStateMachine" id=13]
+[ext_resource path="res://game/customer/selection/CustomerSelectionView.tscn" type="PackedScene" id=14]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.52163
@@ -47,6 +48,10 @@ script = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="Selection and stuff/AreaUserCustomerInteraction"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.321759, 0 )
 shape = SubResource( 2 )
+
+[node name="CustomerSelectionView" parent="Selection and stuff" instance=ExtResource( 14 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.360773, 0 )
+visible = false
 
 [node name="SpeechBubble" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68207, 0 )

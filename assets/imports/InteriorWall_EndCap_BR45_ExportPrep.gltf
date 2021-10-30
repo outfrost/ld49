@@ -30,7 +30,7 @@
                     "clearcoatRoughnessFactor" : 0.16605442762374878
                 }
             },
-            "name" : "Wall.001",
+            "name" : "Wall",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.8829235434532166,
@@ -50,7 +50,7 @@
                     "clearcoatRoughnessFactor" : 0.16605442762374878
                 }
             },
-            "name" : "WallColor.001",
+            "name" : "WallColor",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.058788347989320755,

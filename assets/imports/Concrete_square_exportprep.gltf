@@ -15,7 +15,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "ConcreteTile.002"
+            "name" : "ConcreteTile_Square"
         }
     ],
     "materials" : [
@@ -49,7 +49,7 @@
     ],
     "meshes" : [
         {
-            "name" : "Cube.012",
+            "name" : "Cube.031",
             "primitives" : [
                 {
                     "attributes" : {
