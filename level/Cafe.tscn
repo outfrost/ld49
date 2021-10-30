@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://level/EspressoMachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/ServingTray.tscn" type="PackedScene" id=2]
@@ -31,10 +31,6 @@
 [ext_resource path="res://assets/Door.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/walls/ExteriorWall_EndCap_UL45.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/walls/ExteriorWall_Plain_Str.tscn" type="PackedScene" id=31]
-[ext_resource path="res://assets/wall_doorway_closed.tscn" type="PackedScene" id=32]
-[ext_resource path="res://assets/wall_window.tscn" type="PackedScene" id=33]
-[ext_resource path="res://assets/wall_doorway_angle_openinward.tscn" type="PackedScene" id=34]
-[ext_resource path="res://assets/wall_plain.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/imports/props/winter.gltf" type="PackedScene" id=36]
 [ext_resource path="res://assets/imports/props/calendar2.gltf" type="PackedScene" id=37]
 [ext_resource path="res://assets/imports/props/city.gltf" type="PackedScene" id=38]
@@ -84,33 +80,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.6, -0.25 )
 [node name="LevelInteractables" type="Spatial" parent="."]
 
 [node name="EspressoMachine" parent="LevelInteractables" instance=ExtResource( 1 )]
-transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.8, 1, -0.175 )
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.85, 1, -0.225 )
 
 [node name="EspressoMachine2" parent="LevelInteractables" instance=ExtResource( 1 )]
-transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.8, 1, -1.175 )
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.85, 1, -1.225 )
 coffee_type = 2
 
 [node name="EspressoMachine3" parent="LevelInteractables" instance=ExtResource( 1 )]
-transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.8, 1, -2.174 )
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -4.85, 1, -2.225 )
 coffee_type = 3
 
 [node name="DripMachine" parent="LevelInteractables" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 1, 1.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45, 1, 1.45 )
 
 [node name="Register" parent="LevelInteractables" instance=ExtResource( 6 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.125, 1, -1.4 )
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.175, 1, -1.45 )
 
 [node name="Fridge" parent="LevelInteractables" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 0, -4.55 )
 cold_beverage_scene = ExtResource( 12 )
 
 [node name="ServingTray" parent="LevelInteractables" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.296, 1, 1.315 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.346, 1, 1.265 )
 
 [node name="LevelStatics" type="Spatial" parent="."]
 
 [node name="air_conditioner_exportprep" parent="LevelStatics" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.51 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99, 2.25, -5.65 )
 
 [node name="Skidmark" type="OmniLight" parent="LevelStatics/air_conditioner_exportprep"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.11, 0.34 )
@@ -134,73 +130,7 @@ transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.556197, 1, 1.20096
 [node name="wattleboter_exportprep" parent="LevelStatics" instance=ExtResource( 13 )]
 transform = Transform( 1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.78942, 1, 1.27809 )
 
-[node name="Walls" type="Spatial" parent="LevelStatics"]
-
-[node name="wall_plain_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.2, 0, 6.05 )
-
-[node name="wall_plain_exportprep2" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.8, 0, 6.05 )
-
-[node name="wall_plain_exportprep3" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, 5.18 )
-
-[node name="wall_plain_exportprep4" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, 3.18 )
-
-[node name="wall_plain_exportprep5" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, 1.18 )
-
-[node name="wall_plain_exportprep6" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, -0.82 )
-
-[node name="wall_plain_exportprep7" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, -2.82 )
-
-[node name="wall_plain_exportprep8" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.66, 0, -4.82 )
-
-[node name="wall_plain_exportprep9" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.82, 0, -5.66 )
-
-[node name="wall_plain_exportprep10" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.82, 0, -5.66 )
-
-[node name="wall_plain_exportprep11" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82, 0, -5.66 )
-
-[node name="wall_plain_exportprep12" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18, 0, -5.66 )
-
-[node name="wall_plain_exportprep13" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18, 0, -5.66 )
-
-[node name="wall_plain_exportprep14" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05, 0, -4.8 )
-
-[node name="wall_plain_exportprep15" parent="LevelStatics/Walls" instance=ExtResource( 35 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05, 0, 1.2 )
-
-[node name="wall_window_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 33 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.8, 0, 6.05 )
-
-[node name="wall_window_exportprep3" parent="LevelStatics/Walls" instance=ExtResource( 33 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05, 0, -2.8 )
-
-[node name="wall_window_exportprep4" parent="LevelStatics/Walls" instance=ExtResource( 33 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05, 0, -0.8 )
-
-[node name="wall_window_exportprep2" parent="LevelStatics/Walls" instance=ExtResource( 33 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, 6.05 )
-
-[node name="wall_doorway_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 32 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18, 0, -5.66 )
-
-[node name="wall_doorway_angle_exportprep" parent="LevelStatics/Walls" instance=ExtResource( 34 )]
-transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.095, 0, 4.095 )
-
 [node name="2PieceWalls" type="Spatial" parent="LevelStatics"]
-visible = false
 
 [node name="Interior" type="Spatial" parent="LevelStatics/2PieceWalls"]
 
@@ -296,19 +226,22 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.8, 0
 [node name="door_exportprep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 29 )]
 transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.215, 0, 4.275 )
 
+[node name="door_exportprep2" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, -5.725 )
+
 [node name="ExteriorWall_45Door_ExportPrep" parent="LevelStatics/2PieceWalls/Exterior" instance=ExtResource( 62 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.2, 0, 4.2 )
 
 [node name="Counters" type="Spatial" parent="LevelStatics"]
 
 [node name="counterCornerSharp" parent="LevelStatics/Counters" instance=ExtResource( 18 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.3, 0, -4.9 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.35, 0, -4.95 )
 
 [node name="counterCornerSharp2" parent="LevelStatics/Counters" instance=ExtResource( 18 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4.9, 0, 0.7 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4.95, 0, 0.65 )
 
 [node name="counterShelves" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -2.8 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.95, 0, -2.85 )
 
 [node name="tea-tin-3" parent="LevelStatics/Counters/counterShelves" instance=ExtResource( 54 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.54, -0.43 )
@@ -455,7 +388,7 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.85, 
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.85, 0.1, -0.0600009 )
 
 [node name="counterShelves2" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.9, 0, -0.8 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.95, 0, -0.85 )
 
 [node name="coffee-box-1" parent="LevelStatics/Counters/counterShelves2" instance=ExtResource( 52 )]
 transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -0.82, 0.54, -0.51 )
@@ -665,25 +598,25 @@ transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.7, 0.1
 transform = Transform( 4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, -0.7, 0.1, -0.12 )
 
 [node name="counterShelves3" parent="LevelStatics/Counters" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 1.3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 0, 1.25 )
 
 [node name="counterHollow" parent="LevelStatics/Counters" instance=ExtResource( 20 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.8, 0, -4.9 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.85, 0, -4.95 )
 
 [node name="counterHollow2" parent="LevelStatics/Counters" instance=ExtResource( 20 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.2, 0, -1.3 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.25, 0, -1.35 )
 
 [node name="counterCornerRound" parent="LevelStatics/Counters" instance=ExtResource( 21 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 1.3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0, 1.25 )
 
 [node name="syrup" parent="LevelStatics/Counters/counterCornerRound" instance=ExtResource( 15 )]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.6, 1.01, 0.1 )
 
 [node name="MuffinDisplay" parent="LevelStatics/Counters/counterCornerRound" instance=ExtResource( 28 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0.6, 1, -1.6 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0.65, 1, -1.65 )
 
 [node name="counterSink" parent="LevelStatics/Counters" instance=ExtResource( 57 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.8, 0, -4.9 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.85, 0, -4.95 )
 
 [node name="Decorations" type="Spatial" parent="LevelStatics"]
 
@@ -712,34 +645,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0 )
 
 [node name="landscape" parent="LevelStatics/Decorations" instance=ExtResource( 22 )]
-transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -3.41, 1.9, -5.51 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -3.41, 1.9, -5.65 )
 
 [node name="winter" parent="LevelStatics/Decorations" instance=ExtResource( 36 )]
-transform = Transform( 3.89414e-07, 0, -2, 0, 2, 0, 2, 0, 3.89414e-07, -5.51, 1.9, 1.5 )
+transform = Transform( 3.89414e-07, 0, -2, 0, 2, 0, 2, 0, 3.89414e-07, -5.65, 1.9, 1.5 )
 
 [node name="ludumdare" parent="LevelStatics/Decorations" instance=ExtResource( 23 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 2.89, 1.5, -5.5 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 2.89, 1.5, -5.65 )
 
 [node name="coffeeposter" parent="LevelStatics/Decorations" instance=ExtResource( 24 )]
-transform = Transform( 1.50996e-07, 0, -2, 0, 2, 0, 2, 0, 1.50996e-07, -5.51, 2.2, -1.1 )
+transform = Transform( 1.50996e-07, 0, -2, 0, 2, 0, 2, 0, 1.50996e-07, -5.65, 2.2, -1.1 )
 
 [node name="balerine" parent="LevelStatics/Decorations" instance=ExtResource( 25 )]
-transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -5.5, 1.9, -3.9 )
+transform = Transform( -8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -5.65, 1.9, -3.9 )
 
 [node name="calendar" parent="LevelStatics/Decorations" instance=ExtResource( 26 )]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5.32, 1.8, 2.64 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5.5, 1.8, 2.75 )
 
 [node name="calendar2" parent="LevelStatics/Decorations" instance=ExtResource( 37 )]
-transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -0.51, 1.8, -5.5 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, -0.51, 1.8, -5.65 )
 
 [node name="poster-1" parent="LevelStatics/Decorations" instance=ExtResource( 27 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1.8, -5.5 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.69, 1.8, -5.65 )
 
 [node name="city" parent="LevelStatics/Decorations" instance=ExtResource( 38 )]
-transform = Transform( 2.62268e-07, 0, -2, 0, 2, 0, 2, 0, 2.62268e-07, -5.51, 2, 4.2 )
+transform = Transform( 2.62268e-07, 0, -2, 0, 2, 0, 2, 0, 2.62268e-07, -5.65, 2, 4.2 )
 
 [node name="stool" parent="LevelStatics/Decorations" instance=ExtResource( 10 )]
-transform = Transform( 0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -3.9, 0, -3.4 )
+transform = Transform( 0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -3.95, 0, -3.4 )
 
 [node name="bucketRag" parent="LevelStatics/Decorations" instance=ExtResource( 16 )]
 transform = Transform( -0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -1.2, 0, 0.6 )
@@ -1388,25 +1321,25 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 13.2, 0
 [node name="Furniture" type="Spatial" parent="LevelStatics"]
 
 [node name="table_high_rect_exportprep" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -1.99998 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, 0, -2.29998 )
 
 [node name="table_high_rect_exportprep3" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, 0.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, 0, -0.1 )
 
 [node name="table_high_rect_exportprep2" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.125, 0, -4.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, 0, -4.5 )
 
 [node name="table_high_rect_exportprep4" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.875, 0, 5.15 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.275, 0, 5.4 )
 
 [node name="table_high_rect_exportprep5" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325, 0, 5.15 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.075, 0, 5.4 )
 
 [node name="table_high_rect_exportprep6" parent="LevelStatics/Furniture" instance=ExtResource( 7 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.075, 0, 5.15 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.475, 0, 5.4 )
 
 [node name="Clock" parent="LevelStatics" instance=ExtResource( 58 )]
-transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.61, 2.4, -5.475 )
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.61, 2.4, -5.625 )
 
 [node name="CityBuildings" type="Spatial" parent="LevelStatics"]
 
