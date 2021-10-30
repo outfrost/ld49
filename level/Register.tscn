@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 4 )
-duration = 2.0
+duration = 1.25
 outcome_temper_delta = -0.25
 displayed_name = "Take order"
 
