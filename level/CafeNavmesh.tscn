@@ -140,6 +140,7 @@ material/0 = null
 
 [node name="CustomerSpawner" parent="Navigation" index="10" instance=ExtResource( 4 )]
 customer_scenes = [ ExtResource( 5 ) ]
+endgame_decline_offset = 150
 
 [node name="SpawnSpot" parent="Navigation" index="11" instance=ExtResource( 2 )]
 transform = Transform( 0.623337, 0, 0, 0, 1, 0, 0, 0, 0.459076, 7.1, 1.679, -4.9 )

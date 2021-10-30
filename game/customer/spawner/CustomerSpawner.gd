@@ -17,11 +17,13 @@ onready var spawn_timer:Timer = $SpawnTimer
 var time_passed = 0
 export var randomize_time:bool = true
 export (int, 0, 120) var random_seconds:int = 10
+export var endgame_decline_offset: int	# offset from the max game time when spawn rate starts decreasing
 var waiting:bool = false
 
 var game_manager_node:Node
 
 var increasing_difficulty:bool = true
+var decreasing_difficulty:bool = false
 var current_max_customers = 0
 var global_max_customers = 7 #Won't override the available seats
 
@@ -75,15 +77,19 @@ func _ready():
 	else:
 		printerr("[CustomerSpawner] Could not find the Game node, customers will not spawn ", get_stack())
 
-
 #Increase the difficulty (customer limit) by 1 until the limit is reached, then decrease by 1 until 0
 func _on_RampDifficultyTimer_timeout()->void:
 	if increasing_difficulty:
 		current_max_customers+=1
 		print_debug("[CustomerSpawner] Increased limit of customers ", current_max_customers)
-		if current_max_customers > global_max_customers:
+		if current_max_customers == global_max_customers:
 			increasing_difficulty = false
-	else:
-		if current_max_customers > 0:
+	elif !decreasing_difficulty and game_manager_node.time_elapsed >= game_manager_node.game_duration - endgame_decline_offset:
+		decreasing_difficulty = true
+	elif decreasing_difficulty:
+		if current_max_customers > 5:
 			print_debug("[CustomerSpawner] Decreased limit of customers ", current_max_customers)
 			current_max_customers-=1
+		elif current_max_customers > 0:
+			print_debug("[CustomerSpawner] Decreased limit of customers ", current_max_customers)
+			current_max_customers-=2

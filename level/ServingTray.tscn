@@ -11,7 +11,7 @@
 [sub_resource type="Resource" id=1]
 script = ExtResource( 8 )
 duration = 0.0
-outcome_temper_delta = 0.5
+outcome_temper_delta = 0.0
 displayed_name = "Put cup on the tray"
 
 [sub_resource type="CubeMesh" id=2]
