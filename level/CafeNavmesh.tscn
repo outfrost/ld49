@@ -66,7 +66,7 @@ transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, -3.43413, 0.
 transform = Transform( 0.29619, 0, 0, 0, 0.29619, 0, 0, 0, 0.29619, -4.87274, 0.735948, 4.27533 )
 
 [node name="DrinkingSpot2" parent="Navigation" index="6" instance=ExtResource( 3 )]
-transform = Transform( -1.29469e-08, 0, 0.29619, 0, 0.29619, 0, -0.29619, 0, -1.29469e-08, 4.28147, 0.735948, -2.10154 )
+transform = Transform( -1.29469e-08, 0, 0.29619, 0, 0.29619, 0, -0.29619, 0, -1.29469e-08, 4.28147, 0.735948, -2.30154 )
 
 [node name="DrinkingSpot3" parent="Navigation" index="7" instance=ExtResource( 3 )]
 transform = Transform( -1.29469e-08, 0, 0.29619, 0, 0.29619, 0, -0.29619, 0, -1.29469e-08, 4.28147, 0.735948, -3.55505 )
