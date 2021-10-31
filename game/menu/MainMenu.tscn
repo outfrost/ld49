@@ -242,7 +242,6 @@ __meta__ = {
 }
 
 [node name="ControlsPopup" type="Popup" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
