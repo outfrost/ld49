@@ -62,6 +62,7 @@ onready var speech_bubble = $SpeechBubble
 onready var anim_tree = $AnimationTree
 onready var anim_state_machine = anim_tree.get("parameters/playback")
 onready var animPlayer:AnimationPlayer = $customer/AnimationPlayer
+onready var model: MeshInstance = $customer/customerArmature/Skeleton/customer
 
 var order_score = 0
 
@@ -197,7 +198,7 @@ func _ready():
 
 	max_waiting_timer.wait_time = waiting_time_tolerance/customer_difficulty
 	max_waiting_timer.start()
-	var model: MeshInstance = $customer/customerArmature/Skeleton/customer
+
 	# Clone the mesh to prevent artifacts from shape keys
 	var mesh: Mesh = model.mesh.duplicate()
 	model.mesh = mesh
@@ -210,6 +211,15 @@ func _ready():
 	model.set("blend_shapes/bodyThicker", model_modifier[0])
 	model.set("blend_shapes/hairRound", model_modifier[1])
 	model.set("blend_shapes/hairSharp", model_modifier[2])
+
+func _process(delta) -> void:
+
+	# Check to make sure our shape keys are not randomly changing
+	assert(model.get("blend_shapes/moodBad") == 0, "%s - Customer model blend_shapes/moodBad should be 0, current value is %f" % name % model.get("blend_shapes/moodBad"))
+	assert(model.get("blend_shapes/moodGood") == 0, "%s - Customer model blend_shapes/moodGood should be 0, current value is %f" % name % model.get("blend_shapes/moodGood"))
+	assert(model.get("blend_shapes/bodyThicker") == model_modifier[0], "%s - Customer model blend_shapes/bodyThicker should be %f, curretn value is %f" % name % model_modifier[0] % model.get("blend_shapes/bodyThicker"))
+	assert(model.get("blend_shapes/hairRound") == model_modifier[1], "%s - Customer model blend_shapes/hairRound should be %f, current value is %f" % name % model_modifier[1] % model.get("blend_shapes/hairRound"))
+	assert(model.get("blend_shapes/hairSharp") == model_modifier[2], "%s - Customer model blend_shapes/hairSharp should be %f, current value is %f" % name % model_modifier[2] % model.get("blend_shapes/hairSharp"))
 
 func move_to(target:Spatial):
 	if target == null:
