@@ -6,6 +6,7 @@ export var activity_place_item: Resource
 enum States {IDLE, WORKING}
 
 var should_ignore_clicks: bool = false
+var hovered: bool = false
 
 var state: int = States.IDLE
 var timeout: float = 0.0
@@ -30,19 +31,10 @@ func _ready() -> void:
 	pass
 
 func hover() -> void:
-	var activity_intent = get_current_activity_intent()
-	if !activity_intent:
-		return
-	var current_activity_title = activity_intent["activity"].displayed_name
-	tooltip.show_text(current_activity_title)
-	if outline:
-		outline.show()
-	pass
+	hovered = true
 
 func unhover() -> void:
-	tooltip.hide()
-	if outline:
-		outline.hide()
+	hovered = false
 
 func get_current_activity_intent():
 	# TODO: check if player has anything to put on the tray
@@ -91,7 +83,23 @@ func _process(delta: float) -> void:
 		# TODO: make a "SLAP" noise for putting cup on the tray
 		eprint("just put an item on the tray")
 		return
-	pass
+
+	# Determine if we should be showing highlight
+	if state != States.WORKING and hovered:
+		var activity_intent = get_current_activity_intent()
+		if activity_intent:
+			var current_activity_title = activity_intent["activity"].displayed_name
+			tooltip.show_text(current_activity_title)
+			if outline:
+				outline.show()
+		else:
+			tooltip.hide()
+			if outline:
+				outline.hide()
+	else:
+		tooltip.hide()
+		if outline:
+			outline.hide()
 
 #	DebugOverlay.display("Tray item count %d" % items_container_object.get_child_count())
 

@@ -7,6 +7,7 @@ export var cold_beverage_scene: PackedScene
 enum States {IDLE, WORKING}
 
 var should_ignore_clicks: bool = false
+var hovered: bool = false
 
 var state: int = States.IDLE
 var timeout: float = 0.0
@@ -22,16 +23,11 @@ func _ready() -> void:
 
 
 func hover() -> void:
-	var activity_intent = get_current_activity_intent()
-	if !activity_intent:
-		return
-	var current_activity_title = activity_intent["activity"].displayed_name
-	tooltip.show_text(current_activity_title)
-	if outline:
-		outline.show()
-	pass
+	hovered = true
+
 
 func unhover() -> void:
+	hovered = false
 	tooltip.hide()
 	if outline:
 		outline.hide()
@@ -71,7 +67,23 @@ func _process(delta: float) -> void:
 		eprint("finished chilling at the fridge")
 		state = States.IDLE
 		return
-	pass
+
+	# Determine if we should be showing highlight
+	if state != States.WORKING and hovered:
+		var activity_intent = get_current_activity_intent()
+		if activity_intent:
+			var current_activity_title = activity_intent["activity"].displayed_name
+			tooltip.show_text(current_activity_title)
+			if outline:
+				outline.show()
+		else:
+			tooltip.hide()
+			if outline:
+				outline.hide()
+	else:
+		tooltip.hide()
+		if outline:
+			outline.hide()
 
 func set_using():
 	should_ignore_clicks = false
