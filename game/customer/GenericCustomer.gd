@@ -215,11 +215,11 @@ func _ready():
 func _process(delta) -> void:
 
 	# Check to make sure our shape keys are not randomly changing
-	assert(model.get("blend_shapes/moodBad") == 0, "%s - Customer model blend_shapes/moodBad should be 0, current value is %f" % name % model.get("blend_shapes/moodBad"))
-	assert(model.get("blend_shapes/moodGood") == 0, "%s - Customer model blend_shapes/moodGood should be 0, current value is %f" % name % model.get("blend_shapes/moodGood"))
-	assert(model.get("blend_shapes/bodyThicker") == model_modifier[0], "%s - Customer model blend_shapes/bodyThicker should be %f, curretn value is %f" % name % model_modifier[0] % model.get("blend_shapes/bodyThicker"))
-	assert(model.get("blend_shapes/hairRound") == model_modifier[1], "%s - Customer model blend_shapes/hairRound should be %f, current value is %f" % name % model_modifier[1] % model.get("blend_shapes/hairRound"))
-	assert(model.get("blend_shapes/hairSharp") == model_modifier[2], "%s - Customer model blend_shapes/hairSharp should be %f, current value is %f" % name % model_modifier[2] % model.get("blend_shapes/hairSharp"))
+	assert(model.get("blend_shapes/moodBad") == 0, "%s - Customer model blend_shapes/moodBad should be 0, current value is %f" % [name, model.get("blend_shapes/moodBad")])
+	assert(model.get("blend_shapes/moodGood") == 0, "%s - Customer model blend_shapes/moodGood should be 0, current value is %f" % [name,model.get("blend_shapes/moodGood")])
+	assert(model.get("blend_shapes/bodyThicker") == model_modifier[0], "%s - Customer model blend_shapes/bodyThicker should be %f, curretn value is %f" % [name, model_modifier[0], model.get("blend_shapes/bodyThicker")])
+	assert(model.get("blend_shapes/hairRound") == model_modifier[1], "%s - Customer model blend_shapes/hairRound should be %f, current value is %f" % [name, model_modifier[1],model.get("blend_shapes/hairRound")])
+	assert(model.get("blend_shapes/hairSharp") == model_modifier[2], "%s - Customer model blend_shapes/hairSharp should be %f, current value is %f" % [name, model_modifier[2], model.get("blend_shapes/hairSharp")])
 
 func move_to(target:Spatial):
 	if target == null:
