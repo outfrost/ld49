@@ -21,7 +21,6 @@ func add_item(sprite:Texture, order_id:int)->bool:
 	if order_id > len(order_textures):
 		printerr("Order id is greater than the amount of images for the orders ", get_stack())
 		return false
-	sprites[sprite] = order_id
 	var texture:TextureRect = TextureRect.new()
 	texture.expand = true
 	texture.stretch_mode = TextureRect.STRETCH_SCALE_ON_EXPAND
@@ -30,6 +29,7 @@ func add_item(sprite:Texture, order_id:int)->bool:
 	texture.size_flags_vertical = false
 	hbox.add_child(texture)
 	texture.texture = order_textures[order_id]
+	sprites[texture] = order_id
 	return true
 
 func remove_item(order_id:int)->bool:

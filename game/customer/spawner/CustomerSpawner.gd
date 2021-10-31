@@ -24,8 +24,8 @@ var game_manager_node:Node
 
 var increasing_difficulty:bool = true
 var decreasing_difficulty:bool = false
-var current_max_customers = 0
-var global_max_customers = 7 #Won't override the available seats
+var current_max_customers = 10
+var global_max_customers = 50 #Won't override the available seats
 
 func customer_despawning(node:Spatial)->void:
 	instanced_customers.erase(node)
@@ -54,6 +54,7 @@ func _on_SpawnTimer_timeout()->void:
 		spawn_customer()
 
 func has_free_seats()->bool:
+	#return true
 	var free_seats = false
 	for i in sitting_spots:
 		if not i.busy:
@@ -70,6 +71,7 @@ func _process(delta):
 			spawn_timer.start()
 
 func _ready():
+	Engine.time_scale = 3
 	add_child(spots_collection)
 	game_manager_node = find_parent("Game")
 	if is_instance_valid(game_manager_node):

@@ -21,6 +21,8 @@ var order_textures:Dictionary = {
 	possible_orders.coffee_cappuccino:load("res://art_assets/ui/logoCupCappuccino.png"),
 }
 
+var DEBUGGING = true
+
 func get_coffe_name(coffee_type: int) -> String:
 	if coffee_type in translations.keys():
 		return translations[coffee_type]
@@ -83,8 +85,8 @@ func barista_add_item_to_delivery(item:int)->void:
 	barista_prepared_order.append(item)
 
 #Calls any customer to the deliver zone
-func barista_call_client_to_get_food(client_node:GenericCustomer)->void:
-	if is_instance_valid(client_node) and barista_prepared_order.size() > 0:
+func barista_call_client_to_get_food(client_node:GenericCustomer, override=false)->void:
+	if is_instance_valid(client_node) and (barista_prepared_order.size() > 0 or override):
 		if client_node.has_method("receive_order"):
 			client_node.call_customer_to_deliver_zone()
 
@@ -185,3 +187,23 @@ func is_serving_tray_empty()->bool:
 	if not is_instance_valid(_serving_tray):
 		return true
 	return _serving_tray.is_empty()
+
+
+var current:GenericCustomer = null
+#This whole process is for debug purposes
+func _process(delta):
+	#Debug purposes
+	if not DEBUGGING:
+		return
+	if not is_instance_valid(customer_waiting_on_ask_spot):
+		return
+	if not customer_waiting_on_ask_spot.barista_took_order:
+		yield(get_tree().create_timer(1), "timeout")
+		if current != customer_waiting_on_ask_spot:
+			take_order_from_customer()
+			current = customer_waiting_on_ask_spot
+	if order_queue.size() > 0:
+		yield(get_tree().create_timer(3), "timeout")
+		for i in order_queue:
+			if i.FSM.current_state == i.FSM.waiting_for_order:
+				barista_call_client_to_get_food(i, true)
