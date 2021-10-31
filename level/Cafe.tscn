@@ -931,21 +931,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 3.2 )
 
 [node name="Concrete_square_exportprep58" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2, 0, 3.2 )
+visible = false
 
 [node name="Concrete_square_exportprep60" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2, 0, 3.2 )
+visible = false
 
 [node name="Concrete_square_exportprep61" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2, 0, 3.2 )
+visible = false
 
 [node name="Concrete_square_exportprep62" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2, 0, 3.2 )
+visible = false
 
 [node name="Concrete_square_exportprep63" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2, 0, 5.2 )
+visible = false
 
 [node name="Concrete_square_exportprep64" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2, 0, 1.2 )
+visible = false
 
 [node name="Concrete_square_exportprep41" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, 1.2 )
@@ -961,6 +967,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -4.8 )
 
 [node name="Concrete_square_exportprep52" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -6.8 )
+
+[node name="Concrete_square_exportprep53" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -8.8 )
 
 [node name="Concrete_square_exportprep54" parent="LevelStatics/Flooring/Sidewalk" instance=ExtResource( 47 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -10.8 )
@@ -1125,21 +1134,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, 1.2 )
 
 [node name="Pavement_square_exportprep85" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, 3.2 )
+visible = false
 
 [node name="Pavement_square_exportprep86" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, 5.2 )
+visible = false
 
 [node name="Pavement_square_exportprep87" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, 1.2 )
+visible = false
 
 [node name="Pavement_square_exportprep88" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, 3.2 )
+visible = false
 
 [node name="Pavement_square_exportprep89" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, 5.2 )
+visible = false
 
 [node name="Pavement_square_exportprep90" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, 1.2 )
+visible = false
 
 [node name="Pavement_square_exportprep67" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, 0, -8.8 )
@@ -1167,57 +1182,75 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, 0, -8.8 )
 
 [node name="Pavement_square_exportprep92" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep93" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep94" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep95" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep96" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep97" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -8.8 )
+visible = false
 
 [node name="Pavement_square_exportprep106" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -10.8 )
+visible = false
 
 [node name="Pavement_square_exportprep107" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -10.8 )
+visible = false
 
 [node name="Pavement_square_exportprep108" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -12.8 )
+visible = false
 
 [node name="Pavement_square_exportprep109" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -12.8 )
+visible = false
 
 [node name="Pavement_square_exportprep98" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -6.8 )
+visible = false
 
 [node name="Pavement_square_exportprep99" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -6.8 )
+visible = false
 
 [node name="Pavement_square_exportprep100" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -4.8 )
+visible = false
 
 [node name="Pavement_square_exportprep101" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -4.8 )
+visible = false
 
 [node name="Pavement_square_exportprep102" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -2.8 )
+visible = false
 
 [node name="Pavement_square_exportprep103" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -2.8 )
+visible = false
 
 [node name="Pavement_square_exportprep104" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, -0.8 )
+visible = false
 
 [node name="Pavement_square_exportprep105" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2, 0, -0.8 )
+visible = false
 
 [node name="Pavement_square_exportprep74" parent="LevelStatics/Flooring/Road" instance=ExtResource( 49 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2, 0, -6.8 )
@@ -1342,6 +1375,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.475,
 transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.61, 2.4, -5.625 )
 
 [node name="CityBuildings" type="Spatial" parent="LevelStatics"]
+visible = false
 
 [node name="ExteriorWall_Door_Str_ExportPrep" parent="LevelStatics/CityBuildings" instance=ExtResource( 39 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.2, 0, 1.2 )
