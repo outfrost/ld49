@@ -18,6 +18,7 @@ size = Vector3( 0.07, 0.07, 0.035 )
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0 )
 script = ExtResource( 5 )
 coffee_type = 1
+outcome_temper = -1.5
 
 [node name="Model" parent="." instance=ExtResource( 6 )]
 

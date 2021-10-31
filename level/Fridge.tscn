@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 5 )
-duration = 5.0
-outcome_temper_delta = 5.0
+duration = 4.0
+outcome_temper_delta = 10.0
 displayed_name = "Have a cold beverage"
 
 [sub_resource type="BoxShape" id=2]

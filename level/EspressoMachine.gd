@@ -2,6 +2,7 @@ class_name EspressoMachine
 extends Area
 
 export(OrderRepository.possible_orders) var coffee_type
+export var outcome_temper: float
 
 const start_duration: float = 1.0 # seconds
 const cooking_duration: float = 5.0 # seconds
@@ -34,11 +35,13 @@ var ready_sound: AudioStreamPlayer3D
 var outline: Spatial
 var brewing_particles: Particles
 var brewing_particles2: Particles
+var game_node:Node
 
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
+	game_node = find_parent("Game")
 
 	if $Model.has_node("CoffeeMachine"):
 		$Model/CoffeeMachine.set_surface_material(5, coffee_materials[coffee_type])
@@ -152,6 +155,7 @@ func set_working():
 	cup_empty_node.visible = true
 	ready_light.visible = false
 	brewing_sound.play()
+	game_node.update_temper(outcome_temper)
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("reachAppliance")
 	self._emitParticles(true)
