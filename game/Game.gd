@@ -7,6 +7,8 @@ onready var game_over_overlay: Control = $UI/GameOverOverlay
 onready var brain_gauge: Control = $UI/BrainGauge
 
 export var level_scene: PackedScene
+export var menu_background_scene: PackedScene
+onready var menu_background = menu_background_scene.instance()
 onready var level_container: Node = $LevelContainer
 var spawn_location: Position3D
 var player_visual: Spatial
@@ -64,6 +66,8 @@ func _ready() -> void:
 	OrderRepository.connect("client_enraged", self, "on_customer_enraged")
 
 	main_menu.connect("start_game", self, "on_start_game")
+
+	level_container.add_child(menu_background)
 
 	transition_screen.fade_out()
 
@@ -202,8 +206,7 @@ func on_start_game() -> void:
 		yield(transition_screen, "animation_finished")
 
 	main_menu.hide()
-	$Background/Cafe.hide()
-	$Background/Cafe/CameraPosition/Camera.current = false
+	level_container.remove_child(menu_background)
 
 	setup()
 
@@ -222,8 +225,7 @@ func back_to_menu() -> void:
 	brain_gauge.hide()
 	teardown()
 
-	$Background/Cafe.show()
-	$Background/Cafe/CameraPosition/Camera.current = true
+	level_container.add_child(menu_background)
 	main_menu.show()
 
 	transition_screen.fade_out()
