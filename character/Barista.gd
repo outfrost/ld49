@@ -24,9 +24,14 @@ export var max_speed: float = 3.0
 
 onready var anim = $baristaLowPoly/AnimationPlayer
 onready var cooling_off_sfx = $CoolingOffSfx
+onready var frustrated_sfx = $FrustratedSfx
+onready var very_frustrated_sfx = $VeryFrustratedSfx
+onready var frustrated_sfx_timer = $FrustratedSfxTimer
 
 onready var navmesh: Navigation = get_parent().find_node("Navigation")
 onready var y_pos: float = transform.origin.y
+
+onready var game: Game = find_parent("Game")
 
 var current_state = State.Idle
 var current_speed: float = 0.0
@@ -50,6 +55,8 @@ func _ready() -> void:
 	carry_attachment = BoneAttachment.new()
 	carry_attachment.bone_name = "baristaCarried"
 	$baristaLowPoly/baristaArmature/Skeleton.add_child(carry_attachment)
+
+	OrderRepository.connect("client_unhappy", self, "react_to_customer_unhappy")
 
 func _physics_process(delta):
 	match current_state:
@@ -136,3 +143,11 @@ func remove_icon() -> void:
 
 func set_displayed_icon(icon_type:int):
 	displayed_icon = icon_type
+
+func react_to_customer_unhappy(_node, _temper_delta) -> void:
+	frustrated_sfx_timer.start()
+	yield(frustrated_sfx_timer, "timeout")
+	if game.temper < game.crazy_temper:
+		very_frustrated_sfx.play()
+	else:
+		frustrated_sfx.play()

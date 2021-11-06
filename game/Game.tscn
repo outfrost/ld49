@@ -26,6 +26,7 @@ displayed_description = ""
 script = ExtResource( 5 )
 level_scene = ExtResource( 7 )
 menu_background_scene = ExtResource( 13 )
+crazy_temper = 35.0
 game_duration = 600
 passive_effects = [ SubResource( 1 ) ]
 

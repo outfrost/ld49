@@ -22,7 +22,7 @@ var is_running = false
 var temper: float
 export(float, 0.0, 200.0, 2.0) var temper_initial: float = 100.0
 export(float, 0.0, 200.0, 2.0) var temper_min: float = 0.0
-export(float, 35.0, 45.0, 0.1) var crazy_temper: float = 30.0
+export(float, 0.0, 100.0, 0.5) var crazy_temper: float = 30.0
 export(float, 0.0, 200.0, 2.0) var temper_max: float = 100.0
 
 var time_elapsed: float = 0.0
