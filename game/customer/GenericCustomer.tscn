@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://game/customer/FSM/states/picking_up_beverage.gd" type="Script" id=12]
 [ext_resource path="res://game/customer/GenericCustomerAnimationTree.tres" type="AnimationNodeStateMachine" id=13]
 [ext_resource path="res://game/customer/selection/CustomerSelectionView.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sound/sfx_angrywaitingtime_v2.ogg" type="AudioStream" id=15]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.52163
@@ -27,6 +28,8 @@ extents = Vector3( 0.543002, 0.57038, 1.05343 )
 "customer",
 ]]
 script = ExtResource( 1 )
+grumble_min_pitch = 0.75
+grumble_max_pitch = 1.5
 
 [node name="customer" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
@@ -111,6 +114,13 @@ one_shot = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0 )
 
 [node name="FocusTween" type="Tween" parent="."]
+
+[node name="WaitingTimeSfx" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+stream = ExtResource( 15 )
+unit_db = 15.0
+bus = "Effects"
+emission_angle_degrees = 90.0
 
 [connection signal="timeout" from="MaxWaitingTime" to="." method="_on_MaxWaitingTime_timeout"]
 [connection signal="input_event" from="Selection and stuff/AreaUserCustomerInteraction" to="Selection and stuff" method="_on_AreaUserCustomerInteraction_input_event"]

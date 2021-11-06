@@ -38,6 +38,9 @@ export var happy_effect: float = 5
 export var grumble_effect: float = -1
 export var angry_effect: float = -5
 
+export(float, 0.0, 3.0) var grumble_min_pitch: float = 1.0
+export(float, 0.0, 3.0) var grumble_max_pitch: float = 1.2
+
 onready var max_waiting_timer:Timer = $MaxWaitingTime
 
 
@@ -74,6 +77,10 @@ var place_order_timer_check:bool = false
 
 var current_focus:Spatial = null
 onready var focus_tween:Tween = $FocusTween
+
+onready var waiting_time_sfx: AudioStreamPlayer3D = $WaitingTimeSfx
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func emit_started_walking()->void:
 	emit_signal("started_walking")
@@ -126,6 +133,8 @@ func needs_fullfilled()->void:
 	OrderRepository.emit_client_is_satisfied(self, happy_effect * effect_multiplier)
 
 func grumble()->void:
+	waiting_time_sfx.pitch_scale = rng.randf_range(grumble_min_pitch, grumble_max_pitch)
+	waiting_time_sfx.play()
 	OrderRepository.emit_client_is_unhappy(self, grumble_effect * effect_multiplier) #Customer is grumbly
 
 func needs_failed()->void:
