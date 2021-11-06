@@ -191,7 +191,6 @@ func leave_and_go_away()->void:
 func _ready():
 	add_child(spots_collection)
 	animPlayer.get_animation("customerWalk").loop = true
-	animPlayer.get_animation("drinkBeverage").loop = true
 	animPlayer.get_animation("customerWaitTable").loop = true
 	animPlayer.get_animation("customerWaitRegister").loop = true
 	animPlayer.get_animation("customerDrinkIdle").loop = true
