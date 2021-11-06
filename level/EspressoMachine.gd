@@ -4,6 +4,8 @@ extends Area
 export(OrderRepository.possible_orders) var coffee_type
 export var outcome_temper: float
 
+export(Array, NodePath) var brewing_sfx: Array
+
 const start_duration: float = 1.0 # seconds
 const cooking_duration: float = 5.0 # seconds
 const resetting_duration: float = 0.2 # seconds
@@ -31,7 +33,7 @@ var timeout: float = 0.0
 var cup_empty_node: Spatial
 var cup_full_node: Spatial
 var ready_light: MeshInstance
-var brewing_sound: AudioStreamPlayer3D
+var brewing_sounds: Array
 var ready_sound: AudioStreamPlayer3D
 var outline: Spatial
 var brewing_particles: Particles
@@ -39,6 +41,8 @@ var brewing_particles2: Particles
 var game_node:Node
 
 onready var tooltip: SpatialLabel = $Togglables/SpatialLabel
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	coffee_name = OrderRepository.get_coffe_name(coffee_type)
@@ -61,8 +65,14 @@ func _ready() -> void:
 	cup_full_node.visible = false
 	ready_light = $Togglables/ReadyLight
 	ready_light.visible = true
-	brewing_sound = $Togglables/BrewingSound
-	brewing_sound.playing = false
+	for path in brewing_sfx:
+		var player: AudioStreamPlayer3D = get_node(path)
+		if player:
+			brewing_sounds.append(player)
+		else:
+			push_error("Invalid NodePath to brewing sound player")
+	if brewing_sounds.size() == 0:
+		push_error("No brewing sound players assigned")
 	brewing_particles = $Model/SteamEmitter/Particles
 	brewing_particles2 = $Model/SteamEmitter2/Particles
 	self._emitParticles(false)
@@ -123,7 +133,8 @@ func _process(delta: float) -> void:
 		cup_empty_node.visible = false
 		cup_full_node.visible = true
 		ready_light.visible = true
-		brewing_sound.stop()
+		for player in brewing_sounds:
+			player.stop()
 		ready_sound.play()
 		self._emitParticles(false)
 		if !HintPopup.firstmachinedone:
@@ -163,7 +174,7 @@ func set_working():
 	timeout = get_node(@"/root/Game").time_elapsed + cooking_duration
 	cup_empty_node.visible = true
 	ready_light.visible = false
-	brewing_sound.play()
+	brewing_sounds[rng.randi_range(0, brewing_sounds.size() - 1)].play()
 	game_node.update_temper(outcome_temper)
 	var animation_player: AnimationPlayer = $"/root/Game".player_visual.get_node("baristaLowPoly/AnimationPlayer")
 	animation_player.play("reachAppliance")

@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://sound/sfx_dripping_a_v1_loop.ogg" type="AudioStream" id=1]
 [ext_resource path="res://sound/sfx_coffemachine_ready_v1.ogg" type="AudioStream" id=2]
 [ext_resource path="res://sound/sfx_dripping_b_v1_loop.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/imports/paper_cup_ready_exportprep.gltf" type="PackedScene" id=4]
@@ -8,6 +9,7 @@
 [ext_resource path="res://assets/imports/paper_cup_empty_exportprep.gltf" type="PackedScene" id=7]
 [ext_resource path="res://assets/coffee_machine.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/util/SpatialLabel.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sound/sfx_dripping_c_v1_loop.ogg" type="AudioStream" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.191637, 0.51773, 0.37785 )
@@ -19,6 +21,7 @@ size = Vector3( 0.07, 0.07, 0.035 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 script = ExtResource( 5 )
 outcome_temper = -1.5
+brewing_sfx = [ NodePath("Togglables/BrewingSound"), NodePath("Togglables/BrewingSound2"), NodePath("Togglables/BrewingSound3") ]
 
 [node name="Model" parent="." instance=ExtResource( 8 )]
 transform = Transform( 2.43384e-07, 0, -1.25, 0, 1.25, 0, 1.25, 0, 2.43384e-07, 0, 0, 0 )
@@ -43,7 +46,17 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="BrewingSound" type="AudioStreamPlayer3D" parent="Togglables"]
+stream = ExtResource( 1 )
+unit_db = 15.0
+bus = "Effects"
+
+[node name="BrewingSound2" type="AudioStreamPlayer3D" parent="Togglables"]
 stream = ExtResource( 3 )
+unit_db = 15.0
+bus = "Effects"
+
+[node name="BrewingSound3" type="AudioStreamPlayer3D" parent="Togglables"]
+stream = ExtResource( 10 )
 unit_db = 15.0
 bus = "Effects"
 
