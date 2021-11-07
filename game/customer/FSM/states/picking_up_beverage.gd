@@ -9,6 +9,15 @@ func enter():
 	$Timer.start()
 	base_customer._face_focus_direction(base_customer.allocated_spot)
 
+	base_customer.order_score = OrderRepository.compare_order(
+		OrderRepository.barista_prepared_order,
+		OrderRepository.get_order(base_customer))
+
+	if base_customer.order_score >= 50:
+		base_customer.happy_sfx.play()
+	else:
+		base_customer.sad_sfx.play()
+
 func exit():
 	.exit()
 
@@ -18,7 +27,6 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	base_customer.got_food = true
-	base_customer.order_score = OrderRepository.compare_order(OrderRepository.barista_prepared_order, OrderRepository.get_order(base_customer))
 	OrderRepository.client_got_order_from_the_counter()
 	OrderRepository.client_gave_review(base_customer.order_score)
 	OrderRepository.remove_order(base_customer)

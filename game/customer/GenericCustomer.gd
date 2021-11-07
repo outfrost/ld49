@@ -79,6 +79,8 @@ var current_focus:Spatial = null
 onready var focus_tween:Tween = $FocusTween
 
 onready var waiting_time_sfx: AudioStreamPlayer3D = $WaitingTimeSfx
+onready var happy_sfx: AudioStreamPlayer3D = $HappySfx
+onready var sad_sfx: AudioStreamPlayer3D = $SadSfx
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 

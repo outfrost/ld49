@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://game/customer/GenericCustomer.gd" type="Script" id=1]
 [ext_resource path="res://art_assets/customer/customer.gltf" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://game/customer/GenericCustomerAnimationTree.tres" type="AnimationNodeStateMachine" id=13]
 [ext_resource path="res://game/customer/selection/CustomerSelectionView.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sound/sfx_angrywaitingtime_v2.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sound/sfx_reactionhappy_v1.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sound/sfx_reactiongrumpy_v1.ogg" type="AudioStream" id=17]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.52163
@@ -118,7 +120,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0 )
 [node name="WaitingTimeSfx" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 stream = ExtResource( 15 )
-unit_db = 15.0
+unit_db = 16.5
+bus = "Effects"
+emission_angle_degrees = 90.0
+attenuation_filter_db = -21.0
+
+[node name="HappySfx" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+stream = ExtResource( 16 )
+unit_db = 12.0
+bus = "Effects"
+emission_angle_degrees = 90.0
+
+[node name="SadSfx" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+stream = ExtResource( 17 )
+unit_db = 12.0
 bus = "Effects"
 emission_angle_degrees = 90.0
 
