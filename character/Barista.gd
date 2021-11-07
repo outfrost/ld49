@@ -26,7 +26,7 @@ onready var anim = $baristaLowPoly/AnimationPlayer
 onready var cooling_off_sfx = $CoolingOffSfx
 onready var frustrated_sfx = $FrustratedSfx
 onready var very_frustrated_sfx = $VeryFrustratedSfx
-onready var frustrated_sfx_timer = $FrustratedSfxTimer
+onready var frustrated_sfx_timer = $FrustratedSfxDelay
 
 onready var navmesh: Navigation = get_parent().find_node("Navigation")
 onready var y_pos: float = transform.origin.y
@@ -57,6 +57,7 @@ func _ready() -> void:
 	$baristaLowPoly/baristaArmature/Skeleton.add_child(carry_attachment)
 
 	OrderRepository.connect("client_unhappy", self, "react_to_customer_unhappy")
+	OrderRepository.connect("client_enraged", self, "react_to_customer_unhappy")
 
 func _physics_process(delta):
 	match current_state:

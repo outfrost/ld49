@@ -36,7 +36,7 @@ emission_angle_degrees = 90.0
 [node name="FrustratedSfx" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 stream = ExtResource( 5 )
-unit_db = 18.0
+unit_db = 16.5
 bus = "Effects"
 emission_angle_degrees = 90.0
 
@@ -47,8 +47,7 @@ unit_db = 15.0
 bus = "Effects"
 emission_angle_degrees = 90.0
 
-[node name="FrustratedSfxTimer" type="Timer" parent="."]
-wait_time = 1.1
+[node name="FrustratedSfxDelay" type="Timer" parent="."]
 one_shot = true
 
 [node name="Icon" type="Spatial" parent="."]
