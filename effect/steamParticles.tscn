@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/imports/WhitePlastic.tres" type="Material" id=1]
+[ext_resource path="res://effect/steamParticles_mat.tres" type="Material" id=1]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=1]
 min_value = -1.0
 _data = [ Vector2( 0, 0 ), 0.0, -2.00493, 0, 0, Vector2( 1, 1 ), 0.0521758, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 0.3
 direction = Vector3( 0, 0, -1 )
@@ -21,19 +21,17 @@ angular_velocity_random = 0.5
 radial_accel = -2.6
 scale = 0.48
 scale_random = 0.29
-scale_curve = SubResource( 4 )
+scale_curve = SubResource( 2 )
 
-[sub_resource type="SphereMesh" id=2]
+[sub_resource type="QuadMesh" id=4]
 material = ExtResource( 1 )
-radius = 0.25
-height = 0.5
+size = Vector2( 2, 2 )
 
 [node name="SteamEmitter" type="Spatial"]
 
 [node name="Particles" type="Particles" parent="."]
-emitting = false
-amount = 10
+amount = 16
 randomness = 1.0
 visibility_aabb = AABB( -0.1, -0.1, -0.1, 0.2, 0.2, 0.2 )
-process_material = SubResource( 1 )
-draw_pass_1 = SubResource( 2 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
