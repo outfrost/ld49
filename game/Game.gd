@@ -76,7 +76,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	DebugOverlay.display("fps %d" % Performance.get_monitor(Performance.TIME_FPS))
-	DebugOverlay.display("BrAIn %.2f" % temper)
+#	DebugOverlay.display("BrAIn %.2f" % temper)
 
 	if Input.is_action_just_pressed("menu"):
 		back_to_menu()
